@@ -29,6 +29,13 @@ class GetTermSeoAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isReadOnly(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'Get term SEOpress meta', 'wp-mcp-abilities' );
     }

@@ -29,6 +29,13 @@ class GetTermMetaAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isReadOnly(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'Get term meta', 'wp-mcp-abilities' );
     }
@@ -100,11 +107,24 @@ class GetTermMetaAbility extends AbstractAbility {
     }
 
     /**
+     * Authorises against the very term being read.
+     *
+     * Term meta is only exposed by the REST API in the `edit` context, and its
+     * write siblings check `edit_term`: a blanket `edit_posts` would let a
+     * contributor read the meta of any term, private taxonomies included.
+     *
      * @inheritDoc
      * @param mixed $input Raw input coming from the MCP adapter.
      */
     public function checkPermission( mixed $input = null ): bool {
-        return Capabilities::canRead();
+        $input = Input::normalize( $input );
+        $term  = $this->resolveTerm( Input::int( $input, 'term_id' ), Input::string( $input, 'taxonomy' ) );
+
+        if ( is_wp_error( $term ) ) {
+            return false;
+        }
+
+        return Capabilities::canEditTerm( $term );
     }
 
     /**
@@ -117,6 +137,10 @@ class GetTermMetaAbility extends AbstractAbility {
 
         if ( is_wp_error( $term ) ) {
             return $term;
+        }
+
+        if ( ! Capabilities::canEditTerm( $term ) ) {
+            return $this->forbidden();
         }
 
         $rawMetaKey = $input['meta_key'] ?? null;

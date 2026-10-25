@@ -29,6 +29,13 @@ class GetPostMetaAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isReadOnly(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'Get post meta', 'wp-mcp-abilities' );
     }

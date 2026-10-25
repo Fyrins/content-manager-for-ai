@@ -28,6 +28,13 @@ class ListProductVariationsAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isReadOnly(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'List product variations', 'wp-mcp-abilities' );
     }

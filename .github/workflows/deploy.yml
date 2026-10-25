@@ -14,6 +14,14 @@ jobs:
           persist-credentials: false
       - name: Check versions
         run: bin/check-versions.sh . "$GITHUB_REF_NAME"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+          cache: npm
+      # `build/` is not versioned: the settings screen's script has to be built
+      # before the package is assembled from the working tree.
+      - name: Build the settings screen
+        run: npm ci && npm run build
       - id: deploy
         uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2 # 2.3.0
         with:

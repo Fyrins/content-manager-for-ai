@@ -119,6 +119,22 @@ class ThirdPartyAbilityCatalog {
     }
 
     /**
+     * Whether an ability declares that it only reads.
+     *
+     * Read from the same annotations as `isDestructive()`, for the same reason.
+     * An ability that says nothing is taken as writing: the settings screen
+     * would rather warn about a harmless ability than reassure about one that
+     * changes the site.
+     *
+     * @param \WP_Ability $ability Ability to read.
+     */
+    public function isReadOnly( \WP_Ability $ability ): bool {
+        $meta = $ability->get_meta();
+
+        return ! empty( $meta['annotations']['readonly'] );
+    }
+
+    /**
      * Whether an ability was registered by this plugin.
      *
      * @param \WP_Ability $ability Ability to read.

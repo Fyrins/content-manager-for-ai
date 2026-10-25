@@ -91,6 +91,27 @@ abstract class AbstractAbility implements AbilityInterface {
     }
 
     /**
+     * Whether the ability only reads, never changing anything on the site.
+     *
+     * Published as the `readonly` annotation, and used by the settings screen
+     * to sort the abilities into reading and writing.
+     */
+    public function isReadOnly(): bool {
+        return false;
+    }
+
+    /**
+     * Whether the ability deletes something an agent cannot take back.
+     *
+     * Published as the `destructive` annotation. Kept apart from
+     * `isEnabledByDefault()`: an ability can be off by default for another
+     * reason, as rebuilding a facet index is.
+     */
+    public function isDestructive(): bool {
+        return false;
+    }
+
+    /**
      * Whether the ability's own requirements are met.
      *
      * An ability depending on a third-party plugin returns false when that
@@ -135,6 +156,10 @@ abstract class AbstractAbility implements AbilityInterface {
              */
             'meta'                => [
                 'mcp'              => [ 'public' => true ],
+                'annotations'      => [
+                    'readonly'    => $this->isReadOnly(),
+                    'destructive' => $this->isDestructive(),
+                ],
                 // Read by the third-party catalogue to tell our abilities from the rest.
                 'wpmcpa' => [ 'plugin' => self::PLUGIN_MARK ],
             ],

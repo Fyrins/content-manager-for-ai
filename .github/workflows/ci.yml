@@ -20,16 +20,36 @@ jobs:
       - run: composer install --no-interaction --no-progress
       - run: composer lint
 
+  js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint:js
+      - run: npx wp-scripts lint-style 'src/**/*.scss'
+      - run: npm run build
+
   plugin-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+          cache: npm
+      # The settings screen's script is built here, as it is for a release:
+      # `build/` is not versioned.
+      - run: npm ci && npm run build
       - name: Build the publishable package
         run: |
-          mkdir -p build/wp-mcp-abilities
-          rsync -a --exclude=/build --exclude-from=.distignore ./ build/wp-mcp-abilities/
+          mkdir -p dist/wp-mcp-abilities
+          rsync -a --exclude=/dist --exclude-from=.distignore ./ dist/wp-mcp-abilities/
       - uses: wordpress/plugin-check-action@10857da14b6c2246d15402b3e69f777edcf8c12e # v1.1.9
         with:
-          build-dir: build/wp-mcp-abilities
+          build-dir: dist/wp-mcp-abilities
           categories: general,plugin_repo,security,performance,accessibility
           include-experimental: true

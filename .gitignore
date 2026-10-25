@@ -22,3 +22,7 @@ node_modules
 /bin/smoke.sh
 /tests/
 /docs/
+
+# Built assets, produced by npm run build
+/build/
+/dist/

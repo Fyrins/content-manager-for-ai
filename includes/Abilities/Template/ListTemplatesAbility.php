@@ -37,6 +37,13 @@ class ListTemplatesAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isReadOnly(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'List templates', 'wp-mcp-abilities' );
     }

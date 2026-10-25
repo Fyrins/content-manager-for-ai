@@ -31,6 +31,13 @@ class DeleteTermMetaAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isDestructive(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'Delete term meta', 'wp-mcp-abilities' );
     }
