@@ -88,12 +88,10 @@ class SettingsRestRoute implements HookInterface {
                     'args'                => [
                         'enabled' => [
                             'type'                 => 'object',
-                            'default'              => [],
                             'additionalProperties' => [ 'type' => 'boolean' ],
                         ],
                         'exposed' => [
                             'type'                 => 'object',
-                            'default'              => [],
                             'additionalProperties' => [ 'type' => 'boolean' ],
                         ],
                     ],
@@ -119,25 +117,64 @@ class SettingsRestRoute implements HookInterface {
     }
 
     /**
-     * Saves both options, then returns the screen's data as stored.
+     * Saves the switches sent, then returns the screen's data as stored.
      *
-     * The payload replaces the switches the screen lists: an ability it leaves
-     * out is switched off, exactly as an unchecked box is with a form.
+     * Only what the request carries changes. The option's validation switches
+     * off every listed ability its payload leaves out, the way a form treats an
+     * unchecked box; a REST client sending a single switch, or none, must not
+     * turn everything else off. The current state is therefore laid under the
+     * request before validating. The screen always sends every switch, so it
+     * sees no difference.
      *
      * @param \WP_REST_Request $request Request carrying `enabled` and `exposed`.
      * @return \WP_REST_Response
      */
     public function save( \WP_REST_Request $request ): \WP_REST_Response {
-        update_option(
-            SettingsService::OPTION_KEY,
-            $this->sanitizer->sanitizeEnabled( $request->get_param( 'enabled' ) )
-        );
-        update_option(
-            SettingsService::EXPOSED_OPTION_KEY,
-            $this->sanitizer->sanitizeExposed( $request->get_param( 'exposed' ) )
-        );
+        $enabled = $request->get_param( 'enabled' );
+        $exposed = $request->get_param( 'exposed' );
+
+        if ( is_array( $enabled ) ) {
+            update_option(
+                SettingsService::OPTION_KEY,
+                $this->sanitizer->sanitizeEnabled( array_merge( $this->currentSwitches( 'enabled' ), $enabled ) )
+            );
+        }
+
+        if ( is_array( $exposed ) ) {
+            update_option(
+                SettingsService::EXPOSED_OPTION_KEY,
+                $this->sanitizer->sanitizeExposed( array_merge( $this->currentSwitches( 'exposed' ), $exposed ) )
+            );
+        }
 
         return rest_ensure_response( $this->payload() );
+    }
+
+    /**
+     * Current state of the switches one option holds, as the screen sends them.
+     *
+     * Read from the same rows the screen shows, so a request merged over it
+     * changes exactly what it names.
+     *
+     * @param string $option `enabled` for the switches, `exposed` for the exposures.
+     * @return array<string, bool>
+     */
+    private function currentSwitches( string $option ): array {
+        $switches = [];
+
+        foreach ( $this->ownAbilities() as $row ) {
+            if ( 'enabled' === $option ) {
+                $switches[ $row['name'] ] = $row['enabled'];
+            }
+        }
+
+        foreach ( $this->thirdPartyAbilities() as $row ) {
+            if ( ( 'enabled' === $option ) === $row['joinable'] ) {
+                $switches[ $row['name'] ] = $row['enabled'];
+            }
+        }
+
+        return $switches;
     }
 
     /**

@@ -91,6 +91,7 @@ class RegisterAbilitiesPage implements HookInterface {
             [ 'wp-components' ],
             $asset['version']
         );
+        wp_style_add_data( self::HANDLE, 'rtl', 'replace' );
 
         $path    = '/' . SettingsRestRoute::NAMESPACE . SettingsRestRoute::ROUTE;
         $preload = array_reduce( [ $path ], 'rest_preload_api_request', [] );
@@ -99,13 +100,13 @@ class RegisterAbilitiesPage implements HookInterface {
             'wp-api-fetch',
             sprintf(
                 'wp.apiFetch.use( wp.apiFetch.createPreloadingMiddleware( %s ) );',
-                wp_json_encode( $preload )
+                wp_json_encode( $preload, JSON_HEX_TAG | JSON_HEX_AMP )
             ),
             'after'
         );
         wp_add_inline_script(
             self::HANDLE,
-            sprintf( 'window.wpMcpAbilities = %s;', wp_json_encode( [ 'path' => $path ] ) ),
+            sprintf( 'window.wpMcpAbilities = %s;', wp_json_encode( [ 'path' => $path ], JSON_HEX_TAG | JSON_HEX_AMP ) ),
             'before'
         );
     }

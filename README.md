@@ -130,7 +130,7 @@ An ability absent from the stored option falls back to its own default, so an ab
 
 **Storage.** The switches live in the `wpmcpa_enabled` option, an array keyed by ability name. Third-party exposure lives in `wpmcpa_exposed`. Both options are deleted when the plugin is uninstalled.
 
-**Writing the option from code.** The setting is registered on `admin_init`, and from then on its validation applies to every write of the option, not only to the form. The REST route runs the same validation (`Services\SettingsSanitizer`), so a `POST` to `wp-mcp-abilities/v1/settings` behaves the same way: an ability the `enabled` map leaves out is switched off. It sets to `false` every listed ability the payload does not mention, since an unchecked box is never sent by a form. A partial write such as `update_option( 'wpmcpa_enabled', [ 'wp-mcp-abilities/delete-post' => true ] )` therefore switches everything else off. Read the option, change the key you want, and write the whole array back:
+**Writing the option from code.** The setting is registered on `admin_init`, and from then on its validation applies to every write of the option, not only to the form. The REST route runs the same validation (`Services\SettingsSanitizer`), but starts from the current state: a `POST` to `wp-mcp-abilities/v1/settings` only changes the switches it sends, and an empty one changes nothing. It sets to `false` every listed ability the payload does not mention, since an unchecked box is never sent by a form. A partial write such as `update_option( 'wpmcpa_enabled', [ 'wp-mcp-abilities/delete-post' => true ] )` therefore switches everything else off. Read the option, change the key you want, and write the whole array back:
 
 ```bash
 wp eval '$o = (array) get_option( "wpmcpa_enabled", [] ); $o["wp-mcp-abilities/delete-post"] = true; update_option( "wpmcpa_enabled", $o );'
@@ -424,7 +424,7 @@ Each entry is validated as JSON (`invalid_json_ld` otherwise) and re-encoded wit
 
 - **Input:** `term_id` (integer, required), `taxonomy` (optional when the ID is unambiguous).
 - **Output:** the shared fields.
-- **Capability:** read. **Default:** enabled.
+- **Capability:** `edit_term` on the term. **Default:** enabled.
 
 #### `wp-mcp-abilities/update-term-seopress`
 

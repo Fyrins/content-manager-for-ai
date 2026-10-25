@@ -4,7 +4,7 @@ Tags: mcp, ai, abilities, agents, api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,11 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 
 == Changelog ==
 
+= 1.2.1 =
+* Security: `get-term-seopress` requires `edit_term` on the term it reads.
+* Fix: a partial request to the settings REST route no longer switches the other abilities off.
+* Fix: RTL stylesheet of the settings screen, and escaping in the Base64 helper command.
+
 = 1.2.0 =
 * New: settings screen rebuilt in tabs. A Connection tab shows the server URL, creates an application password in one click and gives ready-to-paste configurations for Claude Code, Claude Desktop and Cursor.
 * New: abilities are grouped in cards, split into read-only and write, with select-all and a filter field.
@@ -131,6 +136,9 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 * Settings screen to switch each ability on or off, and to control abilities registered by other plugins.
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+Security fix: contributors can no longer read the SEOPress fields of any term.
 
 = 1.2.0 =
 Security fix: read abilities no longer let low-privilege users read private content and meta. New settings screen with client configuration help.

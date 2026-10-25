@@ -94,8 +94,8 @@
             "Copy": [
                 "Copier"
             ],
-            "Run this in a terminal. Add --scope user to reach the site from every project.": [
-                "Lancez ceci dans un terminal. Ajoutez --scope user pour acc\u00e9der au site depuis tous vos projets."
+            "Run this in a terminal. Add --scope user to reach the site from every project. The command carries the password, only Base64-encoded: it stays in your shell history unless you remove it.": [
+                "Lancez ceci dans un terminal. Ajoutez --scope user pour acc\u00e9der au site depuis tous vos projets. La commande contient le mot de passe, seulement encod\u00e9 en Base64 : il reste dans l'historique de votre shell tant que vous ne l'en retirez pas."
             ],
             "Copy the Claude Code command": [
                 "Copier la commande Claude Code"

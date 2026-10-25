@@ -140,7 +140,10 @@ function ClientSnippets( { connection, password } ) {
 		2
 	);
 
-	const tokenCommand = `read -rsp 'Application password: ' WPMCPA_PW && printf '%s' '${ userLogin }:'"$WPMCPA_PW" | base64 && unset WPMCPA_PW`;
+	// The login goes between single quotes: one inside it closes the quote,
+	// is escaped, and reopens it.
+	const quotedLogin = userLogin.replace( /'/g, "'\\''" );
+	const tokenCommand = `read -rsp 'Application password: ' WPMCPA_PW && printf '%s' '${ quotedLogin }:'"$WPMCPA_PW" | base64 && unset WPMCPA_PW`;
 
 	const clients = [
 		{
@@ -150,7 +153,7 @@ function ClientSnippets( { connection, password } ) {
 				<>
 					<p>
 						{ __(
-							'Run this in a terminal. Add --scope user to reach the site from every project.',
+							'Run this in a terminal. Add --scope user to reach the site from every project. The command carries the password, only Base64-encoded: it stays in your shell history unless you remove it.',
 							'wp-mcp-abilities'
 						) }
 					</p>
