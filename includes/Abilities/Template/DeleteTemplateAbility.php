@@ -104,15 +104,6 @@ class DeleteTemplateAbility extends AbstractAbility {
     }
 
     /**
-     * Destructive ability, never exposed unless explicitly enabled.
-     *
-     * @inheritDoc
-     */
-    public function isEnabledByDefault(): bool {
-        return false;
-    }
-
-    /**
      * @inheritDoc
      * @param mixed $input Raw input coming from the MCP adapter.
      */

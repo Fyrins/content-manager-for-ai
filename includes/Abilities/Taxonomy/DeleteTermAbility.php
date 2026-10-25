@@ -90,15 +90,6 @@ class DeleteTermAbility extends AbstractAbility {
     }
 
     /**
-     * Destructive ability, never exposed unless explicitly enabled.
-     *
-     * @inheritDoc
-     */
-    public function isEnabledByDefault(): bool {
-        return false;
-    }
-
-    /**
      * Authorises against the very term being deleted, not a blanket capability.
      *
      * @inheritDoc

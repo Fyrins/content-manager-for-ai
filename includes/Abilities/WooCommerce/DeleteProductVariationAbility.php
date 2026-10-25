@@ -66,13 +66,6 @@ class DeleteProductVariationAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
-    public function isEnabledByDefault(): bool {
-        return false;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function getInputSchema(): array {
         $schema = [ 'type' => 'object' ];
 

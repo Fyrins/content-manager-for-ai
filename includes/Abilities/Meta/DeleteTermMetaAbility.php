@@ -98,15 +98,6 @@ class DeleteTermMetaAbility extends AbstractAbility {
     }
 
     /**
-     * Destructive ability: hidden until a site explicitly enables it.
-     *
-     * @inheritDoc
-     */
-    public function isEnabledByDefault(): bool {
-        return false;
-    }
-
-    /**
      * Authorises against the very term being edited.
      *
      * @inheritDoc

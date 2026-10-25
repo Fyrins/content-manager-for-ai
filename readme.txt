@@ -4,7 +4,7 @@ Tags: mcp, ai, abilities, agents, api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,11 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 
 == Changelog ==
 
+= 1.2.2 =
+* Fix: exposing to MCP a third-party ability closed by its own plugin now works.
+* Fix: settings screen accessibility (ability details tied to their checkbox, copy announced, persistent save errors).
+* New: `wpmcpa_server_url` filter.
+
 = 1.2.1 =
 * Security: `get-term-seopress` requires `edit_term` on the term it reads.
 * Fix: a partial request to the settings REST route no longer switches the other abilities off.
@@ -136,6 +141,9 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 * Settings screen to switch each ability on or off, and to control abilities registered by other plugins.
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+Exposing a closed third-party ability to MCP works again. Accessibility fixes on the settings screen.
 
 = 1.2.1 =
 Security fix: contributors can no longer read the SEOPress fields of any term.

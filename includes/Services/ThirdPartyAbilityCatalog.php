@@ -113,9 +113,7 @@ class ThirdPartyAbilityCatalog {
      * @param \WP_Ability $ability Ability to read.
      */
     public function isDestructive( \WP_Ability $ability ): bool {
-        $meta = $ability->get_meta();
-
-        return ! empty( $meta['annotations']['destructive'] );
+        return $this->annotation( $ability, 'destructive' );
     }
 
     /**
@@ -129,9 +127,37 @@ class ThirdPartyAbilityCatalog {
      * @param \WP_Ability $ability Ability to read.
      */
     public function isReadOnly( \WP_Ability $ability ): bool {
+        return $this->annotation( $ability, 'readonly' );
+    }
+
+    /**
+     * Option the settings box of an ability writes to.
+     *
+     * One box, two questions, never both on the same ability. An ability its
+     * own plugin exposes can only be taken away from MCP, which the switches
+     * hold; one it keeps closed can only be handed over, which the exposures
+     * hold. The screen, the validation and the REST route all ask here, so
+     * they cannot disagree.
+     *
+     * @param \WP_Ability $ability Ability to read.
+     * @return string `SettingsService::OPTION_KEY` or `SettingsService::EXPOSED_OPTION_KEY`.
+     */
+    public function optionFor( \WP_Ability $ability ): string {
+        return $this->isExposedToMcp( $ability )
+            ? SettingsService::OPTION_KEY
+            : SettingsService::EXPOSED_OPTION_KEY;
+    }
+
+    /**
+     * Whether an ability sets one of its boolean annotations.
+     *
+     * @param \WP_Ability $ability Ability to read.
+     * @param string      $key     Annotation name.
+     */
+    private function annotation( \WP_Ability $ability, string $key ): bool {
         $meta = $ability->get_meta();
 
-        return ! empty( $meta['annotations']['readonly'] );
+        return ! empty( $meta['annotations'][ $key ] );
     }
 
     /**
