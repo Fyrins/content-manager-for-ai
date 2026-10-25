@@ -2,7 +2,13 @@
  * Loads the settings, renders the tabs and saves the switches.
  */
 import apiFetch from '@wordpress/api-fetch';
-import { Button, Notice, SnackbarList, Spinner, TabPanel } from '@wordpress/components';
+import {
+	Button,
+	Notice,
+	SnackbarList,
+	Spinner,
+	TabPanel,
+} from '@wordpress/components';
 import { useEffect, useMemo, useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 
@@ -45,7 +51,9 @@ function toPayload( abilities, thirdParty ) {
  * @return {Array} Updated rows.
  */
 function applyChanges( rows, changes ) {
-	return rows.map( ( row ) => ( row.name in changes ? { ...row, enabled: changes[ row.name ] } : row ) );
+	return rows.map( ( row ) =>
+		row.name in changes ? { ...row, enabled: changes[ row.name ] } : row
+	);
 }
 
 export default function App( { path } ) {
@@ -71,8 +79,10 @@ export default function App( { path } ) {
 		() =>
 			!! data &&
 			JSON.stringify( toPayload( data.abilities, data.thirdParty ) ) !==
-				JSON.stringify( toPayload( saved.abilities, saved.thirdParty ) ),
-		[ data, saved ],
+				JSON.stringify(
+					toPayload( saved.abilities, saved.thirdParty )
+				),
+		[ data, saved ]
 	);
 
 	// Warns before leaving with unsaved switches, as a classic form would not.
@@ -133,7 +143,9 @@ export default function App( { path } ) {
 					},
 				] );
 			} )
-			.catch( ( e ) => setNotices( [ { id: Date.now(), content: e.message } ] ) )
+			.catch( ( e ) =>
+				setNotices( [ { id: Date.now(), content: e.message } ] )
+			)
 			.finally( () => setIsSaving( false ) );
 	};
 
@@ -150,7 +162,7 @@ export default function App( { path } ) {
 				/* translators: 1: number of enabled abilities, 2: number of abilities. */
 				__( 'Abilities (%1$d/%2$d)', 'wp-mcp-abilities' ),
 				enabledCount,
-				data.abilities.length,
+				data.abilities.length
 			),
 		},
 	];
@@ -164,7 +176,11 @@ export default function App( { path } ) {
 
 	return (
 		<div className="wpmcpa-app">
-			<TabPanel className="wpmcpa-tabs" tabs={ tabs } onSelect={ setCurrentTab }>
+			<TabPanel
+				className="wpmcpa-tabs"
+				tabs={ tabs }
+				onSelect={ setCurrentTab }
+			>
 				{ ( tab ) => {
 					if ( 'connection' === tab.name ) {
 						return (
@@ -187,18 +203,30 @@ export default function App( { path } ) {
 						);
 					}
 
-					return <AbilitiesTab rows={ data.abilities } onChange={ updateOwn } />;
+					return (
+						<AbilitiesTab
+							rows={ data.abilities }
+							onChange={ updateOwn }
+						/>
+					);
 				} }
 			</TabPanel>
 
 			{ /* Only the abilities tabs hold switches; the save bar stays out of the way elsewhere unless something is pending. */ }
 			{ ( 'connection' !== currentTab || isDirty ) && (
 				<div className="wpmcpa-savebar">
-					<Button variant="primary" onClick={ save } isBusy={ isSaving } disabled={ isSaving || ! isDirty }>
+					<Button
+						variant="primary"
+						onClick={ save }
+						isBusy={ isSaving }
+						disabled={ isSaving || ! isDirty }
+					>
 						{ __( 'Save settings', 'wp-mcp-abilities' ) }
 					</Button>
 					{ isDirty && (
-						<span className="wpmcpa-savebar__hint">{ __( 'Unsaved changes', 'wp-mcp-abilities' ) }</span>
+						<span className="wpmcpa-savebar__hint">
+							{ __( 'Unsaved changes', 'wp-mcp-abilities' ) }
+						</span>
 					) }
 				</div>
 			) }
@@ -206,7 +234,11 @@ export default function App( { path } ) {
 			<SnackbarList
 				className="wpmcpa-snackbars"
 				notices={ notices }
-				onRemove={ ( id ) => setNotices( ( current ) => current.filter( ( notice ) => notice.id !== id ) ) }
+				onRemove={ ( id ) =>
+					setNotices( ( current ) =>
+						current.filter( ( notice ) => notice.id !== id )
+					)
+				}
 			/>
 		</div>
 	);

@@ -1,7 +1,13 @@
 /**
  * One group of abilities, split into reading and writing.
  */
-import { Card, CardBody, CardHeader, CheckboxControl, Tooltip } from '@wordpress/components';
+import {
+	Card,
+	CardBody,
+	CardHeader,
+	CheckboxControl,
+	Tooltip,
+} from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
 
 /**
@@ -13,7 +19,9 @@ import { __, sprintf } from '@wordpress/i18n';
  * @param {boolean}  props.isThirdParty Whether the row belongs to another plugin.
  */
 function AbilityCheckbox( { row, onChange, isThirdParty } ) {
-	const details = [ row.name, row.description ].filter( Boolean ).join( ' — ' );
+	const details = [ row.name, row.description ]
+		.filter( Boolean )
+		.join( ' — ' );
 
 	return (
 		<li className="wpmcpa-ability">
@@ -21,22 +29,31 @@ function AbilityCheckbox( { row, onChange, isThirdParty } ) {
 				__nextHasNoMarginBottom
 				label={ row.label || row.name }
 				checked={ row.enabled }
-				onChange={ ( checked ) => onChange( { [ row.name ]: checked } ) }
+				onChange={ ( checked ) =>
+					onChange( { [ row.name ]: checked } )
+				}
 			/>
 			<Tooltip text={ details }>
-				<span className="wpmcpa-ability__help" tabIndex={ 0 } role="img" aria-label={ details }>
+				<span
+					className="wpmcpa-ability__help"
+					tabIndex={ 0 }
+					role="img"
+					aria-label={ details }
+				>
 					?
 				</span>
 			</Tooltip>
 			{ row.destructive && (
-				<span className="wpmcpa-badge wpmcpa-badge--danger">{ __( 'Deletes', 'wp-mcp-abilities' ) }</span>
+				<span className="wpmcpa-badge wpmcpa-badge--danger">
+					{ __( 'Deletes', 'wp-mcp-abilities' ) }
+				</span>
 			) }
 			{ isThirdParty && ! row.joinable && (
 				<span
 					className="wpmcpa-badge"
 					title={ __(
 						'Closed to MCP by its own declaration. Check to hand it to an agent.',
-						'wp-mcp-abilities',
+						'wp-mcp-abilities'
 					) }
 				>
 					{ __( 'Closed by its plugin', 'wp-mcp-abilities' ) }
@@ -56,7 +73,13 @@ function AbilityCheckbox( { row, onChange, isThirdParty } ) {
  * @param {Function} props.onChange     Receives a name => state map.
  * @param {boolean}  props.isThirdParty Whether the rows belong to another plugin.
  */
-function AbilitySection( { title, description, rows, onChange, isThirdParty } ) {
+function AbilitySection( {
+	title,
+	description,
+	rows,
+	onChange,
+	isThirdParty,
+} ) {
 	if ( rows.length === 0 ) {
 		return null;
 	}
@@ -64,7 +87,10 @@ function AbilitySection( { title, description, rows, onChange, isThirdParty } ) 
 	const checkedCount = rows.filter( ( row ) => row.enabled ).length;
 	const allChecked = checkedCount === rows.length;
 
-	const toggleAll = ( checked ) => onChange( Object.fromEntries( rows.map( ( row ) => [ row.name, checked ] ) ) );
+	const toggleAll = ( checked ) =>
+		onChange(
+			Object.fromEntries( rows.map( ( row ) => [ row.name, checked ] ) )
+		);
 
 	return (
 		<section className="wpmcpa-section">
@@ -72,7 +98,12 @@ function AbilitySection( { title, description, rows, onChange, isThirdParty } ) 
 			<p className="wpmcpa-section__description">{ description }</p>
 			<ul className="wpmcpa-grid">
 				{ rows.map( ( row ) => (
-					<AbilityCheckbox key={ row.name } row={ row } onChange={ onChange } isThirdParty={ isThirdParty } />
+					<AbilityCheckbox
+						key={ row.name }
+						row={ row }
+						onChange={ onChange }
+						isThirdParty={ isThirdParty }
+					/>
 				) ) }
 			</ul>
 			{ rows.length > 1 && (
@@ -80,7 +111,9 @@ function AbilitySection( { title, description, rows, onChange, isThirdParty } ) 
 					__nextHasNoMarginBottom
 					className="wpmcpa-section__toggle"
 					label={
-						allChecked ? __( 'Deselect all', 'wp-mcp-abilities' ) : __( 'Select all', 'wp-mcp-abilities' )
+						allChecked
+							? __( 'Deselect all', 'wp-mcp-abilities' )
+							: __( 'Select all', 'wp-mcp-abilities' )
 					}
 					checked={ allChecked }
 					indeterminate={ checkedCount > 0 && ! allChecked }
@@ -91,7 +124,12 @@ function AbilitySection( { title, description, rows, onChange, isThirdParty } ) 
 	);
 }
 
-export default function AbilityGroupCard( { title, rows, onChange, isThirdParty } ) {
+export default function AbilityGroupCard( {
+	title,
+	rows,
+	onChange,
+	isThirdParty,
+} ) {
 	const readRows = rows.filter( ( row ) => row.readonly );
 	const writeRows = rows.filter( ( row ) => ! row.readonly );
 	const enabledCount = rows.filter( ( row ) => row.enabled ).length;
@@ -105,7 +143,7 @@ export default function AbilityGroupCard( { title, rows, onChange, isThirdParty 
 						/* translators: 1: number of enabled abilities, 2: number of abilities. */
 						__( '%1$d of %2$d enabled', 'wp-mcp-abilities' ),
 						enabledCount,
-						rows.length,
+						rows.length
 					) }
 				</span>
 			</CardHeader>
@@ -114,7 +152,7 @@ export default function AbilityGroupCard( { title, rows, onChange, isThirdParty 
 					title={ __( 'Read-only abilities', 'wp-mcp-abilities' ) }
 					description={ __(
 						'These abilities let an agent read content. They change nothing on the site.',
-						'wp-mcp-abilities',
+						'wp-mcp-abilities'
 					) }
 					rows={ readRows }
 					onChange={ onChange }
@@ -126,11 +164,11 @@ export default function AbilityGroupCard( { title, rows, onChange, isThirdParty 
 						isThirdParty
 							? __(
 									'These abilities do not declare themselves read-only: assume they can change the site.',
-									'wp-mcp-abilities',
+									'wp-mcp-abilities'
 								)
 							: __(
 									'These abilities let an agent create, update and delete content.',
-									'wp-mcp-abilities',
+									'wp-mcp-abilities'
 								)
 					}
 					rows={ writeRows }

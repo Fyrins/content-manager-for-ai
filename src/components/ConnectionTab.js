@@ -2,7 +2,16 @@
  * Everything a client needs to connect: server URL, credentials, config.
  */
 import apiFetch from '@wordpress/api-fetch';
-import { Button, Card, CardBody, CardHeader, ExternalLink, Notice, TabPanel, TextControl } from '@wordpress/components';
+import {
+	Button,
+	Card,
+	CardBody,
+	CardHeader,
+	ExternalLink,
+	Notice,
+	TabPanel,
+	TextControl,
+} from '@wordpress/components';
 import { useCopyToClipboard } from '@wordpress/compose';
 import { createInterpolateElement, useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
@@ -39,8 +48,16 @@ function CopyButton( { text, label } ) {
 	} );
 
 	return (
-		<Button variant="secondary" size="compact" ref={ ref } label={ label } showTooltip={ false }>
-			{ copied ? __( 'Copied!', 'wp-mcp-abilities' ) : __( 'Copy', 'wp-mcp-abilities' ) }
+		<Button
+			variant="secondary"
+			size="compact"
+			ref={ ref }
+			label={ label }
+			showTooltip={ false }
+		>
+			{ copied
+				? __( 'Copied!', 'wp-mcp-abilities' )
+				: __( 'Copy', 'wp-mcp-abilities' ) }
 		</Button>
 	);
 }
@@ -89,7 +106,7 @@ function ClientSnippets( { connection, password } ) {
 			},
 		},
 		null,
-		2,
+		2
 	);
 
 	const cursorConfig = JSON.stringify(
@@ -102,7 +119,7 @@ function ClientSnippets( { connection, password } ) {
 			},
 		},
 		null,
-		2,
+		2
 	);
 
 	const desktopConfig = JSON.stringify(
@@ -120,7 +137,7 @@ function ClientSnippets( { connection, password } ) {
 			},
 		},
 		null,
-		2,
+		2
 	);
 
 	const tokenCommand = `read -rsp 'Application password: ' WPMCPA_PW && printf '%s' '${ userLogin }:'"$WPMCPA_PW" | base64 && unset WPMCPA_PW`;
@@ -134,12 +151,15 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'Run this in a terminal. Add --scope user to reach the site from every project.',
-							'wp-mcp-abilities',
+							'wp-mcp-abilities'
 						) }
 					</p>
 					<Snippet
 						code={ `claude mcp add --transport http ${ serverName } ${ endpoint } --header "${ header }"` }
-						label={ __( 'Copy the Claude Code command', 'wp-mcp-abilities' ) }
+						label={ __(
+							'Copy the Claude Code command',
+							'wp-mcp-abilities'
+						) }
 					/>
 				</>
 			),
@@ -152,22 +172,30 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'Open Settings → Developer → Edit Config, then paste this into the file. Claude Desktop reaches the site through a small proxy run with npx, so Node.js has to be installed.',
-							'wp-mcp-abilities',
+							'wp-mcp-abilities'
 						) }
 					</p>
 					<dl className="wpmcpa-paths">
 						<dt>macOS</dt>
 						<dd>
-							<code>~/Library/Application Support/Claude/claude_desktop_config.json</code>
+							<code>
+								~/Library/Application
+								Support/Claude/claude_desktop_config.json
+							</code>
 						</dd>
 						<dt>Windows</dt>
 						<dd>
-							<code>%APPDATA%\Claude\claude_desktop_config.json</code>
+							<code>
+								%APPDATA%\Claude\claude_desktop_config.json
+							</code>
 						</dd>
 					</dl>
 					<Snippet
 						code={ desktopConfig }
-						label={ __( 'Copy the Claude Desktop configuration', 'wp-mcp-abilities' ) }
+						label={ __(
+							'Copy the Claude Desktop configuration',
+							'wp-mcp-abilities'
+						) }
 					/>
 				</>
 			),
@@ -181,14 +209,17 @@ function ClientSnippets( { connection, password } ) {
 						{ createInterpolateElement(
 							__(
 								'Paste this into <code>~/.cursor/mcp.json</code>, or into <code>.cursor/mcp.json</code> at the root of a project.',
-								'wp-mcp-abilities',
+								'wp-mcp-abilities'
 							),
-							{ code: <code /> },
+							{ code: <code /> }
 						) }
 					</p>
 					<Snippet
 						code={ cursorConfig }
-						label={ __( 'Copy the Cursor configuration', 'wp-mcp-abilities' ) }
+						label={ __(
+							'Copy the Cursor configuration',
+							'wp-mcp-abilities'
+						) }
 					/>
 				</>
 			),
@@ -201,10 +232,16 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'The exact format depends on the client. One speaking HTTP usually takes something like this.',
-							'wp-mcp-abilities',
+							'wp-mcp-abilities'
 						) }
 					</p>
-					<Snippet code={ httpConfig } label={ __( 'Copy the configuration', 'wp-mcp-abilities' ) } />
+					<Snippet
+						code={ httpConfig }
+						label={ __(
+							'Copy the configuration',
+							'wp-mcp-abilities'
+						) }
+					/>
 				</>
 			),
 		},
@@ -220,10 +257,16 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'Already have an application password? This command turns it into the Base64 value the snippets expect, without leaving it in your shell history.',
-							'wp-mcp-abilities',
+							'wp-mcp-abilities'
 						) }
 					</p>
-					<Snippet code={ tokenCommand } label={ __( 'Copy the Base64 command', 'wp-mcp-abilities' ) } />
+					<Snippet
+						code={ tokenCommand }
+						label={ __(
+							'Copy the Base64 command',
+							'wp-mcp-abilities'
+						) }
+					/>
 				</div>
 			) }
 		</>
@@ -239,7 +282,9 @@ function ClientSnippets( { connection, password } ) {
  * @param {Function} props.onCreated  Receives the new password.
  */
 function PasswordCreator( { connection, password, onCreated } ) {
-	const [ name, setName ] = useState( __( 'MCP client', 'wp-mcp-abilities' ) );
+	const [ name, setName ] = useState(
+		__( 'MCP client', 'wp-mcp-abilities' )
+	);
 	const [ isBusy, setIsBusy ] = useState( false );
 	const [ error, setError ] = useState( null );
 
@@ -248,7 +293,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 			<Notice status="warning" isDismissible={ false }>
 				{ __(
 					'Application passwords are not available for your account. WordPress only offers them on sites served over HTTPS, or on a local environment, and a plugin may also switch them off.',
-					'wp-mcp-abilities',
+					'wp-mcp-abilities'
 				) }
 			</Notice>
 		);
@@ -259,7 +304,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 			<Notice status="success" isDismissible={ false }>
 				{ __(
 					'Application password created and filled into the snippets below. Copy the one you need now: the password will not be shown again once you leave this page.',
-					'wp-mcp-abilities',
+					'wp-mcp-abilities'
 				) }
 			</Notice>
 		);
@@ -285,7 +330,10 @@ function PasswordCreator( { connection, password, onCreated } ) {
 				<TextControl
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __( 'Application password name', 'wp-mcp-abilities' ) }
+					label={ __(
+						'Application password name',
+						'wp-mcp-abilities'
+					) }
 					value={ name }
 					onChange={ setName }
 				/>
@@ -296,7 +344,10 @@ function PasswordCreator( { connection, password, onCreated } ) {
 					isBusy={ isBusy }
 					disabled={ isBusy || ! name.trim() }
 				>
-					{ __( 'Create an application password', 'wp-mcp-abilities' ) }
+					{ __(
+						'Create an application password',
+						'wp-mcp-abilities'
+					) }
 				</Button>
 			</div>
 			<p className="description">
@@ -305,12 +356,12 @@ function PasswordCreator( { connection, password, onCreated } ) {
 						/* translators: %s: login of the current user. */
 						__(
 							'Created for your account, %s: the client will act with exactly your rights. You can revoke it at any time from <a>your profile</a>.',
-							'wp-mcp-abilities',
+							'wp-mcp-abilities'
 						),
-						connection.userLogin,
+						connection.userLogin
 					),
 					// eslint-disable-next-line jsx-a11y/anchor-has-content -- Filled by createInterpolateElement.
-					{ a: <a href={ connection.profileUrl } /> },
+					{ a: <a href={ connection.profileUrl } /> }
 				) }
 			</p>
 			{ error && (
@@ -322,14 +373,18 @@ function PasswordCreator( { connection, password, onCreated } ) {
 	);
 }
 
-export default function ConnectionTab( { connection, password, onPasswordCreated } ) {
+export default function ConnectionTab( {
+	connection,
+	password,
+	onPasswordCreated,
+} ) {
 	return (
 		<div className="wpmcpa-connection">
 			{ ! connection.mcpAdapter && (
 				<Notice status="warning" isDismissible={ false }>
 					{ __(
 						'The MCP Adapter plugin is not running. The abilities are registered, but no MCP client can reach them until it is installed and active.',
-						'wp-mcp-abilities',
+						'wp-mcp-abilities'
 					) }{ ' ' }
 					<ExternalLink href={ connection.adapterUrl }>
 						{ __( 'Download the MCP Adapter', 'wp-mcp-abilities' ) }
@@ -340,27 +395,32 @@ export default function ConnectionTab( { connection, password, onPasswordCreated
 				<Notice status="warning" isDismissible={ false }>
 					{ __(
 						'This site switches off the default MCP server, so the URL below does not answer. Use the URL of the server your code declares instead.',
-						'wp-mcp-abilities',
+						'wp-mcp-abilities'
 					) }
 				</Notice>
 			) }
 
 			<Card className="wpmcpa-card" size="medium">
 				<CardHeader>
-					<h2 className="wpmcpa-card__title">{ __( 'MCP server URL', 'wp-mcp-abilities' ) }</h2>
+					<h2 className="wpmcpa-card__title">
+						{ __( 'MCP server URL', 'wp-mcp-abilities' ) }
+					</h2>
 				</CardHeader>
 				<CardBody>
 					<p>
 						{ __(
 							'The address to give your AI client. It acts as a WordPress user, within that user’s capabilities, and only reaches the abilities enabled on this screen.',
-							'wp-mcp-abilities',
+							'wp-mcp-abilities'
 						) }
 					</p>
 					<div className="wpmcpa-url">
 						<code>{ connection.endpoint }</code>
 						<CopyButton
 							text={ connection.endpoint }
-							label={ __( 'Copy the server URL', 'wp-mcp-abilities' ) }
+							label={ __(
+								'Copy the server URL',
+								'wp-mcp-abilities'
+							) }
 						/>
 					</div>
 				</CardBody>
@@ -377,10 +437,14 @@ export default function ConnectionTab( { connection, password, onPasswordCreated
 					<p>
 						{ __(
 							'The client signs in with an application password. Pick the account deliberately: a dedicated user with the lowest role that covers the job is the safest choice.',
-							'wp-mcp-abilities',
+							'wp-mcp-abilities'
 						) }
 					</p>
-					<PasswordCreator connection={ connection } password={ password } onCreated={ onPasswordCreated } />
+					<PasswordCreator
+						connection={ connection }
+						password={ password }
+						onCreated={ onPasswordCreated }
+					/>
 				</CardBody>
 			</Card>
 
@@ -392,7 +456,10 @@ export default function ConnectionTab( { connection, password, onPasswordCreated
 					</h2>
 				</CardHeader>
 				<CardBody>
-					<ClientSnippets connection={ connection } password={ password } />
+					<ClientSnippets
+						connection={ connection }
+						password={ password }
+					/>
 				</CardBody>
 			</Card>
 
@@ -408,22 +475,22 @@ export default function ConnectionTab( { connection, password, onPasswordCreated
 						<li>
 							{ __(
 								'Restart the client, then ask it which WordPress abilities it can use.',
-								'wp-mcp-abilities',
+								'wp-mcp-abilities'
 							) }
 						</li>
 						<li>
 							{ createInterpolateElement(
 								__(
 									'It should call <code>mcp-adapter-discover-abilities</code> and list the abilities checked in the Abilities tab.',
-									'wp-mcp-abilities',
+									'wp-mcp-abilities'
 								),
-								{ code: <code /> },
+								{ code: <code /> }
 							) }
 						</li>
 						<li>
 							{ __(
 								'A 401 error means the credentials are wrong; a 404 means the MCP Adapter is not active.',
-								'wp-mcp-abilities',
+								'wp-mcp-abilities'
 							) }
 						</li>
 					</ol>

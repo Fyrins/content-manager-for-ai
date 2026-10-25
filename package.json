@@ -24,5 +24,6 @@
     "@wordpress/element": "^10.0.0",
     "@wordpress/i18n": "^7.0.0",
     "@wordpress/scripts": "^35.0.0"
-  }
+  },
+  "prettier": "@wordpress/prettier-config"
 }
