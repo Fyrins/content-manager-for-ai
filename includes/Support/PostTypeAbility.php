@@ -130,6 +130,20 @@ class PostTypeAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isReadOnly(): bool {
+        return in_array( $this->operation, [ 'list', 'get' ], true );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isDestructive(): bool {
+        return 'delete' === $this->operation;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getInputSchema(): array {
         return match ( $this->operation ) {
             'list'   => $this->listInputSchema(),

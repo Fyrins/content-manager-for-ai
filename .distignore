@@ -9,3 +9,6 @@ composer.lock
 phpcs.xml.dist
 README.md
 CHANGELOG.md
+src
+package.json
+package-lock.json

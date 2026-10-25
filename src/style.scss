@@ -1,0 +1,231 @@
+// Settings screen of WP MCP Abilities.
+// Colours come from the admin theme variables, so the screen follows the
+// administrator's colour scheme.
+
+.wpmcpa-app {
+	max-width: 960px;
+	margin-top: 16px;
+}
+
+.wpmcpa-tabs > .components-tab-panel__tabs {
+	margin-bottom: 24px;
+	border-bottom: 1px solid #dcdcde;
+}
+
+.wpmcpa-intro {
+	max-width: 70ch;
+	margin-bottom: 16px;
+
+	p {
+		margin-top: 0;
+	}
+}
+
+.wpmcpa-search {
+	max-width: 360px;
+	margin-bottom: 24px;
+}
+
+.wpmcpa-card {
+	margin-bottom: 24px;
+
+	&__title {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+		margin: 0;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	&__count {
+		color: #646970;
+		font-size: 12px;
+	}
+}
+
+.wpmcpa-section {
+
+	& + & {
+		margin-top: 24px;
+		padding-top: 24px;
+		border-top: 1px solid #f0f0f1;
+	}
+
+	&__title {
+		margin: 0 0 4px;
+		font-size: 13px;
+		font-weight: 600;
+	}
+
+	&__description {
+		margin: 0 0 16px;
+		color: #50575e;
+	}
+
+	&__toggle {
+		margin-top: 16px;
+	}
+}
+
+.wpmcpa-caution {
+	margin: 0 0 16px;
+}
+
+.wpmcpa-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+	gap: 12px 24px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.wpmcpa-ability {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+	margin: 0;
+
+	&__help {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		background: #f0f0f1;
+		color: #50575e;
+		font-size: 10px;
+		font-weight: 600;
+		cursor: help;
+
+		&:focus-visible {
+			outline: 2px solid var(--wp-admin-theme-color, #3858e9);
+			outline-offset: 1px;
+		}
+	}
+}
+
+.wpmcpa-badge {
+	padding: 1px 6px;
+	border-radius: 2px;
+	background: #f0f0f1;
+	color: #50575e;
+	font-size: 11px;
+	line-height: 1.6;
+
+	&--danger {
+		background: #fcf0f1;
+		color: #8a2424;
+	}
+}
+
+.wpmcpa-step {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: var(--wp-admin-theme-color, #3858e9);
+	color: #fff;
+	font-size: 12px;
+}
+
+.wpmcpa-url {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+
+	code {
+		padding: 6px 10px;
+		overflow-wrap: anywhere;
+	}
+}
+
+.wpmcpa-password {
+
+	&__row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		align-items: flex-end;
+
+		.components-base-control {
+			flex: 1 1 260px;
+		}
+	}
+}
+
+.wpmcpa-clients > .components-tab-panel__tabs {
+	margin-bottom: 16px;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.wpmcpa-snippet {
+	display: flex;
+	gap: 8px;
+	align-items: flex-start;
+	margin-bottom: 16px;
+
+	pre {
+		flex: 1;
+		min-width: 0;
+		margin: 0;
+		padding: 12px;
+		overflow-x: auto;
+		border: 1px solid #dcdcde;
+		border-radius: 2px;
+		background: #f6f7f7;
+	}
+
+	code {
+		padding: 0;
+		background: none;
+		white-space: pre;
+	}
+}
+
+.wpmcpa-paths {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 4px 12px;
+	margin: 0 0 16px;
+
+	dd {
+		margin: 0;
+	}
+}
+
+.wpmcpa-token-help {
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid #f0f0f1;
+}
+
+.wpmcpa-savebar {
+	position: sticky;
+	bottom: 0;
+	z-index: 10;
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	padding: 12px 0;
+	border-top: 1px solid #dcdcde;
+	background: #f0f0f1;
+
+	&__hint {
+		color: #50575e;
+	}
+}
+
+.wpmcpa-snackbars {
+	position: fixed;
+	bottom: 24px;
+	left: 50%;
+	z-index: 100000;
+	transform: translateX(-50%);
+}

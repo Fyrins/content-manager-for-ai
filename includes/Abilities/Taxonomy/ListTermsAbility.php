@@ -34,6 +34,13 @@ class ListTermsAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isReadOnly(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'List terms', 'wp-mcp-abilities' );
     }

@@ -5,9 +5,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-25
+
+### Added
+
+- A Connection tab on the settings screen: the MCP server URL with a copy button, an application password created for the current user in one click, and configurations for Claude Code, Claude Desktop (through `@automattic/mcp-wordpress-remote`), Cursor and a generic HTTP client, filled with the login and the new password. Warnings show when the MCP Adapter is not running, when the default server is switched off, or when application passwords are unavailable.
+- `readonly` and `destructive` annotations on every ability, published in `meta.annotations` and read by MCP clients. `AbstractAbility` gains `isReadOnly()` and `isDestructive()`.
+- `wp-mcp-abilities/v1/settings` REST route (`GET`, `POST`), reserved to `manage_options`, behind the settings screen.
+
+### Changed
+
+- The settings screen is rebuilt with `@wordpress/components`, in tabs. Abilities are grouped in cards and split into read-only and write, with a select-all box per block, a filter field, the name and description behind a `?`, and a badge on the ones that delete. Third-party abilities move to their own tab. The stored options and their validation are unchanged.
+- The screen's script is built with `@wordpress/scripts` into `build/`, which is not versioned: a copy cloned from the repository needs `npm ci && npm run build`. The release workflow builds it before deploying.
+
 ### Security
 
 - Read abilities only checked `edit_posts`, never the object they read: any contributor could read the content, meta and SEOpress data of private posts and of other authors' drafts, and browse the whole media library. Permissions are now checked on the object itself. `get-*` post type abilities require `read_post` (`edit_post` for a password-protected post). `list-*` post type abilities only return published posts and the caller's own without `edit_others_posts`. `get-post-meta` and `get-post-seopress` require `edit_post` on the post, as the REST API `edit` context does. `list-media` requires `upload_files` and leaves out attachments whose parent the caller cannot read. Ported from bsaweb-mcp-abilities.
+- `get-term-meta` only checked `edit_posts`: a contributor could read the meta of any term, private taxonomies included. It now requires `edit_term` on the term read, like `update-term-meta` and `delete-term-meta`.
 
 ## [1.1.1] - 2026-10-08
 

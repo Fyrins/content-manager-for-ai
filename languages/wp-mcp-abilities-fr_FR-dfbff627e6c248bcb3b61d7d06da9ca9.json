@@ -1,0 +1,186 @@
+{
+    "translation-revision-date": "2026-09-25T16:00:00+02:00",
+    "generator": "WP-CLI\/2.10.0",
+    "source": "build\/index.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "fr_FR",
+                "plural-forms": "nplurals=2; plural=(n > 1);"
+            },
+            "Download the MCP Adapter": [
+                "T\u00e9l\u00e9charger MCP Adapter"
+            ],
+            "No ability is available on this site.": [
+                "Aucune ability n'est disponible sur ce site."
+            ],
+            "These abilities come from another plugin. Unchecking one hides it from MCP requests: an agent no longer lists it, and can no longer run it. The rest of the site is untouched, and the plugin providing it keeps using it as usual.": [
+                "Ces abilities proviennent d'une autre extension. En d\u00e9cocher une la masque aux requ\u00eates MCP : un agent ne la liste plus et ne peut plus l'ex\u00e9cuter. Le reste du site n'est pas touch\u00e9, et l'extension qui la fournit continue de s'en servir normalement."
+            ],
+            "Some of them were never meant for an agent by the plugin that registered them. Checking such a one hands it to the MCP server as a tool. It grants no right: the ability decides for itself who may call it, exactly as it does elsewhere. What changes is that an agent can now reach it.": [
+                "Certaines d'entre elles n'ont jamais \u00e9t\u00e9 destin\u00e9es \u00e0 un agent par l'extension qui les enregistre. En cocher une la remet au serveur MCP comme outil. Cela n'accorde aucun droit : l'ability d\u00e9cide elle-m\u00eame qui peut l'appeler, comme partout ailleurs. Ce qui change, c'est qu'un agent peut d\u00e9sormais l'atteindre."
+            ],
+            "This site switches off the default MCP server. Exposing an ability here will have no effect until a server declares it.": [
+                "Ce site d\u00e9sactive le serveur MCP par d\u00e9faut. Exposer une ability ici restera sans effet tant qu'aucun serveur ne la d\u00e9clare."
+            ],
+            "Pick the abilities exposed to MCP clients. An unchecked ability is not registered at all. Destructive abilities are off until you enable them.": [
+                "Choisissez les abilities expos\u00e9es aux clients MCP. Une ability d\u00e9coch\u00e9e n'est pas enregistr\u00e9e du tout. Les abilities destructrices restent d\u00e9sactiv\u00e9es tant que vous ne les activez pas."
+            ],
+            "Use write abilities with caution. An agent can make mistakes, and with them it can change or delete what is on the site. Review what it does, especially on a live site.": [
+                "Activez les abilities d'\u00e9criture avec prudence. Un agent peut se tromper, et avec elles il peut modifier ou supprimer ce qui est sur le site. V\u00e9rifiez ce qu'il fait, surtout sur un site en production."
+            ],
+            "Filter abilities": [
+                "Filtrer les abilities"
+            ],
+            "No ability matches.": [
+                "Aucune ability ne correspond."
+            ],
+            "Deletes": [
+                "Supprime"
+            ],
+            "Closed to MCP by its own declaration. Check to hand it to an agent.": [
+                "Ferm\u00e9e \u00e0 MCP par sa propre d\u00e9claration. Cochez pour la remettre \u00e0 un agent."
+            ],
+            "Closed by its plugin": [
+                "Ferm\u00e9e par son extension"
+            ],
+            "Deselect all": [
+                "Tout d\u00e9cocher"
+            ],
+            "Select all": [
+                "Tout cocher"
+            ],
+            "%1$d of %2$d enabled": [
+                "%1$d sur %2$d activ\u00e9es"
+            ],
+            "Read-only abilities": [
+                "Abilities de lecture"
+            ],
+            "These abilities let an agent read content. They change nothing on the site.": [
+                "Ces abilities permettent \u00e0 un agent de lire le contenu. Elles ne modifient rien sur le site."
+            ],
+            "Write abilities": [
+                "Abilities d'\u00e9criture"
+            ],
+            "These abilities do not declare themselves read-only: assume they can change the site.": [
+                "Ces abilities ne se d\u00e9clarent pas en lecture seule : partez du principe qu'elles peuvent modifier le site."
+            ],
+            "These abilities let an agent create, update and delete content.": [
+                "Ces abilities permettent \u00e0 un agent de cr\u00e9er, modifier et supprimer du contenu."
+            ],
+            "Settings saved.": [
+                "R\u00e9glages enregistr\u00e9s."
+            ],
+            "Connection": [
+                "Connexion"
+            ],
+            "Abilities (%1$d\/%2$d)": [
+                "Abilities (%1$d\/%2$d)"
+            ],
+            "Other plugins": [
+                "Autres extensions"
+            ],
+            "Save settings": [
+                "Enregistrer les r\u00e9glages"
+            ],
+            "Unsaved changes": [
+                "Modifications non enregistr\u00e9es"
+            ],
+            "Copied!": [
+                "Copi\u00e9 !"
+            ],
+            "Copy": [
+                "Copier"
+            ],
+            "Run this in a terminal. Add --scope user to reach the site from every project.": [
+                "Lancez ceci dans un terminal. Ajoutez --scope user pour acc\u00e9der au site depuis tous vos projets."
+            ],
+            "Copy the Claude Code command": [
+                "Copier la commande Claude Code"
+            ],
+            "Open Settings \u2192 Developer \u2192 Edit Config, then paste this into the file. Claude Desktop reaches the site through a small proxy run with npx, so Node.js has to be installed.": [
+                "Ouvrez R\u00e9glages \u2192 D\u00e9veloppeur \u2192 Modifier la configuration, puis collez ceci dans le fichier. Claude Desktop passe par un petit proxy lanc\u00e9 avec npx : Node.js doit donc \u00eatre install\u00e9."
+            ],
+            "Copy the Claude Desktop configuration": [
+                "Copier la configuration Claude Desktop"
+            ],
+            "Paste this into <code>~\/.cursor\/mcp.json<\/code>, or into <code>.cursor\/mcp.json<\/code> at the root of a project.": [
+                "Collez ceci dans <code>~\/.cursor\/mcp.json<\/code>, ou dans <code>.cursor\/mcp.json<\/code> \u00e0 la racine d'un projet."
+            ],
+            "Copy the Cursor configuration": [
+                "Copier la configuration Cursor"
+            ],
+            "Other client": [
+                "Autre client"
+            ],
+            "The exact format depends on the client. One speaking HTTP usually takes something like this.": [
+                "Le format exact d\u00e9pend du client. Un client qui parle HTTP accepte en g\u00e9n\u00e9ral quelque chose comme ceci."
+            ],
+            "Copy the configuration": [
+                "Copier la configuration"
+            ],
+            "Already have an application password? This command turns it into the Base64 value the snippets expect, without leaving it in your shell history.": [
+                "Vous avez d\u00e9j\u00e0 un mot de passe d'application ? Cette commande le convertit en la valeur Base64 attendue par les extraits, sans le laisser dans l'historique de votre shell."
+            ],
+            "Copy the Base64 command": [
+                "Copier la commande Base64"
+            ],
+            "MCP client": [
+                "Client MCP"
+            ],
+            "Application passwords are not available for your account. WordPress only offers them on sites served over HTTPS, or on a local environment, and a plugin may also switch them off.": [
+                "Les mots de passe d'application ne sont pas disponibles pour votre compte. WordPress ne les propose que sur les sites servis en HTTPS ou en environnement local, et une extension peut aussi les d\u00e9sactiver."
+            ],
+            "Application password created and filled into the snippets below. Copy the one you need now: the password will not be shown again once you leave this page.": [
+                "Mot de passe d'application cr\u00e9\u00e9 et ins\u00e9r\u00e9 dans les extraits ci-dessous. Copiez d\u00e8s maintenant celui dont vous avez besoin : le mot de passe ne sera plus affich\u00e9 une fois cette page quitt\u00e9e."
+            ],
+            "Application password name": [
+                "Nom du mot de passe d'application"
+            ],
+            "Create an application password": [
+                "Cr\u00e9er un mot de passe d'application"
+            ],
+            "Created for your account, %s: the client will act with exactly your rights. You can revoke it at any time from <a>your profile<\/a>.": [
+                "Cr\u00e9\u00e9 pour votre compte, %s : le client agira avec exactement vos droits. Vous pouvez le r\u00e9voquer \u00e0 tout moment depuis <a>votre profil<\/a>."
+            ],
+            "The MCP Adapter plugin is not running. The abilities are registered, but no MCP client can reach them until it is installed and active.": [
+                "L'extension MCP Adapter n'est pas active. Les abilities sont enregistr\u00e9es, mais aucun client MCP ne peut les atteindre tant qu'elle n'est pas install\u00e9e et activ\u00e9e."
+            ],
+            "This site switches off the default MCP server, so the URL below does not answer. Use the URL of the server your code declares instead.": [
+                "Ce site d\u00e9sactive le serveur MCP par d\u00e9faut : l'URL ci-dessous ne r\u00e9pond donc pas. Utilisez plut\u00f4t l'URL du serveur que d\u00e9clare votre code."
+            ],
+            "MCP server URL": [
+                "URL du serveur MCP"
+            ],
+            "The address to give your AI client. It acts as a WordPress user, within that user\u2019s capabilities, and only reaches the abilities enabled on this screen.": [
+                "L'adresse \u00e0 donner \u00e0 votre client IA. Il agit en tant qu'utilisateur WordPress, dans la limite de ses droits, et n'atteint que les abilities activ\u00e9es sur cet \u00e9cran."
+            ],
+            "Copy the server URL": [
+                "Copier l'URL du serveur"
+            ],
+            "Create the credentials": [
+                "Cr\u00e9er les identifiants"
+            ],
+            "The client signs in with an application password. Pick the account deliberately: a dedicated user with the lowest role that covers the job is the safest choice.": [
+                "Le client se connecte avec un mot de passe d'application. Choisissez le compte avec soin : un utilisateur d\u00e9di\u00e9, avec le r\u00f4le le plus bas qui suffit \u00e0 la t\u00e2che, est le choix le plus s\u00fbr."
+            ],
+            "Configure your client": [
+                "Configurer votre client"
+            ],
+            "Check that it works": [
+                "V\u00e9rifier que cela fonctionne"
+            ],
+            "Restart the client, then ask it which WordPress abilities it can use.": [
+                "Red\u00e9marrez le client, puis demandez-lui quelles abilities WordPress il peut utiliser."
+            ],
+            "It should call <code>mcp-adapter-discover-abilities<\/code> and list the abilities checked in the Abilities tab.": [
+                "Il doit appeler <code>mcp-adapter-discover-abilities<\/code> et lister les abilities coch\u00e9es dans l'onglet Abilities."
+            ],
+            "A 401 error means the credentials are wrong; a 404 means the MCP Adapter is not active.": [
+                "Une erreur 401 signifie que les identifiants sont faux ; une erreur 404, que MCP Adapter n'est pas actif."
+            ]
+        }
+    }
+}

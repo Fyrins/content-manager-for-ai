@@ -80,6 +80,8 @@ https://example.com/wp-json/mcp/mcp-adapter-default-server
 
 Its REST namespace is `mcp` and its route `mcp-adapter-default-server`.
 
+**The settings screen does this for you.** Its Connection tab shows the server URL, creates an application password for your account in one click, and fills it into ready-to-paste configurations for Claude Code, Claude Desktop, Cursor and a generic HTTP client (see [Settings screen](#settings-screen)). The rest of this section explains what those configurations contain.
+
 **Authentication.** The client acts as a WordPress user. The usual way is an application password: in the WordPress admin, open Users → Profile, create one under "Application Passwords", and send it with HTTP Basic authentication (`username:application-password`, base64-encoded). WordPress only offers application passwords on sites served over HTTPS, or on a local environment.
 
 **Client configuration.** The exact format depends on the client. A typical configuration for a client speaking HTTP looks like this:
@@ -106,7 +108,15 @@ Its REST namespace is `mcp` and its route `mcp-adapter-default-server`.
 
 **Settings → MCP Abilities** (`wp-admin/options-general.php?page=wp-mcp-abilities`), visible to users with `manage_options`.
 
-The screen lists every ability of the plugin that can run on the site, one checkbox each, in sections sorted alphabetically: one per exposed post type (named after its plural label), plus Content, Media, Meta, SEOpress, Taxonomies, Templates and WooCommerce. Abilities whose dependency is missing (WooCommerce, SEOPress, SEOPress Pro) are not listed. Below them come the sections for abilities registered by other plugins, described in [Third-party abilities](#third-party-abilities).
+The screen is a React app built with `@wordpress/components`. It reads and saves through the `wp-mcp-abilities/v1/settings` REST route (`GET` and `POST`, `manage_options` required), preloaded so the page renders without a first round trip. It has three tabs.
+
+**Connection.** The URL of the adapter's default server with a copy button; a form creating an application password for the current user through the core `/wp/v2/users/me/application-passwords` route; and per-client tabs (Claude Code, Claude Desktop, Cursor, other) whose snippets are filled with the login and, once created, the password. The password lives in the page only: it is shown once, like on the profile screen. Warnings appear when the MCP Adapter is not running, when the default server is switched off, or when application passwords are unavailable (no HTTPS outside a local environment).
+
+**Abilities.** Every ability of the plugin that can run on the site, one card per group sorted alphabetically: one per exposed post type (named after its plural label), plus Content, Media, Meta, SEOpress, Taxonomies, Templates, WooCommerce and WP Grid Builder. Each card splits its abilities into read-only and write, with a select-all box per block, a `?` showing the ability name and description, and a "Deletes" badge on destructive ones. A filter field narrows the list. Abilities whose dependency is missing (WooCommerce, SEOPress, SEOPress Pro) are not listed.
+
+**Other plugins.** Abilities registered by other plugins, one card per namespace, described in [Third-party abilities](#third-party-abilities). This tab only shows when there are some.
+
+**Read-only and destructive.** The split comes from the `readonly` and `destructive` annotations every ability now publishes in `meta.annotations` (`AbstractAbility::isReadOnly()` and `isDestructive()`). MCP clients receive them too. For third-party abilities the screen reads the same annotations, and an ability declaring nothing is shown as writing.
 
 **What unchecking does.** An unchecked ability is not registered at all: it disappears from the Abilities API and from what an MCP client can discover.
 
@@ -120,7 +130,7 @@ An ability absent from the stored option falls back to its own default, so an ab
 
 **Storage.** The switches live in the `wpmcpa_enabled` option, an array keyed by ability name. Third-party exposure lives in `wpmcpa_exposed`. Both options are deleted when the plugin is uninstalled.
 
-**Writing the option from code.** The setting is registered on `admin_init`, and from then on its validation applies to every write of the option, not only to the form. It sets to `false` every listed ability the payload does not mention, since an unchecked box is never sent by a form. A partial write such as `update_option( 'wpmcpa_enabled', [ 'wp-mcp-abilities/delete-post' => true ] )` therefore switches everything else off. Read the option, change the key you want, and write the whole array back:
+**Writing the option from code.** The setting is registered on `admin_init`, and from then on its validation applies to every write of the option, not only to the form. The REST route runs the same validation (`Services\SettingsSanitizer`), so a `POST` to `wp-mcp-abilities/v1/settings` behaves the same way: an ability the `enabled` map leaves out is switched off. It sets to `false` every listed ability the payload does not mention, since an unchecked box is never sent by a form. A partial write such as `update_option( 'wpmcpa_enabled', [ 'wp-mcp-abilities/delete-post' => true ] )` therefore switches everything else off. Read the option, change the key you want, and write the whole array back:
 
 ```bash
 wp eval '$o = (array) get_option( "wpmcpa_enabled", [] ); $o["wp-mcp-abilities/delete-post"] = true; update_option( "wpmcpa_enabled", $o );'
@@ -331,7 +341,7 @@ Protected meta keys (prefixed with `_`, or declared protected with `is_protected
 
 - **Input:** `post_id` (integer, required), `meta_key` (string; omit it to get every readable meta of the post).
 - **Output:** `success`, `post_id`, and either `meta_key` with `meta_value`, or `meta` (every readable key, single values unwrapped).
-- **Capability:** read. **Default:** enabled.
+- **Capability:** `edit_post` on the post. **Default:** enabled.
 
 #### `wp-mcp-abilities/update-post-meta`
 
@@ -343,7 +353,7 @@ Protected meta keys (prefixed with `_`, or declared protected with `is_protected
 
 - **Input:** `term_id` (integer, required), `taxonomy` (disambiguates the lookup), `meta_key` (omit it to get every readable meta of the term).
 - **Output:** `success`, `term_id`, and either `meta_key` with `meta_value`, or `meta`.
-- **Capability:** read. **Default:** enabled.
+- **Capability:** `edit_term` on the term. **Default:** enabled.
 
 #### `wp-mcp-abilities/update-term-meta`
 
@@ -873,7 +883,13 @@ cd wp-mcp-abilities
 composer install
 composer lint      # PHP_CodeSniffer with phpcs.xml.dist
 composer format    # PHP Code Beautifier and Fixer
+npm ci
+npm run build      # builds the settings screen into build/
+npm start          # same, rebuilt on every change
+npm run lint:js
 ```
+
+`build/` is not versioned. A copy cloned from the repository shows an error on the settings screen until `npm run build` has run; the release and CI workflows build it before packaging.
 
 `phpcs.xml.dist` applies the WordPress Coding Standards, PHPCompatibilityWP for PHP 8.1 and later, the minimum WordPress version (6.9), and the text domain and prefix checks (`wpmcpa`, `WpMcpAbilities`).
 
@@ -886,10 +902,13 @@ The repository ships no automated test suite. Test changes on a local WordPress 
 The plugin relies on WordPress's just-in-time translation loading (text domain `wp-mcp-abilities`, `languages/`). To refresh the catalogue after changing strings:
 
 ```bash
-wp i18n make-pot . languages/wp-mcp-abilities.pot --exclude=vendor,tests,docs
+wp i18n make-pot . languages/wp-mcp-abilities.pot --slug=wp-mcp-abilities --exclude=vendor,tests,docs,node_modules,build,dist
 wp i18n update-po languages/wp-mcp-abilities.pot languages/
 wp i18n make-mo languages/
+wp i18n make-json languages/ --no-purge --use-map=<map.json>
 ```
+
+The strings of the settings screen live in `src/`, but WordPress looks their translations up by the built file, `build/index.js`. `make-json` therefore needs a map sending every `src/**/*.js` path to `build/index.js`, for instance `{"src/components/App.js": "build/index.js", …}`.
 
 ### Code structure
 
@@ -902,14 +921,15 @@ wp i18n make-mo languages/
 | `includes/Contracts/` | `AbilityInterface`, `AbilityCategoryInterface`, `HookInterface`. |
 | `includes/AbilityCategories/` | The `wp-mcp-abilities` ability category. |
 | `includes/Abilities/` | One class per static ability, by family (`Content`, `Media`, `Meta`, `Seopress`, `Taxonomy`, `Template`, `WooCommerce`), with the traits they share. |
-| `includes/Hooks/` | WordPress integration: availability filtering, post type abilities, third-party switches and exposure, requirements notice, WooCommerce product types. `Hooks/Admin/` holds the settings screen. |
-| `includes/Services/` | Logic without hooks: settings reader, catalogue of the plugin's abilities, catalogue of third-party abilities. |
+| `includes/Hooks/` | WordPress integration: availability filtering, post type abilities, third-party switches and exposure, requirements notice, WooCommerce product types. `Hooks/Admin/` holds the settings screen: the page and its assets, the options registration, and the `SettingsRestRoute` it reads and saves through. |
+| `includes/Services/` | Logic without hooks: settings reader, validation of what is written (`SettingsSanitizer`), catalogue of the plugin's abilities, catalogue of third-party abilities. |
+| `src/` | The settings screen's React app, built into `build/` by `@wordpress/scripts`. |
 | `includes/Support/` | `AbstractAbility`, `PostTypeAbility` (the five generated operations), `PostTypeTaxonomies` (term rules of a post type), `Capabilities`, `Input`, `Requirements`, `RequestCache`. |
 | `uninstall.php` | Deletes the two options. |
 
 ### Adding an ability
 
-1. Create a class under `includes/Abilities/<Family>/` extending `WpMcpAbilities\Support\AbstractAbility`. It must be instantiable without arguments. Implement `getName()` (use `self::qualify( 'my-slug' )`), `getLabel()`, `getDescription()`, `getGroup()`, `getInputSchema()`, `getOutputSchema()`, `checkPermission()` and `execute()`. Override `isEnabledByDefault()` to return `false` if it deletes anything, and `isAvailable()` if it depends on another plugin.
+1. Create a class under `includes/Abilities/<Family>/` extending `WpMcpAbilities\Support\AbstractAbility`. It must be instantiable without arguments. Implement `getName()` (use `self::qualify( 'my-slug' )`), `getLabel()`, `getDescription()`, `getGroup()`, `getInputSchema()`, `getOutputSchema()`, `checkPermission()` and `execute()`. Override `isReadOnly()` to return `true` if it changes nothing, `isDestructive()` and `isEnabledByDefault()` (returning `false`) if it deletes anything, and `isAvailable()` if it depends on another plugin.
 2. Add the class to `Plugin::ABILITIES` in `includes/Plugin.php`.
 3. Check capabilities against the targeted object with `Support\Capabilities`, in `checkPermission()` and again in `execute()`, and read input with `Support\Input`.
 4. Document it in this README, add a changelog entry, refresh the translation catalogue, run `composer lint` and test on a local site.
@@ -975,7 +995,7 @@ class CountWordsAbility extends AbstractAbility {
 }
 ```
 
-`getProperties()`, inherited from `AbstractAbility`, sets the category, wires the callbacks, and adds `meta.mcp.public` and the `meta.wpmcpa.plugin` mark.
+`getProperties()`, inherited from `AbstractAbility`, sets the category, wires the callbacks, and adds `meta.mcp.public`, the `readonly` and `destructive` annotations, and the `meta.wpmcpa.plugin` mark.
 
 ### Checklist when upgrading the MCP Adapter
 
@@ -995,9 +1015,9 @@ The quickest check after an upgrade: call `mcp-adapter-discover-abilities` from 
 3. Commit, then tag and push: `git tag vx.y.z && git push origin vx.y.z`.
 4. The `deploy.yml` workflow runs on `v*` tags. It runs the same version check, deploys to the WordPress.org SVN repository with `10up/action-wordpress-plugin-deploy` (the package follows `.distignore`, the directory assets come from `.wordpress-org/`), then creates the GitHub release with the changelog section as notes. It needs the `SVN_USERNAME` and `SVN_PASSWORD` repository secrets.
 
-The `ci.yml` workflow runs on pushes and pull requests: PHP syntax check, `composer lint`, and Plugin Check on the built package.
+The `ci.yml` workflow runs on pushes and pull requests: PHP syntax check, `composer lint`, JS and SCSS lint with a build of the settings screen, and Plugin Check on the built package.
 
-To build the zip by hand: `wp dist-archive .` (WP-CLI's `dist-archive` command reads `.distignore`). The patterns in `.distignore` are deliberately unanchored, because `dist-archive` 2.0.1 mishandles leading slashes.
+To build the zip by hand: `npm ci && npm run build`, then `wp dist-archive .` (WP-CLI's `dist-archive` command reads `.distignore`). The patterns in `.distignore` are deliberately unanchored, because `dist-archive` 2.0.1 mishandles leading slashes.
 
 ## Migrating from bsaweb-mcp-abilities
 

@@ -33,6 +33,13 @@ class ListFacetsAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isReadOnly(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'List WP Grid Builder facets', 'wp-mcp-abilities' );
     }

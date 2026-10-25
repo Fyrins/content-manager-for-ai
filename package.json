@@ -1,0 +1,29 @@
+{
+  "name": "wp-mcp-abilities",
+  "version": "1.2.0",
+  "description": "Settings screen of WP MCP Abilities",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "lint:js": "wp-scripts lint-js src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fyrins/wp-mcp-abilities.git"
+  },
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Fyrins/wp-mcp-abilities/issues"
+  },
+  "homepage": "https://github.com/Fyrins/wp-mcp-abilities#readme",
+  "private": true,
+  "devDependencies": {
+    "@wordpress/api-fetch": "^8.0.0",
+    "@wordpress/components": "^43.0.0",
+    "@wordpress/compose": "^9.0.0",
+    "@wordpress/element": "^10.0.0",
+    "@wordpress/i18n": "^7.0.0",
+    "@wordpress/scripts": "^35.0.0"
+  },
+  "prettier": "@wordpress/prettier-config"
+}

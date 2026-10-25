@@ -12,6 +12,7 @@ use WpMcpAbilities\Contracts\HookInterface;
 use WpMcpAbilities\Hooks\AbilityAvailability;
 use WpMcpAbilities\Hooks\Admin\RegisterAbilitiesPage;
 use WpMcpAbilities\Hooks\Admin\RegisterAbilitiesSettings;
+use WpMcpAbilities\Hooks\Admin\SettingsRestRoute;
 use WpMcpAbilities\Hooks\PostTypeAbilityProvider;
 use WpMcpAbilities\Hooks\RequirementsNotice;
 use WpMcpAbilities\Hooks\ThirdPartyAbilityAvailability;
@@ -19,6 +20,7 @@ use WpMcpAbilities\Hooks\ThirdPartyAbilityExposure;
 use WpMcpAbilities\Hooks\WooCommerceProductTypes;
 use WpMcpAbilities\Registry\AbilityRegistry;
 use WpMcpAbilities\Services\AbilityCatalogService;
+use WpMcpAbilities\Services\SettingsSanitizer;
 use WpMcpAbilities\Services\SettingsService;
 use WpMcpAbilities\Services\ThirdPartyAbilityCatalog;
 
@@ -102,6 +104,7 @@ final class Plugin {
         $settings   = new SettingsService();
         $catalog    = new AbilityCatalogService( $registry );
         $thirdParty = new ThirdPartyAbilityCatalog();
+        $sanitizer  = new SettingsSanitizer( $catalog, $thirdParty, $settings );
 
         $hooks = [
             $registry,
@@ -111,8 +114,9 @@ final class Plugin {
             new ThirdPartyAbilityExposure( $thirdParty, $settings ),
             new RequirementsNotice(),
             new WooCommerceProductTypes(),
-            new RegisterAbilitiesPage( $catalog ),
-            new RegisterAbilitiesSettings( $catalog, $thirdParty, $settings ),
+            new RegisterAbilitiesPage(),
+            new RegisterAbilitiesSettings( $sanitizer ),
+            new SettingsRestRoute( $catalog, $thirdParty, $settings, $sanitizer ),
         ];
 
         foreach ( $hooks as $hook ) {

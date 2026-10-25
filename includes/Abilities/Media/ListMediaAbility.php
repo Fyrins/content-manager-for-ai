@@ -34,6 +34,13 @@ class ListMediaAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isReadOnly(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'List media', 'wp-mcp-abilities' );
     }

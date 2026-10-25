@@ -28,6 +28,13 @@ class DeleteProductVariationAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
+    public function isDestructive(): bool {
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getLabel(): string {
         return __( 'Delete a product variation', 'wp-mcp-abilities' );
     }
