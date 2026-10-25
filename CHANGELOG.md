@@ -5,6 +5,20 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-10-25
+
+### Security
+
+- `get-term-seopress` only checked `edit_posts`: a contributor could read the SEO fields of any term, private taxonomies included. It now requires `edit_term` on the term, like `get-term-meta` and `update-term-seopress`.
+- `get-term-meta` and `get-term-seopress` answer a missing term like a forbidden one, so a direct `execute()` call cannot tell which terms exist.
+
+### Fixed
+
+- A `POST` to the `wp-mcp-abilities/v1/settings` route only changes the switches it sends. An empty or partial payload used to switch every other ability off. The settings screen always sends every switch and is not affected.
+- The settings screen loads its RTL stylesheet on right-to-left sites.
+- The Base64 helper command escapes a single quote in the login, and the Claude Code instructions now say that the command leaves the password in the shell history.
+- The preloaded settings are encoded with `JSON_HEX_TAG | JSON_HEX_AMP` in the inline script.
+
 ## [1.2.0] - 2026-10-25
 
 ### Added

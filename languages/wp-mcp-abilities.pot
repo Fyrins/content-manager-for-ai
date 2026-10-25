@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP MCP Abilities 1.1.1\n"
+"Project-Id-Version: WP MCP Abilities 1.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-mcp-abilities\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-25T18:56:48+00:00\n"
+"POT-Creation-Date: 2026-10-25T19:32:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: wp-mcp-abilities\n"
@@ -1026,15 +1026,15 @@ msgstr ""
 
 #: includes/Hooks/Admin/RegisterAbilitiesPage.php:51
 #: includes/Hooks/Admin/RegisterAbilitiesPage.php:52
-#: includes/Hooks/Admin/RegisterAbilitiesPage.php:125
+#: includes/Hooks/Admin/RegisterAbilitiesPage.php:126
 msgid "MCP Abilities"
 msgstr ""
 
-#: includes/Hooks/Admin/RegisterAbilitiesPage.php:129
+#: includes/Hooks/Admin/RegisterAbilitiesPage.php:130
 msgid "The screen's script is missing. On a copy installed from the repository, run `npm ci && npm run build`."
 msgstr ""
 
-#: includes/Hooks/Admin/RegisterAbilitiesPage.php:133
+#: includes/Hooks/Admin/RegisterAbilitiesPage.php:134
 msgid "This screen needs JavaScript."
 msgstr ""
 
@@ -1047,7 +1047,7 @@ msgid "WP MCP Abilities is not reachable by MCP clients yet."
 msgstr ""
 
 #: includes/Hooks/RequirementsNotice.php:85
-#: src/components/ConnectionTab.js:335
+#: src/components/ConnectionTab.js:393
 msgid "Download the MCP Adapter"
 msgstr ""
 
@@ -1268,230 +1268,230 @@ msgstr ""
 msgid "The abilities are registered and available through the Abilities API, but no MCP client can reach them until the MCP Adapter is installed and active."
 msgstr ""
 
-#: src/components/AbilitiesTab.js:48
+#: src/components/AbilitiesTab.js:55
 msgid "No ability is available on this site."
 msgstr ""
 
-#: src/components/AbilitiesTab.js:56
+#: src/components/AbilitiesTab.js:68
 msgid "These abilities come from another plugin. Unchecking one hides it from MCP requests: an agent no longer lists it, and can no longer run it. The rest of the site is untouched, and the plugin providing it keeps using it as usual."
 msgstr ""
 
-#: src/components/AbilitiesTab.js:62
+#: src/components/AbilitiesTab.js:74
 msgid "Some of them were never meant for an agent by the plugin that registered them. Checking such a one hands it to the MCP server as a tool. It grants no right: the ability decides for itself who may call it, exactly as it does elsewhere. What changes is that an agent can now reach it."
 msgstr ""
 
-#: src/components/AbilitiesTab.js:69
+#: src/components/AbilitiesTab.js:81
 msgid "This site switches off the default MCP server. Exposing an ability here will have no effect until a server declares it."
 msgstr ""
 
-#: src/components/AbilitiesTab.js:78
+#: src/components/AbilitiesTab.js:90
 msgid "Pick the abilities exposed to MCP clients. An unchecked ability is not registered at all. Destructive abilities are off until you enable them."
 msgstr ""
 
-#: src/components/AbilitiesTab.js:86
+#: src/components/AbilitiesTab.js:102
 msgid "Use write abilities with caution. An agent can make mistakes, and with them it can change or delete what is on the site. Review what it does, especially on a live site."
 msgstr ""
 
-#: src/components/AbilitiesTab.js:96
-#: src/components/AbilitiesTab.js:97
+#: src/components/AbilitiesTab.js:112
+#: src/components/AbilitiesTab.js:113
 msgid "Filter abilities"
 msgstr ""
 
-#: src/components/AbilitiesTab.js:101
+#: src/components/AbilitiesTab.js:118
 msgid "No ability matches."
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:32
+#: src/components/AbilityGroupCard.js:48
 msgid "Deletes"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:37
+#: src/components/AbilityGroupCard.js:54
 msgid "Closed to MCP by its own declaration. Check to hand it to an agent."
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:42
+#: src/components/AbilityGroupCard.js:59
 msgid "Closed by its plugin"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:83
+#: src/components/AbilityGroupCard.js:115
 msgid "Deselect all"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:83
+#: src/components/AbilityGroupCard.js:116
 msgid "Select all"
 msgstr ""
 
 #. translators: 1: number of enabled abilities, 2: number of abilities.
-#: src/components/AbilityGroupCard.js:106
+#: src/components/AbilityGroupCard.js:144
 msgid "%1$d of %2$d enabled"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:114
+#: src/components/AbilityGroupCard.js:152
 msgid "Read-only abilities"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:115
+#: src/components/AbilityGroupCard.js:153
 msgid "These abilities let an agent read content. They change nothing on the site."
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:124
+#: src/components/AbilityGroupCard.js:162
 msgid "Write abilities"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:127
+#: src/components/AbilityGroupCard.js:165
 msgid "These abilities do not declare themselves read-only: assume they can change the site."
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:131
+#: src/components/AbilityGroupCard.js:169
 msgid "These abilities let an agent create, update and delete content."
 msgstr ""
 
-#: src/components/App.js:132
+#: src/components/App.js:142
 msgid "Settings saved."
 msgstr ""
 
-#: src/components/App.js:145
+#: src/components/App.js:157
 msgid "Connection"
 msgstr ""
 
 #. translators: 1: number of enabled abilities, 2: number of abilities.
-#: src/components/App.js:151
+#: src/components/App.js:163
 msgid "Abilities (%1$d/%2$d)"
 msgstr ""
 
-#: src/components/App.js:161
+#: src/components/App.js:173
 msgid "Other plugins"
 msgstr ""
 
-#: src/components/App.js:198
+#: src/components/App.js:224
 msgid "Save settings"
 msgstr ""
 
-#: src/components/App.js:201
+#: src/components/App.js:228
 msgid "Unsaved changes"
 msgstr ""
 
-#: src/components/ConnectionTab.js:43
+#: src/components/ConnectionTab.js:59
 msgid "Copied!"
 msgstr ""
 
-#: src/components/ConnectionTab.js:43
+#: src/components/ConnectionTab.js:60
 msgid "Copy"
 msgstr ""
 
-#: src/components/ConnectionTab.js:135
-msgid "Run this in a terminal. Add --scope user to reach the site from every project."
+#: src/components/ConnectionTab.js:155
+msgid "Run this in a terminal. Add --scope user to reach the site from every project. The command carries the password, only Base64-encoded: it stays in your shell history unless you remove it."
 msgstr ""
 
-#: src/components/ConnectionTab.js:142
+#: src/components/ConnectionTab.js:162
 msgid "Copy the Claude Code command"
 msgstr ""
 
-#: src/components/ConnectionTab.js:153
+#: src/components/ConnectionTab.js:176
 msgid "Open Settings → Developer → Edit Config, then paste this into the file. Claude Desktop reaches the site through a small proxy run with npx, so Node.js has to be installed."
 msgstr ""
 
-#: src/components/ConnectionTab.js:170
+#: src/components/ConnectionTab.js:198
 msgid "Copy the Claude Desktop configuration"
 msgstr ""
 
-#: src/components/ConnectionTab.js:182
+#: src/components/ConnectionTab.js:213
 msgid "Paste this into <code>~/.cursor/mcp.json</code>, or into <code>.cursor/mcp.json</code> at the root of a project."
 msgstr ""
 
-#: src/components/ConnectionTab.js:191
+#: src/components/ConnectionTab.js:222
 msgid "Copy the Cursor configuration"
 msgstr ""
 
-#: src/components/ConnectionTab.js:198
+#: src/components/ConnectionTab.js:232
 msgid "Other client"
 msgstr ""
 
-#: src/components/ConnectionTab.js:202
+#: src/components/ConnectionTab.js:236
 msgid "The exact format depends on the client. One speaking HTTP usually takes something like this."
 msgstr ""
 
-#: src/components/ConnectionTab.js:207
+#: src/components/ConnectionTab.js:243
 msgid "Copy the configuration"
 msgstr ""
 
-#: src/components/ConnectionTab.js:221
+#: src/components/ConnectionTab.js:261
 msgid "Already have an application password? This command turns it into the Base64 value the snippets expect, without leaving it in your shell history."
 msgstr ""
 
-#: src/components/ConnectionTab.js:226
+#: src/components/ConnectionTab.js:268
 msgid "Copy the Base64 command"
 msgstr ""
 
-#: src/components/ConnectionTab.js:242
+#: src/components/ConnectionTab.js:289
 msgid "MCP client"
 msgstr ""
 
-#: src/components/ConnectionTab.js:249
+#: src/components/ConnectionTab.js:297
 msgid "Application passwords are not available for your account. WordPress only offers them on sites served over HTTPS, or on a local environment, and a plugin may also switch them off."
 msgstr ""
 
-#: src/components/ConnectionTab.js:260
+#: src/components/ConnectionTab.js:308
 msgid "Application password created and filled into the snippets below. Copy the one you need now: the password will not be shown again once you leave this page."
 msgstr ""
 
-#: src/components/ConnectionTab.js:288
+#: src/components/ConnectionTab.js:336
 msgid "Application password name"
 msgstr ""
 
-#: src/components/ConnectionTab.js:299
+#: src/components/ConnectionTab.js:350
 msgid "Create an application password"
 msgstr ""
 
 #. translators: %s: login of the current user.
-#: src/components/ConnectionTab.js:306
+#: src/components/ConnectionTab.js:360
 msgid "Created for your account, %s: the client will act with exactly your rights. You can revoke it at any time from <a>your profile</a>."
 msgstr ""
 
-#: src/components/ConnectionTab.js:330
+#: src/components/ConnectionTab.js:388
 msgid "The MCP Adapter plugin is not running. The abilities are registered, but no MCP client can reach them until it is installed and active."
 msgstr ""
 
-#: src/components/ConnectionTab.js:341
+#: src/components/ConnectionTab.js:399
 msgid "This site switches off the default MCP server, so the URL below does not answer. Use the URL of the server your code declares instead."
 msgstr ""
 
-#: src/components/ConnectionTab.js:350
+#: src/components/ConnectionTab.js:409
 msgid "MCP server URL"
 msgstr ""
 
-#: src/components/ConnectionTab.js:354
+#: src/components/ConnectionTab.js:414
 msgid "The address to give your AI client. It acts as a WordPress user, within that user’s capabilities, and only reaches the abilities enabled on this screen."
 msgstr ""
 
-#: src/components/ConnectionTab.js:363
+#: src/components/ConnectionTab.js:423
 msgid "Copy the server URL"
 msgstr ""
 
-#: src/components/ConnectionTab.js:373
+#: src/components/ConnectionTab.js:436
 msgid "Create the credentials"
 msgstr ""
 
-#: src/components/ConnectionTab.js:378
+#: src/components/ConnectionTab.js:441
 msgid "The client signs in with an application password. Pick the account deliberately: a dedicated user with the lowest role that covers the job is the safest choice."
 msgstr ""
 
-#: src/components/ConnectionTab.js:391
+#: src/components/ConnectionTab.js:458
 msgid "Configure your client"
 msgstr ""
 
-#: src/components/ConnectionTab.js:403
+#: src/components/ConnectionTab.js:473
 msgid "Check that it works"
 msgstr ""
 
-#: src/components/ConnectionTab.js:409
+#: src/components/ConnectionTab.js:479
 msgid "Restart the client, then ask it which WordPress abilities it can use."
 msgstr ""
 
-#: src/components/ConnectionTab.js:416
+#: src/components/ConnectionTab.js:486
 msgid "It should call <code>mcp-adapter-discover-abilities</code> and list the abilities checked in the Abilities tab."
 msgstr ""
 
-#: src/components/ConnectionTab.js:424
+#: src/components/ConnectionTab.js:494
 msgid "A 401 error means the credentials are wrong; a 404 means the MCP Adapter is not active."
 msgstr ""

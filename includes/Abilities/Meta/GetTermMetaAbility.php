@@ -135,11 +135,9 @@ class GetTermMetaAbility extends AbstractAbility {
         $input = Input::normalize( $input );
         $term  = $this->resolveTerm( Input::int( $input, 'term_id' ), Input::string( $input, 'taxonomy' ) );
 
-        if ( is_wp_error( $term ) ) {
-            return $term;
-        }
-
-        if ( ! Capabilities::canEditTerm( $term ) ) {
+        // A missing term and a forbidden one answer the same, so that calling
+        // the ability without its permission check cannot tell which exist.
+        if ( is_wp_error( $term ) || ! Capabilities::canEditTerm( $term ) ) {
             return $this->forbidden();
         }
 

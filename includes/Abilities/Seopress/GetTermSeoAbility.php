@@ -92,11 +92,24 @@ class GetTermSeoAbility extends AbstractAbility {
     }
 
     /**
+     * Authorises against the very term being read.
+     *
+     * Same rule as `get-term-meta`, whose data this is: a blanket `edit_posts`
+     * would let a contributor read the SEO fields of any term, private
+     * taxonomies included.
+     *
      * @inheritDoc
      * @param mixed $input Raw input coming from the MCP adapter.
      */
     public function checkPermission( mixed $input = null ): bool {
-        return Capabilities::canRead();
+        $input = Input::normalize( $input );
+        $term  = $this->resolveTerm( Input::int( $input, 'term_id' ), Input::string( $input, 'taxonomy' ) );
+
+        if ( is_wp_error( $term ) ) {
+            return false;
+        }
+
+        return Capabilities::canEditTerm( $term );
     }
 
     /**
@@ -107,8 +120,10 @@ class GetTermSeoAbility extends AbstractAbility {
         $input = Input::normalize( $input );
         $term  = $this->resolveTerm( Input::int( $input, 'term_id' ), Input::string( $input, 'taxonomy' ) );
 
-        if ( is_wp_error( $term ) ) {
-            return $term;
+        // A missing term and a forbidden one answer the same, so that calling
+        // the ability without its permission check cannot tell which exist.
+        if ( is_wp_error( $term ) || ! Capabilities::canEditTerm( $term ) ) {
+            return $this->forbidden();
         }
 
         $result = $this->readSeoData(
