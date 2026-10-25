@@ -1,6 +1,26 @@
 // Settings screen of WP MCP Abilities.
-// Colours come from the admin theme variables, so the screen follows the
-// administrator's colour scheme.
+// Greys and reds are those of the WordPress admin palette, named after it
+// (wp-admin/css/colors). The accent colour comes from the admin colour scheme
+// through --wp-admin-theme-color, so the screen follows the one each
+// administrator picked.
+
+$gray-0: #f6f7f7;
+$gray-2: #f0f0f1;
+$gray-5: #dcdcde;
+$gray-50: #646970;
+$gray-60: #50575e;
+$red-0: #fcf0f1;
+$red-70: #8a2424;
+$accent: var(--wp-admin-theme-color, #3858e9);
+
+// Background of the admin page itself (#wpwrap). The sticky save bar paints
+// it so the content scrolling underneath does not show through.
+$page-background: $gray-2;
+
+// Above the content it scrolls over, below the admin menu (9990).
+$z-savebar: 10;
+// Above the admin bar (99999), like the notices WordPress shows itself.
+$z-snackbars: 100000;
 
 .wpmcpa-app {
 	max-width: 960px;
@@ -9,7 +29,7 @@
 
 .wpmcpa-tabs > .components-tab-panel__tabs {
 	margin-bottom: 24px;
-	border-bottom: 1px solid #dcdcde;
+	border-bottom: 1px solid $gray-5;
 }
 
 .wpmcpa-intro {
@@ -39,7 +59,7 @@
 	}
 
 	&__count {
-		color: #646970;
+		color: $gray-50;
 		font-size: 12px;
 	}
 }
@@ -49,7 +69,7 @@
 	& + & {
 		margin-top: 24px;
 		padding-top: 24px;
-		border-top: 1px solid #f0f0f1;
+		border-top: 1px solid $gray-2;
 	}
 
 	&__title {
@@ -60,7 +80,7 @@
 
 	&__description {
 		margin: 0 0 16px;
-		color: #50575e;
+		color: $gray-60;
 	}
 
 	&__toggle {
@@ -88,6 +108,14 @@
 	align-items: center;
 	margin: 0;
 
+	// Reset the button down to the small round "?" it replaces.
+	&__help.components-button {
+		width: 16px;
+		min-width: 0;
+		height: 16px;
+		padding: 0;
+	}
+
 	&__help {
 		display: inline-flex;
 		justify-content: center;
@@ -95,14 +123,14 @@
 		width: 16px;
 		height: 16px;
 		border-radius: 50%;
-		background: #f0f0f1;
-		color: #50575e;
+		background: $gray-2;
+		color: $gray-60;
 		font-size: 10px;
 		font-weight: 600;
 		cursor: help;
 
 		&:focus-visible {
-			outline: 2px solid var(--wp-admin-theme-color, #3858e9);
+			outline: 2px solid $accent;
 			outline-offset: 1px;
 		}
 	}
@@ -111,14 +139,14 @@
 .wpmcpa-badge {
 	padding: 1px 6px;
 	border-radius: 2px;
-	background: #f0f0f1;
-	color: #50575e;
+	background: $gray-2;
+	color: $gray-60;
 	font-size: 11px;
 	line-height: 1.6;
 
 	&--danger {
-		background: #fcf0f1;
-		color: #8a2424;
+		background: $red-0;
+		color: $red-70;
 	}
 }
 
@@ -129,7 +157,7 @@
 	width: 22px;
 	height: 22px;
 	border-radius: 50%;
-	background: var(--wp-admin-theme-color, #3858e9);
+	background: $accent;
 	color: #fff;
 	font-size: 12px;
 }
@@ -146,23 +174,20 @@
 	}
 }
 
-.wpmcpa-password {
+.wpmcpa-password__row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: flex-end;
 
-	&__row {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-		align-items: flex-end;
-
-		.components-base-control {
-			flex: 1 1 260px;
-		}
+	.components-base-control {
+		flex: 1 1 260px;
 	}
 }
 
 .wpmcpa-clients > .components-tab-panel__tabs {
 	margin-bottom: 16px;
-	border-bottom: 1px solid #f0f0f1;
+	border-bottom: 1px solid $gray-2;
 }
 
 .wpmcpa-snippet {
@@ -177,9 +202,9 @@
 		margin: 0;
 		padding: 12px;
 		overflow-x: auto;
-		border: 1px solid #dcdcde;
+		border: 1px solid $gray-5;
 		border-radius: 2px;
-		background: #f6f7f7;
+		background: $gray-0;
 	}
 
 	code {
@@ -203,22 +228,28 @@
 .wpmcpa-token-help {
 	margin-top: 16px;
 	padding-top: 16px;
-	border-top: 1px solid #f0f0f1;
+	border-top: 1px solid $gray-2;
 }
 
 .wpmcpa-savebar {
 	position: sticky;
 	bottom: 0;
-	z-index: 10;
+	z-index: $z-savebar;
 	display: flex;
+	flex-wrap: wrap;
 	gap: 12px;
 	align-items: center;
 	padding: 12px 0;
-	border-top: 1px solid #dcdcde;
-	background: #f0f0f1;
+	border-top: 1px solid $gray-5;
+	background: $page-background;
 
 	&__hint {
-		color: #50575e;
+		color: $gray-60;
+	}
+
+	&__error {
+		flex-basis: 100%;
+		margin: 0;
 	}
 }
 
@@ -226,6 +257,7 @@
 	position: fixed;
 	bottom: 24px;
 	left: 50%;
-	z-index: 100000;
+	z-index: $z-snackbars;
+	max-width: calc(100vw - 32px);
 	transform: translateX(-50%);
 }

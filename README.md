@@ -130,11 +130,15 @@ An ability absent from the stored option falls back to its own default, so an ab
 
 **Storage.** The switches live in the `wpmcpa_enabled` option, an array keyed by ability name. Third-party exposure lives in `wpmcpa_exposed`. Both options are deleted when the plugin is uninstalled.
 
-**Writing the option from code.** The setting is registered on `admin_init`, and from then on its validation applies to every write of the option, not only to the form. The REST route runs the same validation (`Services\SettingsSanitizer`), but starts from the current state: a `POST` to `wp-mcp-abilities/v1/settings` only changes the switches it sends, and an empty one changes nothing. It sets to `false` every listed ability the payload does not mention, since an unchecked box is never sent by a form. A partial write such as `update_option( 'wpmcpa_enabled', [ 'wp-mcp-abilities/delete-post' => true ] )` therefore switches everything else off. Read the option, change the key you want, and write the whole array back:
+**Which option a third-party box writes to.** A third-party ability its own plugin exposes is switched off in `wpmcpa_enabled`; one its plugin keeps closed is exposed in `wpmcpa_exposed`. The rule lives in `ThirdPartyAbilityCatalog::optionFor()`, the only place the screen, the validation and the route ask, and every row the route returns names its REST parameter in `option`.
+
+**Writing the option from code.** The setting is registered on `admin_init`, and from then on its validation (`Services\SettingsSanitizer`) applies to every write of the option made from the admin. It sets to `false` every listed ability the payload does not mention, the way a form treats an unchecked box. A partial write such as `update_option( 'wpmcpa_enabled', [ 'wp-mcp-abilities/delete-post' => true ] )` therefore switches everything else off. Read the option, change the key you want, and write the whole array back:
 
 ```bash
 wp eval '$o = (array) get_option( "wpmcpa_enabled", [] ); $o["wp-mcp-abilities/delete-post"] = true; update_option( "wpmcpa_enabled", $o );'
 ```
+
+The REST route behaves differently: it lays the current state under the request before validating, so a `POST` to `wp-mcp-abilities/v1/settings` only changes the switches it sends, and an empty one changes nothing.
 
 A client that creates test objects and needs to clean up after itself can have `delete-{post type}` enabled for the session this way, then disabled again.
 
@@ -639,6 +643,7 @@ The execution actions and the two filters below cover every ability of the plugi
 | `wpmcpa_taxonomies` | `array<string, WP_Taxonomy> $taxonomies` | Taxonomies reachable through the taxonomy abilities. |
 | `wpmcpa_assignable_taxonomies` | `array<string, WP_Taxonomy> $taxonomies`, `WP_Post_Type $postType` | Taxonomies the post type abilities may assign terms in. |
 | `wpmcpa_mcp_route_prefixes` | `string[] $prefixes` | REST route prefixes treated as MCP traffic for third-party switches. Default `[ '/mcp/' ]`. |
+| `wpmcpa_server_url` | `string $url` | MCP server URL the settings screen hands out. Default: the adapter's default server. |
 
 `wpmcpa_abilities` runs on `wp_abilities_api_init`. The plugin itself hooks it at priority 20 to drop abilities that are switched off or miss a dependency, so a callback at the default priority sees every static ability. Entries must implement `WpMcpAbilities\Contracts\AbilityInterface`; anything else is ignored. The generated post type abilities do not go through this filter (use the two post type filters). Abilities added here are registered but not listed on the settings screen; to add one that is, use `wpmcpa_register_abilities` (see [Extending the plugin](#extending-the-plugin)).
 
@@ -921,7 +926,7 @@ The strings of the settings screen live in `src/`, but WordPress looks their tra
 | `includes/Contracts/` | `AbilityInterface`, `AbilityCategoryInterface`, `HookInterface`. |
 | `includes/AbilityCategories/` | The `wp-mcp-abilities` ability category. |
 | `includes/Abilities/` | One class per static ability, by family (`Content`, `Media`, `Meta`, `Seopress`, `Taxonomy`, `Template`, `WooCommerce`), with the traits they share. |
-| `includes/Hooks/` | WordPress integration: availability filtering, post type abilities, third-party switches and exposure, requirements notice, WooCommerce product types. `Hooks/Admin/` holds the settings screen: the page and its assets, the options registration, and the `SettingsRestRoute` it reads and saves through. |
+| `includes/Hooks/` | WordPress integration: availability filtering, post type abilities, third-party switches and exposure, requirements notice, WooCommerce product types. `Hooks/Admin/` holds the settings screen: the page and its assets, the options registration, and the `SettingsRestRoute` it reads and saves through. The route only speaks REST; what the screen shows is built by `Services\SettingsScreenData`. |
 | `includes/Services/` | Logic without hooks: settings reader, validation of what is written (`SettingsSanitizer`), catalogue of the plugin's abilities, catalogue of third-party abilities. |
 | `src/` | The settings screen's React app, built into `build/` by `@wordpress/scripts`. |
 | `includes/Support/` | `AbstractAbility`, `PostTypeAbility` (the five generated operations), `PostTypeTaxonomies` (term rules of a post type), `Capabilities`, `Input`, `Requirements`, `RequestCache`. |
@@ -929,7 +934,7 @@ The strings of the settings screen live in `src/`, but WordPress looks their tra
 
 ### Adding an ability
 
-1. Create a class under `includes/Abilities/<Family>/` extending `WpMcpAbilities\Support\AbstractAbility`. It must be instantiable without arguments. Implement `getName()` (use `self::qualify( 'my-slug' )`), `getLabel()`, `getDescription()`, `getGroup()`, `getInputSchema()`, `getOutputSchema()`, `checkPermission()` and `execute()`. Override `isReadOnly()` to return `true` if it changes nothing, `isDestructive()` and `isEnabledByDefault()` (returning `false`) if it deletes anything, and `isAvailable()` if it depends on another plugin.
+1. Create a class under `includes/Abilities/<Family>/` extending `WpMcpAbilities\Support\AbstractAbility`. It must be instantiable without arguments. Implement `getName()` (use `self::qualify( 'my-slug' )`), `getLabel()`, `getDescription()`, `getGroup()`, `getInputSchema()`, `getOutputSchema()`, `checkPermission()` and `execute()`. Override `isReadOnly()` to return `true` if it changes nothing, `isDestructive()` to return `true` if it deletes anything (it is then off by default with no other override), and `isAvailable()` if it depends on another plugin. Override `isEnabledByDefault()` only to switch off by default an ability that destroys nothing.
 2. Add the class to `Plugin::ABILITIES` in `includes/Plugin.php`.
 3. Check capabilities against the targeted object with `Support\Capabilities`, in `checkPermission()` and again in `execute()`, and read input with `Support\Input`.
 4. Document it in this README, add a changelog entry, refresh the translation catalogue, run `composer lint` and test on a local site.

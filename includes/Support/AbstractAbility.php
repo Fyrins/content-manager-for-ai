@@ -84,10 +84,13 @@ abstract class AbstractAbility implements AbilityInterface {
     /**
      * Whether the ability is exposed when the site has no explicit setting yet.
      *
-     * Destructive abilities override this and return false.
+     * Follows `isDestructive()`, so a new destructive ability can never ship
+     * switched on by forgetting a second override. An ability that is safe but
+     * still better off by default, as rebuilding a facet index is, overrides
+     * this alone.
      */
     public function isEnabledByDefault(): bool {
-        return true;
+        return ! $this->isDestructive();
     }
 
     /**
@@ -103,9 +106,8 @@ abstract class AbstractAbility implements AbilityInterface {
     /**
      * Whether the ability deletes something an agent cannot take back.
      *
-     * Published as the `destructive` annotation. Kept apart from
-     * `isEnabledByDefault()`: an ability can be off by default for another
-     * reason, as rebuilding a facet index is.
+     * Published as the `destructive` annotation, and switches the ability
+     * off by default through `isEnabledByDefault()`.
      */
     public function isDestructive(): bool {
         return false;

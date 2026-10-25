@@ -37,6 +37,9 @@
             "No ability matches.": [
                 "Aucune ability ne correspond."
             ],
+            "Details about %s": [
+                "D\u00e9tails sur %s"
+            ],
             "Deletes": [
                 "Supprime"
             ],
@@ -70,8 +73,17 @@
             "These abilities let an agent create, update and delete content.": [
                 "Ces abilities permettent \u00e0 un agent de cr\u00e9er, modifier et supprimer du contenu."
             ],
+            "Could not load the settings.": [
+                "Impossible de charger les r\u00e9glages."
+            ],
+            "Loading the settings\u2026": [
+                "Chargement des r\u00e9glages\u2026"
+            ],
             "Settings saved.": [
                 "R\u00e9glages enregistr\u00e9s."
+            ],
+            "Could not save the settings.": [
+                "Impossible d'enregistrer les r\u00e9glages."
             ],
             "Connection": [
                 "Connexion"
@@ -142,8 +154,8 @@
             "Create an application password": [
                 "Cr\u00e9er un mot de passe d'application"
             ],
-            "Created for your account, %s: the client will act with exactly your rights. You can revoke it at any time from <a>your profile<\/a>.": [
-                "Cr\u00e9\u00e9 pour votre compte, %s : le client agira avec exactement vos droits. Vous pouvez le r\u00e9voquer \u00e0 tout moment depuis <a>votre profil<\/a>."
+            "Created for your account, <login \/>: the client will act with exactly your rights. You can revoke it at any time from <a>your profile<\/a>.": [
+                "Cr\u00e9\u00e9 pour votre compte, <login \/> : le client agira avec exactement vos droits. Vous pouvez le r\u00e9voquer \u00e0 tout moment depuis <a>votre profil<\/a>."
             ],
             "The MCP Adapter plugin is not running. The abilities are registered, but no MCP client can reach them until it is installed and active.": [
                 "L'extension MCP Adapter n'est pas active. Les abilities sont enregistr\u00e9es, mais aucun client MCP ne peut les atteindre tant qu'elle n'est pas install\u00e9e et activ\u00e9e."

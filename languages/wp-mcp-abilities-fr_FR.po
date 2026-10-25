@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP MCP Abilities 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-mcp-abilities\n"
-"POT-Creation-Date: 2026-10-25T19:32:23+00:00\n"
+"POT-Creation-Date: 2026-10-25T19:51:17+00:00\n"
 "PO-Revision-Date: 2026-09-25T16:00:00+02:00\n"
 "Last-Translator: Alexandre Revire\n"
 "Language-Team: French\n"
@@ -239,7 +239,7 @@ msgstr "Médias"
 msgid "Identifier of the attachment to delete."
 msgstr "Identifiant du fichier joint à supprimer."
 
-#: includes/Abilities/Media/DeleteMediaAbility.php:135
+#: includes/Abilities/Media/DeleteMediaAbility.php:128
 msgid "Unable to delete the attachment."
 msgstr "Impossible de supprimer le média."
 
@@ -271,7 +271,7 @@ msgstr "Nombre de fichiers joints par page."
 #: includes/Abilities/Media/ListMediaAbility.php:89
 #: includes/Abilities/Taxonomy/ListTermsAbility.php:98
 #: includes/Abilities/Template/ListTemplatesAbility.php:92
-#: includes/Support/PostTypeAbility.php:820
+#: includes/Support/PostTypeAbility.php:813
 msgid "Page to return, starting at 1."
 msgstr "Page à retourner, en commençant à 1."
 
@@ -739,7 +739,7 @@ msgstr ""
 "Taxonomie à laquelle appartient le terme. Optionnel si l'ID est sans "
 "ambiguïté."
 
-#: includes/Abilities/Taxonomy/DeleteTermAbility.php:143
+#: includes/Abilities/Taxonomy/DeleteTermAbility.php:134
 msgid "Unable to delete the term."
 msgstr "Impossible de supprimer le terme."
 
@@ -939,16 +939,16 @@ msgstr ""
 msgid "Whether to bypass Trash and delete permanently."
 msgstr "Indique s'il faut contourner la corbeille et supprimer définitivement."
 
-#: includes/Abilities/Template/DeleteTemplateAbility.php:153
+#: includes/Abilities/Template/DeleteTemplateAbility.php:144
 msgid "Templates that come from the theme files cannot be deleted."
 msgstr ""
 "Les modèles provenant des fichiers du thème ne peuvent pas être supprimés."
 
-#: includes/Abilities/Template/DeleteTemplateAbility.php:166
+#: includes/Abilities/Template/DeleteTemplateAbility.php:157
 msgid "The template has already been deleted."
 msgstr "Le modèle a déjà été supprimé."
 
-#: includes/Abilities/Template/DeleteTemplateAbility.php:177
+#: includes/Abilities/Template/DeleteTemplateAbility.php:168
 msgid "Unable to delete the template."
 msgstr "Impossible de supprimer le modèle."
 
@@ -1138,7 +1138,7 @@ msgstr ""
 "variable et porter des attributs marqués pour la variation."
 
 #: includes/Abilities/WooCommerce/CreateProductVariationAbility.php:68
-#: includes/Abilities/WooCommerce/DeleteProductVariationAbility.php:82
+#: includes/Abilities/WooCommerce/DeleteProductVariationAbility.php:75
 #: includes/Abilities/WooCommerce/GetProductVariationAbility.php:75
 #: includes/Abilities/WooCommerce/ListProductVariationsAbility.php:75
 #: includes/Abilities/WooCommerce/UpdateProductVariationAbility.php:68
@@ -1153,7 +1153,7 @@ msgstr "Supprimer une variation de produit"
 msgid "Permanently deletes a WooCommerce product variation."
 msgstr "Supprime définitivement une variation de produit WooCommerce."
 
-#: includes/Abilities/WooCommerce/DeleteProductVariationAbility.php:86
+#: includes/Abilities/WooCommerce/DeleteProductVariationAbility.php:79
 msgid "Id of the variation to delete."
 msgstr "Id de la variation à supprimer."
 
@@ -1301,7 +1301,7 @@ msgstr "WP MCP Abilities ne peut pas enregistrer ses abilities."
 msgid "WP MCP Abilities is not reachable by MCP clients yet."
 msgstr "WP MCP Abilities n'est pas encore joignable par les clients MCP."
 
-#: includes/Hooks/RequirementsNotice.php:85 src/components/ConnectionTab.js:393
+#: includes/Hooks/RequirementsNotice.php:85 src/components/ConnectionTab.js:398
 msgid "Download the MCP Adapter"
 msgstr "Télécharger MCP Adapter"
 
@@ -1315,7 +1315,7 @@ msgstr ""
 "wpmcpa_register_abilities doivent étendre %2$s."
 
 #. translators: %s: ability name.
-#: includes/Support/AbstractAbility.php:224
+#: includes/Support/AbstractAbility.php:226
 msgid ""
 "The wpmcpa_execute_result filter must return an array or a WP_Error; the "
 "original result of \"%s\" was kept."
@@ -1323,16 +1323,16 @@ msgstr ""
 "Le filtre wpmcpa_execute_result doit renvoyer un tableau ou un WP_Error ; le "
 "résultat d'origine de « %s » a été conservé."
 
-#: includes/Support/AbstractAbility.php:257
-#: includes/Support/PostTypeAbility.php:656
+#: includes/Support/AbstractAbility.php:259
+#: includes/Support/PostTypeAbility.php:649
 msgid "Post not found."
 msgstr "Article introuvable."
 
-#: includes/Support/AbstractAbility.php:278
+#: includes/Support/AbstractAbility.php:280
 msgid "Term not found."
 msgstr "Terme introuvable."
 
-#: includes/Support/AbstractAbility.php:292
+#: includes/Support/AbstractAbility.php:294
 msgid "You are not allowed to perform this action."
 msgstr "Vous n'êtes pas autorisé à effectuer cette action."
 
@@ -1386,8 +1386,8 @@ msgstr "Met à jour un %s existant."
 msgid "Deletes a %s (trash by default, permanent if force=true)."
 msgstr "Supprime un %s (corbeille par défaut, définitif si force=true)."
 
-#: includes/Support/PostTypeAbility.php:172
-#: includes/Support/PostTypeAbility.php:187
+#: includes/Support/PostTypeAbility.php:165
+#: includes/Support/PostTypeAbility.php:180
 msgid ""
 "Status actually stored, which is not always the one asked for: a \"publish\" "
 "carrying a future date is scheduled by WordPress as \"future\"."
@@ -1396,20 +1396,20 @@ msgstr ""
 "« publish » portant une date à venir est programmé par WordPress en "
 "« future »."
 
-#: includes/Support/PostTypeAbility.php:176
-#: includes/Support/PostTypeAbility.php:191
+#: includes/Support/PostTypeAbility.php:169
+#: includes/Support/PostTypeAbility.php:184
 msgid "Publication date actually stored."
 msgstr "La date de publication réellement enregistrée."
 
-#: includes/Support/PostTypeAbility.php:495
+#: includes/Support/PostTypeAbility.php:488
 msgid "You are not allowed to pin a post."
 msgstr "Vous n'avez pas le droit d'épingler un article."
 
-#: includes/Support/PostTypeAbility.php:632
+#: includes/Support/PostTypeAbility.php:625
 msgid "Unable to delete the content."
 msgstr "Impossible de supprimer le contenu."
 
-#: includes/Support/PostTypeAbility.php:704
+#: includes/Support/PostTypeAbility.php:697
 msgid ""
 "The \"date\" parameter could not be read. Expected format: YYYY-MM-DD "
 "HH:MM:SS."
@@ -1417,51 +1417,51 @@ msgstr ""
 "Le paramètre « date » n'a pas pu être lu. Format attendu : AAAA-MM-JJ "
 "HH:MM:SS."
 
-#: includes/Support/PostTypeAbility.php:813
+#: includes/Support/PostTypeAbility.php:806
 msgid "Number of items per page."
 msgstr "Nombre d'éléments par page."
 
 #. translators: %s: singular label of the post type (e.g. "Post").
-#: includes/Support/PostTypeAbility.php:840
-#: includes/Support/PostTypeAbility.php:875
+#: includes/Support/PostTypeAbility.php:833
+#: includes/Support/PostTypeAbility.php:868
 msgid "The %s ID."
 msgstr "L'ID du %s."
 
-#: includes/Support/PostTypeAbility.php:849
+#: includes/Support/PostTypeAbility.php:842
 msgid "Permanently delete (skip trash)."
 msgstr "Supprimer définitivement (sans passer par la corbeille)."
 
 #. translators: %s: singular label of the post type (e.g. "Post").
-#: includes/Support/PostTypeAbility.php:882
+#: includes/Support/PostTypeAbility.php:875
 msgid "The %s title."
 msgstr "Le titre du %s."
 
 #. translators: %s: singular label of the post type (e.g. "Post").
-#: includes/Support/PostTypeAbility.php:888
+#: includes/Support/PostTypeAbility.php:881
 msgid "The HTML content of the %s."
 msgstr "Le contenu HTML du %s."
 
 #. translators: %s: singular label of the post type (e.g. "Post").
-#: includes/Support/PostTypeAbility.php:894
+#: includes/Support/PostTypeAbility.php:887
 msgid "The %s excerpt."
 msgstr "L'extrait du %s."
 
-#: includes/Support/PostTypeAbility.php:899
+#: includes/Support/PostTypeAbility.php:892
 msgid "The URL slug (post_name). Auto-generated from the title if omitted."
 msgstr ""
 "Le slug de l'URL (post_name). Généré automatiquement à partir du titre si "
 "omis."
 
-#: includes/Support/PostTypeAbility.php:907
+#: includes/Support/PostTypeAbility.php:900
 msgid "The status (draft, publish)."
 msgstr "Le statut (draft, publish)."
 
 #. translators: %s: singular label of the post type (e.g. "Post").
-#: includes/Support/PostTypeAbility.php:919
+#: includes/Support/PostTypeAbility.php:912
 msgid "The parent %s ID."
 msgstr "L'ID du %s parent."
 
-#: includes/Support/PostTypeAbility.php:927
+#: includes/Support/PostTypeAbility.php:920
 msgid ""
 "The IDs of categories to assign. Equivalent to the \"category\" entry of "
 "\"terms\"."
@@ -1469,7 +1469,7 @@ msgstr ""
 "Les identifiants des catégories à assigner. Équivaut à l'entrée « category » "
 "de « terms »."
 
-#: includes/Support/PostTypeAbility.php:938
+#: includes/Support/PostTypeAbility.php:931
 msgid ""
 "Term IDs to assign, keyed by taxonomy. Each taxonomy sent replaces the terms "
 "already assigned in it; a taxonomy left out is untouched, and an empty array "
@@ -1480,19 +1480,19 @@ msgstr ""
 "absente n'est pas touchée, et un tableau vide la vide."
 
 #. translators: %s: singular label of the post type (e.g. "Post").
-#: includes/Support/PostTypeAbility.php:949
+#: includes/Support/PostTypeAbility.php:942
 msgid "The user ID to assign as author of the %s."
 msgstr "L'ID de l'utilisateur à assigner comme auteur du %s."
 
-#: includes/Support/PostTypeAbility.php:962
+#: includes/Support/PostTypeAbility.php:955
 msgid "The publication date (YYYY-MM-DD HH:MM:SS), in site time."
 msgstr "La date de publication (AAAA-MM-JJ HH:MM:SS), à l'heure du site."
 
-#: includes/Support/PostTypeAbility.php:968
+#: includes/Support/PostTypeAbility.php:961
 msgid "Pin as sticky (true) or unpin (false)."
 msgstr "Épingler (true) ou désépingler (false)."
 
-#: includes/Support/PostTypeAbility.php:1029
+#: includes/Support/PostTypeAbility.php:1022
 msgid "Term IDs assigned to the post, keyed by taxonomy."
 msgstr "Identifiants des termes assignés au contenu, indexés par taxonomie."
 
@@ -1636,48 +1636,53 @@ msgstr "Filtrer les abilities"
 msgid "No ability matches."
 msgstr "Aucune ability ne correspond."
 
-#: src/components/AbilityGroupCard.js:48
+#. translators: %s: label of the ability.
+#: src/components/AbilityGroupCard.js:56
+msgid "Details about %s"
+msgstr "Détails sur %s"
+
+#: src/components/AbilityGroupCard.js:66
 msgid "Deletes"
 msgstr "Supprime"
 
-#: src/components/AbilityGroupCard.js:54
+#: src/components/AbilityGroupCard.js:72
 msgid "Closed to MCP by its own declaration. Check to hand it to an agent."
 msgstr ""
 "Fermée à MCP par sa propre déclaration. Cochez pour la remettre à un agent."
 
-#: src/components/AbilityGroupCard.js:59
+#: src/components/AbilityGroupCard.js:77
 msgid "Closed by its plugin"
 msgstr "Fermée par son extension"
 
-#: src/components/AbilityGroupCard.js:115
+#: src/components/AbilityGroupCard.js:133
 msgid "Deselect all"
 msgstr "Tout décocher"
 
-#: src/components/AbilityGroupCard.js:116
+#: src/components/AbilityGroupCard.js:134
 msgid "Select all"
 msgstr "Tout cocher"
 
 #. translators: 1: number of enabled abilities, 2: number of abilities.
-#: src/components/AbilityGroupCard.js:144
+#: src/components/AbilityGroupCard.js:162
 msgid "%1$d of %2$d enabled"
 msgstr "%1$d sur %2$d activées"
 
-#: src/components/AbilityGroupCard.js:152
+#: src/components/AbilityGroupCard.js:170
 msgid "Read-only abilities"
 msgstr "Abilities de lecture"
 
-#: src/components/AbilityGroupCard.js:153
+#: src/components/AbilityGroupCard.js:171
 msgid ""
 "These abilities let an agent read content. They change nothing on the site."
 msgstr ""
 "Ces abilities permettent à un agent de lire le contenu. Elles ne modifient "
 "rien sur le site."
 
-#: src/components/AbilityGroupCard.js:162
+#: src/components/AbilityGroupCard.js:180
 msgid "Write abilities"
 msgstr "Abilities d'écriture"
 
-#: src/components/AbilityGroupCard.js:165
+#: src/components/AbilityGroupCard.js:183
 msgid ""
 "These abilities do not declare themselves read-only: assume they can change "
 "the site."
@@ -1685,46 +1690,58 @@ msgstr ""
 "Ces abilities ne se déclarent pas en lecture seule : partez du principe "
 "qu'elles peuvent modifier le site."
 
-#: src/components/AbilityGroupCard.js:169
+#: src/components/AbilityGroupCard.js:187
 msgid "These abilities let an agent create, update and delete content."
 msgstr ""
 "Ces abilities permettent à un agent de créer, modifier et supprimer du "
 "contenu."
 
-#: src/components/App.js:142
+#: src/components/App.js:73
+msgid "Could not load the settings."
+msgstr "Impossible de charger les réglages."
+
+#: src/components/App.js:117
+msgid "Loading the settings…"
+msgstr "Chargement des réglages…"
+
+#: src/components/App.js:150
 msgid "Settings saved."
 msgstr "Réglages enregistrés."
 
-#: src/components/App.js:157
+#: src/components/App.js:159
+msgid "Could not save the settings."
+msgstr "Impossible d'enregistrer les réglages."
+
+#: src/components/App.js:170
 msgid "Connection"
 msgstr "Connexion"
 
 #. translators: 1: number of enabled abilities, 2: number of abilities.
-#: src/components/App.js:163
+#: src/components/App.js:176
 msgid "Abilities (%1$d/%2$d)"
 msgstr "Abilities (%1$d/%2$d)"
 
-#: src/components/App.js:173
+#: src/components/App.js:186
 msgid "Other plugins"
 msgstr "Autres extensions"
 
-#: src/components/App.js:224
+#: src/components/App.js:246
 msgid "Save settings"
 msgstr "Enregistrer les réglages"
 
-#: src/components/App.js:228
+#: src/components/App.js:250
 msgid "Unsaved changes"
 msgstr "Modifications non enregistrées"
 
-#: src/components/ConnectionTab.js:59
+#: src/components/ConnectionTab.js:50 src/components/ConnectionTab.js:63
 msgid "Copied!"
 msgstr "Copié !"
 
-#: src/components/ConnectionTab.js:60
+#: src/components/ConnectionTab.js:64
 msgid "Copy"
 msgstr "Copier"
 
-#: src/components/ConnectionTab.js:155
+#: src/components/ConnectionTab.js:159
 msgid ""
 "Run this in a terminal. Add --scope user to reach the site from every "
 "project. The command carries the password, only Base64-encoded: it stays in "
@@ -1735,11 +1752,11 @@ msgstr ""
 "encodé en Base64 : il reste dans l'historique de votre shell tant que vous "
 "ne l'en retirez pas."
 
-#: src/components/ConnectionTab.js:162
+#: src/components/ConnectionTab.js:166
 msgid "Copy the Claude Code command"
 msgstr "Copier la commande Claude Code"
 
-#: src/components/ConnectionTab.js:176
+#: src/components/ConnectionTab.js:180
 msgid ""
 "Open Settings → Developer → Edit Config, then paste this into the file. "
 "Claude Desktop reaches the site through a small proxy run with npx, so "
@@ -1749,11 +1766,11 @@ msgstr ""
 "dans le fichier. Claude Desktop passe par un petit proxy lancé avec npx : "
 "Node.js doit donc être installé."
 
-#: src/components/ConnectionTab.js:198
+#: src/components/ConnectionTab.js:202
 msgid "Copy the Claude Desktop configuration"
 msgstr "Copier la configuration Claude Desktop"
 
-#: src/components/ConnectionTab.js:213
+#: src/components/ConnectionTab.js:217
 msgid ""
 "Paste this into <code>~/.cursor/mcp.json</code>, or into <code>.cursor/"
 "mcp.json</code> at the root of a project."
@@ -1761,15 +1778,15 @@ msgstr ""
 "Collez ceci dans <code>~/.cursor/mcp.json</code>, ou dans <code>.cursor/"
 "mcp.json</code> à la racine d'un projet."
 
-#: src/components/ConnectionTab.js:222
+#: src/components/ConnectionTab.js:226
 msgid "Copy the Cursor configuration"
 msgstr "Copier la configuration Cursor"
 
-#: src/components/ConnectionTab.js:232
+#: src/components/ConnectionTab.js:236
 msgid "Other client"
 msgstr "Autre client"
 
-#: src/components/ConnectionTab.js:236
+#: src/components/ConnectionTab.js:240
 msgid ""
 "The exact format depends on the client. One speaking HTTP usually takes "
 "something like this."
@@ -1777,11 +1794,11 @@ msgstr ""
 "Le format exact dépend du client. Un client qui parle HTTP accepte en "
 "général quelque chose comme ceci."
 
-#: src/components/ConnectionTab.js:243
+#: src/components/ConnectionTab.js:247
 msgid "Copy the configuration"
 msgstr "Copier la configuration"
 
-#: src/components/ConnectionTab.js:261
+#: src/components/ConnectionTab.js:265
 msgid ""
 "Already have an application password? This command turns it into the Base64 "
 "value the snippets expect, without leaving it in your shell history."
@@ -1790,15 +1807,15 @@ msgstr ""
 "en la valeur Base64 attendue par les extraits, sans le laisser dans "
 "l'historique de votre shell."
 
-#: src/components/ConnectionTab.js:268
+#: src/components/ConnectionTab.js:272
 msgid "Copy the Base64 command"
 msgstr "Copier la commande Base64"
 
-#: src/components/ConnectionTab.js:289
+#: src/components/ConnectionTab.js:293
 msgid "MCP client"
 msgstr "Client MCP"
 
-#: src/components/ConnectionTab.js:297
+#: src/components/ConnectionTab.js:301
 msgid ""
 "Application passwords are not available for your account. WordPress only "
 "offers them on sites served over HTTPS, or on a local environment, and a "
@@ -1808,7 +1825,7 @@ msgstr ""
 "WordPress ne les propose que sur les sites servis en HTTPS ou en "
 "environnement local, et une extension peut aussi les désactiver."
 
-#: src/components/ConnectionTab.js:308
+#: src/components/ConnectionTab.js:312
 msgid ""
 "Application password created and filled into the snippets below. Copy the "
 "one you need now: the password will not be shown again once you leave this "
@@ -1818,24 +1835,23 @@ msgstr ""
 "Copiez dès maintenant celui dont vous avez besoin : le mot de passe ne sera "
 "plus affiché une fois cette page quittée."
 
-#: src/components/ConnectionTab.js:336
+#: src/components/ConnectionTab.js:340
 msgid "Application password name"
 msgstr "Nom du mot de passe d'application"
 
-#: src/components/ConnectionTab.js:350
+#: src/components/ConnectionTab.js:354
 msgid "Create an application password"
 msgstr "Créer un mot de passe d'application"
 
-#. translators: %s: login of the current user.
-#: src/components/ConnectionTab.js:360
+#: src/components/ConnectionTab.js:364
 msgid ""
-"Created for your account, %s: the client will act with exactly your rights. "
-"You can revoke it at any time from <a>your profile</a>."
+"Created for your account, <login />: the client will act with exactly your "
+"rights. You can revoke it at any time from <a>your profile</a>."
 msgstr ""
-"Créé pour votre compte, %s : le client agira avec exactement vos droits. "
-"Vous pouvez le révoquer à tout moment depuis <a>votre profil</a>."
+"Créé pour votre compte, <login /> : le client agira avec exactement vos "
+"droits. Vous pouvez le révoquer à tout moment depuis <a>votre profil</a>."
 
-#: src/components/ConnectionTab.js:388
+#: src/components/ConnectionTab.js:393
 msgid ""
 "The MCP Adapter plugin is not running. The abilities are registered, but no "
 "MCP client can reach them until it is installed and active."
@@ -1844,7 +1860,7 @@ msgstr ""
 "mais aucun client MCP ne peut les atteindre tant qu'elle n'est pas installée "
 "et activée."
 
-#: src/components/ConnectionTab.js:399
+#: src/components/ConnectionTab.js:404
 msgid ""
 "This site switches off the default MCP server, so the URL below does not "
 "answer. Use the URL of the server your code declares instead."
@@ -1852,11 +1868,11 @@ msgstr ""
 "Ce site désactive le serveur MCP par défaut : l'URL ci-dessous ne répond "
 "donc pas. Utilisez plutôt l'URL du serveur que déclare votre code."
 
-#: src/components/ConnectionTab.js:409
+#: src/components/ConnectionTab.js:414
 msgid "MCP server URL"
 msgstr "URL du serveur MCP"
 
-#: src/components/ConnectionTab.js:414
+#: src/components/ConnectionTab.js:419
 msgid ""
 "The address to give your AI client. It acts as a WordPress user, within that "
 "user’s capabilities, and only reaches the abilities enabled on this screen."
@@ -1865,15 +1881,15 @@ msgstr ""
 "WordPress, dans la limite de ses droits, et n'atteint que les abilities "
 "activées sur cet écran."
 
-#: src/components/ConnectionTab.js:423
+#: src/components/ConnectionTab.js:428
 msgid "Copy the server URL"
 msgstr "Copier l'URL du serveur"
 
-#: src/components/ConnectionTab.js:436
+#: src/components/ConnectionTab.js:441
 msgid "Create the credentials"
 msgstr "Créer les identifiants"
 
-#: src/components/ConnectionTab.js:441
+#: src/components/ConnectionTab.js:446
 msgid ""
 "The client signs in with an application password. Pick the account "
 "deliberately: a dedicated user with the lowest role that covers the job is "
@@ -1883,21 +1899,21 @@ msgstr ""
 "compte avec soin : un utilisateur dédié, avec le rôle le plus bas qui suffit "
 "à la tâche, est le choix le plus sûr."
 
-#: src/components/ConnectionTab.js:458
+#: src/components/ConnectionTab.js:463
 msgid "Configure your client"
 msgstr "Configurer votre client"
 
-#: src/components/ConnectionTab.js:473
+#: src/components/ConnectionTab.js:478
 msgid "Check that it works"
 msgstr "Vérifier que cela fonctionne"
 
-#: src/components/ConnectionTab.js:479
+#: src/components/ConnectionTab.js:484
 msgid "Restart the client, then ask it which WordPress abilities it can use."
 msgstr ""
 "Redémarrez le client, puis demandez-lui quelles abilities WordPress il peut "
 "utiliser."
 
-#: src/components/ConnectionTab.js:486
+#: src/components/ConnectionTab.js:491
 msgid ""
 "It should call <code>mcp-adapter-discover-abilities</code> and list the "
 "abilities checked in the Abilities tab."
@@ -1905,13 +1921,20 @@ msgstr ""
 "Il doit appeler <code>mcp-adapter-discover-abilities</code> et lister les "
 "abilities cochées dans l'onglet Abilities."
 
-#: src/components/ConnectionTab.js:494
+#: src/components/ConnectionTab.js:499
 msgid ""
 "A 401 error means the credentials are wrong; a 404 means the MCP Adapter is "
 "not active."
 msgstr ""
 "Une erreur 401 signifie que les identifiants sont faux ; une erreur 404, que "
 "MCP Adapter n'est pas actif."
+
+#~ msgid ""
+#~ "Created for your account, %s: the client will act with exactly your "
+#~ "rights. You can revoke it at any time from <a>your profile</a>."
+#~ msgstr ""
+#~ "Créé pour votre compte, %s : le client agira avec exactement vos droits. "
+#~ "Vous pouvez le révoquer à tout moment depuis <a>votre profil</a>."
 
 #~ msgid ""
 #~ "Run this in a terminal. Add --scope user to reach the site from every "

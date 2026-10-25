@@ -1,6 +1,7 @@
 /**
  * Everything a client needs to connect: server URL, credentials, config.
  */
+import { speak } from '@wordpress/a11y';
 import apiFetch from '@wordpress/api-fetch';
 import {
 	Button,
@@ -14,7 +15,7 @@ import {
 } from '@wordpress/components';
 import { useCopyToClipboard } from '@wordpress/compose';
 import { createInterpolateElement, useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Placeholder shown in the snippets until a password is created on screen.
@@ -44,6 +45,9 @@ function CopyButton( { text, label } ) {
 	const [ copied, setCopied ] = useState( false );
 	const ref = useCopyToClipboard( text, () => {
 		setCopied( true );
+		// The button keeps its accessible name, so the change of its text is
+		// not read out: announce it.
+		speak( __( 'Copied!', 'wp-mcp-abilities' ) );
 		window.setTimeout( () => setCopied( false ), 2000 );
 	} );
 
@@ -354,17 +358,18 @@ function PasswordCreator( { connection, password, onCreated } ) {
 				</Button>
 			</div>
 			<p className="description">
+				{ /* The login goes in as an element, never into the string the
+				interpolation parses: a login holding a tag would break it. */ }
 				{ createInterpolateElement(
-					sprintf(
-						/* translators: %s: login of the current user. */
-						__(
-							'Created for your account, %s: the client will act with exactly your rights. You can revoke it at any time from <a>your profile</a>.',
-							'wp-mcp-abilities'
-						),
-						connection.userLogin
+					__(
+						'Created for your account, <login />: the client will act with exactly your rights. You can revoke it at any time from <a>your profile</a>.',
+						'wp-mcp-abilities'
 					),
-					// eslint-disable-next-line jsx-a11y/anchor-has-content -- Filled by createInterpolateElement.
-					{ a: <a href={ connection.profileUrl } /> }
+					{
+						login: <strong>{ connection.userLogin }</strong>,
+						// eslint-disable-next-line jsx-a11y/anchor-has-content -- Filled by createInterpolateElement.
+						a: <a href={ connection.profileUrl } />,
+					}
 				) }
 			</p>
 			{ error && (

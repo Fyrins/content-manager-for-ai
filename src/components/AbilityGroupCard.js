@@ -2,16 +2,23 @@
  * One group of abilities, split into reading and writing.
  */
 import {
+	Button,
 	Card,
 	CardBody,
 	CardHeader,
 	CheckboxControl,
 	Tooltip,
+	VisuallyHidden,
 } from '@wordpress/components';
+import { useInstanceId } from '@wordpress/compose';
 import { __, sprintf } from '@wordpress/i18n';
 
 /**
  * Checkbox of a single ability, with its details behind a tooltip.
+ *
+ * The details are also tied to the checkbox through `aria-describedby`, so a
+ * screen reader announces them with the box itself rather than only from the
+ * tooltip, which a touch screen or a screen reader user may never open.
  *
  * @param {Object}   props
  * @param {Object}   props.row          Ability row.
@@ -22,33 +29,44 @@ function AbilityCheckbox( { row, onChange, isThirdParty } ) {
 	const details = [ row.name, row.description ]
 		.filter( Boolean )
 		.join( ' — ' );
+	const label = row.label || row.name;
+	const detailsId = useInstanceId(
+		AbilityCheckbox,
+		'wpmcpa-ability-details'
+	);
 
 	return (
 		<li className="wpmcpa-ability">
 			<CheckboxControl
 				__nextHasNoMarginBottom
-				label={ row.label || row.name }
+				label={ label }
 				checked={ row.enabled }
+				aria-describedby={ detailsId }
 				onChange={ ( checked ) =>
 					onChange( { [ row.name ]: checked } )
 				}
 			/>
+			<VisuallyHidden id={ detailsId }>{ details }</VisuallyHidden>
 			<Tooltip text={ details }>
-				<span
+				<Button
 					className="wpmcpa-ability__help"
-					tabIndex={ 0 }
-					role="img"
-					aria-label={ details }
+					size="small"
+					aria-label={ sprintf(
+						/* translators: %s: label of the ability. */
+						__( 'Details about %s', 'wp-mcp-abilities' ),
+						label
+					) }
+					aria-describedby={ detailsId }
 				>
 					?
-				</span>
+				</Button>
 			</Tooltip>
 			{ row.destructive && (
 				<span className="wpmcpa-badge wpmcpa-badge--danger">
 					{ __( 'Deletes', 'wp-mcp-abilities' ) }
 				</span>
 			) }
-			{ isThirdParty && ! row.joinable && (
+			{ isThirdParty && 'exposed' === row.option && (
 				<span
 					className="wpmcpa-badge"
 					title={ __(

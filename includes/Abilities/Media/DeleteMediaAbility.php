@@ -88,13 +88,6 @@ class DeleteMediaAbility extends AbstractAbility {
     }
 
     /**
-     * @inheritDoc
-     */
-    public function isEnabledByDefault(): bool {
-        return false;
-    }
-
-    /**
      * Authorises against the very attachment being deleted, not a blanket capability.
      *
      * @inheritDoc

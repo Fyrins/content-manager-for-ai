@@ -17,9 +17,11 @@ defined( 'ABSPATH' ) || exit;
  * Registers both options and their validation.
  *
  * The screen itself is rendered by a script and saves through the REST route,
- * so no section or field is declared here. Registering the options still
- * matters: it is what applies their validation to every `update_option()` made
- * from the admin, whatever made it.
+ * which validates explicitly: no section or field is declared here, and no
+ * form posts to options.php any more. Registering the options still matters,
+ * because the options are a documented way to drive the plugin from code: it
+ * applies the same validation to every `update_option()` made from the admin.
+ * Running it twice on a REST save is harmless, the validation being idempotent.
  */
 class RegisterAbilitiesSettings implements HookInterface {
     /**
@@ -33,14 +35,6 @@ class RegisterAbilitiesSettings implements HookInterface {
      */
     public function hooks(): void {
         add_action( 'admin_init', [ $this, 'registerSettings' ] );
-
-        // Ties what options.php requires to write the option to what the screen
-        // requires to be opened, so lowering one never silently leaves the other
-        // behind.
-        add_filter(
-            'option_page_capability_' . SettingsService::PAGE_SLUG,
-            static fn (): string => SettingsService::CAPABILITY
-        );
     }
 
     /**

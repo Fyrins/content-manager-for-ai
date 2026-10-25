@@ -5,6 +5,24 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.2.2] - 2026-10-25
+
+### Fixed
+
+- Exposing to MCP a third-party ability its own plugin keeps closed had no effect. The validation wrote `false` in `wpmcpa_enabled` for every such ability, and both the exposure and the availability filter drop an ability switched off there. Only the abilities whose box writes to that option are rewritten now, and the entries left by earlier versions are cleared.
+- Accessibility of the settings screen: each ability's name and description are tied to its checkbox through `aria-describedby`, and the "?" is a real button with a name. "Copied!" is announced to screen readers. A failed save stays on screen in an error notice instead of a snackbar that vanished. The loading spinner has a status role and a label.
+- The login in the application password sentence is passed as an element, no longer parsed with the translated string.
+
+### Added
+
+- `wpmcpa_server_url` filter, to change the MCP server URL the settings screen hands out.
+
+### Changed
+
+- Destructive abilities are off by default by construction: `AbstractAbility::isEnabledByDefault()` follows `isDestructive()`.
+- The settings REST route returns, for each row, the parameter its box writes to (`option`: `enabled` or `exposed`), decided by `ThirdPartyAbilityCatalog::optionFor()`. Its read model moves to `Services\SettingsScreenData`.
+- The options.php capability filter is gone: no form posts there any more. The options stay registered so that `update_option()` keeps its validation.
+
 ## [1.2.1] - 2026-10-25
 
 ### Security

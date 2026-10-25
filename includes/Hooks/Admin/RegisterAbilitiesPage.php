@@ -67,9 +67,9 @@ class RegisterAbilitiesPage implements HookInterface {
             return;
         }
 
-        $assetFile = WPMCPA_DIR . '/build/index.asset.php';
+        $assetFile = $this->assetFile();
 
-        if ( ! is_readable( $assetFile ) ) {
+        if ( null === $assetFile ) {
             return;
         }
 
@@ -125,7 +125,7 @@ class RegisterAbilitiesPage implements HookInterface {
         <div class="wrap wpmcpa-settings-wrap">
             <h1><?php echo esc_html__( 'MCP Abilities', 'wp-mcp-abilities' ); ?></h1>
             <div id="wpmcpa-settings">
-                <?php if ( ! is_readable( WPMCPA_DIR . '/build/index.asset.php' ) ) : ?>
+                <?php if ( null === $this->assetFile() ) : ?>
                     <div class="notice notice-error inline">
                         <p><?php esc_html_e( 'The screen\'s script is missing. On a copy installed from the repository, run `npm ci && npm run build`.', 'wp-mcp-abilities' ); ?></p>
                     </div>
@@ -136,5 +136,16 @@ class RegisterAbilitiesPage implements HookInterface {
             </div>
         </div>
         <?php
+    }
+
+    /**
+     * The asset file `npm run build` writes, if the script has been built.
+     *
+     * @return string|null Path of the file, or null when it is missing.
+     */
+    private function assetFile(): ?string {
+        $file = WPMCPA_DIR . '/build/index.asset.php';
+
+        return is_readable( $file ) ? $file : null;
     }
 }

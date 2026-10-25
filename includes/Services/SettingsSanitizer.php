@@ -39,6 +39,14 @@ class SettingsSanitizer {
      * its own default on the next read, quietly turning back on an ability an
      * administrator had deliberately switched off.
      *
+     * Only the abilities whose box writes here are rewritten: this plugin's,
+     * and the third-party ones their own plugin exposes. A third-party ability
+     * kept closed by its plugin has its box in the exposures, and an entry here
+     * would only get in its way: the exposure and the availability filter both
+     * drop an ability switched off here, so writing `false` for it, as the
+     * form-era validation did for every unsubmitted name, made exposing it
+     * impossible. Such entries are cleared.
+     *
      * @param mixed $value Raw value submitted by the form.
      * @return array<string, bool>
      */
@@ -46,13 +54,16 @@ class SettingsSanitizer {
         $submitted = is_array( $value ) ? $value : [];
         $sanitized = array_map( 'boolval', $this->settings->all() );
 
-        $listed = array_merge(
-            array_keys( $this->catalog->all() ),
-            array_keys( $this->thirdParty->all() )
-        );
-
-        foreach ( $listed as $name ) {
+        foreach ( array_keys( $this->catalog->all() ) as $name ) {
             $sanitized[ $name ] = ! empty( $submitted[ $name ] );
+        }
+
+        foreach ( $this->thirdParty->all() as $name => $ability ) {
+            if ( SettingsService::OPTION_KEY === $this->thirdParty->optionFor( $ability ) ) {
+                $sanitized[ $name ] = ! empty( $submitted[ $name ] );
+            } else {
+                unset( $sanitized[ $name ] );
+            }
         }
 
         return $sanitized;
@@ -79,7 +90,7 @@ class SettingsSanitizer {
          * next read.
          */
         foreach ( $this->thirdParty->all() as $name => $ability ) {
-            if ( $this->thirdParty->isExposedToMcp( $ability ) ) {
+            if ( SettingsService::EXPOSED_OPTION_KEY !== $this->thirdParty->optionFor( $ability ) ) {
                 continue;
             }
 

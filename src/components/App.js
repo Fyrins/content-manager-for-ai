@@ -7,6 +7,7 @@ import {
 	Notice,
 	SnackbarList,
 	Spinner,
+	VisuallyHidden,
 	TabPanel,
 } from '@wordpress/components';
 import { useEffect, useMemo, useState } from '@wordpress/element';
@@ -18,29 +19,22 @@ import ConnectionTab from './ConnectionTab';
 /**
  * Builds the payload the REST route expects from the rows on screen.
  *
- * A third-party ability its own plugin keeps closed is written to the
- * exposures, every other row to the switches.
+ * Each row names the parameter it belongs to in `option`, as decided by the
+ * server: `enabled` for the switches, `exposed` for third-party abilities
+ * their own plugin keeps closed.
  *
  * @param {Array} abilities  Rows of this plugin.
  * @param {Array} thirdParty Rows of other plugins.
  * @return {{enabled: Object, exposed: Object}} Body of the POST request.
  */
 function toPayload( abilities, thirdParty ) {
-	const enabled = {};
-	const exposed = {};
+	const payload = { enabled: {}, exposed: {} };
 
-	abilities.forEach( ( row ) => {
-		enabled[ row.name ] = row.enabled;
-	} );
-	thirdParty.forEach( ( row ) => {
-		if ( row.joinable ) {
-			enabled[ row.name ] = row.enabled;
-		} else {
-			exposed[ row.name ] = row.enabled;
-		}
+	[ ...abilities, ...thirdParty ].forEach( ( row ) => {
+		payload[ row.option ][ row.name ] = row.enabled;
 	} );
 
-	return { enabled, exposed };
+	return payload;
 }
 
 /**
@@ -62,6 +56,7 @@ export default function App( { path } ) {
 	const [ error, setError ] = useState( null );
 	const [ isSaving, setIsSaving ] = useState( false );
 	const [ notices, setNotices ] = useState( [] );
+	const [ saveError, setSaveError ] = useState( null );
 	const [ currentTab, setCurrentTab ] = useState( 'connection' );
 	// Held here so it survives a switch of tab: it is shown only once.
 	const [ password, setPassword ] = useState( '' );
@@ -72,7 +67,12 @@ export default function App( { path } ) {
 				setData( response );
 				setSaved( response );
 			} )
-			.catch( ( e ) => setError( e.message ) );
+			.catch( ( e ) =>
+				setError(
+					e?.message ||
+						__( 'Could not load the settings.', 'wp-mcp-abilities' )
+				)
+			);
 	}, [ path ] );
 
 	const isDirty = useMemo(
@@ -110,7 +110,14 @@ export default function App( { path } ) {
 	}
 
 	if ( ! data ) {
-		return <Spinner />;
+		return (
+			<div role="status">
+				<Spinner />
+				<VisuallyHidden>
+					{ __( 'Loading the settings…', 'wp-mcp-abilities' ) }
+				</VisuallyHidden>
+			</div>
+		);
 	}
 
 	const updateOwn = ( changes ) =>
@@ -127,6 +134,7 @@ export default function App( { path } ) {
 
 	const save = () => {
 		setIsSaving( true );
+		setSaveError( null );
 
 		apiFetch( {
 			path,
@@ -143,8 +151,13 @@ export default function App( { path } ) {
 					},
 				] );
 			} )
+			// A failure stays on screen until the next attempt: a snackbar
+			// would vanish before it is read, and looks like a success.
 			.catch( ( e ) =>
-				setNotices( [ { id: Date.now(), content: e.message } ] )
+				setSaveError(
+					e?.message ||
+						__( 'Could not save the settings.', 'wp-mcp-abilities' )
+				)
 			)
 			.finally( () => setIsSaving( false ) );
 	};
@@ -213,8 +226,17 @@ export default function App( { path } ) {
 			</TabPanel>
 
 			{ /* Only the abilities tabs hold switches; the save bar stays out of the way elsewhere unless something is pending. */ }
-			{ ( 'connection' !== currentTab || isDirty ) && (
+			{ ( 'connection' !== currentTab || isDirty || saveError ) && (
 				<div className="wpmcpa-savebar">
+					{ saveError && (
+						<Notice
+							status="error"
+							className="wpmcpa-savebar__error"
+							onRemove={ () => setSaveError( null ) }
+						>
+							{ saveError }
+						</Notice>
+					) }
 					<Button
 						variant="primary"
 						onClick={ save }

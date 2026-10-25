@@ -123,13 +123,6 @@ class PostTypeAbility extends AbstractAbility {
     /**
      * @inheritDoc
      */
-    public function isEnabledByDefault(): bool {
-        return 'delete' !== $this->operation;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function isReadOnly(): bool {
         return in_array( $this->operation, [ 'list', 'get' ], true );
     }

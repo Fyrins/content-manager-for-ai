@@ -21,6 +21,7 @@ use WpMcpAbilities\Hooks\WooCommerceProductTypes;
 use WpMcpAbilities\Registry\AbilityRegistry;
 use WpMcpAbilities\Services\AbilityCatalogService;
 use WpMcpAbilities\Services\SettingsSanitizer;
+use WpMcpAbilities\Services\SettingsScreenData;
 use WpMcpAbilities\Services\SettingsService;
 use WpMcpAbilities\Services\ThirdPartyAbilityCatalog;
 
@@ -105,6 +106,7 @@ final class Plugin {
         $catalog    = new AbilityCatalogService( $registry );
         $thirdParty = new ThirdPartyAbilityCatalog();
         $sanitizer  = new SettingsSanitizer( $catalog, $thirdParty, $settings );
+        $screenData = new SettingsScreenData( $catalog, $thirdParty, $settings );
 
         $hooks = [
             $registry,
@@ -116,7 +118,7 @@ final class Plugin {
             new WooCommerceProductTypes(),
             new RegisterAbilitiesPage(),
             new RegisterAbilitiesSettings( $sanitizer ),
-            new SettingsRestRoute( $catalog, $thirdParty, $settings, $sanitizer ),
+            new SettingsRestRoute( $screenData, $sanitizer ),
         ];
 
         foreach ( $hooks as $hook ) {
