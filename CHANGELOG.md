@@ -5,6 +5,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-25
+
 ### Added
 
 - A Connection tab on the settings screen: the MCP server URL with a copy button, an application password created for the current user in one click, and configurations for Claude Code, Claude Desktop (through `@automattic/mcp-wordpress-remote`), Cursor and a generic HTTP client, filled with the login and the new password. Warnings show when the MCP Adapter is not running, when the default server is switched off, or when application passwords are unavailable.

@@ -4,7 +4,7 @@ Tags: mcp, ai, abilities, agents, api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.1.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,8 +68,8 @@ Every query, result and permission decision can be adjusted through `wpmcpa_*` f
 1. Install and activate WP MCP Abilities.
 2. Install and activate the MCP Adapter from its GitHub releases.
 3. Go to Settings → MCP Abilities and choose which abilities are enabled.
-4. Create an application password for the WordPress user the agent will act as (Users → Profile).
-5. Point your MCP client at `https://your-site.example/wp-json/mcp/mcp-adapter-default-server`, authenticated with that user and application password.
+4. In the Connection tab, create an application password for the WordPress user the agent will act as.
+5. Copy the configuration of your client (Claude Code, Claude Desktop, Cursor or another HTTP client) into it. It points at `https://your-site.example/wp-json/mcp/mcp-adapter-default-server`, authenticated with that user and application password.
 
 == Frequently Asked Questions ==
 
@@ -111,6 +111,12 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 
 == Changelog ==
 
+= 1.2.0 =
+* New: settings screen rebuilt in tabs. A Connection tab shows the server URL, creates an application password in one click and gives ready-to-paste configurations for Claude Code, Claude Desktop and Cursor.
+* New: abilities are grouped in cards, split into read-only and write, with select-all and a filter field.
+* New: every ability publishes `readonly` and `destructive` annotations.
+* Security: read abilities now check permissions on the object they read (posts, post meta, SEOPress data, media). `get-term-meta` requires `edit_term` on the term.
+
 = 1.1.1 =
 * Fix: the "MCP Adapter is not running" notice no longer shows by mistake with MCP Adapter 0.7 when another plugin bundles an older copy of the adapter.
 
@@ -125,6 +131,9 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 * Settings screen to switch each ability on or off, and to control abilities registered by other plugins.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Security fix: read abilities no longer let low-privilege users read private content and meta. New settings screen with client configuration help.
 
 = 1.1.1 =
 Removes a false "MCP Adapter is not running" notice with MCP Adapter 0.7.
