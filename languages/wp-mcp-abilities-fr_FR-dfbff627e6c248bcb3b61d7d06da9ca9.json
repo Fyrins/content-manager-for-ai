@@ -130,6 +130,12 @@
             "Copy the Cursor configuration": [
                 "Copier la configuration Cursor"
             ],
+            "Paste this into <code>~\/.codex\/config.toml<\/code>, or into <code>.codex\/config.toml<\/code> at the root of a trusted project. The Codex CLI, its IDE extension and the ChatGPT desktop app share this file.": [
+                "Collez ceci dans <code>~\/.codex\/config.toml<\/code>, ou dans <code>.codex\/config.toml<\/code> \u00e0 la racine d'un projet de confiance. La CLI Codex, son extension d'IDE et l'application ChatGPT pour ordinateur partagent ce fichier."
+            ],
+            "Copy the Codex configuration": [
+                "Copier la configuration Codex"
+            ],
             "Other client": [
                 "Autre client"
             ],

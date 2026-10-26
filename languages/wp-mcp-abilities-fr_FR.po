@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP MCP Abilities 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-mcp-abilities\n"
-"POT-Creation-Date: 2026-10-26T08:23:49+00:00\n"
+"POT-Creation-Date: 2026-10-26T08:37:47+00:00\n"
 "PO-Revision-Date: 2026-09-25T16:00:00+02:00\n"
 "Last-Translator: Alexandre Revire\n"
 "Language-Team: French\n"
@@ -1301,7 +1301,7 @@ msgstr "WP MCP Abilities ne peut pas enregistrer ses abilities."
 msgid "WP MCP Abilities is not reachable by MCP clients yet."
 msgstr "WP MCP Abilities n'est pas encore joignable par les clients MCP."
 
-#: includes/Hooks/RequirementsNotice.php:85 src/components/ConnectionTab.js:398
+#: includes/Hooks/RequirementsNotice.php:85 src/components/ConnectionTab.js:443
 msgid "Download the MCP Adapter"
 msgstr "Télécharger MCP Adapter"
 
@@ -1744,15 +1744,15 @@ msgstr "Enregistrer les réglages"
 msgid "Unsaved changes"
 msgstr "Modifications non enregistrées"
 
-#: src/components/ConnectionTab.js:50 src/components/ConnectionTab.js:63
+#: src/components/ConnectionTab.js:52 src/components/ConnectionTab.js:65
 msgid "Copied!"
 msgstr "Copié !"
 
-#: src/components/ConnectionTab.js:64
+#: src/components/ConnectionTab.js:66
 msgid "Copy"
 msgstr "Copier"
 
-#: src/components/ConnectionTab.js:159
+#: src/components/ConnectionTab.js:170
 msgid ""
 "Run this in a terminal. Add --scope user to reach the site from every "
 "project. The command carries the password, only Base64-encoded: it stays in "
@@ -1763,11 +1763,11 @@ msgstr ""
 "encodé en Base64 : il reste dans l'historique de votre shell tant que vous "
 "ne l'en retirez pas."
 
-#: src/components/ConnectionTab.js:166
+#: src/components/ConnectionTab.js:177
 msgid "Copy the Claude Code command"
 msgstr "Copier la commande Claude Code"
 
-#: src/components/ConnectionTab.js:180
+#: src/components/ConnectionTab.js:196
 msgid ""
 "Open Settings → Developer → Edit Config, then paste this into the file. "
 "Claude Desktop reaches the site through a small proxy run with npx, so "
@@ -1777,11 +1777,11 @@ msgstr ""
 "dans le fichier. Claude Desktop passe par un petit proxy lancé avec npx : "
 "Node.js doit donc être installé."
 
-#: src/components/ConnectionTab.js:202
+#: src/components/ConnectionTab.js:218
 msgid "Copy the Claude Desktop configuration"
 msgstr "Copier la configuration Claude Desktop"
 
-#: src/components/ConnectionTab.js:217
+#: src/components/ConnectionTab.js:233
 msgid ""
 "Paste this into <code>~/.cursor/mcp.json</code>, or into <code>.cursor/"
 "mcp.json</code> at the root of a project."
@@ -1789,15 +1789,29 @@ msgstr ""
 "Collez ceci dans <code>~/.cursor/mcp.json</code>, ou dans <code>.cursor/"
 "mcp.json</code> à la racine d'un projet."
 
-#: src/components/ConnectionTab.js:226
+#: src/components/ConnectionTab.js:242
 msgid "Copy the Cursor configuration"
 msgstr "Copier la configuration Cursor"
 
-#: src/components/ConnectionTab.js:236
+#: src/components/ConnectionTab.js:257
+msgid ""
+"Paste this into <code>~/.codex/config.toml</code>, or into <code>.codex/"
+"config.toml</code> at the root of a trusted project. The Codex CLI, its IDE "
+"extension and the ChatGPT desktop app share this file."
+msgstr ""
+"Collez ceci dans <code>~/.codex/config.toml</code>, ou dans <code>.codex/"
+"config.toml</code> à la racine d'un projet de confiance. La CLI Codex, son "
+"extension d'IDE et l'application ChatGPT pour ordinateur partagent ce fichier."
+
+#: src/components/ConnectionTab.js:266
+msgid "Copy the Codex configuration"
+msgstr "Copier la configuration Codex"
+
+#: src/components/ConnectionTab.js:279
 msgid "Other client"
 msgstr "Autre client"
 
-#: src/components/ConnectionTab.js:240
+#: src/components/ConnectionTab.js:285
 msgid ""
 "The exact format depends on the client. One speaking HTTP usually takes "
 "something like this."
@@ -1805,11 +1819,11 @@ msgstr ""
 "Le format exact dépend du client. Un client qui parle HTTP accepte en "
 "général quelque chose comme ceci."
 
-#: src/components/ConnectionTab.js:247
+#: src/components/ConnectionTab.js:292
 msgid "Copy the configuration"
 msgstr "Copier la configuration"
 
-#: src/components/ConnectionTab.js:265
+#: src/components/ConnectionTab.js:310
 msgid ""
 "Already have an application password? This command turns it into the Base64 "
 "value the snippets expect, without leaving it in your shell history."
@@ -1818,15 +1832,15 @@ msgstr ""
 "en la valeur Base64 attendue par les extraits, sans le laisser dans "
 "l'historique de votre shell."
 
-#: src/components/ConnectionTab.js:272
+#: src/components/ConnectionTab.js:317
 msgid "Copy the Base64 command"
 msgstr "Copier la commande Base64"
 
-#: src/components/ConnectionTab.js:293
+#: src/components/ConnectionTab.js:338
 msgid "MCP client"
 msgstr "Client MCP"
 
-#: src/components/ConnectionTab.js:301
+#: src/components/ConnectionTab.js:346
 msgid ""
 "Application passwords are not available for your account. WordPress only "
 "offers them on sites served over HTTPS, or on a local environment, and a "
@@ -1836,7 +1850,7 @@ msgstr ""
 "WordPress ne les propose que sur les sites servis en HTTPS ou en "
 "environnement local, et une extension peut aussi les désactiver."
 
-#: src/components/ConnectionTab.js:312
+#: src/components/ConnectionTab.js:357
 msgid ""
 "Application password created and filled into the snippets below. Copy the "
 "one you need now: the password will not be shown again once you leave this "
@@ -1846,15 +1860,15 @@ msgstr ""
 "Copiez dès maintenant celui dont vous avez besoin : le mot de passe ne sera "
 "plus affiché une fois cette page quittée."
 
-#: src/components/ConnectionTab.js:340
+#: src/components/ConnectionTab.js:385
 msgid "Application password name"
 msgstr "Nom du mot de passe d'application"
 
-#: src/components/ConnectionTab.js:354
+#: src/components/ConnectionTab.js:399
 msgid "Create an application password"
 msgstr "Créer un mot de passe d'application"
 
-#: src/components/ConnectionTab.js:364
+#: src/components/ConnectionTab.js:409
 msgid ""
 "Created for your account, <login />: the client will act with exactly your "
 "rights. You can revoke it at any time from <a>your profile</a>."
@@ -1862,7 +1876,7 @@ msgstr ""
 "Créé pour votre compte, <login /> : le client agira avec exactement vos "
 "droits. Vous pouvez le révoquer à tout moment depuis <a>votre profil</a>."
 
-#: src/components/ConnectionTab.js:393
+#: src/components/ConnectionTab.js:438
 msgid ""
 "The MCP Adapter plugin is not running. The abilities are registered, but no "
 "MCP client can reach them until it is installed and active."
@@ -1871,7 +1885,7 @@ msgstr ""
 "mais aucun client MCP ne peut les atteindre tant qu'elle n'est pas installée "
 "et activée."
 
-#: src/components/ConnectionTab.js:404
+#: src/components/ConnectionTab.js:449
 msgid ""
 "This site switches off the default MCP server, so the URL below does not "
 "answer. Use the URL of the server your code declares instead."
@@ -1879,11 +1893,11 @@ msgstr ""
 "Ce site désactive le serveur MCP par défaut : l'URL ci-dessous ne répond "
 "donc pas. Utilisez plutôt l'URL du serveur que déclare votre code."
 
-#: src/components/ConnectionTab.js:414
+#: src/components/ConnectionTab.js:459
 msgid "MCP server URL"
 msgstr "URL du serveur MCP"
 
-#: src/components/ConnectionTab.js:419
+#: src/components/ConnectionTab.js:464
 msgid ""
 "The address to give your AI client. It acts as a WordPress user, within that "
 "user’s capabilities, and only reaches the abilities enabled on this screen."
@@ -1892,15 +1906,15 @@ msgstr ""
 "WordPress, dans la limite de ses droits, et n'atteint que les abilities "
 "activées sur cet écran."
 
-#: src/components/ConnectionTab.js:428
+#: src/components/ConnectionTab.js:473
 msgid "Copy the server URL"
 msgstr "Copier l'URL du serveur"
 
-#: src/components/ConnectionTab.js:441
+#: src/components/ConnectionTab.js:486
 msgid "Create the credentials"
 msgstr "Créer les identifiants"
 
-#: src/components/ConnectionTab.js:446
+#: src/components/ConnectionTab.js:491
 msgid ""
 "The client signs in with an application password. Pick the account "
 "deliberately: a dedicated user with the lowest role that covers the job is "
@@ -1910,21 +1924,21 @@ msgstr ""
 "compte avec soin : un utilisateur dédié, avec le rôle le plus bas qui suffit "
 "à la tâche, est le choix le plus sûr."
 
-#: src/components/ConnectionTab.js:463
+#: src/components/ConnectionTab.js:508
 msgid "Configure your client"
 msgstr "Configurer votre client"
 
-#: src/components/ConnectionTab.js:478
+#: src/components/ConnectionTab.js:523
 msgid "Check that it works"
 msgstr "Vérifier que cela fonctionne"
 
-#: src/components/ConnectionTab.js:484
+#: src/components/ConnectionTab.js:529
 msgid "Restart the client, then ask it which WordPress abilities it can use."
 msgstr ""
 "Redémarrez le client, puis demandez-lui quelles abilities WordPress il peut "
 "utiliser."
 
-#: src/components/ConnectionTab.js:491
+#: src/components/ConnectionTab.js:536
 msgid ""
 "It should call <code>mcp-adapter-discover-abilities</code> and list the "
 "abilities checked in the Abilities tab."
@@ -1932,7 +1946,7 @@ msgstr ""
 "Il doit appeler <code>mcp-adapter-discover-abilities</code> et lister les "
 "abilities cochées dans l'onglet Abilities."
 
-#: src/components/ConnectionTab.js:499
+#: src/components/ConnectionTab.js:544
 msgid ""
 "A 401 error means the credentials are wrong; a 404 means the MCP Adapter is "
 "not active."

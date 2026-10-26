@@ -4,7 +4,7 @@ Tags: mcp, ai, abilities, agents, api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.2.4
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,7 +69,7 @@ Every query, result and permission decision can be adjusted through `wpmcpa_*` f
 2. Install and activate the MCP Adapter from its GitHub releases.
 3. Go to Settings → MCP Abilities and choose which abilities are enabled.
 4. In the Connection tab, create an application password for the WordPress user the agent will act as.
-5. Copy the configuration of your client (Claude Code, Claude Desktop, Cursor or another HTTP client) into it. It points at `https://your-site.example/wp-json/mcp/mcp-adapter-default-server`, authenticated with that user and application password.
+5. Copy the configuration of your client (Claude Code, Claude Desktop, Cursor, Codex or another HTTP client) into it. It points at `https://your-site.example/wp-json/mcp/mcp-adapter-default-server`, authenticated with that user and application password.
 
 == Frequently Asked Questions ==
 
@@ -107,9 +107,16 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 
 == Screenshots ==
 
-1. The settings screen: enable or disable each ability.
+1. Connection tab: the MCP server URL, an application password created in one click, and ready-to-paste configurations for Claude Code, Claude Desktop, Cursor, Codex and other clients.
+2. Abilities tab: enable or disable each ability, grouped in cards and split into read-only and write.
+3. Other plugins tab: abilities registered by other plugins, such as SEOPress, with a legend explaining the badges.
 
 == Changelog ==
+
+= 1.3.0 =
+* New: Codex tab in the Connection screen, with a ready-to-paste `config.toml` snippet.
+* New: each client tab shows its logo.
+* Fix: the "?" and badges of an ability stay next to its label when the label wraps.
 
 = 1.2.4 =
 * Fix: the "?" tooltip is back for abilities whose description says more than their label. Descriptions written under every checkbox made long-described blocks hard to read.
@@ -149,6 +156,9 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 * Settings screen to switch each ability on or off, and to control abilities registered by other plugins.
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+Adds Codex to the client configurations, and logos to the client tabs.
 
 = 1.2.4 =
 Readable ability lists again for plugins with long descriptions.
