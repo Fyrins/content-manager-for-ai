@@ -5,6 +5,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.2.4] - 2026-10-26
+
 ### Changed
 
 - The "?" is back: written under every checkbox, the descriptions made the blocks of plugins that describe their abilities at length (Product Feed for one) hard to read. It now shows only when the description says more than the label, and its tooltip gives the technical name and the description.

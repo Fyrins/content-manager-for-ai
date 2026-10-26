@@ -1,6 +1,6 @@
 {
   "name": "wp-mcp-abilities",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Settings screen of WP MCP Abilities",
   "scripts": {
     "build": "wp-scripts build",
