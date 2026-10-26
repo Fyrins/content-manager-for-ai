@@ -40,14 +40,20 @@
             "Irreversible": [
                 "Irr\u00e9versible"
             ],
-            "Hidden by default": [
-                "Masqu\u00e9e par d\u00e9faut"
-            ],
             "Can overwrite or erase data on the site, with no way to undo it.": [
                 "Peut \u00e9craser ou effacer des donn\u00e9es du site, sans retour possible."
             ],
+            "Hidden by default": [
+                "Masqu\u00e9e par d\u00e9faut"
+            ],
             "Its plugin registers it but does not offer it to agents. Check it to add it to the MCP server, no code needed.": [
                 "Son extension l'enregistre mais ne la propose pas aux agents. Cochez-la pour l'ajouter au serveur MCP, sans code \u00e0 \u00e9crire."
+            ],
+            "Details about %s": [
+                "D\u00e9tails sur %s"
+            ],
+            "Applies to every ability below.": [
+                "S'applique \u00e0 toutes les abilities ci-dessous."
             ],
             "Deselect all": [
                 "Tout d\u00e9cocher"

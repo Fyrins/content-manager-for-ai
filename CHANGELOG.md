@@ -5,6 +5,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Changed
+
+- The "?" is back: written under every checkbox, the descriptions made the blocks of plugins that describe their abilities at length (Product Feed for one) hard to read. It now shows only when the description says more than the label, and its tooltip gives the technical name and the description.
+- A badge every ability of a block carries is no longer repeated on each row: the legend says it applies to every ability below. The badges that remain line up with the label when they wrap.
+
 ## [1.2.3] - 2026-10-26
 
 ### Changed
