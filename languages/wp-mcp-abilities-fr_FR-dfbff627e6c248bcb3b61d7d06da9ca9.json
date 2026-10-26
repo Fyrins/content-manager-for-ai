@@ -37,17 +37,17 @@
             "No ability matches.": [
                 "Aucune ability ne correspond."
             ],
-            "Details about %s": [
-                "D\u00e9tails sur %s"
+            "Irreversible": [
+                "Irr\u00e9versible"
             ],
-            "Deletes": [
-                "Supprime"
+            "Hidden by default": [
+                "Masqu\u00e9e par d\u00e9faut"
             ],
-            "Closed to MCP by its own declaration. Check to hand it to an agent.": [
-                "Ferm\u00e9e \u00e0 MCP par sa propre d\u00e9claration. Cochez pour la remettre \u00e0 un agent."
+            "Can overwrite or erase data on the site, with no way to undo it.": [
+                "Peut \u00e9craser ou effacer des donn\u00e9es du site, sans retour possible."
             ],
-            "Closed by its plugin": [
-                "Ferm\u00e9e par son extension"
+            "Its plugin does not open it to agents. Check it to make it available to them.": [
+                "Son extension ne la propose pas aux agents. Cochez-la pour la leur rendre accessible."
             ],
             "Deselect all": [
                 "Tout d\u00e9cocher"

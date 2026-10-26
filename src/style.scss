@@ -78,6 +78,13 @@ $z-snackbars: 100000;
 		font-weight: 600;
 	}
 
+	&__badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		margin: 2px 0 4px;
+	}
+
 	&__description {
 		margin: 0 0 16px;
 		color: $gray-60;
@@ -102,41 +109,63 @@ $z-snackbars: 100000;
 }
 
 .wpmcpa-ability {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 6px;
-	align-items: center;
 	margin: 0;
 
-	// Reset the button down to the small round "?" it replaces.
-	&__help.components-button {
-		width: 16px;
-		min-width: 0;
-		height: 16px;
-		padding: 0;
+	// Lined up with the label, past the 16px box and its 12px gap.
+	&__details {
+		margin: 2px 0 0 28px;
+		color: $gray-60;
+		font-size: 12px;
 	}
 
-	&__help {
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		width: 16px;
-		height: 16px;
-		border-radius: 50%;
-		background: $gray-2;
-		color: $gray-60;
-		font-size: 10px;
-		font-weight: 600;
-		cursor: help;
+	&__badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		margin: 2px 0 4px;
+	}
 
-		&:focus-visible {
-			outline: 2px solid $accent;
-			outline-offset: 1px;
-		}
+	&__description {
+		margin: 0 0 2px;
+	}
+
+	&__name {
+		padding: 0;
+		background: none;
+		color: $gray-50;
+		font-size: 11px;
+		overflow-wrap: anywhere;
+	}
+}
+
+.wpmcpa-legend {
+	display: grid;
+	gap: 6px;
+	margin: 0 0 16px;
+	padding: 10px 12px;
+	border-left: 3px solid $gray-5;
+	background: $gray-0;
+
+	&__item {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 8px;
+		align-items: baseline;
+	}
+
+	dt,
+	dd {
+		margin: 0;
+	}
+
+	dd {
+		flex: 1 1 240px;
+		color: $gray-60;
 	}
 }
 
 .wpmcpa-badge {
+	white-space: nowrap;
 	padding: 1px 6px;
 	border-radius: 2px;
 	background: $gray-2;

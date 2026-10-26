@@ -2,23 +2,30 @@
  * One group of abilities, split into reading and writing.
  */
 import {
-	Button,
 	Card,
 	CardBody,
 	CardHeader,
 	CheckboxControl,
-	Tooltip,
-	VisuallyHidden,
 } from '@wordpress/components';
 import { useInstanceId } from '@wordpress/compose';
 import { __, sprintf } from '@wordpress/i18n';
 
 /**
- * Checkbox of a single ability, with its details behind a tooltip.
+ * Whether a third-party row is closed to MCP until an administrator opens it.
  *
- * The details are also tied to the checkbox through `aria-describedby`, so a
- * screen reader announces them with the box itself rather than only from the
- * tooltip, which a touch screen or a screen reader user may never open.
+ * @param {Object}  row          Ability row.
+ * @param {boolean} isThirdParty Whether the row belongs to another plugin.
+ */
+const isHiddenByDefault = ( row, isThirdParty ) =>
+	isThirdParty && 'exposed' === row.option;
+
+/**
+ * Checkbox of a single ability, with its details written underneath.
+ *
+ * The details used to sit behind a "?" tooltip, which told nothing when the
+ * description only repeated the label, as SEOPress's do. They are shown now,
+ * the description only when it adds something, and stay tied to the checkbox
+ * through `aria-describedby`.
  *
  * @param {Object}   props
  * @param {Object}   props.row          Ability row.
@@ -26,10 +33,16 @@ import { __, sprintf } from '@wordpress/i18n';
  * @param {boolean}  props.isThirdParty Whether the row belongs to another plugin.
  */
 function AbilityCheckbox( { row, onChange, isThirdParty } ) {
-	const details = [ row.name, row.description ]
-		.filter( Boolean )
-		.join( ' — ' );
 	const label = row.label || row.name;
+	const normalize = ( text ) =>
+		( text || '' )
+			.trim()
+			.replace( /[.\s]+$/, '' )
+			.toLowerCase();
+	const description =
+		row.description && normalize( row.description ) !== normalize( label )
+			? row.description
+			: '';
 	const detailsId = useInstanceId(
 		AbilityCheckbox,
 		'wpmcpa-ability-details'
@@ -46,38 +59,88 @@ function AbilityCheckbox( { row, onChange, isThirdParty } ) {
 					onChange( { [ row.name ]: checked } )
 				}
 			/>
-			<VisuallyHidden id={ detailsId }>{ details }</VisuallyHidden>
-			<Tooltip text={ details }>
-				<Button
-					className="wpmcpa-ability__help"
-					size="small"
-					aria-label={ sprintf(
-						/* translators: %s: label of the ability. */
-						__( 'Details about %s', 'wp-mcp-abilities' ),
-						label
-					) }
-					aria-describedby={ detailsId }
-				>
-					?
-				</Button>
-			</Tooltip>
-			{ row.destructive && (
-				<span className="wpmcpa-badge wpmcpa-badge--danger">
-					{ __( 'Deletes', 'wp-mcp-abilities' ) }
-				</span>
-			) }
-			{ isThirdParty && 'exposed' === row.option && (
-				<span
-					className="wpmcpa-badge"
-					title={ __(
-						'Closed to MCP by its own declaration. Check to hand it to an agent.',
-						'wp-mcp-abilities'
-					) }
-				>
-					{ __( 'Closed by its plugin', 'wp-mcp-abilities' ) }
-				</span>
-			) }
+			<div id={ detailsId } className="wpmcpa-ability__details">
+				{ ( row.destructive ||
+					isHiddenByDefault( row, isThirdParty ) ) && (
+					<div className="wpmcpa-ability__badges">
+						{ row.destructive && (
+							<span className="wpmcpa-badge wpmcpa-badge--danger">
+								{ __( 'Irreversible', 'wp-mcp-abilities' ) }
+							</span>
+						) }
+						{ isHiddenByDefault( row, isThirdParty ) && (
+							<span className="wpmcpa-badge">
+								{ __(
+									'Hidden by default',
+									'wp-mcp-abilities'
+								) }
+							</span>
+						) }
+					</div>
+				) }
+				{ description && (
+					<p className="wpmcpa-ability__description">
+						{ description }
+					</p>
+				) }
+				<code className="wpmcpa-ability__name">{ row.name }</code>
+			</div>
 		</li>
+	);
+}
+
+/**
+ * Meaning of the badges a block shows, written once above its abilities.
+ *
+ * Only the badges present in the block are explained.
+ *
+ * @param {Object}  props
+ * @param {Array}   props.rows         Ability rows of the block.
+ * @param {boolean} props.isThirdParty Whether the rows belong to another plugin.
+ */
+function BadgeLegend( { rows, isThirdParty } ) {
+	const hasDestructive = rows.some( ( row ) => row.destructive );
+	const hasHidden = rows.some( ( row ) =>
+		isHiddenByDefault( row, isThirdParty )
+	);
+
+	if ( ! hasDestructive && ! hasHidden ) {
+		return null;
+	}
+
+	return (
+		<dl className="wpmcpa-legend">
+			{ hasDestructive && (
+				<div className="wpmcpa-legend__item">
+					<dt>
+						<span className="wpmcpa-badge wpmcpa-badge--danger">
+							{ __( 'Irreversible', 'wp-mcp-abilities' ) }
+						</span>
+					</dt>
+					<dd>
+						{ __(
+							'Can overwrite or erase data on the site, with no way to undo it.',
+							'wp-mcp-abilities'
+						) }
+					</dd>
+				</div>
+			) }
+			{ hasHidden && (
+				<div className="wpmcpa-legend__item">
+					<dt>
+						<span className="wpmcpa-badge">
+							{ __( 'Hidden by default', 'wp-mcp-abilities' ) }
+						</span>
+					</dt>
+					<dd>
+						{ __(
+							'Its plugin does not open it to agents. Check it to make it available to them.',
+							'wp-mcp-abilities'
+						) }
+					</dd>
+				</div>
+			) }
+		</dl>
 	);
 }
 
@@ -114,6 +177,7 @@ function AbilitySection( {
 		<section className="wpmcpa-section">
 			<h3 className="wpmcpa-section__title">{ title }</h3>
 			<p className="wpmcpa-section__description">{ description }</p>
+			<BadgeLegend rows={ rows } isThirdParty={ isThirdParty } />
 			<ul className="wpmcpa-grid">
 				{ rows.map( ( row ) => (
 					<AbilityCheckbox
