@@ -46,8 +46,8 @@
             "Can overwrite or erase data on the site, with no way to undo it.": [
                 "Peut \u00e9craser ou effacer des donn\u00e9es du site, sans retour possible."
             ],
-            "Its plugin does not open it to agents. Check it to make it available to them.": [
-                "Son extension ne la propose pas aux agents. Cochez-la pour la leur rendre accessible."
+            "Its plugin registers it but does not offer it to agents. Check it to add it to the MCP server, no code needed.": [
+                "Son extension l'enregistre mais ne la propose pas aux agents. Cochez-la pour l'ajouter au serveur MCP, sans code \u00e0 \u00e9crire."
             ],
             "Deselect all": [
                 "Tout d\u00e9cocher"

@@ -1650,10 +1650,11 @@ msgstr "Peut écraser ou effacer des données du site, sans retour possible."
 
 #: src/components/AbilityGroupCard.js:136
 msgid ""
-"Its plugin does not open it to agents. Check it to make it available to them."
+"Its plugin registers it but does not offer it to agents. Check it to add it "
+"to the MCP server, no code needed."
 msgstr ""
-"Son extension ne la propose pas aux agents. Cochez-la pour la leur rendre "
-"accessible."
+"Son extension l'enregistre mais ne la propose pas aux agents. Cochez-la "
+"pour l'ajouter au serveur MCP, sans code à écrire."
 
 #: src/components/AbilityGroupCard.js:197
 msgid "Deselect all"

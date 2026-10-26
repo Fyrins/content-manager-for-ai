@@ -134,7 +134,7 @@ function BadgeLegend( { rows, isThirdParty } ) {
 					</dt>
 					<dd>
 						{ __(
-							'Its plugin does not open it to agents. Check it to make it available to them.',
+							'Its plugin registers it but does not offer it to agents. Check it to add it to the MCP server, no code needed.',
 							'wp-mcp-abilities'
 						) }
 					</dd>
