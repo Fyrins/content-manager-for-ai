@@ -4,7 +4,7 @@ Tags: mcp, ai, abilities, agents, api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,10 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 
 == Changelog ==
 
+= 1.2.4 =
+* Fix: the "?" tooltip is back for abilities whose description says more than their label. Descriptions written under every checkbox made long-described blocks hard to read.
+* Fix: a badge every ability of a block carries is explained once in the legend instead of being repeated on each row.
+
 = 1.2.3 =
 * Fix: clearer badges on the settings screen. "Irreversible" replaces "Deletes", "Hidden by default" replaces "Closed by its plugin", and a legend explains them.
 * Fix: each ability's technical name and description are shown under its checkbox, instead of a "?" tooltip that repeated the label.
@@ -145,6 +149,9 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 * Settings screen to switch each ability on or off, and to control abilities registered by other plugins.
 
 == Upgrade Notice ==
+
+= 1.2.4 =
+Readable ability lists again for plugins with long descriptions.
 
 = 1.2.3 =
 Clearer badges and ability details on the settings screen.

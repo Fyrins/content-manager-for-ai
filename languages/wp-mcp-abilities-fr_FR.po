@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP MCP Abilities 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-mcp-abilities\n"
-"POT-Creation-Date: 2026-10-26T08:05:52+00:00\n"
+"POT-Creation-Date: 2026-10-26T08:23:49+00:00\n"
 "PO-Revision-Date: 2026-09-25T16:00:00+02:00\n"
 "Last-Translator: Alexandre Revire\n"
 "Language-Team: French\n"
@@ -1636,55 +1636,64 @@ msgstr "Filtrer les abilities"
 msgid "No ability matches."
 msgstr "Aucune ability ne correspond."
 
-#: src/components/AbilityGroupCard.js:68 src/components/AbilityGroupCard.js:117
+#: src/components/AbilityGroupCard.js:26
 msgid "Irreversible"
 msgstr "Irréversible"
 
-#: src/components/AbilityGroupCard.js:73 src/components/AbilityGroupCard.js:132
-msgid "Hidden by default"
-msgstr "Masquée par défaut"
-
-#: src/components/AbilityGroupCard.js:121
+#: src/components/AbilityGroupCard.js:28
 msgid "Can overwrite or erase data on the site, with no way to undo it."
 msgstr "Peut écraser ou effacer des données du site, sans retour possible."
 
-#: src/components/AbilityGroupCard.js:136
+#: src/components/AbilityGroupCard.js:37
+msgid "Hidden by default"
+msgstr "Masquée par défaut"
+
+#: src/components/AbilityGroupCard.js:39
 msgid ""
 "Its plugin registers it but does not offer it to agents. Check it to add it "
 "to the MCP server, no code needed."
 msgstr ""
-"Son extension l'enregistre mais ne la propose pas aux agents. Cochez-la "
-"pour l'ajouter au serveur MCP, sans code à écrire."
+"Son extension l'enregistre mais ne la propose pas aux agents. Cochez-la pour "
+"l'ajouter au serveur MCP, sans code à écrire."
 
-#: src/components/AbilityGroupCard.js:197
+#. translators: %s: label of the ability.
+#: src/components/AbilityGroupCard.js:112
+msgid "Details about %s"
+msgstr "Détails sur %s"
+
+#: src/components/AbilityGroupCard.js:158
+msgid "Applies to every ability below."
+msgstr "S'applique à toutes les abilities ci-dessous."
+
+#: src/components/AbilityGroupCard.js:234
 msgid "Deselect all"
 msgstr "Tout décocher"
 
-#: src/components/AbilityGroupCard.js:198
+#: src/components/AbilityGroupCard.js:235
 msgid "Select all"
 msgstr "Tout cocher"
 
 #. translators: 1: number of enabled abilities, 2: number of abilities.
-#: src/components/AbilityGroupCard.js:226
+#: src/components/AbilityGroupCard.js:263
 msgid "%1$d of %2$d enabled"
 msgstr "%1$d sur %2$d activées"
 
-#: src/components/AbilityGroupCard.js:234
+#: src/components/AbilityGroupCard.js:271
 msgid "Read-only abilities"
 msgstr "Abilities de lecture"
 
-#: src/components/AbilityGroupCard.js:235
+#: src/components/AbilityGroupCard.js:272
 msgid ""
 "These abilities let an agent read content. They change nothing on the site."
 msgstr ""
 "Ces abilities permettent à un agent de lire le contenu. Elles ne modifient "
 "rien sur le site."
 
-#: src/components/AbilityGroupCard.js:244
+#: src/components/AbilityGroupCard.js:281
 msgid "Write abilities"
 msgstr "Abilities d'écriture"
 
-#: src/components/AbilityGroupCard.js:247
+#: src/components/AbilityGroupCard.js:284
 msgid ""
 "These abilities do not declare themselves read-only: assume they can change "
 "the site."
@@ -1692,7 +1701,7 @@ msgstr ""
 "Ces abilities ne se déclarent pas en lecture seule : partez du principe "
 "qu'elles peuvent modifier le site."
 
-#: src/components/AbilityGroupCard.js:251
+#: src/components/AbilityGroupCard.js:288
 msgid "These abilities let an agent create, update and delete content."
 msgstr ""
 "Ces abilities permettent à un agent de créer, modifier et supprimer du "

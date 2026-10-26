@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP MCP Abilities 1.2.2\n"
+"Project-Id-Version: WP MCP Abilities 1.2.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-mcp-abilities\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-26T08:08:00+00:00\n"
+"POT-Creation-Date: 2026-10-26T08:23:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: wp-mcp-abilities\n"
@@ -1301,54 +1301,61 @@ msgstr ""
 msgid "No ability matches."
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:68
-#: src/components/AbilityGroupCard.js:117
+#: src/components/AbilityGroupCard.js:26
 msgid "Irreversible"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:73
-#: src/components/AbilityGroupCard.js:132
-msgid "Hidden by default"
-msgstr ""
-
-#: src/components/AbilityGroupCard.js:121
+#: src/components/AbilityGroupCard.js:28
 msgid "Can overwrite or erase data on the site, with no way to undo it."
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:136
+#: src/components/AbilityGroupCard.js:37
+msgid "Hidden by default"
+msgstr ""
+
+#: src/components/AbilityGroupCard.js:39
 msgid "Its plugin registers it but does not offer it to agents. Check it to add it to the MCP server, no code needed."
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:197
+#. translators: %s: label of the ability.
+#: src/components/AbilityGroupCard.js:112
+msgid "Details about %s"
+msgstr ""
+
+#: src/components/AbilityGroupCard.js:158
+msgid "Applies to every ability below."
+msgstr ""
+
+#: src/components/AbilityGroupCard.js:234
 msgid "Deselect all"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:198
+#: src/components/AbilityGroupCard.js:235
 msgid "Select all"
 msgstr ""
 
 #. translators: 1: number of enabled abilities, 2: number of abilities.
-#: src/components/AbilityGroupCard.js:226
+#: src/components/AbilityGroupCard.js:263
 msgid "%1$d of %2$d enabled"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:234
+#: src/components/AbilityGroupCard.js:271
 msgid "Read-only abilities"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:235
+#: src/components/AbilityGroupCard.js:272
 msgid "These abilities let an agent read content. They change nothing on the site."
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:244
+#: src/components/AbilityGroupCard.js:281
 msgid "Write abilities"
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:247
+#: src/components/AbilityGroupCard.js:284
 msgid "These abilities do not declare themselves read-only: assume they can change the site."
 msgstr ""
 
-#: src/components/AbilityGroupCard.js:251
+#: src/components/AbilityGroupCard.js:288
 msgid "These abilities let an agent create, update and delete content."
 msgstr ""
 

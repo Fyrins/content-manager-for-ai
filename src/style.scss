@@ -108,33 +108,45 @@ $z-snackbars: 100000;
 	list-style: none;
 }
 
+// Hanging indent: what wraps lines up with the label, past the 16px box and
+// its 12px gap, instead of going back under the box.
 .wpmcpa-ability {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
 	margin: 0;
+	padding-left: 28px;
 
-	// Lined up with the label, past the 16px box and its 12px gap.
-	&__details {
-		margin: 2px 0 0 28px;
-		color: $gray-60;
-		font-size: 12px;
+	> .components-checkbox-control {
+		margin-left: -28px;
 	}
 
-	&__badges {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 4px;
-		margin: 2px 0 4px;
-	}
-
-	&__description {
-		margin: 0 0 2px;
-	}
-
-	&__name {
+	// Reset the button down to the small round "?" it replaces.
+	&__help.components-button {
+		width: 16px;
+		min-width: 0;
+		height: 16px;
 		padding: 0;
-		background: none;
-		color: $gray-50;
-		font-size: 11px;
-		overflow-wrap: anywhere;
+	}
+
+	&__help {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		background: $gray-2;
+		color: $gray-60;
+		font-size: 10px;
+		font-weight: 600;
+		cursor: help;
+
+		&:focus-visible {
+			outline: 2px solid $accent;
+			outline-offset: 1px;
+		}
 	}
 }
 
