@@ -80,7 +80,7 @@ https://example.com/wp-json/mcp/mcp-adapter-default-server
 
 Its REST namespace is `mcp` and its route `mcp-adapter-default-server`.
 
-**The settings screen does this for you.** Its Connection tab shows the server URL, creates an application password for your account in one click, and fills it into ready-to-paste configurations for Claude Code, Claude Desktop, Cursor and a generic HTTP client (see [Settings screen](#settings-screen)). The rest of this section explains what those configurations contain.
+**The settings screen does this for you.** Its Connection tab shows the server URL, creates an application password for your account in one click, and fills it into ready-to-paste configurations for Claude Code, Claude Desktop, Cursor, Codex and a generic HTTP client (see [Settings screen](#settings-screen)). The rest of this section explains what those configurations contain.
 
 **Authentication.** The client acts as a WordPress user. The usual way is an application password: in the WordPress admin, open Users → Profile, create one under "Application Passwords", and send it with HTTP Basic authentication (`username:application-password`, base64-encoded). WordPress only offers application passwords on sites served over HTTPS, or on a local environment.
 
@@ -110,11 +110,17 @@ Its REST namespace is `mcp` and its route `mcp-adapter-default-server`.
 
 The screen is a React app built with `@wordpress/components`. It reads and saves through the `wp-mcp-abilities/v1/settings` REST route (`GET` and `POST`, `manage_options` required), preloaded so the page renders without a first round trip. It has three tabs.
 
-**Connection.** The URL of the adapter's default server with a copy button; a form creating an application password for the current user through the core `/wp/v2/users/me/application-passwords` route; and per-client tabs (Claude Code, Claude Desktop, Cursor, other) whose snippets are filled with the login and, once created, the password. The password lives in the page only: it is shown once, like on the profile screen. Warnings appear when the MCP Adapter is not running, when the default server is switched off, or when application passwords are unavailable (no HTTPS outside a local environment).
+![Connection tab: server URL, application password and per-client configuration](.wordpress-org/screenshot-1.png)
 
-**Abilities.** Every ability of the plugin that can run on the site, one card per group sorted alphabetically: one per exposed post type (named after its plural label), plus Content, Media, Meta, SEOpress, Taxonomies, Templates, WooCommerce and WP Grid Builder. Each card splits its abilities into read-only and write, with a select-all box per block, a `?` showing the ability name and description, and a "Deletes" badge on destructive ones. A filter field narrows the list. Abilities whose dependency is missing (WooCommerce, SEOPress, SEOPress Pro) are not listed.
+**Connection.** The URL of the adapter's default server with a copy button; a form creating an application password for the current user through the core `/wp/v2/users/me/application-passwords` route; and per-client tabs (Claude Code, Claude Desktop, Cursor, Codex, other), each with its logo, whose snippets are filled with the login and, once created, the password. The password lives in the page only: it is shown once, like on the profile screen. Warnings appear when the MCP Adapter is not running, when the default server is switched off, or when application passwords are unavailable (no HTTPS outside a local environment).
+
+**Abilities.** Every ability of the plugin that can run on the site, one card per group sorted alphabetically: one per exposed post type (named after its plural label), plus Content, Media, Meta, SEOpress, Taxonomies, Templates, WooCommerce and WP Grid Builder. Each card splits its abilities into read-only and write, with a select-all box per block. A `?` shows the ability name and description in a tooltip, when the description says more than the label. An "Irreversible" badge marks the abilities annotated `destructive`, and a "Hidden by default" badge the third-party ones their plugin keeps closed to MCP; a legend above each block explains them, and a badge every ability of the block carries is shown there only. A filter field narrows the list. Abilities whose dependency is missing (WooCommerce, SEOPress, SEOPress Pro) are not listed.
+
+![Abilities tab: abilities grouped in cards, split into read-only and write](.wordpress-org/screenshot-2.png)
 
 **Other plugins.** Abilities registered by other plugins, one card per namespace, described in [Third-party abilities](#third-party-abilities). This tab only shows when there are some.
+
+![Other plugins tab: SEOPress abilities hidden by default, with the badge legend](.wordpress-org/screenshot-3.png)
 
 **Read-only and destructive.** The split comes from the `readonly` and `destructive` annotations every ability now publishes in `meta.annotations` (`AbstractAbility::isReadOnly()` and `isDestructive()`). MCP clients receive them too. For third-party abilities the screen reads the same annotations, and an ability declaring nothing is shown as writing.
 

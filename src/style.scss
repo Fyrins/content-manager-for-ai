@@ -108,18 +108,27 @@ $z-snackbars: 100000;
 	list-style: none;
 }
 
-// Hanging indent: what wraps lines up with the label, past the 16px box and
-// its 12px gap, instead of going back under the box.
+// The label shrinks and wraps; the "?" and the badges stay on its right,
+// level with its first line, instead of falling alone under it.
 .wpmcpa-ability {
 	display: flex;
-	flex-wrap: wrap;
 	gap: 6px;
-	align-items: center;
+	align-items: flex-start;
 	margin: 0;
-	padding-left: 28px;
 
 	> .components-checkbox-control {
-		margin-left: -28px;
+		flex: 0 1 auto;
+		min-width: 0;
+	}
+
+	// Nudged down to the first line of the label.
+	> .wpmcpa-ability__help {
+		flex: none;
+		margin-top: 2px;
+	}
+
+	> .wpmcpa-badge {
+		flex: none;
 	}
 
 	// Reset the button down to the small round "?" it replaces.
@@ -301,4 +310,21 @@ $z-snackbars: 100000;
 	z-index: $z-snackbars;
 	max-width: calc(100vw - 32px);
 	transform: translateX(-50%);
+}
+
+.wpmcpa-client-tab {
+	display: inline-flex;
+	gap: 8px;
+	align-items: center;
+
+	// Width left to each icon: the Claude Code mascot is wider than high.
+	&__icon {
+		flex: none;
+		height: 16px;
+		font-size: 16px;
+
+		&.dashicon {
+			width: 16px;
+		}
+	}
 }

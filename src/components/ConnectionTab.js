@@ -17,6 +17,8 @@ import { useCopyToClipboard } from '@wordpress/compose';
 import { createInterpolateElement, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
+import ClientTabTitle from './ClientIcons';
+
 /**
  * Placeholder shown in the snippets until a password is created on screen.
  */
@@ -126,6 +128,15 @@ function ClientSnippets( { connection, password } ) {
 		2
 	);
 
+	// TOML basic strings share JSON's escapes, so JSON.stringify quotes them.
+	const codexConfig = [
+		`[mcp_servers.${ JSON.stringify( serverName ) }]`,
+		`url = ${ JSON.stringify( endpoint ) }`,
+		`http_headers = { "Authorization" = ${ JSON.stringify(
+			`Basic ${ token }`
+		) } }`,
+	].join( '\n' );
+
 	const desktopConfig = JSON.stringify(
 		{
 			mcpServers: {
@@ -152,7 +163,7 @@ function ClientSnippets( { connection, password } ) {
 	const clients = [
 		{
 			name: 'claude-code',
-			title: 'Claude Code',
+			title: <ClientTabTitle client="claude-code" label="Claude Code" />,
 			render: () => (
 				<>
 					<p>
@@ -173,7 +184,12 @@ function ClientSnippets( { connection, password } ) {
 		},
 		{
 			name: 'claude-desktop',
-			title: 'Claude Desktop',
+			title: (
+				<ClientTabTitle
+					client="claude-desktop"
+					label="Claude Desktop"
+				/>
+			),
 			render: () => (
 				<>
 					<p>
@@ -209,7 +225,7 @@ function ClientSnippets( { connection, password } ) {
 		},
 		{
 			name: 'cursor',
-			title: 'Cursor',
+			title: <ClientTabTitle client="cursor" label="Cursor" />,
 			render: () => (
 				<>
 					<p>
@@ -232,8 +248,37 @@ function ClientSnippets( { connection, password } ) {
 			),
 		},
 		{
+			name: 'codex',
+			title: <ClientTabTitle client="codex" label="Codex" />,
+			render: () => (
+				<>
+					<p>
+						{ createInterpolateElement(
+							__(
+								'Paste this into <code>~/.codex/config.toml</code>, or into <code>.codex/config.toml</code> at the root of a trusted project. The Codex CLI, its IDE extension and the ChatGPT desktop app share this file.',
+								'wp-mcp-abilities'
+							),
+							{ code: <code /> }
+						) }
+					</p>
+					<Snippet
+						code={ codexConfig }
+						label={ __(
+							'Copy the Codex configuration',
+							'wp-mcp-abilities'
+						) }
+					/>
+				</>
+			),
+		},
+		{
 			name: 'other',
-			title: __( 'Other client', 'wp-mcp-abilities' ),
+			title: (
+				<ClientTabTitle
+					client="other"
+					label={ __( 'Other client', 'wp-mcp-abilities' ) }
+				/>
+			),
 			render: () => (
 				<>
 					<p>

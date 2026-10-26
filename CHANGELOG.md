@@ -5,6 +5,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-26
+
+### Added
+
+- Codex tab in the Connection screen. Its snippet goes into `~/.codex/config.toml` (or a trusted project's `.codex/config.toml`), shared by the Codex CLI, its IDE extension and the ChatGPT desktop app. Codex speaks streamable HTTP, so it reaches the server directly with the `Authorization` header, no proxy.
+- Each client tab shows its logo: the Claude Code mascot, the Claude logo for Claude Desktop, the Cursor and Codex logos, and a plugin icon for the other clients.
+- Screenshots of the three tabs, in the README and for the WordPress.org listing.
+
+### Changed
+
+- When an ability label wraps, its "?" and badges stay on the right of its first line instead of falling alone under it, and the checkbox lines up with that first line.
+- The README describes the badges, the legend and the "?" as they are since 1.2.4.
+
 ## [1.2.4] - 2026-10-26
 
 ### Changed
