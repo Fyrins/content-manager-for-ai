@@ -4,7 +4,7 @@ Tags: mcp, ai, abilities, agents, api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,10 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 
 == Changelog ==
 
+= 1.2.3 =
+* Fix: clearer badges on the settings screen. "Irreversible" replaces "Deletes", "Hidden by default" replaces "Closed by its plugin", and a legend explains them.
+* Fix: each ability's technical name and description are shown under its checkbox, instead of a "?" tooltip that repeated the label.
+
 = 1.2.2 =
 * Fix: exposing to MCP a third-party ability closed by its own plugin now works.
 * Fix: settings screen accessibility (ability details tied to their checkbox, copy announced, persistent save errors).
@@ -141,6 +145,9 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 * Settings screen to switch each ability on or off, and to control abilities registered by other plugins.
 
 == Upgrade Notice ==
+
+= 1.2.3 =
+Clearer badges and ability details on the settings screen.
 
 = 1.2.2 =
 Exposing a closed third-party ability to MCP works again. Accessibility fixes on the settings screen.

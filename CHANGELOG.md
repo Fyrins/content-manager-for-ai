@@ -5,8 +5,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [1.2.3] - 2026-10-26
+
 ### Changed
 
+- The release workflow builds the installable zip and publishes the GitHub release in its own job. The WordPress.org deploy only runs when the `DEPLOY_TO_WPORG` repository variable is `true`: while the plugin is not on WordPress.org, its failure skipped the release, zip included.
 - Clearer badges on the settings screen. "Deletes" becomes "Irreversible", since it reflects the `destructive` annotation of an ability (it can overwrite data, not only delete it), and "Closed by its plugin" becomes "Hidden by default". A legend above each block explains the badges it shows.
 - The "?" tooltip is gone: each ability's technical name, and its description when it says more than the label, are written under the checkbox and stay tied to it through `aria-describedby`.
 
