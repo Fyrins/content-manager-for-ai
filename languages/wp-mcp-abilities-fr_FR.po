@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP MCP Abilities 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-mcp-abilities\n"
-"POT-Creation-Date: 2026-10-25T19:51:17+00:00\n"
+"POT-Creation-Date: 2026-10-26T08:05:52+00:00\n"
 "PO-Revision-Date: 2026-09-25T16:00:00+02:00\n"
 "Last-Translator: Alexandre Revire\n"
 "Language-Team: French\n"
@@ -1636,53 +1636,55 @@ msgstr "Filtrer les abilities"
 msgid "No ability matches."
 msgstr "Aucune ability ne correspond."
 
-#. translators: %s: label of the ability.
-#: src/components/AbilityGroupCard.js:56
-msgid "Details about %s"
-msgstr "Détails sur %s"
+#: src/components/AbilityGroupCard.js:68 src/components/AbilityGroupCard.js:117
+msgid "Irreversible"
+msgstr "Irréversible"
 
-#: src/components/AbilityGroupCard.js:66
-msgid "Deletes"
-msgstr "Supprime"
+#: src/components/AbilityGroupCard.js:73 src/components/AbilityGroupCard.js:132
+msgid "Hidden by default"
+msgstr "Masquée par défaut"
 
-#: src/components/AbilityGroupCard.js:72
-msgid "Closed to MCP by its own declaration. Check to hand it to an agent."
+#: src/components/AbilityGroupCard.js:121
+msgid "Can overwrite or erase data on the site, with no way to undo it."
+msgstr "Peut écraser ou effacer des données du site, sans retour possible."
+
+#: src/components/AbilityGroupCard.js:136
+msgid ""
+"Its plugin registers it but does not offer it to agents. Check it to add it "
+"to the MCP server, no code needed."
 msgstr ""
-"Fermée à MCP par sa propre déclaration. Cochez pour la remettre à un agent."
+"Son extension l'enregistre mais ne la propose pas aux agents. Cochez-la "
+"pour l'ajouter au serveur MCP, sans code à écrire."
 
-#: src/components/AbilityGroupCard.js:77
-msgid "Closed by its plugin"
-msgstr "Fermée par son extension"
-
-#: src/components/AbilityGroupCard.js:133
+#: src/components/AbilityGroupCard.js:197
 msgid "Deselect all"
 msgstr "Tout décocher"
 
-#: src/components/AbilityGroupCard.js:134
+#: src/components/AbilityGroupCard.js:198
 msgid "Select all"
 msgstr "Tout cocher"
 
 #. translators: 1: number of enabled abilities, 2: number of abilities.
-#: src/components/AbilityGroupCard.js:162
+#: src/components/AbilityGroupCard.js:226
 msgid "%1$d of %2$d enabled"
 msgstr "%1$d sur %2$d activées"
 
-#: src/components/AbilityGroupCard.js:170
+#: src/components/AbilityGroupCard.js:234
 msgid "Read-only abilities"
 msgstr "Abilities de lecture"
 
-#: src/components/AbilityGroupCard.js:171
+#: src/components/AbilityGroupCard.js:235
 msgid ""
 "These abilities let an agent read content. They change nothing on the site."
 msgstr ""
 "Ces abilities permettent à un agent de lire le contenu. Elles ne modifient "
 "rien sur le site."
 
-#: src/components/AbilityGroupCard.js:180
+#: src/components/AbilityGroupCard.js:244
 msgid "Write abilities"
 msgstr "Abilities d'écriture"
 
-#: src/components/AbilityGroupCard.js:183
+#: src/components/AbilityGroupCard.js:247
 msgid ""
 "These abilities do not declare themselves read-only: assume they can change "
 "the site."
@@ -1690,7 +1692,7 @@ msgstr ""
 "Ces abilities ne se déclarent pas en lecture seule : partez du principe "
 "qu'elles peuvent modifier le site."
 
-#: src/components/AbilityGroupCard.js:187
+#: src/components/AbilityGroupCard.js:251
 msgid "These abilities let an agent create, update and delete content."
 msgstr ""
 "Ces abilities permettent à un agent de créer, modifier et supprimer du "
@@ -1928,31 +1930,3 @@ msgid ""
 msgstr ""
 "Une erreur 401 signifie que les identifiants sont faux ; une erreur 404, que "
 "MCP Adapter n'est pas actif."
-
-#~ msgid ""
-#~ "Created for your account, %s: the client will act with exactly your "
-#~ "rights. You can revoke it at any time from <a>your profile</a>."
-#~ msgstr ""
-#~ "Créé pour votre compte, %s : le client agira avec exactement vos droits. "
-#~ "Vous pouvez le révoquer à tout moment depuis <a>votre profil</a>."
-
-#~ msgid ""
-#~ "Run this in a terminal. Add --scope user to reach the site from every "
-#~ "project."
-#~ msgstr ""
-#~ "Lancez ceci dans un terminal. Ajoutez --scope user pour accéder au site "
-#~ "depuis tous vos projets."
-
-#~ msgid ""
-#~ "Pick the abilities exposed to MCP clients. Destructive abilities are off "
-#~ "until you enable them."
-#~ msgstr ""
-#~ "Choisissez les abilities exposées aux clients MCP. Les abilities "
-#~ "destructives sont désactivées tant que vous ne les activez pas."
-
-#, php-format
-#~ msgid "Other plugin: %s"
-#~ msgstr "Autre extension : %s"
-
-#~ msgid "Declares itself destructive."
-#~ msgstr "Se déclare destructrice."
