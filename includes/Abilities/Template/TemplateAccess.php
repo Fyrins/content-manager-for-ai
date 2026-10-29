@@ -2,12 +2,12 @@
 /**
  * Shared resolution, shaping and validation for template abilities.
  *
- * @package WpMcpAbilities\Abilities\Template
+ * @package CM4AI\Abilities\Template
  */
 
-namespace WpMcpAbilities\Abilities\Template;
+namespace CM4AI\Abilities\Template;
 
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,7 +51,7 @@ trait TemplateAccess {
         if ( ! in_array( $type, self::templateTypes(), true ) ) {
             return new \WP_Error(
                 'invalid_template_type',
-                __( 'The "type" parameter must be "wp_template" or "wp_template_part".', 'wp-mcp-abilities' ),
+                __( 'The "type" parameter must be "wp_template" or "wp_template_part".', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -69,7 +69,7 @@ trait TemplateAccess {
         if ( '' === $slug || 1 !== preg_match( '/^[a-zA-Z0-9_%-]+$/', $slug ) ) {
             return new \WP_Error(
                 'invalid_slug',
-                __( 'The "slug" parameter must only contain letters, numbers, underscores, percent signs or hyphens.', 'wp-mcp-abilities' ),
+                __( 'The "slug" parameter must only contain letters, numbers, underscores, percent signs or hyphens.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -96,7 +96,7 @@ trait TemplateAccess {
             if ( false === $separatorPosition ) {
                 return new \WP_Error(
                     'invalid_template_id',
-                    __( 'The "id" parameter must be formatted as "{theme}//{slug}".', 'wp-mcp-abilities' ),
+                    __( 'The "id" parameter must be formatted as "{theme}//{slug}".', 'content-manager-for-ai-agents' ),
                     [ 'status' => 400 ]
                 );
             }
@@ -107,7 +107,7 @@ trait TemplateAccess {
             if ( '' === $theme ) {
                 return new \WP_Error(
                     'invalid_template_id',
-                    __( 'The "id" parameter must be formatted as "{theme}//{slug}".', 'wp-mcp-abilities' ),
+                    __( 'The "id" parameter must be formatted as "{theme}//{slug}".', 'content-manager-for-ai-agents' ),
                     [ 'status' => 400 ]
                 );
             }
@@ -125,7 +125,7 @@ trait TemplateAccess {
         if ( '' === $slug ) {
             return new \WP_Error(
                 'missing_identifier',
-                __( 'Provide either "id" or "slug".', 'wp-mcp-abilities' ),
+                __( 'Provide either "id" or "slug".', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -157,7 +157,7 @@ trait TemplateAccess {
         if ( ! $template instanceof \WP_Block_Template ) {
             return new \WP_Error(
                 'template_not_found',
-                __( 'No template exists with that id.', 'wp-mcp-abilities' ),
+                __( 'No template exists with that id.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 404 ]
             );
         }
@@ -262,7 +262,7 @@ trait TemplateAccess {
             'default'     => 'wp_template',
             'description' => __(
                 'Which kind of template to target: "wp_template" for a full page template or "wp_template_part" for a reusable part (header, footer, navigation overlay…).',
-                'wp-mcp-abilities'
+                'content-manager-for-ai-agents'
             ),
         ];
     }

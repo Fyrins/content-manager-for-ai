@@ -1,7 +1,7 @@
 {
-  "name": "wp-mcp-abilities",
-  "version": "1.3.0",
-  "description": "Settings screen of WP MCP Abilities",
+  "name": "content-manager-for-ai-agents",
+  "version": "2.0.0",
+  "description": "Settings screen of Content Manager for AI Agents",
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fyrins/wp-mcp-abilities.git"
+    "url": "git+https://github.com/Fyrins/content-manager-for-ai.git"
   },
   "license": "GPL-2.0-or-later",
   "bugs": {
-    "url": "https://github.com/Fyrins/wp-mcp-abilities/issues"
+    "url": "https://github.com/Fyrins/content-manager-for-ai/issues"
   },
-  "homepage": "https://github.com/Fyrins/wp-mcp-abilities#readme",
+  "homepage": "https://github.com/Fyrins/content-manager-for-ai#readme",
   "private": true,
   "devDependencies": {
     "@wordpress/a11y": "^5.0.0",

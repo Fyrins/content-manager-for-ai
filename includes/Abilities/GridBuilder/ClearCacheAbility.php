@@ -2,13 +2,13 @@
 /**
  * Clears the WP Grid Builder cache.
  *
- * @package WpMcpAbilities\Abilities\GridBuilder
+ * @package CM4AI\Abilities\GridBuilder
  */
 
-namespace WpMcpAbilities\Abilities\GridBuilder;
+namespace CM4AI\Abilities\GridBuilder;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
 use WP_Grid_Builder\Includes\Helpers;
 
 defined( 'ABSPATH' ) || exit;
@@ -35,21 +35,21 @@ class ClearCacheAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Clear WP Grid Builder cache', 'wp-mcp-abilities' );
+        return __( 'Clear WP Grid Builder cache', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Clears the WP Grid Builder cache, as the button of its settings screen does. Use it when a facet shows stale or empty choices after an import or an indexing.', 'wp-mcp-abilities' );
+        return __( 'Clears the WP Grid Builder cache, as the button of its settings screen does. Use it when a facet shows stale or empty choices after an import or an indexing.', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WP Grid Builder', 'wp-mcp-abilities' );
+        return __( 'WP Grid Builder', 'content-manager-for-ai-agents' );
     }
 
     /**

@@ -2,13 +2,13 @@
 /**
  * What the settings screen shows, read from the catalogues and the options.
  *
- * @package WpMcpAbilities\Services
+ * @package CM4AI\Services
  */
 
-namespace WpMcpAbilities\Services;
+namespace CM4AI\Services;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Requirements;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Requirements;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -162,7 +162,7 @@ class SettingsScreenData {
          * @param string $url URL of the MCP server.
          */
         $endpoint = (string) apply_filters(
-            'wpmcpa_server_url',
+            'cm4ai_server_url',
             rest_url( self::DEFAULT_SERVER_ROUTE )
         );
 

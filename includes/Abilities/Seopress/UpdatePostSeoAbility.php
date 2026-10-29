@@ -2,14 +2,14 @@
 /**
  * Updates the SEOpress meta of a post.
  *
- * @package WpMcpAbilities\Abilities\Seopress
+ * @package CM4AI\Abilities\Seopress
  */
 
-namespace WpMcpAbilities\Abilities\Seopress;
+namespace CM4AI\Abilities\Seopress;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,21 +30,21 @@ class UpdatePostSeoAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update post SEOpress meta', 'wp-mcp-abilities' );
+        return __( 'Update post SEOpress meta', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Updates the SEOpress meta of a post.', 'wp-mcp-abilities' );
+        return __( 'Updates the SEOpress meta of a post.', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'SEOpress', 'wp-mcp-abilities' );
+        return __( 'SEOpress', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -62,15 +62,15 @@ class UpdatePostSeoAbility extends AbstractAbility {
             'type'       => 'object',
             'properties' => array_merge(
                 [
-                    'post_id'          => [ 'type' => 'integer', 'description' => __( 'The post ID.', 'wp-mcp-abilities' ) ],
-                    'focus_keyword'    => [ 'type' => 'string', 'description' => __( 'Target keywords, comma-separated.', 'wp-mcp-abilities' ) ],
-                    'primary_category' => [ 'type' => 'string', 'description' => __( 'Primary category ID for breadcrumbs, or "none".', 'wp-mcp-abilities' ) ],
-                    'breadcrumb_title' => [ 'type' => 'string', 'description' => __( 'Custom breadcrumb title.', 'wp-mcp-abilities' ) ],
-                    'nosnippet'        => [ 'type' => 'boolean', 'description' => __( 'Set nosnippet on this post.', 'wp-mcp-abilities' ) ],
-                    'noimageindex'     => [ 'type' => 'boolean', 'description' => __( 'Set noimageindex on this post.', 'wp-mcp-abilities' ) ],
-                    'redirect_enabled' => [ 'type' => 'boolean', 'description' => __( 'Enable a redirection for this post.', 'wp-mcp-abilities' ) ],
-                    'redirect_type'    => [ 'type' => 'integer', 'description' => __( 'Redirect HTTP status (301, 302, or 307).', 'wp-mcp-abilities' ), 'enum' => [ 301, 302, 307 ] ],
-                    'redirect_url'     => [ 'type' => 'string', 'description' => __( 'Redirect destination URL.', 'wp-mcp-abilities' ) ],
+                    'post_id'          => [ 'type' => 'integer', 'description' => __( 'The post ID.', 'content-manager-for-ai-agents' ) ],
+                    'focus_keyword'    => [ 'type' => 'string', 'description' => __( 'Target keywords, comma-separated.', 'content-manager-for-ai-agents' ) ],
+                    'primary_category' => [ 'type' => 'string', 'description' => __( 'Primary category ID for breadcrumbs, or "none".', 'content-manager-for-ai-agents' ) ],
+                    'breadcrumb_title' => [ 'type' => 'string', 'description' => __( 'Custom breadcrumb title.', 'content-manager-for-ai-agents' ) ],
+                    'nosnippet'        => [ 'type' => 'boolean', 'description' => __( 'Set nosnippet on this post.', 'content-manager-for-ai-agents' ) ],
+                    'noimageindex'     => [ 'type' => 'boolean', 'description' => __( 'Set noimageindex on this post.', 'content-manager-for-ai-agents' ) ],
+                    'redirect_enabled' => [ 'type' => 'boolean', 'description' => __( 'Enable a redirection for this post.', 'content-manager-for-ai-agents' ) ],
+                    'redirect_type'    => [ 'type' => 'integer', 'description' => __( 'Redirect HTTP status (301, 302, or 307).', 'content-manager-for-ai-agents' ), 'enum' => [ 301, 302, 307 ] ],
+                    'redirect_url'     => [ 'type' => 'string', 'description' => __( 'Redirect destination URL.', 'content-manager-for-ai-agents' ) ],
                 ],
                 $this->seoWriteSchemaProperties()
             ),
@@ -131,7 +131,7 @@ class UpdatePostSeoAbility extends AbstractAbility {
          * @param \WP_Post                   $post    Post being updated.
          * @param array<string, mixed>       $input   Normalised MCP input.
          */
-        $seoData = (array) apply_filters( 'wpmcpa_update_seo_data', $seoData, $post, $input );
+        $seoData = (array) apply_filters( 'cm4ai_update_seo_data', $seoData, $post, $input );
 
         $this->persistSeoData( $post->ID, $seoData, $fields, 'update_post_meta' );
 

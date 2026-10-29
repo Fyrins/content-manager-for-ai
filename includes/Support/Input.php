@@ -2,10 +2,10 @@
 /**
  * Input normalisation helpers shared by every ability.
  *
- * @package WpMcpAbilities\Support
+ * @package CM4AI\Support
  */
 
-namespace WpMcpAbilities\Support;
+namespace CM4AI\Support;
 
 defined( 'ABSPATH' ) || exit;
 

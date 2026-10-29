@@ -2,10 +2,10 @@
 /**
  * Runtime requirements of the plugin.
  *
- * @package WpMcpAbilities\Support
+ * @package CM4AI\Support
  */
 
-namespace WpMcpAbilities\Support;
+namespace CM4AI\Support;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -91,12 +91,12 @@ class Requirements {
 
         if ( ! self::hasAbilitiesApi() ) {
             $missing[] = [
-                'title'    => __( 'The Abilities API is missing.', 'wp-mcp-abilities' ),
+                'title'    => __( 'The Abilities API is missing.', 'content-manager-for-ai-agents' ),
                 'detail'   => sprintf(
                     /* translators: 1: current WordPress version, 2: first version shipping the Abilities API. */
                     __(
                         'This site runs WordPress %1$s, and the Abilities API only ships with core from %2$s onwards. Updating WordPress is the way out: the feature plugin that used to provide it is now abandoned.',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                     get_bloginfo( 'version' ),
                     self::ABILITIES_API_IN_CORE
@@ -108,10 +108,10 @@ class Requirements {
 
         if ( ! self::hasMcpAdapter() ) {
             $adapter = [
-                'title'    => __( 'The MCP Adapter plugin is not running.', 'wp-mcp-abilities' ),
+                'title'    => __( 'The MCP Adapter plugin is not running.', 'content-manager-for-ai-agents' ),
                 'detail'   => __(
                     'The abilities are registered and available through the Abilities API, but no MCP client can reach them until the MCP Adapter is installed and active.',
-                    'wp-mcp-abilities'
+                    'content-manager-for-ai-agents'
                 ),
                 'url'      => self::MCP_ADAPTER_URL,
                 'severity' => 'warning',

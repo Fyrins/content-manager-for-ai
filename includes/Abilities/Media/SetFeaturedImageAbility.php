@@ -2,14 +2,14 @@
 /**
  * Assigns an existing media as the featured image of a post.
  *
- * @package WpMcpAbilities\Abilities\Media
+ * @package CM4AI\Abilities\Media
  */
 
-namespace WpMcpAbilities\Abilities\Media;
+namespace CM4AI\Abilities\Media;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -33,7 +33,7 @@ class SetFeaturedImageAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Set the featured image', 'wp-mcp-abilities' );
+        return __( 'Set the featured image', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -42,7 +42,7 @@ class SetFeaturedImageAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Assigns an existing media as the featured image of a post.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -50,7 +50,7 @@ class SetFeaturedImageAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Media', 'wp-mcp-abilities' );
+        return __( 'Media', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -62,11 +62,11 @@ class SetFeaturedImageAbility extends AbstractAbility {
             'properties' => [
                 'post_id'       => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the post to update.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Identifier of the post to update.', 'content-manager-for-ai-agents' ),
                 ],
                 'attachment_id' => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the attachment to use.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Identifier of the attachment to use.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'post_id', 'attachment_id' ],
@@ -131,7 +131,7 @@ class SetFeaturedImageAbility extends AbstractAbility {
         if ( ! $result ) {
             return new \WP_Error(
                 'set_featured_image_failed',
-                __( 'Unable to set the featured image.', 'wp-mcp-abilities' ),
+                __( 'Unable to set the featured image.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }

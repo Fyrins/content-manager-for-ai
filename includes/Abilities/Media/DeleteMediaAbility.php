@@ -2,14 +2,14 @@
 /**
  * Permanently deletes an attachment.
  *
- * @package WpMcpAbilities\Abilities\Media
+ * @package CM4AI\Abilities\Media
  */
 
-namespace WpMcpAbilities\Abilities\Media;
+namespace CM4AI\Abilities\Media;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -39,7 +39,7 @@ class DeleteMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Delete a media', 'wp-mcp-abilities' );
+        return __( 'Delete a media', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -48,7 +48,7 @@ class DeleteMediaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Permanently deletes a media from the library.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -56,7 +56,7 @@ class DeleteMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Media', 'wp-mcp-abilities' );
+        return __( 'Media', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -68,7 +68,7 @@ class DeleteMediaAbility extends AbstractAbility {
             'properties' => [
                 'attachment_id' => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the attachment to delete.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Identifier of the attachment to delete.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'attachment_id' ],
@@ -125,7 +125,7 @@ class DeleteMediaAbility extends AbstractAbility {
         if ( ! $result ) {
             return new \WP_Error(
                 'delete_failed',
-                __( 'Unable to delete the attachment.', 'wp-mcp-abilities' ),
+                __( 'Unable to delete the attachment.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }

@@ -2,13 +2,13 @@
 /**
  * Lists the global product attributes of the site.
  *
- * @package WpMcpAbilities\Abilities\WooCommerce
+ * @package CM4AI\Abilities\WooCommerce
  */
 
-namespace WpMcpAbilities\Abilities\WooCommerce;
+namespace CM4AI\Abilities\WooCommerce;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -36,7 +36,7 @@ class ListProductAttributesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List product attributes', 'wp-mcp-abilities' );
+        return __( 'List product attributes', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -45,7 +45,7 @@ class ListProductAttributesAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists the global WooCommerce product attributes with their taxonomy names, types and ordering.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -53,7 +53,7 @@ class ListProductAttributesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'wp-mcp-abilities' );
+        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
     }
 
     /**

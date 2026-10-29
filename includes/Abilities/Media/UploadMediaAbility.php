@@ -2,14 +2,14 @@
 /**
  * Downloads a media file from a URL and adds it to the library.
  *
- * @package WpMcpAbilities\Abilities\Media
+ * @package CM4AI\Abilities\Media
  */
 
-namespace WpMcpAbilities\Abilities\Media;
+namespace CM4AI\Abilities\Media;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -34,7 +34,7 @@ class UploadMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Upload a media', 'wp-mcp-abilities' );
+        return __( 'Upload a media', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -43,7 +43,7 @@ class UploadMediaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Downloads a media file from a URL and adds it to the library.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -51,7 +51,7 @@ class UploadMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Media', 'wp-mcp-abilities' );
+        return __( 'Media', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -63,15 +63,15 @@ class UploadMediaAbility extends AbstractAbility {
             'properties' => [
                 'url'      => [
                     'type'        => 'string',
-                    'description' => __( 'The URL of the file to download.', 'wp-mcp-abilities' ),
+                    'description' => __( 'The URL of the file to download.', 'content-manager-for-ai-agents' ),
                 ],
                 'filename' => [
                     'type'        => 'string',
-                    'description' => __( 'The desired filename (optional, inferred from the URL by default).', 'wp-mcp-abilities' ),
+                    'description' => __( 'The desired filename (optional, inferred from the URL by default).', 'content-manager-for-ai-agents' ),
                 ],
                 'alt_text' => [
                     'type'        => 'string',
-                    'description' => __( 'The image alt text.', 'wp-mcp-abilities' ),
+                    'description' => __( 'The image alt text.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'url' ],
@@ -115,7 +115,7 @@ class UploadMediaAbility extends AbstractAbility {
         if ( ! in_array( $scheme, [ 'http', 'https' ], true ) ) {
             return new \WP_Error(
                 'invalid_url_scheme',
-                __( 'The URL must use http or https.', 'wp-mcp-abilities' ),
+                __( 'The URL must use http or https.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -124,18 +124,30 @@ class UploadMediaAbility extends AbstractAbility {
         require_once ABSPATH . 'wp-admin/includes/media.php';
         require_once ABSPATH . 'wp-admin/includes/image.php';
 
-        $tmpFile = download_url( $url );
-
-        if ( is_wp_error( $tmpFile ) ) {
-            return $tmpFile;
-        }
-
         /**
          * Filters the highest number of bytes accepted for an upload-media download.
          *
          * @param int $maxBytes Maximum accepted size, in bytes. Defaults to 10 MB.
          */
-        $maxBytes = (int) apply_filters( 'wpmcpa_upload_media_max_bytes', 10 * MB_IN_BYTES );
+        $maxBytes = (int) apply_filters( 'cm4ai_upload_media_max_bytes', 10 * MB_IN_BYTES );
+
+        // Stops the transfer one byte past the limit, so an oversized file is
+        // never written to disk in full and is still told apart from one that
+        // weighs exactly the limit.
+        $limitResponse = static function ( array $args ) use ( $maxBytes ): array {
+            $args['limit_response_size'] = $maxBytes + 1;
+
+            return $args;
+        };
+
+        add_filter( 'http_request_args', $limitResponse );
+        $tmpFile = download_url( $url );
+        remove_filter( 'http_request_args', $limitResponse );
+
+        if ( is_wp_error( $tmpFile ) ) {
+            return $tmpFile;
+        }
+
         $fileSize = filesize( $tmpFile );
 
         if ( false !== $fileSize && $fileSize > $maxBytes ) {
@@ -143,7 +155,7 @@ class UploadMediaAbility extends AbstractAbility {
 
             return new \WP_Error(
                 'file_too_large',
-                __( 'The downloaded file exceeds the allowed size.', 'wp-mcp-abilities' ),
+                __( 'The downloaded file exceeds the allowed size.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -164,7 +176,7 @@ class UploadMediaAbility extends AbstractAbility {
          * @param array{name: string, tmp_name: string} $fileArray File descriptor.
          * @param array<string, mixed>                   $input     Normalised MCP input.
          */
-        $fileArray = (array) apply_filters( 'wpmcpa_upload_media_file', $fileArray, $input );
+        $fileArray = (array) apply_filters( 'cm4ai_upload_media_file', $fileArray, $input );
 
         $attachmentId = media_handle_sideload( $fileArray, 0 );
 

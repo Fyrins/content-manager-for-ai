@@ -2,10 +2,10 @@
 /**
  * Capability checks shared by every ability.
  *
- * @package WpMcpAbilities\Support
+ * @package CM4AI\Support
  */
 
-namespace WpMcpAbilities\Support;
+namespace CM4AI\Support;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -34,7 +34,7 @@ class Capabilities {
          * @param mixed  $context    The object the check was made against, when any.
          */
         return (bool) apply_filters(
-            'wpmcpa_check_permission',
+            'cm4ai_check_permission',
             $allowed,
             $capability,
             $context
@@ -186,6 +186,29 @@ class Capabilities {
      */
     public static function canEditTerm( \WP_Term $term ): bool {
         return self::filter( current_user_can( 'edit_term', $term->term_id ), 'edit_term', $term );
+    }
+
+    /**
+     * Whether the current user may write a meta key on an object.
+     *
+     * Goes through the meta capabilities, so an `auth_callback` given to
+     * `register_meta()` is honoured. Protected keys are left to the allow-list
+     * of `MetaAccess`: core denies them to everyone through this capability,
+     * which would void the allow-list a developer set up on purpose.
+     *
+     * @param string $action     `edit` or `delete`.
+     * @param string $objectType `post` or `term`.
+     * @param int    $objectId   Target object.
+     * @param string $metaKey    Meta key, already resolved.
+     */
+    public static function canWriteMeta( string $action, string $objectType, int $objectId, string $metaKey ): bool {
+        if ( is_protected_meta( $metaKey, $objectType ) ) {
+            return true;
+        }
+
+        $capability = $action . '_' . $objectType . '_meta';
+
+        return self::filter( current_user_can( $capability, $objectId, $metaKey ), $capability, $objectId );
     }
 
     /**

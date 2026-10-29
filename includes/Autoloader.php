@@ -2,15 +2,15 @@
 /**
  * PSR-4 autoloader for the plugin's classes.
  *
- * @package WpMcpAbilities
+ * @package CM4AI
  */
 
-namespace WpMcpAbilities;
+namespace CM4AI;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Maps `WpMcpAbilities\Foo\Bar` to `includes/Foo/Bar.php`.
+ * Maps `CM4AI\Foo\Bar` to `includes/Foo/Bar.php`.
  */
 final class Autoloader {
     private const PREFIX = __NAMESPACE__ . '\\';

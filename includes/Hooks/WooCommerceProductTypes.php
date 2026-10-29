@@ -2,12 +2,12 @@
 /**
  * Hands the product operations over to whoever describes them best.
  *
- * @package WpMcpAbilities\Hooks
+ * @package CM4AI\Hooks
  */
 
-namespace WpMcpAbilities\Hooks;
+namespace CM4AI\Hooks;
 
-use WpMcpAbilities\Contracts\HookInterface;
+use CM4AI\Contracts\HookInterface;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -60,7 +60,7 @@ class WooCommerceProductTypes implements HookInterface {
      * @inheritDoc
      */
     public function hooks(): void {
-        add_filter( 'wpmcpa_post_type_operations', [ $this, 'releaseProductOperations' ], 10, 2 );
+        add_filter( 'cm4ai_post_type_operations', [ $this, 'releaseProductOperations' ], 10, 2 );
     }
 
     /**

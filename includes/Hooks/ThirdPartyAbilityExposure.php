@@ -2,14 +2,14 @@
 /**
  * Hands the MCP server the third-party abilities an administrator opened.
  *
- * @package WpMcpAbilities\Hooks
+ * @package CM4AI\Hooks
  */
 
-namespace WpMcpAbilities\Hooks;
+namespace CM4AI\Hooks;
 
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Services\SettingsService;
-use WpMcpAbilities\Services\ThirdPartyAbilityCatalog;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Services\SettingsService;
+use CM4AI\Services\ThirdPartyAbilityCatalog;
 
 defined( 'ABSPATH' ) || exit;
 

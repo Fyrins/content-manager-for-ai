@@ -2,10 +2,10 @@
 /**
  * Parametrised CRUD ability for a single (post type, operation) pair.
  *
- * @package WpMcpAbilities\Support
+ * @package CM4AI\Support
  */
 
-namespace WpMcpAbilities\Support;
+namespace CM4AI\Support;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
  * Describes and executes one of the five CRUD operations for a given post type.
  *
  * One instance is built per (post type × operation) by
- * `WpMcpAbilities\Hooks\PostTypeAbilityProvider`, so this class lives
+ * `CM4AI\Hooks\PostTypeAbilityProvider`, so this class lives
  * under `includes/Support` rather than `includes/Abilities`: the latter only
  * holds the argument-free abilities listed in `Plugin::ABILITIES`, whereas this
  * one requires a post type and an operation.
@@ -37,7 +37,7 @@ class PostTypeAbility extends AbstractAbility {
     /**
      * Query var restricting a `list` call to published posts and to this author's.
      */
-    private const OWN_POSTS_QUERY_VAR = 'wpmcpa_own_posts';
+    private const OWN_POSTS_QUERY_VAR = 'cm4ai_own_posts';
 
     /**
      * @param \WP_Post_Type $postType  Post type this ability operates on.
@@ -77,15 +77,15 @@ class PostTypeAbility extends AbstractAbility {
 
         return match ( $this->operation ) {
             // translators: %s: plural label of the post type (e.g. "Posts").
-            'list'   => sprintf( __( 'List %s', 'wp-mcp-abilities' ), $plural ),
+            'list'   => sprintf( __( 'List %s', 'content-manager-for-ai-agents' ), $plural ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'get'    => sprintf( __( 'Get a %s', 'wp-mcp-abilities' ), $singular ),
+            'get'    => sprintf( __( 'Get a %s', 'content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'create' => sprintf( __( 'Create a %s', 'wp-mcp-abilities' ), $singular ),
+            'create' => sprintf( __( 'Create a %s', 'content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'update' => sprintf( __( 'Update a %s', 'wp-mcp-abilities' ), $singular ),
+            'update' => sprintf( __( 'Update a %s', 'content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'delete' => sprintf( __( 'Delete a %s', 'wp-mcp-abilities' ), $singular ),
+            'delete' => sprintf( __( 'Delete a %s', 'content-manager-for-ai-agents' ), $singular ),
         };
     }
 
@@ -98,16 +98,16 @@ class PostTypeAbility extends AbstractAbility {
 
         return match ( $this->operation ) {
             // translators: %s: plural label of the post type (e.g. "Posts").
-            'list'   => sprintf( __( 'Lists all published and draft %s.', 'wp-mcp-abilities' ), $plural ),
+            'list'   => sprintf( __( 'Lists all published and draft %s.', 'content-manager-for-ai-agents' ), $plural ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'get'    => sprintf( __( 'Retrieves the full content of a %s.', 'wp-mcp-abilities' ), $singular ),
+            'get'    => sprintf( __( 'Retrieves the full content of a %s.', 'content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'create' => sprintf( __( 'Creates a new %s.', 'wp-mcp-abilities' ), $singular ),
+            'create' => sprintf( __( 'Creates a new %s.', 'content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'update' => sprintf( __( 'Updates an existing %s.', 'wp-mcp-abilities' ), $singular ),
+            'update' => sprintf( __( 'Updates an existing %s.', 'content-manager-for-ai-agents' ), $singular ),
             'delete' => sprintf(
                 // translators: %s: singular label of the post type (e.g. "Post").
-                __( 'Deletes a %s (trash by default, permanent if force=true).', 'wp-mcp-abilities' ),
+                __( 'Deletes a %s (trash by default, permanent if force=true).', 'content-manager-for-ai-agents' ),
                 $singular
             ),
         };
@@ -162,11 +162,11 @@ class PostTypeAbility extends AbstractAbility {
                     'link'    => [ 'type' => 'string' ],
                     'status'  => [
                         'type'        => 'string',
-                        'description' => __( 'Status actually stored, which is not always the one asked for: a "publish" carrying a future date is scheduled by WordPress as "future".', 'wp-mcp-abilities' ),
+                        'description' => __( 'Status actually stored, which is not always the one asked for: a "publish" carrying a future date is scheduled by WordPress as "future".', 'content-manager-for-ai-agents' ),
                     ],
                     'date'    => [
                         'type'        => 'string',
-                        'description' => __( 'Publication date actually stored.', 'wp-mcp-abilities' ),
+                        'description' => __( 'Publication date actually stored.', 'content-manager-for-ai-agents' ),
                     ],
                 ],
             ],
@@ -177,11 +177,11 @@ class PostTypeAbility extends AbstractAbility {
                     'link'    => [ 'type' => 'string' ],
                     'status'  => [
                         'type'        => 'string',
-                        'description' => __( 'Status actually stored, which is not always the one asked for: a "publish" carrying a future date is scheduled by WordPress as "future".', 'wp-mcp-abilities' ),
+                        'description' => __( 'Status actually stored, which is not always the one asked for: a "publish" carrying a future date is scheduled by WordPress as "future".', 'content-manager-for-ai-agents' ),
                     ],
                     'date'    => [
                         'type'        => 'string',
-                        'description' => __( 'Publication date actually stored.', 'wp-mcp-abilities' ),
+                        'description' => __( 'Publication date actually stored.', 'content-manager-for-ai-agents' ),
                     ],
                 ],
             ],
@@ -253,7 +253,7 @@ class PostTypeAbility extends AbstractAbility {
          * @param array<string, mixed> $args  Arguments passed to WP_Query.
          * @param array<string, mixed> $input Normalised MCP input.
          */
-        $args = (array) apply_filters( 'wpmcpa_list_posts_query_args', $args, $input );
+        $args = (array) apply_filters( 'cm4ai_list_posts_query_args', $args, $input );
 
         // Without `edit_others_posts`, only published posts and the caller's own
         // are listed: the drafts of other authors stay out of reach, as they do
@@ -279,7 +279,7 @@ class PostTypeAbility extends AbstractAbility {
          * @param array<string, mixed> $result Formatted payload.
          * @param \WP_Post[]           $posts  Raw post objects.
          */
-        return (array) apply_filters( 'wpmcpa_list_posts_result', $result, $query->posts );
+        return (array) apply_filters( 'cm4ai_list_posts_result', $result, $query->posts );
     }
 
     /**
@@ -322,7 +322,7 @@ class PostTypeAbility extends AbstractAbility {
          * @param array<string, mixed> $result Formatted payload.
          * @param \WP_Post              $post   Raw post object.
          */
-        return (array) apply_filters( 'wpmcpa_get_post_result', $result, $post );
+        return (array) apply_filters( 'cm4ai_get_post_result', $result, $post );
     }
 
     /**
@@ -404,7 +404,7 @@ class PostTypeAbility extends AbstractAbility {
          * @param array<string, mixed> $postData Arguments passed to wp_insert_post().
          * @param array<string, mixed> $input    Normalised MCP input.
          */
-        $postData = (array) apply_filters( 'wpmcpa_create_post_data', $postData, $input );
+        $postData = (array) apply_filters( 'cm4ai_create_post_data', $postData, $input );
 
         // Slashed at the very last moment, so filters see the raw values.
         // wp_insert_post() expects escaped data and eats one level of
@@ -485,7 +485,7 @@ class PostTypeAbility extends AbstractAbility {
 
         return new \WP_Error(
             'cannot_assign_sticky',
-            __( 'You are not allowed to pin a post.', 'wp-mcp-abilities' ),
+            __( 'You are not allowed to pin a post.', 'content-manager-for-ai-agents' ),
             [ 'status' => 403 ]
         );
     }
@@ -574,7 +574,7 @@ class PostTypeAbility extends AbstractAbility {
          * @param \WP_Post              $post       Post being updated.
          * @param array<string, mixed> $input      Normalised MCP input.
          */
-        $updateData = (array) apply_filters( 'wpmcpa_update_post_data', $updateData, $post, $input );
+        $updateData = (array) apply_filters( 'cm4ai_update_post_data', $updateData, $post, $input );
 
         // Same escaping as on creation: without it, rewriting a page through
         // MCP silently degrades every backslash its markup carries.
@@ -622,7 +622,7 @@ class PostTypeAbility extends AbstractAbility {
         if ( ! $result ) {
             return new \WP_Error(
                 'delete_failed',
-                __( 'Unable to delete the content.', 'wp-mcp-abilities' ),
+                __( 'Unable to delete the content.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }
@@ -646,7 +646,7 @@ class PostTypeAbility extends AbstractAbility {
         if ( $post->post_type !== $this->postType->name ) {
             return new \WP_Error(
                 'post_not_found',
-                __( 'Post not found.', 'wp-mcp-abilities' ),
+                __( 'Post not found.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 404 ]
             );
         }
@@ -694,7 +694,7 @@ class PostTypeAbility extends AbstractAbility {
         if ( ! $parsed instanceof \DateTimeImmutable || $parsed->format( 'Y-m-d H:i:s' ) !== $date ) {
             return new \WP_Error(
                 'invalid_date',
-                __( 'The "date" parameter could not be read. Expected format: YYYY-MM-DD HH:MM:SS.', 'wp-mcp-abilities' ),
+                __( 'The "date" parameter could not be read. Expected format: YYYY-MM-DD HH:MM:SS.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -803,14 +803,14 @@ class PostTypeAbility extends AbstractAbility {
             'properties' => [
                 'per_page' => [
                     'type'        => 'integer',
-                    'description' => __( 'Number of items per page.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Number of items per page.', 'content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'maximum'     => self::MAX_PER_PAGE,
                     'default'     => self::DEFAULT_PER_PAGE,
                 ],
                 'page'     => [
                     'type'        => 'integer',
-                    'description' => __( 'Page to return, starting at 1.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Page to return, starting at 1.', 'content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'default'     => 1,
                 ],
@@ -830,7 +830,7 @@ class PostTypeAbility extends AbstractAbility {
                 'type'        => 'integer',
                 'description' => sprintf(
                     // translators: %s: singular label of the post type (e.g. "Post").
-                    __( 'The %s ID.', 'wp-mcp-abilities' ),
+                    __( 'The %s ID.', 'content-manager-for-ai-agents' ),
                     $this->postType->labels->singular_name
                 ),
             ],
@@ -839,7 +839,7 @@ class PostTypeAbility extends AbstractAbility {
         if ( $withForce ) {
             $properties['force'] = [
                 'type'        => 'boolean',
-                'description' => __( 'Permanently delete (skip trash).', 'wp-mcp-abilities' ),
+                'description' => __( 'Permanently delete (skip trash).', 'content-manager-for-ai-agents' ),
                 'default'     => false,
             ];
         }
@@ -865,39 +865,39 @@ class PostTypeAbility extends AbstractAbility {
             $properties['post_id'] = [
                 'type'        => 'integer',
                 // translators: %s: singular label of the post type (e.g. "Post").
-                'description' => sprintf( __( 'The %s ID.', 'wp-mcp-abilities' ), $label ),
+                'description' => sprintf( __( 'The %s ID.', 'content-manager-for-ai-agents' ), $label ),
             ];
         }
 
         $properties['title'] = [
             'type'        => 'string',
             // translators: %s: singular label of the post type (e.g. "Post").
-            'description' => sprintf( __( 'The %s title.', 'wp-mcp-abilities' ), $label ),
+            'description' => sprintf( __( 'The %s title.', 'content-manager-for-ai-agents' ), $label ),
         ];
 
         $properties['content'] = [
             'type'        => 'string',
             // translators: %s: singular label of the post type (e.g. "Post").
-            'description' => sprintf( __( 'The HTML content of the %s.', 'wp-mcp-abilities' ), $label ),
+            'description' => sprintf( __( 'The HTML content of the %s.', 'content-manager-for-ai-agents' ), $label ),
         ];
 
         $properties['excerpt'] = [
             'type'        => 'string',
             // translators: %s: singular label of the post type (e.g. "Post").
-            'description' => sprintf( __( 'The %s excerpt.', 'wp-mcp-abilities' ), $label ),
+            'description' => sprintf( __( 'The %s excerpt.', 'content-manager-for-ai-agents' ), $label ),
         ];
 
         $properties['slug'] = [
             'type'        => 'string',
             'description' => __(
                 'The URL slug (post_name). Auto-generated from the title if omitted.',
-                'wp-mcp-abilities'
+                'content-manager-for-ai-agents'
             ),
         ];
 
         $properties['status'] = [
             'type'        => 'string',
-            'description' => __( 'The status (draft, publish).', 'wp-mcp-abilities' ),
+            'description' => __( 'The status (draft, publish).', 'content-manager-for-ai-agents' ),
             'enum'        => [ 'draft', 'publish' ],
         ];
 
@@ -909,7 +909,7 @@ class PostTypeAbility extends AbstractAbility {
             $properties['parent_id'] = [
                 'type'        => 'integer',
                 // translators: %s: singular label of the post type (e.g. "Post").
-                'description' => sprintf( __( 'The parent %s ID.', 'wp-mcp-abilities' ), $label ),
+                'description' => sprintf( __( 'The parent %s ID.', 'content-manager-for-ai-agents' ), $label ),
             ];
         }
 
@@ -917,7 +917,7 @@ class PostTypeAbility extends AbstractAbility {
             $properties['category_ids'] = [
                 'type'        => 'array',
                 'items'       => [ 'type' => 'integer' ],
-                'description' => __( 'The IDs of categories to assign. Equivalent to the "category" entry of "terms".', 'wp-mcp-abilities' ),
+                'description' => __( 'The IDs of categories to assign. Equivalent to the "category" entry of "terms".', 'content-manager-for-ai-agents' ),
             ];
         }
 
@@ -930,7 +930,7 @@ class PostTypeAbility extends AbstractAbility {
                 'additionalProperties' => false,
                 'description'          => __(
                     'Term IDs to assign, keyed by taxonomy. Each taxonomy sent replaces the terms already assigned in it; a taxonomy left out is untouched, and an empty array clears it.',
-                    'wp-mcp-abilities'
+                    'content-manager-for-ai-agents'
                 ),
             ];
         }
@@ -939,7 +939,7 @@ class PostTypeAbility extends AbstractAbility {
             'type'        => 'integer',
             'description' => sprintf(
                 // translators: %s: singular label of the post type (e.g. "Post").
-                __( 'The user ID to assign as author of the %s.', 'wp-mcp-abilities' ),
+                __( 'The user ID to assign as author of the %s.', 'content-manager-for-ai-agents' ),
                 $label
             ),
         ];
@@ -952,13 +952,13 @@ class PostTypeAbility extends AbstractAbility {
         // said nothing.
         $properties['date'] = [
             'type'        => 'string',
-            'description' => __( 'The publication date (YYYY-MM-DD HH:MM:SS), in site time.', 'wp-mcp-abilities' ),
+            'description' => __( 'The publication date (YYYY-MM-DD HH:MM:SS), in site time.', 'content-manager-for-ai-agents' ),
         ];
 
         if ( 'post' === $this->postType->name ) {
             $properties['sticky'] = [
                 'type'        => 'boolean',
-                'description' => __( 'Pin as sticky (true) or unpin (false).', 'wp-mcp-abilities' ),
+                'description' => __( 'Pin as sticky (true) or unpin (false).', 'content-manager-for-ai-agents' ),
             ];
         }
 
@@ -1019,7 +1019,7 @@ class PostTypeAbility extends AbstractAbility {
                 $properties['terms'] = [
                     'type'        => 'object',
                     'properties'  => $termProperties,
-                    'description' => __( 'Term IDs assigned to the post, keyed by taxonomy.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Term IDs assigned to the post, keyed by taxonomy.', 'content-manager-for-ai-agents' ),
                 ];
             }
         } else {

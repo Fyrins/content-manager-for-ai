@@ -2,14 +2,14 @@
 /**
  * Queues the WP Grid Builder index of one or more facets for rebuilding.
  *
- * @package WpMcpAbilities\Abilities\GridBuilder
+ * @package CM4AI\Abilities\GridBuilder
  */
 
-namespace WpMcpAbilities\Abilities\GridBuilder;
+namespace CM4AI\Abilities\GridBuilder;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 use WP_Grid_Builder\Includes\Helpers;
 use WP_Grid_Builder\Includes\Indexer;
 
@@ -39,21 +39,21 @@ class IndexFacetsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Index WP Grid Builder facets', 'wp-mcp-abilities' );
+        return __( 'Index WP Grid Builder facets', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Queues the given WP Grid Builder facets for indexing, as the "Index" button of the plugin does. Indexing runs in the background: call list-wpgb-facets to follow the index row counts, then clear-wpgb-cache once they are back so that facets stop serving cached choices.', 'wp-mcp-abilities' );
+        return __( 'Queues the given WP Grid Builder facets for indexing, as the "Index" button of the plugin does. Indexing runs in the background: call list-wpgb-facets to follow the index row counts, then clear-wpgb-cache once they are back so that facets stop serving cached choices.', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WP Grid Builder', 'wp-mcp-abilities' );
+        return __( 'WP Grid Builder', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -82,7 +82,7 @@ class IndexFacetsAbility extends AbstractAbility {
                     'type'        => 'array',
                     'items'       => [ 'type' => 'integer' ],
                     'minItems'    => 1,
-                    'description' => __( 'IDs of the facets to index.', 'wp-mcp-abilities' ),
+                    'description' => __( 'IDs of the facets to index.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'ids' ],
@@ -99,12 +99,12 @@ class IndexFacetsAbility extends AbstractAbility {
                 'queued'  => [
                     'type'        => 'array',
                     'items'       => [ 'type' => 'integer' ],
-                    'description' => __( 'IDs of the facets handed to the indexing queue.', 'wp-mcp-abilities' ),
+                    'description' => __( 'IDs of the facets handed to the indexing queue.', 'content-manager-for-ai-agents' ),
                 ],
                 'skipped' => [
                     'type'        => 'array',
                     'items'       => [ 'type' => 'integer' ],
-                    'description' => __( 'Requested IDs that match no facet, or a facet that indexes nothing (search, selection, sort…).', 'wp-mcp-abilities' ),
+                    'description' => __( 'Requested IDs that match no facet, or a facet that indexes nothing (search, selection, sort…).', 'content-manager-for-ai-agents' ),
                 ],
             ],
         ];
@@ -129,7 +129,7 @@ class IndexFacetsAbility extends AbstractAbility {
         if ( [] === $ids ) {
             return new \WP_Error(
                 'missing_facet_ids',
-                __( 'Pass the IDs of the facets to index.', 'wp-mcp-abilities' ),
+                __( 'Pass the IDs of the facets to index.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }

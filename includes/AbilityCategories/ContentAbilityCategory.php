@@ -2,23 +2,23 @@
 /**
  * Ability category holding every content management ability of the plugin.
  *
- * @package WpMcpAbilities\AbilityCategories
+ * @package CM4AI\AbilityCategories
  */
 
-namespace WpMcpAbilities\AbilityCategories;
+namespace CM4AI\AbilityCategories;
 
-use WpMcpAbilities\Contracts\AbilityCategoryInterface;
+use CM4AI\Contracts\AbilityCategoryInterface;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Registers the `wp-mcp-abilities` ability category.
+ * Registers the `cm4ai` ability category.
  */
 class ContentAbilityCategory implements AbilityCategoryInterface {
     /**
      * Category slug, also used as the ability name namespace.
      */
-    public const SLUG = 'wp-mcp-abilities';
+    public const SLUG = 'cm4ai';
 
     /**
      * @inheritDoc
@@ -32,10 +32,10 @@ class ContentAbilityCategory implements AbilityCategoryInterface {
      */
     public function getProperties(): array {
         return [
-            'label'       => __( 'WP MCP Abilities', 'wp-mcp-abilities' ),
+            'label'       => __( 'Content Manager for AI Agents', 'content-manager-for-ai-agents' ),
             'description' => __(
                 'Abilities for WordPress content management.',
-                'wp-mcp-abilities'
+                'content-manager-for-ai-agents'
             ),
         ];
     }

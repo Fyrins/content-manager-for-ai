@@ -2,14 +2,14 @@
 /**
  * Updates an existing term.
  *
- * @package WpMcpAbilities\Abilities\Taxonomy
+ * @package CM4AI\Abilities\Taxonomy
  */
 
-namespace WpMcpAbilities\Abilities\Taxonomy;
+namespace CM4AI\Abilities\Taxonomy;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,7 +30,7 @@ class UpdateTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update a term', 'wp-mcp-abilities' );
+        return __( 'Update a term', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -39,7 +39,7 @@ class UpdateTermAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Updates the name, slug, description or parent of an existing term.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -47,7 +47,7 @@ class UpdateTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'wp-mcp-abilities' );
+        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -59,27 +59,27 @@ class UpdateTermAbility extends AbstractAbility {
             'properties' => [
                 'term_id'     => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the term to update.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Identifier of the term to update.', 'content-manager-for-ai-agents' ),
                 ],
                 'taxonomy'    => [
                     'type'        => 'string',
-                    'description' => __( 'Taxonomy the term belongs to.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Taxonomy the term belongs to.', 'content-manager-for-ai-agents' ),
                 ],
                 'name'        => [
                     'type'        => 'string',
-                    'description' => __( 'New display name.', 'wp-mcp-abilities' ),
+                    'description' => __( 'New display name.', 'content-manager-for-ai-agents' ),
                 ],
                 'slug'        => [
                     'type'        => 'string',
-                    'description' => __( 'New slug.', 'wp-mcp-abilities' ),
+                    'description' => __( 'New slug.', 'content-manager-for-ai-agents' ),
                 ],
                 'description' => [
                     'type'        => 'string',
-                    'description' => __( 'New description.', 'wp-mcp-abilities' ),
+                    'description' => __( 'New description.', 'content-manager-for-ai-agents' ),
                 ],
                 'parent_id'   => [
                     'type'        => 'integer',
-                    'description' => __( 'New parent term, 0 to move the term to the root.', 'wp-mcp-abilities' ),
+                    'description' => __( 'New parent term, 0 to move the term to the root.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'term_id' ],
@@ -158,7 +158,7 @@ class UpdateTermAbility extends AbstractAbility {
         if ( [] === $args ) {
             return new \WP_Error(
                 'nothing_to_update',
-                __( 'Provide at least one field to update.', 'wp-mcp-abilities' ),
+                __( 'Provide at least one field to update.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -170,7 +170,7 @@ class UpdateTermAbility extends AbstractAbility {
          * @param \WP_Term             $term  Term being updated.
          * @param array<string, mixed> $input Normalised MCP input.
          */
-        $args = (array) apply_filters( 'wpmcpa_update_term_args', $args, $term, $input );
+        $args = (array) apply_filters( 'cm4ai_update_term_args', $args, $term, $input );
 
         $result = wp_update_term( $term->term_id, $term->taxonomy, $args );
 

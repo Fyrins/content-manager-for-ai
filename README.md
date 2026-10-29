@@ -1,4 +1,4 @@
-# WP MCP Abilities
+# Content Manager for AI Agents
 
 Content management abilities for AI agents, registered with the WordPress Abilities API and reachable over MCP through the MCP Adapter.
 
@@ -48,15 +48,15 @@ Without the adapter, the abilities are still registered and usable by any other 
 
 ## Installation
 
-**From WordPress.org.** Search for "WP MCP Abilities" under Plugins → Add New, or download the zip from the plugin page and upload it.
+**From WordPress.org.** Search for "Content Manager for AI Agents" under Plugins → Add New, or download the zip from the plugin page and upload it.
 
-**From a GitHub release.** Download the zip attached to a release on the [GitHub repository](https://github.com/Fyrins/wp-mcp-abilities) and upload it under Plugins → Add New → Upload Plugin.
+**From a GitHub release.** Download the zip attached to a release on the [GitHub repository](https://github.com/Fyrins/content-manager-for-ai) and upload it under Plugins → Add New → Upload Plugin.
 
 **With Composer (Bedrock and similar setups).**
 
 ```bash
-composer require fyrins/wp-mcp-abilities
-wp plugin activate wp-mcp-abilities
+composer require fyrins/content-manager-for-ai-agents
+wp plugin activate content-manager-for-ai-agents
 ```
 
 The package has the `wordpress-plugin` type, so `composer/installers` places it in your plugins directory. It has no runtime Composer dependency.
@@ -106,9 +106,9 @@ Its REST namespace is `mcp` and its route `mcp-adapter-default-server`.
 
 ## Settings screen
 
-**Settings → MCP Abilities** (`wp-admin/options-general.php?page=wp-mcp-abilities`), visible to users with `manage_options`.
+**Settings → Content Manager for AI Agents** (`wp-admin/options-general.php?page=content-manager-for-ai-agents`), visible to users with `manage_options`.
 
-The screen is a React app built with `@wordpress/components`. It reads and saves through the `wp-mcp-abilities/v1/settings` REST route (`GET` and `POST`, `manage_options` required), preloaded so the page renders without a first round trip. It has three tabs.
+The screen is a React app built with `@wordpress/components`. It reads and saves through the `cm4ai/v1/settings` REST route (`GET` and `POST`, `manage_options` required), preloaded so the page renders without a first round trip. It has three tabs.
 
 ![Connection tab: server URL, application password and per-client configuration](.wordpress-org/screenshot-1.png)
 
@@ -134,27 +134,27 @@ The screen is a React app built with `@wordpress/components`. It reads and saves
 
 An ability absent from the stored option falls back to its own default, so an ability added by a later version shows up enabled, or disabled if it deletes something. A deletion is the one operation an agent cannot take back, and an update of the plugin must never widen on its own what an agent can reach.
 
-**Storage.** The switches live in the `wpmcpa_enabled` option, an array keyed by ability name. Third-party exposure lives in `wpmcpa_exposed`. Both options are deleted when the plugin is uninstalled.
+**Storage.** The switches live in the `cm4ai_enabled` option, an array keyed by ability name. Third-party exposure lives in `cm4ai_exposed`. Both options are deleted when the plugin is uninstalled.
 
-**Which option a third-party box writes to.** A third-party ability its own plugin exposes is switched off in `wpmcpa_enabled`; one its plugin keeps closed is exposed in `wpmcpa_exposed`. The rule lives in `ThirdPartyAbilityCatalog::optionFor()`, the only place the screen, the validation and the route ask, and every row the route returns names its REST parameter in `option`.
+**Which option a third-party box writes to.** A third-party ability its own plugin exposes is switched off in `cm4ai_enabled`; one its plugin keeps closed is exposed in `cm4ai_exposed`. The rule lives in `ThirdPartyAbilityCatalog::optionFor()`, the only place the screen, the validation and the route ask, and every row the route returns names its REST parameter in `option`.
 
-**Writing the option from code.** The setting is registered on `admin_init`, and from then on its validation (`Services\SettingsSanitizer`) applies to every write of the option made from the admin. It sets to `false` every listed ability the payload does not mention, the way a form treats an unchecked box. A partial write such as `update_option( 'wpmcpa_enabled', [ 'wp-mcp-abilities/delete-post' => true ] )` therefore switches everything else off. Read the option, change the key you want, and write the whole array back:
+**Writing the option from code.** The setting is registered on `admin_init`, and from then on its validation (`Services\SettingsSanitizer`) applies to every write of the option made from the admin. It sets to `false` every listed ability the payload does not mention, the way a form treats an unchecked box. A partial write such as `update_option( 'cm4ai_enabled', [ 'cm4ai/delete-post' => true ] )` therefore switches everything else off. Read the option, change the key you want, and write the whole array back:
 
 ```bash
-wp eval '$o = (array) get_option( "wpmcpa_enabled", [] ); $o["wp-mcp-abilities/delete-post"] = true; update_option( "wpmcpa_enabled", $o );'
+wp eval '$o = (array) get_option( "cm4ai_enabled", [] ); $o["cm4ai/delete-post"] = true; update_option( "cm4ai_enabled", $o );'
 ```
 
-The REST route behaves differently: it lays the current state under the request before validating, so a `POST` to `wp-mcp-abilities/v1/settings` only changes the switches it sends, and an empty one changes nothing.
+The REST route behaves differently: it lays the current state under the request before validating, so a `POST` to `cm4ai/v1/settings` only changes the switches it sends, and an empty one changes nothing.
 
 A client that creates test objects and needs to clean up after itself can have `delete-{post type}` enabled for the session this way, then disabled again.
 
-The `wpmcpa_is_enabled` filter can also force the state of an ability from code (see [Filters reference](#filters-reference)).
+The `cm4ai_is_enabled` filter can also force the state of an ability from code (see [Filters reference](#filters-reference)).
 
 ## Abilities reference
 
 ### Conventions
 
-- Every name is prefixed with `wp-mcp-abilities/`, which is also the slug of the ability category the plugin registers.
+- Every name is prefixed with `cm4ai/`, which is also the slug of the ability category the plugin registers.
 - **Read capability.** Abilities marked "read" check `edit_posts`, the same baseline as the REST API content endpoints.
 - **Two permission checks.** The capability is checked in the ability's `permission_callback`, then again inside `execute()`, against the object actually targeted.
 - **Paginated lists** (`list-{plural}`, `list-media`, `list-terms`, `list-templates`) take `per_page` (1 to 100, default 50) and `page` (from 1, default 1), and return `total`, `page` and `per_page` along with the items. Exceptions: `list-taxonomies` takes no parameter and returns a plain array, and the WooCommerce lists use WooCommerce's own collection parameters and return `total` and `total_pages` (see [WooCommerce](#woocommerce)).
@@ -175,7 +175,7 @@ Five abilities are generated for each public post type (attachments excepted):
 
 **Naming.** `{singular}` is the post type slug. `{plural}` is its `rest_base` when it declares one, otherwise the slug followed by `s`. Underscores become hyphens and any character outside `a-z0-9-` is dropped, because the Abilities API only accepts those. So `post` gives `list-posts` and `get-post`, `page` gives `list-pages` and `create-page`, and a `book_review` post type without a `rest_base` gives `list-book-reviews` and `update-book-review`.
 
-**Which post types.** Every post type registered with `public => true`, except `attachment`. The `wpmcpa_post_types` filter narrows or widens the list, and `wpmcpa_post_type_operations` removes individual operations for a post type. If another plugin already registered an ability under the same name, the generated one is skipped rather than overriding it.
+**Which post types.** Every post type registered with `public => true`, except `attachment`. The `cm4ai_post_types` filter narrows or widens the list, and `cm4ai_post_type_operations` removes individual operations for a post type. If another plugin already registered an ability under the same name, the generated one is skipped rather than overriding it.
 
 **WooCommerce products.** When WooCommerce runs, `product` gives up `create` and `update` to the dedicated [WooCommerce abilities](#woocommerce), which carry the same names (`create-product`, `update-product`). From WooCommerce 10.9, which describes its own catalogue, `list`, `get` and `delete` are given up as well; on older versions they stay generic.
 
@@ -214,7 +214,7 @@ Both accept the same writable properties; `create` requires `title`, `update` re
 
 - `date` works on creation as on update. It is parsed strictly and must survive a round trip unchanged; anything else, including the `0000-00-00 00:00:00` placeholder, is refused with `invalid_date` instead of producing a post dated year zero.
 - Pinning requires `edit_others_posts` or `publish_posts`, as the core REST controller does (`cannot_assign_sticky` otherwise). `sticky_posts` is a site-wide option, so `edit_post` on one's own draft is not enough. Unpinning needs nothing more than the update itself.
-- `terms` covers every taxonomy registered for the post type that declares `show_in_rest`, the same rule the [taxonomy abilities](#taxonomies) follow. The schema lists these taxonomies by name, so an agent reading it knows which ones exist. `post_format` falls out on its own, as it does not declare `show_in_rest`. The `wpmcpa_assignable_taxonomies` filter adjusts the list.
+- `terms` covers every taxonomy registered for the post type that declares `show_in_rest`, the same rule the [taxonomy abilities](#taxonomies) follow. The schema lists these taxonomies by name, so an agent reading it knows which ones exist. `post_format` falls out on its own, as it does not declare `show_in_rest`. The `cm4ai_assignable_taxonomies` filter adjusts the list.
 
 ```json
 {
@@ -242,7 +242,7 @@ Writes are slashed before reaching `wp_insert_post()` and `wp_update_post()`, so
 
 ### Content: replace in post content
 
-#### `wp-mcp-abilities/replace-in-post-content`
+#### `cm4ai/replace-in-post-content`
 
 Replaces a literal string inside the content of a post of any type, without the caller resending the whole content. The `update-*` abilities take the full content, so changing three words in a long page means reading it, reproducing it and sending it back, which costs a lot and risks a silent transcription slip.
 
@@ -263,41 +263,41 @@ A missing `search` gives `missing_search`, an empty one `empty_search`.
 
 ### Taxonomies
 
-The scope is every taxonomy declaring `show_in_rest`, the same rule as the taxonomies assignable through `terms`: whatever a client can assign, it can also list, read and edit. Internal taxonomies that declare `show_in_rest`, such as `nav_menu` and `wp_pattern_category`, stay reachable on purpose: they carry their own capabilities (`edit_theme_options` for `nav_menu`), `delete-term` is off by default, and each ability can be switched off. Use the `wpmcpa_taxonomies` filter to narrow the scope. A taxonomy outside it is refused with `taxonomy_not_allowed`.
+The scope is every taxonomy declaring `show_in_rest`, the same rule as the taxonomies assignable through `terms`: whatever a client can assign, it can also list, read and edit. Internal taxonomies that declare `show_in_rest`, such as `nav_menu` and `wp_pattern_category`, stay reachable on purpose: they carry their own capabilities (`edit_theme_options` for `nav_menu`), `delete-term` is off by default, and each ability can be switched off. Use the `cm4ai_taxonomies` filter to narrow the scope. A taxonomy outside it is refused with `taxonomy_not_allowed`.
 
 Terms are returned as `id`, `name`, `slug`, `description`, `parent`, `count`, `taxonomy`.
 
-#### `wp-mcp-abilities/list-taxonomies`
+#### `cm4ai/list-taxonomies`
 
 - **Input:** none.
 - **Output:** an array of `{ name, label, hierarchical, object_types[] }`.
 - **Capability:** read. **Default:** enabled.
 
-#### `wp-mcp-abilities/list-terms`
+#### `cm4ai/list-terms`
 
 - **Input:** `taxonomy` (string, required), `search` (string), `parent` (integer: children of this term), `hide_empty` (boolean, default `false`), `per_page`, `page`.
 - **Output:** `terms[]`, `total`, `page`, `per_page`.
 - **Capability:** read. **Default:** enabled.
 
-#### `wp-mcp-abilities/get-term`
+#### `cm4ai/get-term`
 
 - **Input:** `term_id` (integer, required), `taxonomy` (string, optional when the ID is unambiguous).
 - **Output:** the term.
 - **Capability:** read. **Default:** enabled.
 
-#### `wp-mcp-abilities/create-term`
+#### `cm4ai/create-term`
 
 - **Input:** `taxonomy` (string, required), `name` (string, required), `slug` (generated from the name when omitted), `description`, `parent_id` (hierarchical taxonomies).
 - **Output:** `success`, `term`.
 - **Capability:** the taxonomy's `manage_terms`. **Default:** enabled.
 
-#### `wp-mcp-abilities/update-term`
+#### `cm4ai/update-term`
 
 - **Input:** `term_id` (integer, required), `taxonomy`, `name`, `slug`, `description`, `parent_id` (`0` moves the term to the root).
 - **Output:** `success`, `term`.
 - **Capability:** `edit_term` on that term. **Default:** enabled.
 
-#### `wp-mcp-abilities/delete-term`
+#### `cm4ai/delete-term`
 
 - **Input:** `term_id` (integer, required), `taxonomy` (optional when the ID is unambiguous).
 - **Output:** `success`. The deletion is permanent.
@@ -307,13 +307,13 @@ Terms are returned as `id`, `name`, `slug`, `description`, `parent`, `count`, `t
 
 Media are returned as `id`, `title`, `filename`, `url`, `mime_type`, `alt_text`, `caption`.
 
-#### `wp-mcp-abilities/list-media`
+#### `cm4ai/list-media`
 
 - **Input:** `mime_type` (string, such as `image` or `image/png`), `search` (string), `per_page`, `page`.
 - **Output:** `items[]`, `total`, `page`, `per_page`.
 - **Capability:** read. **Default:** enabled.
 
-#### `wp-mcp-abilities/upload-media`
+#### `cm4ai/upload-media`
 
 Downloads a file from a URL and adds it to the media library.
 
@@ -321,21 +321,21 @@ Downloads a file from a URL and adds it to the media library.
 - **Output:** `success`, `media`.
 - **Capability:** `upload_files`. **Default:** enabled.
 
-The download goes through core's `download_url()`, which refuses unsafe URLs such as internal addresses. Files larger than 10 MB are refused with `file_too_large` (adjust with `wpmcpa_upload_media_max_bytes`). The file type is validated by `media_handle_sideload()`, as for any upload.
+The download goes through core's `download_url()`, which refuses unsafe URLs such as internal addresses. Files larger than 10 MB are refused with `file_too_large` (adjust with `cm4ai_upload_media_max_bytes`). The file type is validated by `media_handle_sideload()`, as for any upload.
 
-#### `wp-mcp-abilities/update-media`
+#### `cm4ai/update-media`
 
 - **Input:** `attachment_id` (integer, required), `title`, `alt_text`, `caption`.
 - **Output:** `success`, `media`.
 - **Capability:** `edit_post` on the attachment. **Default:** enabled.
 
-#### `wp-mcp-abilities/set-featured-image`
+#### `cm4ai/set-featured-image`
 
 - **Input:** `post_id` (integer, required), `attachment_id` (integer, required).
 - **Output:** `success`, `post_id`, `attachment_id`.
 - **Capability:** `edit_post` on the post. **Default:** enabled.
 
-#### `wp-mcp-abilities/delete-media`
+#### `cm4ai/delete-media`
 
 - **Input:** `attachment_id` (integer, required).
 - **Output:** `success`. The attachment and its files are deleted permanently.
@@ -343,35 +343,35 @@ The download goes through core's `download_url()`, which refuses unsafe URLs suc
 
 ### Meta
 
-Protected meta keys (prefixed with `_`, or declared protected with `is_protected_meta`) are never read, written or deleted unless they are on an allow-list, empty by default and filled through `wpmcpa_allowed_meta_keys`. A refused key gives `meta_key_not_allowed` (403).
+Protected meta keys (prefixed with `_`, or declared protected with `is_protected_meta`) are never read, written or deleted unless they are on an allow-list, empty by default and filled through `cm4ai_allowed_meta_keys`. A refused key gives `meta_key_not_allowed` (403).
 
 `meta_value` accepts a string, a number, a boolean, or an array of those; objects are refused with `invalid_meta_value`. A key registered through `register_meta()` with a `sanitize_callback` gets its strings as sent: that callback is what WordPress applies, for instance `esc_url_raw()` on a URL, which keeps its `%20`. Other keys have their strings stripped of tags and invalid UTF-8, keeping line breaks and percent-encoded octets.
 
-#### `wp-mcp-abilities/get-post-meta`
+#### `cm4ai/get-post-meta`
 
 - **Input:** `post_id` (integer, required), `meta_key` (string; omit it to get every readable meta of the post).
 - **Output:** `success`, `post_id`, and either `meta_key` with `meta_value`, or `meta` (every readable key, single values unwrapped).
 - **Capability:** `edit_post` on the post. **Default:** enabled.
 
-#### `wp-mcp-abilities/update-post-meta`
+#### `cm4ai/update-post-meta`
 
 - **Input:** `post_id` (integer, required), `meta_key` (string, required), `meta_value` (required).
 - **Output:** `success`, `post_id`, `meta_key`, `meta_value`.
 - **Capability:** `edit_post` on the post. **Default:** enabled.
 
-#### `wp-mcp-abilities/get-term-meta`
+#### `cm4ai/get-term-meta`
 
 - **Input:** `term_id` (integer, required), `taxonomy` (disambiguates the lookup), `meta_key` (omit it to get every readable meta of the term).
 - **Output:** `success`, `term_id`, and either `meta_key` with `meta_value`, or `meta`.
 - **Capability:** `edit_term` on the term. **Default:** enabled.
 
-#### `wp-mcp-abilities/update-term-meta`
+#### `cm4ai/update-term-meta`
 
 - **Input:** `term_id` (integer, required), `taxonomy`, `meta_key` (string, required), `meta_value` (required).
 - **Output:** `success`, `term_id`, `meta_key`, `meta_value`.
 - **Capability:** `edit_term` on the term. **Default:** enabled.
 
-#### `wp-mcp-abilities/delete-term-meta`
+#### `cm4ai/delete-term-meta`
 
 - **Input:** `term_id` (integer, required), `taxonomy`, `meta_key` (string, required).
 - **Output:** `success`, `term_id`, `meta_key`.
@@ -408,19 +408,19 @@ Fields specific to posts:
 
 Booleans are stored as SEOPress expects them (`yes` or empty). Empty values are read back as `null`.
 
-#### `wp-mcp-abilities/get-post-seopress`
+#### `cm4ai/get-post-seopress`
 
 - **Input:** `post_id` (integer, required).
 - **Output:** every shared and post-specific field.
 - **Capability:** read. **Default:** enabled.
 
-#### `wp-mcp-abilities/update-post-seopress`
+#### `cm4ai/update-post-seopress`
 
 - **Input:** `post_id` (integer, required) and any shared or post-specific field. Only the fields sent are written.
 - **Output:** `success`.
 - **Capability:** `edit_post` on the post. **Default:** enabled.
 
-#### `wp-mcp-abilities/update-post-schemas-seopress`
+#### `cm4ai/update-post-schemas-seopress`
 
 Replaces the SEOPress Pro manual JSON-LD schemas of a post (`_seopress_pro_schemas_manual`).
 
@@ -430,13 +430,13 @@ Replaces the SEOPress Pro manual JSON-LD schemas of a post (`_seopress_pro_schem
 
 Each entry is validated as JSON (`invalid_json_ld` otherwise) and re-encoded with `JSON_HEX_TAG` before storage, so a `</script>` inside a string cannot close the tag on the front end.
 
-#### `wp-mcp-abilities/get-term-seopress`
+#### `cm4ai/get-term-seopress`
 
 - **Input:** `term_id` (integer, required), `taxonomy` (optional when the ID is unambiguous).
 - **Output:** the shared fields.
 - **Capability:** `edit_term` on the term. **Default:** enabled.
 
-#### `wp-mcp-abilities/update-term-seopress`
+#### `cm4ai/update-term-seopress`
 
 - **Input:** `term_id` (integer, required), `taxonomy`, and any shared field.
 - **Output:** `success`.
@@ -450,19 +450,19 @@ A template is identified either by `id`, formatted `{theme}//{slug}`, or by `slu
 
 Templates are returned as `id`, `slug`, `theme`, `type`, `title`, `description`, `content`, `source`, `origin`, `has_theme_file`, `wp_id`, `is_custom` (templates only), `area` (template parts only), `status`.
 
-#### `wp-mcp-abilities/list-templates`
+#### `cm4ai/list-templates`
 
 - **Input:** `type`, `area` (template parts only), `per_page`, `page`.
 - **Output:** `items[]`, `total`, `page`, `per_page`.
 - **Capability:** read. **Default:** enabled.
 
-#### `wp-mcp-abilities/get-template`
+#### `cm4ai/get-template`
 
 - **Input:** `type`, `id` or `slug`.
 - **Output:** the template.
 - **Capability:** read. **Default:** enabled.
 
-#### `wp-mcp-abilities/create-template`
+#### `cm4ai/create-template`
 
 Creates a template or template part tagged with the active theme.
 
@@ -470,7 +470,7 @@ Creates a template or template part tagged with the active theme.
 - **Output:** `success`, `content_filtered`, `template`.
 - **Capability:** `edit_theme_options`. **Default:** enabled.
 
-#### `wp-mcp-abilities/update-template`
+#### `cm4ai/update-template`
 
 - **Input:** `type`, `id` or `slug`, `title`, `description`, `content`, `area`, `revert` (boolean, default `false`).
 - **Output:** `success`, `reverted`, `content_filtered`, `template`.
@@ -484,7 +484,7 @@ Three cases:
 
 `content_filtered` is `true` when WordPress filtered the submitted markup, which happens when the user lacks `unfiltered_html`.
 
-#### `wp-mcp-abilities/delete-template`
+#### `cm4ai/delete-template`
 
 - **Input:** `type`, `id` or `slug`, `force` (boolean, default `false`: trash; `true`: permanent deletion).
 - **Output:** `success`.
@@ -502,15 +502,15 @@ These abilities write nothing themselves: they hand the request to the WooCommer
 
 | Ability | Route | What it does | Default |
 | --- | --- | --- | --- |
-| `wp-mcp-abilities/create-product` | `POST /wc/v3/products` | Creates a product, `variable` included | enabled |
-| `wp-mcp-abilities/update-product` | `PUT /wc/v3/products/{id}` | Updates a product; only the fields sent are written, and `type` may turn a simple product into a variable one | enabled |
-| `wp-mcp-abilities/list-product-variations` | `GET /wc/v3/products/{id}/variations` | Lists the variations of a variable product | enabled |
-| `wp-mcp-abilities/get-product-variation` | `GET /wc/v3/products/{id}/variations/{id}` | Reads one variation | enabled |
-| `wp-mcp-abilities/create-product-variation` | `POST /wc/v3/products/{id}/variations` | Creates a variation | enabled |
-| `wp-mcp-abilities/update-product-variation` | `PUT /wc/v3/products/{id}/variations/{id}` | Updates a variation; sending `attributes` replaces the current pairs | enabled |
-| `wp-mcp-abilities/delete-product-variation` | `DELETE /wc/v3/products/{id}/variations/{id}` | Deletes a variation for good (`force: true`; variations have no trash) | disabled |
-| `wp-mcp-abilities/list-product-attributes` | `GET /wc/v3/products/attributes` | Lists the global attributes | enabled |
-| `wp-mcp-abilities/create-product-attribute` | `POST /wc/v3/products/attributes` | Creates a global attribute | enabled |
+| `cm4ai/create-product` | `POST /wc/v3/products` | Creates a product, `variable` included | enabled |
+| `cm4ai/update-product` | `PUT /wc/v3/products/{id}` | Updates a product; only the fields sent are written, and `type` may turn a simple product into a variable one | enabled |
+| `cm4ai/list-product-variations` | `GET /wc/v3/products/{id}/variations` | Lists the variations of a variable product | enabled |
+| `cm4ai/get-product-variation` | `GET /wc/v3/products/{id}/variations/{id}` | Reads one variation | enabled |
+| `cm4ai/create-product-variation` | `POST /wc/v3/products/{id}/variations` | Creates a variation | enabled |
+| `cm4ai/update-product-variation` | `PUT /wc/v3/products/{id}/variations/{id}` | Updates a variation; sending `attributes` replaces the current pairs | enabled |
+| `cm4ai/delete-product-variation` | `DELETE /wc/v3/products/{id}/variations/{id}` | Deletes a variation for good (`force: true`; variations have no trash) | disabled |
+| `cm4ai/list-product-attributes` | `GET /wc/v3/products/attributes` | Lists the global attributes | enabled |
+| `cm4ai/create-product-attribute` | `POST /wc/v3/products/attributes` | Creates a global attribute | enabled |
 
 **Inputs.**
 
@@ -527,7 +527,7 @@ Every ability except `delete-product-variation` accepts `_fields`, a comma-separ
 
 **Outputs.** The REST API response, minus its `_links`. The output schema is deliberately open: WooCommerce describes its fields for input, not output (`stock_quantity` is an integer that answers `null` when stock is not managed), and enforcing those descriptions would reject ordinary products. Lists are wrapped: `variations[]` or `attributes[]`, plus `total` and `total_pages` when WooCommerce sends its pagination headers. Both keys are absent, rather than guessed, when it does not.
 
-**Capabilities.** Those of the WooCommerce routes. Their verdict then goes through `wpmcpa_check_permission`, with `rest_route` as the capability and the route as the context. An invalid payload comes back as WooCommerce's validation error, not as a permission refusal.
+**Capabilities.** Those of the WooCommerce routes. Their verdict then goes through `cm4ai_check_permission`, with `rest_route` as the capability and the route as the context. An invalid payload comes back as WooCommerce's validation error, not as a permission refusal.
 
 **Attributes created in the same request.** WooCommerce registers its `pa_*` taxonomies on `init`, from the database. A global attribute created by `create-product-attribute` is registered on the spot, so values assigned to it later in the same request are not dropped.
 
@@ -535,7 +535,7 @@ Every ability except `delete-product-variation` accepts `_fields`, a comma-separ
 
 Registered only when WP Grid Builder is active (`WPGB_VERSION` defined). The plugin keeps facets and their index in tables of its own, out of reach of the content and meta abilities, and has no public function listing them; these abilities read them through its internal `Database` query builder and use its `Helpers` and `Indexer` classes. Recheck them on each major WP Grid Builder release.
 
-#### `wp-mcp-abilities/list-wpgb-facets`
+#### `cm4ai/list-wpgb-facets`
 
 - **Input:** `ids` (integer[], optional): facet IDs to return. Omit to list every facet.
 - **Output:** `facets` (each with `id`, `slug`, `name`, `type`, `source`, `index_rows`, `modified_date`, `settings`) and `total`.
@@ -543,7 +543,7 @@ Registered only when WP Grid Builder is active (`WPGB_VERSION` defined). The plu
 
 The ID is what the `wp-grid-builder/facet` block references, and an import can renumber it. `index_rows` tells an empty index from a facet that simply has nothing to offer on a page.
 
-#### `wp-mcp-abilities/index-wpgb-facets`
+#### `cm4ai/index-wpgb-facets`
 
 - **Input:** `ids` (integer[], required, at least one).
 - **Output:** `queued` (IDs handed to the indexing queue) and `skipped` (IDs matching no facet, or a facet that indexes nothing: search, selection, sort…).
@@ -551,7 +551,7 @@ The ID is what the `wp-grid-builder/facet` block references, and an import can r
 
 Facets go to the plugin's own indexing queue, as its "Index" button does, and the call returns at once: indexing runs in the background, in batches. Follow the row counts with `list-wpgb-facets`, then clear the cache. It is not run within the request because the indexer only guards time, memory and cancellation from its queue, and empties a facet's index before rebuilding it. Disabled by default, since a rebuild empties the index first and loads the site while it runs.
 
-#### `wp-mcp-abilities/clear-wpgb-cache`
+#### `cm4ai/clear-wpgb-cache`
 
 - **Input:** none (`{}`).
 - **Output:** `cleared`.
@@ -567,7 +567,7 @@ The settings screen also lists the abilities other plugins registered, grouped b
 
 - Removal uses `wp_unregister_ability()`, the only lever the Abilities API offers.
 - It only happens on the routes served by the MCP Adapter, under `/wp-json/mcp/`, when the request is dispatched (`rest_pre_dispatch`). The rest of the site is untouched: the plugin that provides the ability keeps using it, including from its own admin screens over REST. Removing it everywhere would also make the setting irreversible, since an ability missing from the registry would be missing from the screen, checkbox included.
-- A site serving its MCP server elsewhere than under `/wp-json/mcp/` adds its route prefix with `wpmcpa_mcp_route_prefixes`, otherwise the switches have no effect.
+- A site serving its MCP server elsewhere than under `/wp-json/mcp/` adds its route prefix with `cm4ai_mcp_route_prefixes`, otherwise the switches have no effect.
 - An ability declaring `meta.mcp.type` as `resource` or `prompt` stays listed by the adapter's default server once unchecked, because the server freezes those two lists when it is built (measured on adapter 0.5). Running it still fails, as the registry is read at call time. Tools are not affected.
 
 **Abilities closed to MCP** (no `meta.mcp.public`, as with SEOPress's abilities, written for the core REST API): the checkbox **exposes** them. Checking one declares it to the adapter's default server as a tool, through the adapter's `mcp_adapter_default_server_config` filter, without touching the registry or the ability's metadata.
@@ -579,9 +579,9 @@ The settings screen also lists the abilities other plugins registered, grouped b
 - If the site switches off the default server (`mcp_adapter_create_default_server` returns false), the section says so: the boxes would have no effect.
 - A removal decided by the first kind of checkbox wins over an exposure.
 
-The exposure state is stored in `wpmcpa_exposed`, separate from the switches, since the two settings have opposite defaults.
+The exposure state is stored in `cm4ai_exposed`, separate from the switches, since the two settings have opposite defaults.
 
-**Never listed.** Core abilities (`core/*`) and the adapter's own (`mcp-adapter/*`): removing `mcp-adapter/execute-ability` would cut the branch the agent sits on. This plugin's abilities are not listed either; they are recognised by the `meta.wpmcpa.plugin` mark they carry, not by their prefix, which another plugin could share.
+**Never listed.** Core abilities (`core/*`) and the adapter's own (`mcp-adapter/*`): removing `mcp-adapter/execute-ability` would cut the branch the agent sits on. This plugin's abilities are not listed either; they are recognised by the `meta.cm4ai.plugin` mark they carry, not by their prefix, which another plugin could share.
 
 ## Security model
 
@@ -590,19 +590,19 @@ The exposure state is stored in `wpmcpa_exposed`, separate from the switches, si
 - **Editorial workflow.** Publishing requires the post type's `publish_posts`; changing the author requires `edit_others_posts`; pinning requires `edit_others_posts` or `publish_posts`; assigning terms requires each taxonomy's `assign_terms`.
 - **Reads** require `edit_posts`.
 - **Templates.** Creating, updating and deleting require `edit_theme_options`, as in the Site Editor. Listing and reading require `edit_posts`.
-- **Meta.** Protected keys are out of reach unless allow-listed (`wpmcpa_allowed_meta_keys`, empty by default). Values are limited to scalars and arrays of scalars, and strings are sanitised.
+- **Meta.** Protected keys are out of reach unless allow-listed (`cm4ai_allowed_meta_keys`, empty by default). Values are limited to scalars and arrays of scalars, and strings are sanitised.
 - **Markup.** Content and template writes go through kses for users without `unfiltered_html`; `content_intact` and `content_filtered` report when markup was stripped. JSON-LD schemas are re-encoded with `JSON_HEX_TAG`.
 - **Uploads.** `http` and `https` URLs only, downloaded by core's `download_url()`, 10 MB by default, file type validated by `media_handle_sideload()`.
 - **Taxonomies.** Only those declaring `show_in_rest`.
 - **Destructive abilities** are disabled until an administrator enables them. The settings screen requires `manage_options`.
-- **Integrator override.** Every capability decision goes through `wpmcpa_check_permission`.
+- **Integrator override.** Every capability decision goes through `cm4ai_check_permission`.
 - **No outgoing calls of its own.** The plugin sends nothing to any third party, has no telemetry and loads no external asset. The only HTTP request it can make is the download `upload-media` performs, to the URL the caller supplies.
 
 Allow a protected meta key:
 
 ```php
 add_filter(
-    'wpmcpa_allowed_meta_keys',
+    'cm4ai_allowed_meta_keys',
     function ( array $keys, string $objectType ): array {
         if ( 'post' === $objectType ) {
             $keys[] = '_my_internal_field';
@@ -623,10 +623,10 @@ All filters are applied with `apply_filters()` and all actions fired with `do_ac
 
 | Action | Parameters | Purpose |
 | --- | --- | --- |
-| `wpmcpa_loaded` | `AbilityRegistry $registry` | Fires at the end of `Plugin::boot()`, once every service is built and every hook attached. Runs while the plugin's file loads, so only code loaded earlier (a mu-plugin, or a plugin loaded before this one) can listen to it. Until `after_setup_theme`, the registry lists the built-in abilities only. |
-| `wpmcpa_register_abilities` | `AbilityRegistry $registry` | Fires once, on first use of the registry (at the earliest during `init`), to add custom abilities with `$registry->addAbility()`. See [Extending the plugin](#extending-the-plugin). |
-| `wpmcpa_before_execute` | `string $name`, `mixed $input`, `AbstractAbility $ability` | Fires before an ability of the plugin runs, once the Abilities API has granted the permission. |
-| `wpmcpa_after_execute` | `string $name`, `mixed $input`, `array\|WP_Error $result`, `AbstractAbility $ability` | Fires after an ability of the plugin ran, with its final result. |
+| `cm4ai_loaded` | `AbilityRegistry $registry` | Fires at the end of `Plugin::boot()`, once every service is built and every hook attached. Runs while the plugin's file loads, so only code loaded earlier (a mu-plugin, or a plugin loaded before this one) can listen to it. Until `after_setup_theme`, the registry lists the built-in abilities only. |
+| `cm4ai_register_abilities` | `AbilityRegistry $registry` | Fires once, on first use of the registry (at the earliest during `init`), to add custom abilities with `$registry->addAbility()`. See [Extending the plugin](#extending-the-plugin). |
+| `cm4ai_before_execute` | `string $name`, `mixed $input`, `AbstractAbility $ability` | Fires before an ability of the plugin runs, once the Abilities API has granted the permission. |
+| `cm4ai_after_execute` | `string $name`, `mixed $input`, `array\|WP_Error $result`, `AbstractAbility $ability` | Fires after an ability of the plugin ran, with its final result. |
 
 The execution actions and the two filters below cover every ability of the plugin, the generated post type abilities and custom ones included.
 
@@ -634,42 +634,42 @@ The execution actions and the two filters below cover every ability of the plugi
 
 | Filter | Parameters | Purpose |
 | --- | --- | --- |
-| `wpmcpa_ability_properties` | `array $properties`, `AbstractAbility $ability` | Arguments passed to `wp_register_ability()`: label, description, schemas, `meta`, callbacks. Anything but an array is ignored. Replacing `execute_callback` or `permission_callback` bypasses the execution hooks and the permission checks. |
-| `wpmcpa_execute_result` | `array\|WP_Error $result`, `string $name`, `mixed $input`, `AbstractAbility $ability` | Result of an ability, before `wpmcpa_after_execute` and before it goes back to the caller. Must return an array or a `WP_Error`; anything else is ignored and reported with `_doing_it_wrong()`. |
+| `cm4ai_ability_properties` | `array $properties`, `AbstractAbility $ability` | Arguments passed to `wp_register_ability()`: label, description, schemas, `meta`, callbacks. Anything but an array is ignored. Replacing `execute_callback` or `permission_callback` bypasses the execution hooks and the permission checks. |
+| `cm4ai_execute_result` | `array\|WP_Error $result`, `string $name`, `mixed $input`, `AbstractAbility $ability` | Result of an ability, before `cm4ai_after_execute` and before it goes back to the caller. Must return an array or a `WP_Error`; anything else is ignored and reported with `_doing_it_wrong()`. |
 
 ### Registration and availability
 
 | Filter | Parameters | Purpose |
 | --- | --- | --- |
-| `wpmcpa_abilities` | `array<string, AbilityInterface> $abilities` | The static abilities about to be registered, keyed by name. Add, replace or remove entries. |
-| `wpmcpa_is_enabled` | `bool $enabled`, `string $ability` | Forces whether an ability of the plugin, or a third-party one, is enabled. |
-| `wpmcpa_is_exposed` | `bool $exposed`, `string $ability` | Forces whether a third-party ability closed to MCP is exposed. |
-| `wpmcpa_post_types` | `WP_Post_Type[] $postTypes` | Post types that get generated abilities. |
-| `wpmcpa_post_type_operations` | `string[] $operations`, `WP_Post_Type $postType` | Operations (`list`, `get`, `create`, `update`, `delete`) generated for a post type. |
-| `wpmcpa_taxonomies` | `array<string, WP_Taxonomy> $taxonomies` | Taxonomies reachable through the taxonomy abilities. |
-| `wpmcpa_assignable_taxonomies` | `array<string, WP_Taxonomy> $taxonomies`, `WP_Post_Type $postType` | Taxonomies the post type abilities may assign terms in. |
-| `wpmcpa_mcp_route_prefixes` | `string[] $prefixes` | REST route prefixes treated as MCP traffic for third-party switches. Default `[ '/mcp/' ]`. |
-| `wpmcpa_server_url` | `string $url` | MCP server URL the settings screen hands out. Default: the adapter's default server. |
+| `cm4ai_abilities` | `array<string, AbilityInterface> $abilities` | The static abilities about to be registered, keyed by name. Add, replace or remove entries. |
+| `cm4ai_is_enabled` | `bool $enabled`, `string $ability` | Forces whether an ability of the plugin, or a third-party one, is enabled. |
+| `cm4ai_is_exposed` | `bool $exposed`, `string $ability` | Forces whether a third-party ability closed to MCP is exposed. |
+| `cm4ai_post_types` | `WP_Post_Type[] $postTypes` | Post types that get generated abilities. |
+| `cm4ai_post_type_operations` | `string[] $operations`, `WP_Post_Type $postType` | Operations (`list`, `get`, `create`, `update`, `delete`) generated for a post type. |
+| `cm4ai_taxonomies` | `array<string, WP_Taxonomy> $taxonomies` | Taxonomies reachable through the taxonomy abilities. |
+| `cm4ai_assignable_taxonomies` | `array<string, WP_Taxonomy> $taxonomies`, `WP_Post_Type $postType` | Taxonomies the post type abilities may assign terms in. |
+| `cm4ai_mcp_route_prefixes` | `string[] $prefixes` | REST route prefixes treated as MCP traffic for third-party switches. Default `[ '/mcp/' ]`. |
+| `cm4ai_server_url` | `string $url` | MCP server URL the settings screen hands out. Default: the adapter's default server. |
 
-`wpmcpa_abilities` runs on `wp_abilities_api_init`. The plugin itself hooks it at priority 20 to drop abilities that are switched off or miss a dependency, so a callback at the default priority sees every static ability. Entries must implement `WpMcpAbilities\Contracts\AbilityInterface`; anything else is ignored. The generated post type abilities do not go through this filter (use the two post type filters). Abilities added here are registered but not listed on the settings screen; to add one that is, use `wpmcpa_register_abilities` (see [Extending the plugin](#extending-the-plugin)).
+`cm4ai_abilities` runs on `wp_abilities_api_init`. The plugin itself hooks it at priority 20 to drop abilities that are switched off or miss a dependency, so a callback at the default priority sees every static ability. Entries must implement `CM4AI\Contracts\AbilityInterface`; anything else is ignored. The generated post type abilities do not go through this filter (use the two post type filters). Abilities added here are registered but not listed on the settings screen; to add one that is, use `cm4ai_register_abilities` (see [Extending the plugin](#extending-the-plugin)).
 
 ### Permissions and meta
 
 | Filter | Parameters | Purpose |
 | --- | --- | --- |
-| `wpmcpa_check_permission` | `bool $allowed`, `string $capability`, `mixed $context` | Overrides any capability decision. `$context` is the post, term, post type or taxonomy slug, or REST route the check was made against, when any. |
-| `wpmcpa_allowed_meta_keys` | `string[] $keys`, `string $objectType` | Protected meta keys the meta abilities may touch. `$objectType` is `post` or `term`. Empty by default. |
+| `cm4ai_check_permission` | `bool $allowed`, `string $capability`, `mixed $context` | Overrides any capability decision. `$context` is the post, term, post type or taxonomy slug, or REST route the check was made against, when any. |
+| `cm4ai_allowed_meta_keys` | `string[] $keys`, `string $objectType` | Protected meta keys the meta abilities may touch. `$objectType` is `post` or `term`. Empty by default. |
 
 ### Content
 
 | Filter | Parameters | Purpose |
 | --- | --- | --- |
-| `wpmcpa_list_posts_query_args` | `array $args`, `array $input` | `WP_Query` arguments of every `list-{plural}` ability. |
-| `wpmcpa_list_posts_result` | `array $result`, `WP_Post[] $posts` | Payload of `list-{plural}`. |
-| `wpmcpa_get_post_result` | `array $result`, `WP_Post $post` | Payload of `get-{singular}`. |
-| `wpmcpa_create_post_data` | `array $postData`, `array $input` | `wp_insert_post()` arguments of `create-{singular}`, before slashing. |
-| `wpmcpa_update_post_data` | `array $updateData`, `WP_Post $post`, `array $input` | `wp_update_post()` arguments of `update-{singular}`, before slashing. |
-| `wpmcpa_replaced_post_content` | `string $after`, `WP_Post $post`, `string $search` | Content about to be stored by `replace-in-post-content`. Not applied on dry runs. |
+| `cm4ai_list_posts_query_args` | `array $args`, `array $input` | `WP_Query` arguments of every `list-{plural}` ability. |
+| `cm4ai_list_posts_result` | `array $result`, `WP_Post[] $posts` | Payload of `list-{plural}`. |
+| `cm4ai_get_post_result` | `array $result`, `WP_Post $post` | Payload of `get-{singular}`. |
+| `cm4ai_create_post_data` | `array $postData`, `array $input` | `wp_insert_post()` arguments of `create-{singular}`, before slashing. |
+| `cm4ai_update_post_data` | `array $updateData`, `WP_Post $post`, `array $input` | `wp_update_post()` arguments of `update-{singular}`, before slashing. |
+| `cm4ai_replaced_post_content` | `string $after`, `WP_Post $post`, `string $search` | Content about to be stored by `replace-in-post-content`. Not applied on dry runs. |
 
 The post type filters are shared by every post type; check `$args['post_type']`, `$post->post_type` or `$postData['post_type']` to target one.
 
@@ -677,48 +677,48 @@ The post type filters are shared by every post type; check `$args['post_type']`,
 
 | Filter | Parameters | Purpose |
 | --- | --- | --- |
-| `wpmcpa_list_media_query_args` | `array $args`, `array $input` | `WP_Query` arguments of `list-media`. |
-| `wpmcpa_list_media_result` | `array $result`, `WP_Post[] $items` | Payload of `list-media`. |
-| `wpmcpa_update_media_args` | `array $updateArgs`, `WP_Post $attachment`, `array $input` | `wp_update_post()` arguments of `update-media`. |
-| `wpmcpa_upload_media_max_bytes` | `int $maxBytes` | Largest accepted download for `upload-media`. Default 10 MB. |
-| `wpmcpa_upload_media_file` | `array $fileArray`, `array $input` | File array (`name`, `tmp_name`) passed to `media_handle_sideload()`. |
+| `cm4ai_list_media_query_args` | `array $args`, `array $input` | `WP_Query` arguments of `list-media`. |
+| `cm4ai_list_media_result` | `array $result`, `WP_Post[] $items` | Payload of `list-media`. |
+| `cm4ai_update_media_args` | `array $updateArgs`, `WP_Post $attachment`, `array $input` | `wp_update_post()` arguments of `update-media`. |
+| `cm4ai_upload_media_max_bytes` | `int $maxBytes` | Largest accepted download for `upload-media`. Default 10 MB. |
+| `cm4ai_upload_media_file` | `array $fileArray`, `array $input` | File array (`name`, `tmp_name`) passed to `media_handle_sideload()`. |
 
 ### Taxonomies
 
 | Filter | Parameters | Purpose |
 | --- | --- | --- |
-| `wpmcpa_list_taxonomies_result` | `array $result` | Payload of `list-taxonomies`. |
-| `wpmcpa_list_terms_query_args` | `array $args`, `array $input` | `get_terms()` arguments of `list-terms`. |
-| `wpmcpa_list_terms_result` | `array $result`, `WP_Term[] $terms` | Payload of `list-terms`. |
-| `wpmcpa_get_term_result` | `array $result`, `WP_Term $term` | Payload of `get-term`. |
-| `wpmcpa_create_term_args` | `array $args`, `string $taxonomy`, `array $input` | `wp_insert_term()` arguments of `create-term`. |
-| `wpmcpa_update_term_args` | `array $args`, `WP_Term $term`, `array $input` | `wp_update_term()` arguments of `update-term`. |
+| `cm4ai_list_taxonomies_result` | `array $result` | Payload of `list-taxonomies`. |
+| `cm4ai_list_terms_query_args` | `array $args`, `array $input` | `get_terms()` arguments of `list-terms`. |
+| `cm4ai_list_terms_result` | `array $result`, `WP_Term[] $terms` | Payload of `list-terms`. |
+| `cm4ai_get_term_result` | `array $result`, `WP_Term $term` | Payload of `get-term`. |
+| `cm4ai_create_term_args` | `array $args`, `string $taxonomy`, `array $input` | `wp_insert_term()` arguments of `create-term`. |
+| `cm4ai_update_term_args` | `array $args`, `WP_Term $term`, `array $input` | `wp_update_term()` arguments of `update-term`. |
 
 ### SEOPress
 
 | Filter | Parameters | Purpose |
 | --- | --- | --- |
-| `wpmcpa_get_post_seo_result` | `array $result`, `WP_Post $post` | Payload of `get-post-seopress`. |
-| `wpmcpa_update_seo_data` | `array $seoData`, `WP_Post $post`, `array $input` | Values about to be written by `update-post-seopress`, keyed by input field. |
-| `wpmcpa_get_term_seo_result` | `array $result`, `WP_Term $term` | Payload of `get-term-seopress`. |
-| `wpmcpa_update_term_seo_data` | `array $seoData`, `WP_Term $term`, `array $input` | Values about to be written by `update-term-seopress`, keyed by input field. |
+| `cm4ai_get_post_seo_result` | `array $result`, `WP_Post $post` | Payload of `get-post-seopress`. |
+| `cm4ai_update_seo_data` | `array $seoData`, `WP_Post $post`, `array $input` | Values about to be written by `update-post-seopress`, keyed by input field. |
+| `cm4ai_get_term_seo_result` | `array $result`, `WP_Term $term` | Payload of `get-term-seopress`. |
+| `cm4ai_update_term_seo_data` | `array $seoData`, `WP_Term $term`, `array $input` | Values about to be written by `update-term-seopress`, keyed by input field. |
 
 ### Templates
 
 | Filter | Parameters | Purpose |
 | --- | --- | --- |
-| `wpmcpa_list_templates_query_args` | `array $query`, `string $type`, `array $input` | `get_block_templates()` arguments of `list-templates`. |
-| `wpmcpa_list_templates_result` | `array $result`, `WP_Block_Template[] $templates` | Payload of `list-templates`. |
-| `wpmcpa_get_template_result` | `array $result`, `WP_Block_Template $template` | Payload of `get-template`. |
-| `wpmcpa_create_template_args` | `array $prepared`, `string $type`, `array $input` | `wp_insert_post()` arguments of `create-template`, before slashing. |
-| `wpmcpa_update_template_args` | `array $prepared`, `WP_Block_Template $template`, `array $input` | `wp_update_post()` or `wp_insert_post()` arguments of `update-template`, before slashing. |
+| `cm4ai_list_templates_query_args` | `array $query`, `string $type`, `array $input` | `get_block_templates()` arguments of `list-templates`. |
+| `cm4ai_list_templates_result` | `array $result`, `WP_Block_Template[] $templates` | Payload of `list-templates`. |
+| `cm4ai_get_template_result` | `array $result`, `WP_Block_Template $template` | Payload of `get-template`. |
+| `cm4ai_create_template_args` | `array $prepared`, `string $type`, `array $input` | `wp_insert_post()` arguments of `create-template`, before slashing. |
+| `cm4ai_update_template_args` | `array $prepared`, `WP_Block_Template $template`, `array $input` | `wp_update_post()` or `wp_insert_post()` arguments of `update-template`, before slashing. |
 
 ### Examples
 
 Keep a post type out of reach:
 
 ```php
-add_filter( 'wpmcpa_post_types', function ( array $postTypes ): array {
+add_filter( 'cm4ai_post_types', function ( array $postTypes ): array {
     unset( $postTypes['page'] );
 
     return $postTypes;
@@ -728,7 +728,7 @@ add_filter( 'wpmcpa_post_types', function ( array $postTypes ): array {
 Expose a post type's reads but not its writes:
 
 ```php
-add_filter( 'wpmcpa_post_type_operations', function ( array $operations, WP_Post_Type $postType ): array {
+add_filter( 'cm4ai_post_type_operations', function ( array $operations, WP_Post_Type $postType ): array {
     return 'book' === $postType->name ? [ 'list', 'get' ] : $operations;
 }, 10, 2 );
 ```
@@ -736,7 +736,7 @@ add_filter( 'wpmcpa_post_type_operations', function ( array $operations, WP_Post
 Keep deletions off on production, whatever the settings screen says:
 
 ```php
-add_filter( 'wpmcpa_is_enabled', function ( bool $enabled, string $ability ): bool {
+add_filter( 'cm4ai_is_enabled', function ( bool $enabled, string $ability ): bool {
     if ( 'production' === wp_get_environment_type() && str_contains( $ability, '/delete-' ) ) {
         return false;
     }
@@ -748,7 +748,7 @@ add_filter( 'wpmcpa_is_enabled', function ( bool $enabled, string $ability ): bo
 Only let administrators delete posts and terms through an ability:
 
 ```php
-add_filter( 'wpmcpa_check_permission', function ( bool $allowed, string $capability ): bool {
+add_filter( 'cm4ai_check_permission', function ( bool $allowed, string $capability ): bool {
     if ( in_array( $capability, [ 'delete_post', 'delete_term' ], true ) && ! current_user_can( 'manage_options' ) ) {
         return false;
     }
@@ -760,7 +760,7 @@ add_filter( 'wpmcpa_check_permission', function ( bool $allowed, string $capabil
 Serve the third-party switches on a custom MCP server route:
 
 ```php
-add_filter( 'wpmcpa_mcp_route_prefixes', function ( array $prefixes ): array {
+add_filter( 'cm4ai_mcp_route_prefixes', function ( array $prefixes ): array {
     $prefixes[] = '/my-agents/';
 
     return $prefixes;
@@ -770,7 +770,7 @@ add_filter( 'wpmcpa_mcp_route_prefixes', function ( array $prefixes ): array {
 Accept larger uploads:
 
 ```php
-add_filter( 'wpmcpa_upload_media_max_bytes', fn (): int => 25 * MB_IN_BYTES );
+add_filter( 'cm4ai_upload_media_max_bytes', fn (): int => 25 * MB_IN_BYTES );
 ```
 
 ## Extending the plugin
@@ -779,15 +779,15 @@ A site, theme or plugin of your own can add abilities to this plugin, observe or
 
 ### Adding a custom ability
 
-A custom ability is a class extending `WpMcpAbilities\Support\AbstractAbility`, added to the registry on `wpmcpa_register_abilities`. It then behaves like the plugin's own: it gets a switch on the settings screen, in a section named after its group, goes through the execution hooks, and carries the `meta.mcp.public` flag and the `meta.wpmcpa.plugin` mark. Because of that mark it is listed with the plugin's abilities, not under "Other plugin".
+A custom ability is a class extending `CM4AI\Support\AbstractAbility`, added to the registry on `cm4ai_register_abilities`. It then behaves like the plugin's own: it gets a switch on the settings screen, in a section named after its group, goes through the execution hooks, and carries the `meta.mcp.public` flag and the `meta.cm4ai.plugin` mark. Because of that mark it is listed with the plugin's abilities, not under "Other plugin".
 
 ```php
-use WpMcpAbilities\Registry\AbilityRegistry;
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Registry\AbilityRegistry;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
-add_action( 'wpmcpa_register_abilities', function ( AbilityRegistry $registry ): void {
+add_action( 'cm4ai_register_abilities', function ( AbilityRegistry $registry ): void {
     $registry->addAbility( new class() extends AbstractAbility {
         public function getName(): string {
             return 'my-site/count-drafts';
@@ -846,17 +846,17 @@ A named class works just as well; an anonymous one keeps the example in one file
 
 What to know:
 
-- **When the action fires.** Once, the first time the registry is read: when the abilities are registered with the Abilities API, or when the settings screen is built. That is at the earliest during `init`, so a plugin loaded after this one or a theme's `functions.php` can hook it. It does not fire from `Plugin::boot()`, which runs while this plugin's file loads, nor before `after_setup_theme`: until then, reading the registry (from `wpmcpa_loaded`, say) returns the built-in abilities only, and the action still fires later.
-- **Base class required.** Inside `wpmcpa_register_abilities`, the registry refuses any object that does not extend `AbstractAbility` and reports it with `_doing_it_wrong()`. The settings screen, the switches and the execution hooks all rely on that class; an ability without it would be registered yet impossible to list or switch off.
-- **Names.** Use a namespace of your own, such as `my-site/count-drafts`, not `wp-mcp-abilities/`. The name must follow the Abilities API rules: lowercase letters, digits and dashes, in the form `namespace/ability`.
+- **When the action fires.** Once, the first time the registry is read: when the abilities are registered with the Abilities API, or when the settings screen is built. That is at the earliest during `init`, so a plugin loaded after this one or a theme's `functions.php` can hook it. It does not fire from `Plugin::boot()`, which runs while this plugin's file loads, nor before `after_setup_theme`: until then, reading the registry (from `cm4ai_loaded`, say) returns the built-in abilities only, and the action still fires later.
+- **Base class required.** Inside `cm4ai_register_abilities`, the registry refuses any object that does not extend `AbstractAbility` and reports it with `_doing_it_wrong()`. The settings screen, the switches and the execution hooks all rely on that class; an ability without it would be registered yet impossible to list or switch off.
+- **Names.** Use a namespace of your own, such as `my-site/count-drafts`, not `cm4ai/`. The name must follow the Abilities API rules: lowercase letters, digits and dashes, in the form `namespace/ability`.
 - **Duplicates.** The last ability added under a given name replaces the earlier one, the plugin's own included. Your own namespace avoids that by accident; reusing one of the plugin's names replaces its ability on purpose.
-- **Category.** Every ability of the plugin, custom ones included, is registered in the `wp-mcp-abilities` category. `wpmcpa_ability_properties` can move it to a category you register yourself.
-- **Switching off.** The switch is stored in the `wpmcpa_enabled` option under the ability's name, and `wpmcpa_is_enabled` applies to it like to any other.
+- **Category.** Every ability of the plugin, custom ones included, is registered in the `cm4ai` category. `cm4ai_ability_properties` can move it to a category you register yourself.
+- **Switching off.** The switch is stored in the `cm4ai_enabled` option under the ability's name, and `cm4ai_is_enabled` applies to it like to any other.
 
 ### Logging every call
 
 ```php
-add_action( 'wpmcpa_after_execute', function ( string $name, mixed $input, array|\WP_Error $result ): void {
+add_action( 'cm4ai_after_execute', function ( string $name, mixed $input, array|\WP_Error $result ): void {
     error_log( sprintf(
         '[mcp] %s by user %d: %s',
         $name,
@@ -866,14 +866,14 @@ add_action( 'wpmcpa_after_execute', function ( string $name, mixed $input, array
 }, 10, 3 );
 ```
 
-`wpmcpa_before_execute` fires right before the ability runs, after the Abilities API has checked the permission. To change what a call returns, use `wpmcpa_execute_result`, which must return an array or a `WP_Error`.
+`cm4ai_before_execute` fires right before the ability runs, after the Abilities API has checked the permission. To change what a call returns, use `cm4ai_execute_result`, which must return an array or a `WP_Error`.
 
 ### Changing what is registered
 
-`wpmcpa_ability_properties` receives the arguments each ability hands to `wp_register_ability()`. For instance, to mark the plugin's read-only abilities as such for MCP clients:
+`cm4ai_ability_properties` receives the arguments each ability hands to `wp_register_ability()`. For instance, to mark the plugin's read-only abilities as such for MCP clients:
 
 ```php
-add_filter( 'wpmcpa_ability_properties', function ( array $properties, $ability ): array {
+add_filter( 'cm4ai_ability_properties', function ( array $properties, $ability ): array {
     if ( preg_match( '#/(list|get)-#', $ability->getName() ) ) {
         $properties['meta']['annotations']['readonly'] = true;
     }
@@ -882,15 +882,15 @@ add_filter( 'wpmcpa_ability_properties', function ( array $properties, $ability 
 }, 10, 2 );
 ```
 
-Keep `meta.mcp.public` and `meta.wpmcpa.plugin` in place: without the first the adapter hides the ability, without the second it is listed as a third-party one. Leave `execute_callback` and `permission_callback` alone too: replacing them bypasses the execution hooks (`wpmcpa_before_execute`, `wpmcpa_execute_result`, `wpmcpa_after_execute`) and the ability's own permission check.
+Keep `meta.mcp.public` and `meta.cm4ai.plugin` in place: without the first the adapter hides the ability, without the second it is listed as a third-party one. Leave `execute_callback` and `permission_callback` alone too: replacing them bypasses the execution hooks (`cm4ai_before_execute`, `cm4ai_execute_result`, `cm4ai_after_execute`) and the ability's own permission check.
 
 ## Development
 
 ### Setup
 
 ```bash
-git clone https://github.com/Fyrins/wp-mcp-abilities.git
-cd wp-mcp-abilities
+git clone https://github.com/Fyrins/content-manager-for-ai.git
+cd content-manager-for-ai-agents
 composer install
 composer lint      # PHP_CodeSniffer with phpcs.xml.dist
 composer format    # PHP Code Beautifier and Fixer
@@ -902,7 +902,7 @@ npm run lint:js
 
 `build/` is not versioned. A copy cloned from the repository shows an error on the settings screen until `npm run build` has run; the release and CI workflows build it before packaging.
 
-`phpcs.xml.dist` applies the WordPress Coding Standards, PHPCompatibilityWP for PHP 8.1 and later, the minimum WordPress version (6.9), and the text domain and prefix checks (`wpmcpa`, `WpMcpAbilities`).
+`phpcs.xml.dist` applies the WordPress Coding Standards, PHPCompatibilityWP for PHP 8.1 and later, the minimum WordPress version (6.9), and the text domain and prefix checks (`content-manager-for-ai-agents`, `CM4AI`).
 
 ### Testing locally
 
@@ -910,11 +910,11 @@ The repository ships no automated test suite. Test changes on a local WordPress 
 
 ### Translations
 
-The plugin relies on WordPress's just-in-time translation loading (text domain `wp-mcp-abilities`, `languages/`). To refresh the catalogue after changing strings:
+The plugin relies on WordPress's just-in-time translation loading (text domain `content-manager-for-ai-agents`, `languages/`). To refresh the catalogue after changing strings:
 
 ```bash
-wp i18n make-pot . languages/wp-mcp-abilities.pot --slug=wp-mcp-abilities --exclude=vendor,tests,docs,node_modules,build,dist
-wp i18n update-po languages/wp-mcp-abilities.pot languages/
+wp i18n make-pot . languages/content-manager-for-ai-agents.pot --slug=content-manager-for-ai-agents --exclude=vendor,tests,docs,node_modules,build,dist
+wp i18n update-po languages/content-manager-for-ai-agents.pot languages/
 wp i18n make-mo languages/
 wp i18n make-json languages/ --no-purge --use-map=<map.json>
 ```
@@ -925,12 +925,12 @@ The strings of the settings screen live in `src/`, but WordPress looks their tra
 
 | Path | Role |
 | --- | --- |
-| `wp-mcp-abilities.php` | Plugin header, constants (`WPMCPA_VERSION`, `WPMCPA_FILE`, `WPMCPA_DIR`), autoloader, `Plugin::boot()`. |
-| `includes/Autoloader.php` | Maps `WpMcpAbilities\Foo\Bar` to `includes/Foo/Bar.php`. |
+| `content-manager-for-ai-agents.php` | Plugin header, constants (`CM4AI_VERSION`, `CM4AI_FILE`, `CM4AI_DIR`), autoloader, `Plugin::boot()`. |
+| `includes/Autoloader.php` | Maps `CM4AI\Foo\Bar` to `includes/Foo/Bar.php`. |
 | `includes/Plugin.php` | Explicit wiring: builds every service and hook once. `Plugin::ABILITIES` lists the static ability classes. |
 | `includes/Registry/` | `AbilityRegistry` holds the category and the static abilities, and registers them on `wp_abilities_api_categories_init` and `wp_abilities_api_init`. |
 | `includes/Contracts/` | `AbilityInterface`, `AbilityCategoryInterface`, `HookInterface`. |
-| `includes/AbilityCategories/` | The `wp-mcp-abilities` ability category. |
+| `includes/AbilityCategories/` | The `cm4ai` ability category. |
 | `includes/Abilities/` | One class per static ability, by family (`Content`, `Media`, `Meta`, `Seopress`, `Taxonomy`, `Template`, `WooCommerce`), with the traits they share. |
 | `includes/Hooks/` | WordPress integration: availability filtering, post type abilities, third-party switches and exposure, requirements notice, WooCommerce product types. `Hooks/Admin/` holds the settings screen: the page and its assets, the options registration, and the `SettingsRestRoute` it reads and saves through. The route only speaks REST; what the screen shows is built by `Services\SettingsScreenData`. |
 | `includes/Services/` | Logic without hooks: settings reader, validation of what is written (`SettingsSanitizer`), catalogue of the plugin's abilities, catalogue of third-party abilities. |
@@ -940,17 +940,17 @@ The strings of the settings screen live in `src/`, but WordPress looks their tra
 
 ### Adding an ability
 
-1. Create a class under `includes/Abilities/<Family>/` extending `WpMcpAbilities\Support\AbstractAbility`. It must be instantiable without arguments. Implement `getName()` (use `self::qualify( 'my-slug' )`), `getLabel()`, `getDescription()`, `getGroup()`, `getInputSchema()`, `getOutputSchema()`, `checkPermission()` and `execute()`. Override `isReadOnly()` to return `true` if it changes nothing, `isDestructive()` to return `true` if it deletes anything (it is then off by default with no other override), and `isAvailable()` if it depends on another plugin. Override `isEnabledByDefault()` only to switch off by default an ability that destroys nothing.
+1. Create a class under `includes/Abilities/<Family>/` extending `CM4AI\Support\AbstractAbility`. It must be instantiable without arguments. Implement `getName()` (use `self::qualify( 'my-slug' )`), `getLabel()`, `getDescription()`, `getGroup()`, `getInputSchema()`, `getOutputSchema()`, `checkPermission()` and `execute()`. Override `isReadOnly()` to return `true` if it changes nothing, `isDestructive()` to return `true` if it deletes anything (it is then off by default with no other override), and `isAvailable()` if it depends on another plugin. Override `isEnabledByDefault()` only to switch off by default an ability that destroys nothing.
 2. Add the class to `Plugin::ABILITIES` in `includes/Plugin.php`.
 3. Check capabilities against the targeted object with `Support\Capabilities`, in `checkPermission()` and again in `execute()`, and read input with `Support\Input`.
 4. Document it in this README, add a changelog entry, refresh the translation catalogue, run `composer lint` and test on a local site.
 
 ```php
-namespace WpMcpAbilities\Abilities\Content;
+namespace CM4AI\Abilities\Content;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 class CountWordsAbility extends AbstractAbility {
     public function getName(): string {
@@ -958,15 +958,15 @@ class CountWordsAbility extends AbstractAbility {
     }
 
     public function getLabel(): string {
-        return __( 'Count words', 'wp-mcp-abilities' );
+        return __( 'Count words', 'content-manager-for-ai-agents' );
     }
 
     public function getDescription(): string {
-        return __( 'Counts the words of a post.', 'wp-mcp-abilities' );
+        return __( 'Counts the words of a post.', 'content-manager-for-ai-agents' );
     }
 
     public function getGroup(): string {
-        return __( 'Content', 'wp-mcp-abilities' );
+        return __( 'Content', 'content-manager-for-ai-agents' );
     }
 
     public function getInputSchema(): array {
@@ -1006,7 +1006,7 @@ class CountWordsAbility extends AbstractAbility {
 }
 ```
 
-`getProperties()`, inherited from `AbstractAbility`, sets the category, wires the callbacks, and adds `meta.mcp.public`, the `readonly` and `destructive` annotations, and the `meta.wpmcpa.plugin` mark.
+`getProperties()`, inherited from `AbstractAbility`, sets the category, wires the callbacks, and adds `meta.mcp.public`, the `readonly` and `destructive` annotations, and the `meta.cm4ai.plugin` mark.
 
 ### Checklist when upgrading the MCP Adapter
 
@@ -1021,7 +1021,7 @@ The quickest check after an upgrade: call `mcp-adapter-discover-abilities` from 
 
 ### Release procedure
 
-1. Set the new version in the plugin header (`Version:`), in `WPMCPA_VERSION`, and in `readme.txt` (`Stable tag:`). Add a `## [x.y.z] - YYYY-MM-DD` section to `CHANGELOG.md`, and the matching entries to the `Changelog` and `Upgrade Notice` sections of `readme.txt`.
+1. Set the new version in the plugin header (`Version:`), in `CM4AI_VERSION`, and in `readme.txt` (`Stable tag:`). Add a `## [x.y.z] - YYYY-MM-DD` section to `CHANGELOG.md`, and the matching entries to the `Changelog` and `Upgrade Notice` sections of `readme.txt`.
 2. Check that the numbers agree: `bin/check-versions.sh . vx.y.z`. It compares the header, the constant, the `Stable tag`, the tag and the changelog section, and refuses a `Stable tag` of `trunk`.
 3. Commit, then tag and push: `git tag vx.y.z && git push origin vx.y.z`.
 4. The `deploy.yml` workflow runs on `v*` tags. It runs the same version check, deploys to the WordPress.org SVN repository with `10up/action-wordpress-plugin-deploy` (the package follows `.distignore`, the directory assets come from `.wordpress-org/`), then creates the GitHub release with the changelog section as notes. It needs the `SVN_USERNAME` and `SVN_PASSWORD` repository secrets.
@@ -1032,36 +1032,36 @@ To build the zip by hand: `npm ci && npm run build`, then `wp dist-archive .` (W
 
 ## Migrating from bsaweb-mcp-abilities
 
-WP MCP Abilities is a standalone fork of bsaweb-mcp-abilities 2.5.1, with the same abilities and behaviour. It no longer needs the former dependency-injection framework, and the MCP Adapter is optional. Everything carrying the old name was renamed:
+Content Manager for AI Agents is a standalone fork of bsaweb-mcp-abilities 2.5.1, with the same abilities and behaviour. It no longer needs the former dependency-injection framework, and the MCP Adapter is optional. Everything carrying the old name was renamed:
 
-| Item | bsaweb-mcp-abilities 2.5.1 | WP MCP Abilities |
+| Item | bsaweb-mcp-abilities 2.5.1 | Content Manager for AI Agents |
 | --- | --- | --- |
-| Plugin folder and slug | `bsaweb-mcp-abilities` | `wp-mcp-abilities` |
-| Main file | `bsaweb-mcp-abilities.php` | `wp-mcp-abilities.php` |
-| Composer package | `bsaweb/bsaweb-mcp-abilities` | `fyrins/wp-mcp-abilities` |
-| PHP namespace | `Bsaweb\McpAbilities` | `WpMcpAbilities` |
-| Constants | `BSAWEB_MCP_ABILITIES_*` | `WPMCPA_VERSION`, `WPMCPA_FILE`, `WPMCPA_DIR` (the kernel name constant is gone) |
-| Ability category and prefix | `bsaweb`, `bsaweb/<name>` | `wp-mcp-abilities`, `wp-mcp-abilities/<name>` |
-| Meta mark | `meta.bsaweb.plugin` | `meta.wpmcpa.plugin` |
-| Filters | `bsaweb_mcp_abilities_*` | `wpmcpa_*` (same suffixes) |
-| Options | `bsaweb_mcp_abilities_enabled`, `bsaweb_mcp_abilities_exposed` | `wpmcpa_enabled`, `wpmcpa_exposed` |
-| Permission probe error code | `bsaweb_permission_probe` | `wpmcpa_permission_probe` |
-| Text domain | `bsaweb-mcp-abilities` | `wp-mcp-abilities` |
-| Settings page slug | `bsaweb-mcp-abilities` | `wp-mcp-abilities` |
+| Plugin folder and slug | `bsaweb-mcp-abilities` | `content-manager-for-ai-agents` |
+| Main file | `bsaweb-mcp-abilities.php` | `content-manager-for-ai-agents.php` |
+| Composer package | `bsaweb/bsaweb-mcp-abilities` | `fyrins/content-manager-for-ai-agents` |
+| PHP namespace | `Bsaweb\McpAbilities` | `CM4AI` |
+| Constants | `BSAWEB_MCP_ABILITIES_*` | `CM4AI_VERSION`, `CM4AI_FILE`, `CM4AI_DIR` (the kernel name constant is gone) |
+| Ability category and prefix | `bsaweb`, `bsaweb/<name>` | `cm4ai`, `cm4ai/<name>` |
+| Meta mark | `meta.bsaweb.plugin` | `meta.cm4ai.plugin` |
+| Filters | `bsaweb_mcp_abilities_*` | `cm4ai_*` (same suffixes) |
+| Options | `bsaweb_mcp_abilities_enabled`, `bsaweb_mcp_abilities_exposed` | `cm4ai_enabled`, `cm4ai_exposed` |
+| Permission probe error code | `bsaweb_permission_probe` | `cm4ai_permission_probe` |
+| Text domain | `bsaweb-mcp-abilities` | `content-manager-for-ai-agents` |
+| Settings page slug | `bsaweb-mcp-abilities` | `content-manager-for-ai-agents` |
 | Minimum WordPress | 6.8 | 6.9 |
 | `Requires Plugins` | `mcp-adapter` | none |
 
 Steps:
 
-1. Deactivate and remove bsaweb-mcp-abilities, then install and activate WP MCP Abilities. With Composer: `composer remove bsaweb/bsaweb-mcp-abilities && composer require fyrins/wp-mcp-abilities`. The old package pulled `wordpress/mcp-adapter` as a dependency; if the adapter came from there, require it directly (`composer require wordpress/mcp-adapter`).
-2. Settings are not migrated. Open Settings → MCP Abilities and set the switches again, including the destructive abilities and third-party exposure. The old options can be deleted: `wp option delete bsaweb_mcp_abilities_enabled bsaweb_mcp_abilities_exposed`.
-3. Rename filters in your code, for instance: `grep -rl 'bsaweb_mcp_abilities_' wp-content/ | xargs sed -i '' 's/bsaweb_mcp_abilities_/wpmcpa_/g'` (GNU sed: `sed -i` without `''`).
-4. Update MCP clients, prompts and scripts that name abilities: `bsaweb/list-posts` becomes `wp-mcp-abilities/list-posts`, and so on.
+1. Deactivate and remove bsaweb-mcp-abilities, then install and activate Content Manager for AI Agents. With Composer: `composer remove bsaweb/bsaweb-mcp-abilities && composer require fyrins/content-manager-for-ai-agents`. The old package pulled `wordpress/mcp-adapter` as a dependency; if the adapter came from there, require it directly (`composer require wordpress/mcp-adapter`).
+2. Settings are not migrated. Open Settings → Content Manager for AI Agents and set the switches again, including the destructive abilities and third-party exposure. The old options can be deleted: `wp option delete bsaweb_mcp_abilities_enabled bsaweb_mcp_abilities_exposed`.
+3. Rename filters in your code, for instance: `grep -rl 'bsaweb_mcp_abilities_' wp-content/ | xargs sed -i '' 's/bsaweb_mcp_abilities_/cm4ai_/g'` (GNU sed: `sed -i` without `''`).
+4. Update MCP clients, prompts and scripts that name abilities: `bsaweb/list-posts` becomes `cm4ai/list-posts`, and so on.
 5. Code reading `meta.bsaweb.plugin`, or calling classes under `Bsaweb\McpAbilities`, must use the new names.
 
 ## Contributing
 
-Issues and pull requests are welcome on [GitHub](https://github.com/Fyrins/wp-mcp-abilities). Before opening a pull request:
+Issues and pull requests are welcome on [GitHub](https://github.com/Fyrins/content-manager-for-ai). Before opening a pull request:
 
 - keep to the existing conventions (one class per ability, explicit wiring in `Plugin.php`, capabilities checked against the target object);
 - run `composer lint` and test the change on a local WordPress site;

@@ -2,10 +2,10 @@
 /**
  * Reads and writes the per-ability on/off switches.
  *
- * @package WpMcpAbilities\Services
+ * @package CM4AI\Services
  */
 
-namespace WpMcpAbilities\Services;
+namespace CM4AI\Services;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -18,7 +18,7 @@ class SettingsService {
      *
      * @var string
      */
-    public const OPTION_KEY = 'wpmcpa_enabled';
+    public const OPTION_KEY = 'cm4ai_enabled';
 
     /**
      * Option holding which third-party abilities are exposed to MCP.
@@ -30,7 +30,7 @@ class SettingsService {
      *
      * @var string
      */
-    public const EXPOSED_OPTION_KEY = 'wpmcpa_exposed';
+    public const EXPOSED_OPTION_KEY = 'cm4ai_exposed';
 
     /**
      * Slug of the settings page, also used as the settings group.
@@ -41,7 +41,7 @@ class SettingsService {
      *
      * @var string
      */
-    public const PAGE_SLUG = 'wp-mcp-abilities';
+    public const PAGE_SLUG = 'content-manager-for-ai-agents';
 
     /**
      * Capability required to read and write these settings.
@@ -73,7 +73,7 @@ class SettingsService {
          * @param bool   $enabled Whether the ability is enabled.
          * @param string $ability Ability name.
          */
-        return (bool) apply_filters( 'wpmcpa_is_enabled', $enabled, $ability );
+        return (bool) apply_filters( 'cm4ai_is_enabled', $enabled, $ability );
     }
 
     /**
@@ -96,7 +96,7 @@ class SettingsService {
          * @param string $ability Ability name.
          */
         return (bool) apply_filters(
-            'wpmcpa_is_exposed',
+            'cm4ai_is_exposed',
             ! empty( $exposed[ $ability ] ),
             $ability
         );

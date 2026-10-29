@@ -2,14 +2,14 @@
 /**
  * Updates the SEOpress meta of a taxonomy term.
  *
- * @package WpMcpAbilities\Abilities\Seopress
+ * @package CM4AI\Abilities\Seopress
  */
 
-namespace WpMcpAbilities\Abilities\Seopress;
+namespace CM4AI\Abilities\Seopress;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,21 +30,21 @@ class UpdateTermSeoAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update term SEOpress meta', 'wp-mcp-abilities' );
+        return __( 'Update term SEOpress meta', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Updates the SEOpress meta of a taxonomy term.', 'wp-mcp-abilities' );
+        return __( 'Updates the SEOpress meta of a taxonomy term.', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'SEOpress', 'wp-mcp-abilities' );
+        return __( 'SEOpress', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -62,8 +62,8 @@ class UpdateTermSeoAbility extends AbstractAbility {
             'type'       => 'object',
             'properties' => array_merge(
                 [
-                    'term_id'  => [ 'type' => 'integer', 'description' => __( 'The term ID.', 'wp-mcp-abilities' ) ],
-                    'taxonomy' => [ 'type' => 'string', 'description' => __( 'The taxonomy slug. Optional if term_id is unambiguous.', 'wp-mcp-abilities' ) ],
+                    'term_id'  => [ 'type' => 'integer', 'description' => __( 'The term ID.', 'content-manager-for-ai-agents' ) ],
+                    'taxonomy' => [ 'type' => 'string', 'description' => __( 'The taxonomy slug. Optional if term_id is unambiguous.', 'content-manager-for-ai-agents' ) ],
                 ],
                 $this->seoWriteSchemaProperties()
             ),
@@ -126,7 +126,7 @@ class UpdateTermSeoAbility extends AbstractAbility {
          * @param \WP_Term                   $term    Term being updated.
          * @param array<string, mixed>       $input   Normalised MCP input.
          */
-        $seoData = (array) apply_filters( 'wpmcpa_update_term_seo_data', $seoData, $term, $input );
+        $seoData = (array) apply_filters( 'cm4ai_update_term_seo_data', $seoData, $term, $input );
 
         $this->persistSeoData( $term->term_id, $seoData, $fields, 'update_term_meta' );
 

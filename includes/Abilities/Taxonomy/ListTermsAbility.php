@@ -2,14 +2,14 @@
 /**
  * Lists the terms of a taxonomy.
  *
- * @package WpMcpAbilities\Abilities\Taxonomy
+ * @package CM4AI\Abilities\Taxonomy
  */
 
-namespace WpMcpAbilities\Abilities\Taxonomy;
+namespace CM4AI\Abilities\Taxonomy;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,7 +42,7 @@ class ListTermsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List terms', 'wp-mcp-abilities' );
+        return __( 'List terms', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -51,7 +51,7 @@ class ListTermsAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists the terms of a taxonomy, with search, parent filtering and pagination.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -59,7 +59,7 @@ class ListTermsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'wp-mcp-abilities' );
+        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -71,31 +71,31 @@ class ListTermsAbility extends AbstractAbility {
             'properties' => [
                 'taxonomy'   => [
                     'type'        => 'string',
-                    'description' => __( 'Taxonomy slug.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Taxonomy slug.', 'content-manager-for-ai-agents' ),
                 ],
                 'search'     => [
                     'type'        => 'string',
-                    'description' => __( 'Restricts results to terms matching this string.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Restricts results to terms matching this string.', 'content-manager-for-ai-agents' ),
                 ],
                 'parent'     => [
                     'type'        => 'integer',
-                    'description' => __( 'Restricts results to the children of this term.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Restricts results to the children of this term.', 'content-manager-for-ai-agents' ),
                 ],
                 'hide_empty' => [
                     'type'        => 'boolean',
-                    'description' => __( 'Excludes terms not assigned to any content.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Excludes terms not assigned to any content.', 'content-manager-for-ai-agents' ),
                     'default'     => false,
                 ],
                 'per_page'   => [
                     'type'        => 'integer',
-                    'description' => __( 'Number of terms per page.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Number of terms per page.', 'content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'maximum'     => self::MAX_PER_PAGE,
                     'default'     => 50,
                 ],
                 'page'       => [
                     'type'        => 'integer',
-                    'description' => __( 'Page to return, starting at 1.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Page to return, starting at 1.', 'content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'default'     => 1,
                 ],
@@ -169,7 +169,7 @@ class ListTermsAbility extends AbstractAbility {
          * @param array<string, mixed> $args  Arguments passed to get_terms().
          * @param array<string, mixed> $input Normalised MCP input.
          */
-        $args = (array) apply_filters( 'wpmcpa_list_terms_query_args', $args, $input );
+        $args = (array) apply_filters( 'cm4ai_list_terms_query_args', $args, $input );
 
         $terms = get_terms( $args );
 
@@ -197,6 +197,6 @@ class ListTermsAbility extends AbstractAbility {
          * @param array<string, mixed> $result Formatted payload.
          * @param \WP_Term[]           $terms  Raw term objects.
          */
-        return (array) apply_filters( 'wpmcpa_list_terms_result', $result, $terms );
+        return (array) apply_filters( 'cm4ai_list_terms_result', $result, $terms );
     }
 }

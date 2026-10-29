@@ -2,13 +2,13 @@
 /**
  * Base class shared by every ability of the plugin.
  *
- * @package WpMcpAbilities\Support
+ * @package CM4AI\Support
  */
 
-namespace WpMcpAbilities\Support;
+namespace CM4AI\Support;
 
-use WpMcpAbilities\Contracts\AbilityInterface;
-use WpMcpAbilities\AbilityCategories\ContentAbilityCategory;
+use CM4AI\Contracts\AbilityInterface;
+use CM4AI\AbilityCategories\ContentAbilityCategory;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,15 +22,15 @@ defined( 'ABSPATH' ) || exit;
  */
 abstract class AbstractAbility implements AbilityInterface {
     /**
-     * Value of `meta.wpmcpa.plugin` on every ability this plugin registers.
+     * Value of `meta.cm4ai.plugin` on every ability this plugin registers.
      *
-     * The name alone cannot tell them apart: `wp-mcp-abilities/` is this plugin's
+     * The name alone cannot tell them apart: `cm4ai/` is this plugin's
      * prefix, but another plugin registering abilities could carry it too. Reading a
      * mark this plugin sets itself keeps the third-party catalogue honest,
      * whereas excluding the prefix would leave those abilities out of both
      * screens, which is the one place they must never be.
      */
-    public const PLUGIN_MARK = 'wp-mcp-abilities';
+    public const PLUGIN_MARK = 'cm4ai';
 
     /**
      * Ability name, namespaced by the plugin category.
@@ -163,7 +163,7 @@ abstract class AbstractAbility implements AbilityInterface {
                     'destructive' => $this->isDestructive(),
                 ],
                 // Read by the third-party catalogue to tell our abilities from the rest.
-                'wpmcpa' => [ 'plugin' => self::PLUGIN_MARK ],
+                'cm4ai' => [ 'plugin' => self::PLUGIN_MARK ],
             ],
         ];
 
@@ -175,7 +175,7 @@ abstract class AbstractAbility implements AbilityInterface {
          * @param array<string, mixed> $properties Arguments of `wp_register_ability()`.
          * @param AbstractAbility      $ability    Ability being registered.
          */
-        $filtered = apply_filters( 'wpmcpa_ability_properties', $properties, $this );
+        $filtered = apply_filters( 'cm4ai_ability_properties', $properties, $this );
 
         return is_array( $filtered ) ? $filtered : $properties;
     }
@@ -199,7 +199,7 @@ abstract class AbstractAbility implements AbilityInterface {
          * @param mixed           $input   Raw input.
          * @param AbstractAbility $ability Ability about to run.
          */
-        do_action( 'wpmcpa_before_execute', $name, $input, $this );
+        do_action( 'cm4ai_before_execute', $name, $input, $this );
 
         $result = $this->execute( $input );
 
@@ -213,7 +213,7 @@ abstract class AbstractAbility implements AbilityInterface {
          * @param mixed                          $input   Raw input.
          * @param AbstractAbility                $ability Ability that ran.
          */
-        $filtered = apply_filters( 'wpmcpa_execute_result', $result, $name, $input, $this );
+        $filtered = apply_filters( 'cm4ai_execute_result', $result, $name, $input, $this );
 
         if ( is_array( $filtered ) || $filtered instanceof \WP_Error ) {
             $result = $filtered;
@@ -223,7 +223,7 @@ abstract class AbstractAbility implements AbilityInterface {
                 esc_html(
                     sprintf(
                         /* translators: %s: ability name. */
-                        __( 'The wpmcpa_execute_result filter must return an array or a WP_Error; the original result of "%s" was kept.', 'wp-mcp-abilities' ),
+                        __( 'The cm4ai_execute_result filter must return an array or a WP_Error; the original result of "%s" was kept.', 'content-manager-for-ai-agents' ),
                         $name
                     )
                 ),
@@ -236,10 +236,10 @@ abstract class AbstractAbility implements AbilityInterface {
          *
          * @param string                         $name    Ability name.
          * @param mixed                          $input   Raw input.
-         * @param array<string, mixed>|\WP_Error $result  Result, after `wpmcpa_execute_result`.
+         * @param array<string, mixed>|\WP_Error $result  Result, after `cm4ai_execute_result`.
          * @param AbstractAbility                $ability Ability that ran.
          */
-        do_action( 'wpmcpa_after_execute', $name, $input, $result, $this );
+        do_action( 'cm4ai_after_execute', $name, $input, $result, $this );
 
         return $result;
     }
@@ -256,7 +256,7 @@ abstract class AbstractAbility implements AbilityInterface {
         if ( ! $post instanceof \WP_Post ) {
             return new \WP_Error(
                 'post_not_found',
-                __( 'Post not found.', 'wp-mcp-abilities' ),
+                __( 'Post not found.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 404 ]
             );
         }
@@ -277,7 +277,7 @@ abstract class AbstractAbility implements AbilityInterface {
         if ( ! $term instanceof \WP_Term ) {
             return new \WP_Error(
                 'term_not_found',
-                __( 'Term not found.', 'wp-mcp-abilities' ),
+                __( 'Term not found.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 404 ]
             );
         }
@@ -291,7 +291,7 @@ abstract class AbstractAbility implements AbilityInterface {
     protected function forbidden(): \WP_Error {
         return new \WP_Error(
             'insufficient_permissions',
-            __( 'You are not allowed to perform this action.', 'wp-mcp-abilities' ),
+            __( 'You are not allowed to perform this action.', 'content-manager-for-ai-agents' ),
             [ 'status' => 403 ]
         );
     }

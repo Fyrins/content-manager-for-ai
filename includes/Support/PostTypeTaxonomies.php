@@ -2,10 +2,10 @@
 /**
  * Taxonomy rules of a post type, for the abilities that write its content.
  *
- * @package WpMcpAbilities\Support
+ * @package CM4AI\Support
  */
 
-namespace WpMcpAbilities\Support;
+namespace CM4AI\Support;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -69,7 +69,7 @@ class PostTypeTaxonomies {
          * @param \WP_Post_Type               $postType   Post type being described.
          */
         return (array) apply_filters(
-            'wpmcpa_assignable_taxonomies',
+            'cm4ai_assignable_taxonomies',
             $taxonomies,
             $this->postType
         );
@@ -93,7 +93,7 @@ class PostTypeTaxonomies {
                 'items'       => [ 'type' => 'integer' ],
                 'description' => sprintf(
                     /* translators: 1: taxonomy label (e.g. "Categories"), 2: taxonomy slug. */
-                    __( 'Term IDs in %1$s (%2$s).', 'wp-mcp-abilities' ),
+                    __( 'Term IDs in %1$s (%2$s).', 'content-manager-for-ai-agents' ),
                     $taxonomy->labels->name,
                     $slug
                 ),
@@ -126,7 +126,7 @@ class PostTypeTaxonomies {
         if ( isset( $input['category_ids'] ) && is_array( $input['terms'] ) && isset( $input['terms']['category'] ) ) {
             return new \WP_Error(
                 'ambiguous_categories',
-                __( 'Send either "category_ids" or the "category" entry of "terms", not both: they write the same taxonomy.', 'wp-mcp-abilities' ),
+                __( 'Send either "category_ids" or the "category" entry of "terms", not both: they write the same taxonomy.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -134,7 +134,7 @@ class PostTypeTaxonomies {
         if ( ! is_array( $input['terms'] ) ) {
             return new \WP_Error(
                 'invalid_terms',
-                __( 'The "terms" parameter must be an object keyed by taxonomy.', 'wp-mcp-abilities' ),
+                __( 'The "terms" parameter must be an object keyed by taxonomy.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -149,7 +149,7 @@ class PostTypeTaxonomies {
                     'taxonomy_not_assignable',
                     sprintf(
                         /* translators: 1: taxonomy slug, 2: post type slug. */
-                        __( 'The "%1$s" taxonomy is not registered for the "%2$s" post type, or is not open to MCP abilities.', 'wp-mcp-abilities' ),
+                        __( 'The "%1$s" taxonomy is not registered for the "%2$s" post type, or is not open to MCP abilities.', 'content-manager-for-ai-agents' ),
                         $taxonomy,
                         $this->postType->name
                     ),
@@ -162,7 +162,7 @@ class PostTypeTaxonomies {
                     'invalid_terms',
                     sprintf(
                         /* translators: %s: taxonomy slug. */
-                        __( 'The "%s" entry of "terms" must be an array of term IDs.', 'wp-mcp-abilities' ),
+                        __( 'The "%s" entry of "terms" must be an array of term IDs.', 'content-manager-for-ai-agents' ),
                         $taxonomy
                     ),
                     [ 'status' => 400 ]
@@ -174,7 +174,7 @@ class PostTypeTaxonomies {
                     'terms_not_allowed',
                     sprintf(
                         /* translators: %s: taxonomy slug. */
-                        __( 'You are not allowed to assign terms in the "%s" taxonomy.', 'wp-mcp-abilities' ),
+                        __( 'You are not allowed to assign terms in the "%s" taxonomy.', 'content-manager-for-ai-agents' ),
                         $taxonomy
                     ),
                     [ 'status' => 403 ]
@@ -187,7 +187,7 @@ class PostTypeTaxonomies {
                         'invalid_terms',
                         sprintf(
                             /* translators: %s: taxonomy slug. */
-                            __( 'The "%s" entry of "terms" must only contain term IDs.', 'wp-mcp-abilities' ),
+                            __( 'The "%s" entry of "terms" must only contain term IDs.', 'content-manager-for-ai-agents' ),
                             $taxonomy
                         ),
                         [ 'status' => 400 ]
@@ -199,7 +199,7 @@ class PostTypeTaxonomies {
                         'term_not_found',
                         sprintf(
                             /* translators: 1: term ID, 2: taxonomy slug. */
-                            __( 'Term %1$d does not exist in the "%2$s" taxonomy.', 'wp-mcp-abilities' ),
+                            __( 'Term %1$d does not exist in the "%2$s" taxonomy.', 'content-manager-for-ai-agents' ),
                             (int) $termId,
                             $taxonomy
                         ),

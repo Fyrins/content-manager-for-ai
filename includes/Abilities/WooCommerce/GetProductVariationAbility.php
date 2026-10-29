@@ -2,13 +2,13 @@
 /**
  * Retrieves a single product variation.
  *
- * @package WpMcpAbilities\Abilities\WooCommerce
+ * @package CM4AI\Abilities\WooCommerce
  */
 
-namespace WpMcpAbilities\Abilities\WooCommerce;
+namespace CM4AI\Abilities\WooCommerce;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -36,7 +36,7 @@ class GetProductVariationAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get a product variation', 'wp-mcp-abilities' );
+        return __( 'Get a product variation', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -45,7 +45,7 @@ class GetProductVariationAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Retrieves a WooCommerce product variation with its attributes, price, stock and dimensions.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -53,7 +53,7 @@ class GetProductVariationAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'wp-mcp-abilities' );
+        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -72,11 +72,11 @@ class GetProductVariationAbility extends AbstractAbility {
         $identifiers = [
             'product_id'   => [
                 'type'        => 'integer',
-                'description' => __( 'Id of the parent product.', 'wp-mcp-abilities' ),
+                'description' => __( 'Id of the parent product.', 'content-manager-for-ai-agents' ),
             ],
             'variation_id' => [
                 'type'        => 'integer',
-                'description' => __( 'Id of the variation.', 'wp-mcp-abilities' ),
+                'description' => __( 'Id of the variation.', 'content-manager-for-ai-agents' ),
             ],
         ];
 

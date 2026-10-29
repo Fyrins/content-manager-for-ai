@@ -22,23 +22,23 @@ import { __, sprintf } from '@wordpress/i18n';
 const BADGES = [
 	{
 		key: 'destructive',
-		className: 'wpmcpa-badge wpmcpa-badge--danger',
-		label: () => __( 'Irreversible', 'wp-mcp-abilities' ),
+		className: 'cm4ai-badge cm4ai-badge--danger',
+		label: () => __( 'Irreversible', 'content-manager-for-ai-agents' ),
 		meaning: () =>
 			__(
 				'Can overwrite or erase data on the site, with no way to undo it.',
-				'wp-mcp-abilities'
+				'content-manager-for-ai-agents'
 			),
 		applies: ( row ) => row.destructive,
 	},
 	{
 		key: 'hidden',
-		className: 'wpmcpa-badge',
-		label: () => __( 'Hidden by default', 'wp-mcp-abilities' ),
+		className: 'cm4ai-badge',
+		label: () => __( 'Hidden by default', 'content-manager-for-ai-agents' ),
 		meaning: () =>
 			__(
 				'Its plugin registers it but does not offer it to agents. Check it to add it to the MCP server, no code needed.',
-				'wp-mcp-abilities'
+				'content-manager-for-ai-agents'
 			),
 		applies: ( row, isThirdParty ) =>
 			isThirdParty && 'exposed' === row.option,
@@ -85,13 +85,10 @@ function AbilityCheckbox( { row, badges, onChange } ) {
 	const label = row.label || row.name;
 	const description = usefulDescription( row, label );
 	const details = [ row.name, description ].filter( Boolean ).join( ' — ' );
-	const detailsId = useInstanceId(
-		AbilityCheckbox,
-		'wpmcpa-ability-details'
-	);
+	const detailsId = useInstanceId( AbilityCheckbox, 'cm4ai-ability-details' );
 
 	return (
-		<li className="wpmcpa-ability">
+		<li className="cm4ai-ability">
 			<CheckboxControl
 				__nextHasNoMarginBottom
 				label={ label }
@@ -105,11 +102,14 @@ function AbilityCheckbox( { row, badges, onChange } ) {
 			{ description && (
 				<Tooltip text={ details }>
 					<Button
-						className="wpmcpa-ability__help"
+						className="cm4ai-ability__help"
 						size="small"
 						aria-label={ sprintf(
 							/* translators: %s: label of the ability. */
-							__( 'Details about %s', 'wp-mcp-abilities' ),
+							__(
+								'Details about %s',
+								'content-manager-for-ai-agents'
+							),
 							label
 						) }
 						aria-describedby={ detailsId }
@@ -143,9 +143,9 @@ function BadgeLegend( { badges, shared } ) {
 	}
 
 	return (
-		<dl className="wpmcpa-legend">
+		<dl className="cm4ai-legend">
 			{ badges.map( ( badge ) => (
-				<div key={ badge.key } className="wpmcpa-legend__item">
+				<div key={ badge.key } className="cm4ai-legend__item">
 					<dt>
 						<span className={ badge.className }>
 							{ badge.label() }
@@ -157,7 +157,7 @@ function BadgeLegend( { badges, shared } ) {
 							' ' +
 								__(
 									'Applies to every ability below.',
-									'wp-mcp-abilities'
+									'content-manager-for-ai-agents'
 								) }
 					</dd>
 				</div>
@@ -211,11 +211,11 @@ function AbilitySection( {
 		);
 
 	return (
-		<section className="wpmcpa-section">
-			<h3 className="wpmcpa-section__title">{ title }</h3>
-			<p className="wpmcpa-section__description">{ description }</p>
+		<section className="cm4ai-section">
+			<h3 className="cm4ai-section__title">{ title }</h3>
+			<p className="cm4ai-section__description">{ description }</p>
 			<BadgeLegend badges={ present } shared={ shared } />
-			<ul className="wpmcpa-grid">
+			<ul className="cm4ai-grid">
 				{ rows.map( ( row ) => (
 					<AbilityCheckbox
 						key={ row.name }
@@ -228,11 +228,17 @@ function AbilitySection( {
 			{ rows.length > 1 && (
 				<CheckboxControl
 					__nextHasNoMarginBottom
-					className="wpmcpa-section__toggle"
+					className="cm4ai-section__toggle"
 					label={
 						allChecked
-							? __( 'Deselect all', 'wp-mcp-abilities' )
-							: __( 'Select all', 'wp-mcp-abilities' )
+							? __(
+									'Deselect all',
+									'content-manager-for-ai-agents'
+								)
+							: __(
+									'Select all',
+									'content-manager-for-ai-agents'
+								)
 					}
 					checked={ allChecked }
 					indeterminate={ checkedCount > 0 && ! allChecked }
@@ -254,13 +260,16 @@ export default function AbilityGroupCard( {
 	const enabledCount = rows.filter( ( row ) => row.enabled ).length;
 
 	return (
-		<Card className="wpmcpa-card" size="medium">
+		<Card className="cm4ai-card" size="medium">
 			<CardHeader>
-				<h2 className="wpmcpa-card__title">{ title }</h2>
-				<span className="wpmcpa-card__count">
+				<h2 className="cm4ai-card__title">{ title }</h2>
+				<span className="cm4ai-card__count">
 					{ sprintf(
 						/* translators: 1: number of enabled abilities, 2: number of abilities. */
-						__( '%1$d of %2$d enabled', 'wp-mcp-abilities' ),
+						__(
+							'%1$d of %2$d enabled',
+							'content-manager-for-ai-agents'
+						),
 						enabledCount,
 						rows.length
 					) }
@@ -268,26 +277,32 @@ export default function AbilityGroupCard( {
 			</CardHeader>
 			<CardBody>
 				<AbilitySection
-					title={ __( 'Read-only abilities', 'wp-mcp-abilities' ) }
+					title={ __(
+						'Read-only abilities',
+						'content-manager-for-ai-agents'
+					) }
 					description={ __(
 						'These abilities let an agent read content. They change nothing on the site.',
-						'wp-mcp-abilities'
+						'content-manager-for-ai-agents'
 					) }
 					rows={ readRows }
 					onChange={ onChange }
 					isThirdParty={ isThirdParty }
 				/>
 				<AbilitySection
-					title={ __( 'Write abilities', 'wp-mcp-abilities' ) }
+					title={ __(
+						'Write abilities',
+						'content-manager-for-ai-agents'
+					) }
 					description={
 						isThirdParty
 							? __(
 									'These abilities do not declare themselves read-only: assume they can change the site.',
-									'wp-mcp-abilities'
+									'content-manager-for-ai-agents'
 								)
 							: __(
 									'These abilities let an agent create, update and delete content.',
-									'wp-mcp-abilities'
+									'content-manager-for-ai-agents'
 								)
 					}
 					rows={ writeRows }

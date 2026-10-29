@@ -2,14 +2,14 @@
 /**
  * Inventory of every ability the plugin can expose.
  *
- * @package WpMcpAbilities\Services
+ * @package CM4AI\Services
  */
 
-namespace WpMcpAbilities\Services;
+namespace CM4AI\Services;
 
-use WpMcpAbilities\Registry\AbilityRegistry;
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\PostTypeAbility;
+use CM4AI\Registry\AbilityRegistry;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\PostTypeAbility;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -119,7 +119,7 @@ class AbilityCatalogService {
          * @param \WP_Post_Type $postType   Post type the abilities are generated for.
          */
         $operations = (array) apply_filters(
-            'wpmcpa_post_type_operations',
+            'cm4ai_post_type_operations',
             self::OPERATIONS,
             $postType
         );
@@ -142,6 +142,6 @@ class AbilityCatalogService {
          *
          * @param \WP_Post_Type[] $postTypes Post types eligible for list/get/create/update/delete abilities.
          */
-        return (array) apply_filters( 'wpmcpa_post_types', $postTypes );
+        return (array) apply_filters( 'cm4ai_post_types', $postTypes );
     }
 }

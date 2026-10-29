@@ -2,14 +2,14 @@
 /**
  * Warns when a dependency the plugin needs is missing.
  *
- * @package WpMcpAbilities\Hooks
+ * @package CM4AI\Hooks
  */
 
-namespace WpMcpAbilities\Hooks;
+namespace CM4AI\Hooks;
 
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Services\SettingsService;
-use WpMcpAbilities\Support\Requirements;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Services\SettingsService;
+use CM4AI\Support\Requirements;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -68,8 +68,8 @@ class RequirementsNotice implements HookInterface {
                     <?php
                     echo esc_html(
                         $is_error
-                            ? __( 'WP MCP Abilities cannot register its abilities.', 'wp-mcp-abilities' )
-                            : __( 'WP MCP Abilities is not reachable by MCP clients yet.', 'wp-mcp-abilities' )
+                            ? __( 'Content Manager for AI Agents cannot register its abilities.', 'content-manager-for-ai-agents' )
+                            : __( 'Content Manager for AI Agents is not reachable by MCP clients yet.', 'content-manager-for-ai-agents' )
                     );
                     ?>
                 </strong>
@@ -82,7 +82,7 @@ class RequirementsNotice implements HookInterface {
                         <br /><code><?php echo esc_html( $requirement['command'] ); ?></code>
                     <?php endif; ?>
                     <?php if ( ! empty( $requirement['url'] ) ) : ?>
-                        <br /><a href="<?php echo esc_url( $requirement['url'] ); ?>"><?php echo esc_html__( 'Download the MCP Adapter', 'wp-mcp-abilities' ); ?></a>
+                        <br /><a href="<?php echo esc_url( $requirement['url'] ); ?>"><?php echo esc_html__( 'Download the MCP Adapter', 'content-manager-for-ai-agents' ); ?></a>
                     <?php endif; ?>
                 </p>
             <?php endforeach; ?>

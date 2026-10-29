@@ -1,10 +1,10 @@
-=== WP MCP Abilities ===
+=== Content Manager for AI Agents ===
 Contributors: fyrins
 Tags: mcp, ai, abilities, agents, api
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.3.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Let AI agents manage your content through the Abilities API: posts, media, terms
 
 == Description ==
 
-WP MCP Abilities registers content management abilities with the WordPress Abilities API. With the MCP Adapter active, an MCP client (Claude, ChatGPT, Cursor…) can discover and run them: an AI agent can draft and publish posts, fix a typo across a page, upload images, classify content, fill in SEO fields or build a variable product, always within the permissions of the WordPress user it authenticates as.
+Content Manager for AI Agents registers content management abilities with the WordPress Abilities API. With the MCP Adapter active, an MCP client (Claude, ChatGPT, Cursor…) can discover and run them: an AI agent can draft and publish posts, fix a typo across a page, upload images, classify content, fill in SEO fields or build a variable product, always within the permissions of the WordPress user it authenticates as.
 
 Ability families, with a few names:
 
@@ -25,9 +25,9 @@ Ability families, with a few names:
 * **SEOPress**, when active: `get-post-seopress`, `update-post-seopress`, `get-term-seopress`, `update-term-seopress`, and `update-post-schemas-seopress` with SEOPress Pro.
 * **WP Grid Builder**, when active: `list-wpgb-facets`, `index-wpgb-facets` (queues facets for indexing, off by default) and `clear-wpgb-cache`, for users who can manage options.
 
-Every name carries the `wp-mcp-abilities/` prefix.
+Every name carries the `cm4ai/` prefix.
 
-Each ability can be switched on or off from Settings → MCP Abilities. Abilities that delete something are off until you enable them.
+Each ability can be switched on or off from Settings → Content Manager for AI Agents. Abilities that delete something are off until you enable them.
 
 = Requirements =
 
@@ -61,13 +61,17 @@ Core and MCP Adapter abilities are never listed.
 
 = For developers =
 
-Every query, result and permission decision can be adjusted through `wpmcpa_*` filters, and new abilities can be added. Custom abilities are added on the `wpmcpa_register_abilities` action, and every call can be observed or adjusted with `wpmcpa_before_execute`, `wpmcpa_execute_result` and `wpmcpa_after_execute`. Full reference on GitHub: https://github.com/Fyrins/wp-mcp-abilities
+Every query, result and permission decision can be adjusted through `cm4ai_*` filters, and new abilities can be added. Custom abilities are added on the `cm4ai_register_abilities` action, and every call can be observed or adjusted with `cm4ai_before_execute`, `cm4ai_execute_result` and `cm4ai_after_execute`. Full reference on GitHub: https://github.com/Fyrins/content-manager-for-ai
+
+= Source code =
+
+The settings screen ships compiled in `build/`. Its sources live in `src/` in the public repository, https://github.com/Fyrins/content-manager-for-ai, and are built with `@wordpress/scripts`: `npm install`, then `npm run build`.
 
 == Installation ==
 
-1. Install and activate WP MCP Abilities.
+1. Install and activate Content Manager for AI Agents.
 2. Install and activate the MCP Adapter from its GitHub releases.
-3. Go to Settings → MCP Abilities and choose which abilities are enabled.
+3. Go to Settings → Content Manager for AI Agents and choose which abilities are enabled.
 4. In the Connection tab, create an application password for the WordPress user the agent will act as.
 5. Copy the configuration of your client (Claude Code, Claude Desktop, Cursor, Codex or another HTTP client) into it. It points at `https://your-site.example/wp-json/mcp/mcp-adapter-default-server`, authenticated with that user and application password.
 
@@ -83,7 +87,7 @@ Exactly what the WordPress user it authenticates as can do, limited to the abili
 
 = How do I disable an ability? =
 
-Uncheck it under Settings → MCP Abilities. A disabled ability is not registered at all, so MCP clients do not see it. Developers can also force the state with the `wpmcpa_is_enabled` filter.
+Uncheck it under Settings → Content Manager for AI Agents. A disabled ability is not registered at all, so MCP clients do not see it. Developers can also force the state with the `cm4ai_is_enabled` filter.
 
 = WooCommerce or SEOPress is not installed. Does it matter? =
 
@@ -113,73 +117,15 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 
 == Changelog ==
 
-= 1.3.0 =
-* New: Codex tab in the Connection screen, with a ready-to-paste `config.toml` snippet.
-* New: each client tab shows its logo.
-* Fix: the "?" and badges of an ability stay next to its label when the label wraps.
+= 2.0.0 =
+* Renamed from WP MCP Abilities to Content Manager for AI Agents, for its release on WordPress.org. The plugin folder, text domain and every identifier change: abilities are now named `cm4ai/<name>`, hooks and options use the `cm4ai_` prefix. Update the MCP clients and code that call the former names.
+* The switches saved under the former name are copied on activation.
+* Security: writing or deleting a meta key also checks the meta capability of that key, so an `auth_callback` given to `register_meta()` applies.
+* Fix: `upload-media` stops the download as soon as the file exceeds the allowed size, instead of writing it to disk in full first.
 
-= 1.2.4 =
-* Fix: the "?" tooltip is back for abilities whose description says more than their label. Descriptions written under every checkbox made long-described blocks hard to read.
-* Fix: a badge every ability of a block carries is explained once in the legend instead of being repeated on each row.
-
-= 1.2.3 =
-* Fix: clearer badges on the settings screen. "Irreversible" replaces "Deletes", "Hidden by default" replaces "Closed by its plugin", and a legend explains them.
-* Fix: each ability's technical name and description are shown under its checkbox, instead of a "?" tooltip that repeated the label.
-
-= 1.2.2 =
-* Fix: exposing to MCP a third-party ability closed by its own plugin now works.
-* Fix: settings screen accessibility (ability details tied to their checkbox, copy announced, persistent save errors).
-* New: `wpmcpa_server_url` filter.
-
-= 1.2.1 =
-* Security: `get-term-seopress` requires `edit_term` on the term it reads.
-* Fix: a partial request to the settings REST route no longer switches the other abilities off.
-* Fix: RTL stylesheet of the settings screen, and escaping in the Base64 helper command.
-
-= 1.2.0 =
-* New: settings screen rebuilt in tabs. A Connection tab shows the server URL, creates an application password in one click and gives ready-to-paste configurations for Claude Code, Claude Desktop and Cursor.
-* New: abilities are grouped in cards, split into read-only and write, with select-all and a filter field.
-* New: every ability publishes `readonly` and `destructive` annotations.
-* Security: read abilities now check permissions on the object they read (posts, post meta, SEOPress data, media). `get-term-meta` requires `edit_term` on the term.
-
-= 1.1.1 =
-* Fix: the "MCP Adapter is not running" notice no longer shows by mistake with MCP Adapter 0.7 when another plugin bundles an older copy of the adapter.
-
-= 1.1.0 =
-* New WP Grid Builder abilities, when that plugin is active: list the facets with their index row counts, queue facets for indexing (off by default) and clear its cache. Reserved to users who can manage options.
-* Fix: updating a meta value no longer strips percent-encoded characters and line breaks. A key with its own sanitize callback gets the value as sent, so a URL keeps its %20.
-
-= 1.0.0 =
-* First public release as a standalone plugin, with no framework or Composer dependency at runtime.
-* Abilities for posts of every public post type, media, taxonomies, meta, block templates, WooCommerce and SEOPress.
-* The MCP Adapter is optional: without it the abilities stay available through the Abilities API, and a notice explains what to install.
-* Settings screen to switch each ability on or off, and to control abilities registered by other plugins.
+Earlier versions, released as WP MCP Abilities: https://github.com/Fyrins/content-manager-for-ai/blob/main/CHANGELOG.md
 
 == Upgrade Notice ==
 
-= 1.3.0 =
-Adds Codex to the client configurations, and logos to the client tabs.
-
-= 1.2.4 =
-Readable ability lists again for plugins with long descriptions.
-
-= 1.2.3 =
-Clearer badges and ability details on the settings screen.
-
-= 1.2.2 =
-Exposing a closed third-party ability to MCP works again. Accessibility fixes on the settings screen.
-
-= 1.2.1 =
-Security fix: contributors can no longer read the SEOPress fields of any term.
-
-= 1.2.0 =
-Security fix: read abilities no longer let low-privilege users read private content and meta. New settings screen with client configuration help.
-
-= 1.1.1 =
-Removes a false "MCP Adapter is not running" notice with MCP Adapter 0.7.
-
-= 1.1.0 =
-Adds WP Grid Builder abilities and fixes meta values losing their %20 and line breaks when written.
-
-= 1.0.0 =
-First public release. Check Settings → MCP Abilities after activation: destructive abilities start disabled.
+= 2.0.0 =
+New name and identifiers. Abilities are now `cm4ai/<name>`: update your MCP client configurations and any code using the former `wpmcpa_` hooks.

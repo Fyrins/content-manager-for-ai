@@ -2,10 +2,10 @@
 /**
  * Shared allowlisting and validation for meta abilities.
  *
- * @package WpMcpAbilities\Abilities\Meta
+ * @package CM4AI\Abilities\Meta
  */
 
-namespace WpMcpAbilities\Abilities\Meta;
+namespace CM4AI\Abilities\Meta;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,13 +25,13 @@ trait MetaAccess {
      * WordPress flags them as protected.
      *
      * Empty by default: every protected meta key is refused until a site opts
-     * it in through the `wpmcpa_allowed_meta_keys` filter. Public
+     * it in through the `cm4ai_allowed_meta_keys` filter. Public
      * (non-protected) meta keys are always allowed and never need to be listed.
      *
      * Example, exposing `_thumbnail_id` to the post meta abilities only:
      *
      *     add_filter(
-     *         'wpmcpa_allowed_meta_keys',
+     *         'cm4ai_allowed_meta_keys',
      *         function ( array $keys, string $objectType ) {
      *             if ( 'post' === $objectType ) {
      *                 $keys[] = '_thumbnail_id';
@@ -53,7 +53,7 @@ trait MetaAccess {
          * @param array<int, string> $keys       Allowed protected meta keys, empty by default.
          * @param string             $objectType Object type being targeted, 'post' or 'term'.
          */
-        return (array) apply_filters( 'wpmcpa_allowed_meta_keys', [], $objectType );
+        return (array) apply_filters( 'cm4ai_allowed_meta_keys', [], $objectType );
     }
 
     /**
@@ -67,7 +67,7 @@ trait MetaAccess {
         if ( ! is_scalar( $rawMetaKey ) ) {
             return new \WP_Error(
                 'meta_key_not_allowed',
-                __( 'The "meta_key" parameter is required.', 'wp-mcp-abilities' ),
+                __( 'The "meta_key" parameter is required.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 403 ]
             );
         }
@@ -77,7 +77,7 @@ trait MetaAccess {
         if ( '' === $metaKey ) {
             return new \WP_Error(
                 'meta_key_not_allowed',
-                __( 'The "meta_key" parameter is required.', 'wp-mcp-abilities' ),
+                __( 'The "meta_key" parameter is required.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 403 ]
             );
         }
@@ -87,7 +87,7 @@ trait MetaAccess {
                 'meta_key_not_allowed',
                 sprintf(
                     /* translators: %s: meta key name. */
-                    __( 'The "%s" meta key is protected and has not been allowlisted for MCP abilities.', 'wp-mcp-abilities' ),
+                    __( 'The "%s" meta key is protected and has not been allowlisted for MCP abilities.', 'content-manager-for-ai-agents' ),
                     $metaKey
                 ),
                 [ 'status' => 403 ]
@@ -137,7 +137,7 @@ trait MetaAccess {
                 if ( null !== $item && ! is_scalar( $item ) ) {
                     return new \WP_Error(
                         'invalid_meta_value',
-                        __( 'The "meta_value" parameter only accepts scalars or arrays of scalars.', 'wp-mcp-abilities' ),
+                        __( 'The "meta_value" parameter only accepts scalars or arrays of scalars.', 'content-manager-for-ai-agents' ),
                         [ 'status' => 400 ]
                     );
                 }
@@ -150,7 +150,7 @@ trait MetaAccess {
 
         return new \WP_Error(
             'invalid_meta_value',
-            __( 'The "meta_value" parameter only accepts scalars or arrays of scalars.', 'wp-mcp-abilities' ),
+            __( 'The "meta_value" parameter only accepts scalars or arrays of scalars.', 'content-manager-for-ai-agents' ),
             [ 'status' => 400 ]
         );
     }
@@ -236,7 +236,7 @@ trait MetaAccess {
         return [
             'description' => __(
                 'The meta value. Accepts a string, number or boolean, or an array of such scalars; objects are rejected.',
-                'wp-mcp-abilities'
+                'content-manager-for-ai-agents'
             ),
             'anyOf'       => [
                 [ 'type' => 'string' ],

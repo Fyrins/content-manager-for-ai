@@ -2,10 +2,10 @@
 /**
  * Contract of the classes that attach WordPress hooks.
  *
- * @package WpMcpAbilities\Contracts
+ * @package CM4AI\Contracts
  */
 
-namespace WpMcpAbilities\Contracts;
+namespace CM4AI\Contracts;
 
 defined( 'ABSPATH' ) || exit;
 

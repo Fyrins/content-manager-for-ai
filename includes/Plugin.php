@@ -2,28 +2,28 @@
 /**
  * Builds the plugin's object graph and attaches its hooks.
  *
- * @package WpMcpAbilities
+ * @package CM4AI
  */
 
-namespace WpMcpAbilities;
+namespace CM4AI;
 
-use WpMcpAbilities\AbilityCategories\ContentAbilityCategory;
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Hooks\AbilityAvailability;
-use WpMcpAbilities\Hooks\Admin\RegisterAbilitiesPage;
-use WpMcpAbilities\Hooks\Admin\RegisterAbilitiesSettings;
-use WpMcpAbilities\Hooks\Admin\SettingsRestRoute;
-use WpMcpAbilities\Hooks\PostTypeAbilityProvider;
-use WpMcpAbilities\Hooks\RequirementsNotice;
-use WpMcpAbilities\Hooks\ThirdPartyAbilityAvailability;
-use WpMcpAbilities\Hooks\ThirdPartyAbilityExposure;
-use WpMcpAbilities\Hooks\WooCommerceProductTypes;
-use WpMcpAbilities\Registry\AbilityRegistry;
-use WpMcpAbilities\Services\AbilityCatalogService;
-use WpMcpAbilities\Services\SettingsSanitizer;
-use WpMcpAbilities\Services\SettingsScreenData;
-use WpMcpAbilities\Services\SettingsService;
-use WpMcpAbilities\Services\ThirdPartyAbilityCatalog;
+use CM4AI\AbilityCategories\ContentAbilityCategory;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Hooks\AbilityAvailability;
+use CM4AI\Hooks\Admin\RegisterAbilitiesPage;
+use CM4AI\Hooks\Admin\RegisterAbilitiesSettings;
+use CM4AI\Hooks\Admin\SettingsRestRoute;
+use CM4AI\Hooks\PostTypeAbilityProvider;
+use CM4AI\Hooks\RequirementsNotice;
+use CM4AI\Hooks\ThirdPartyAbilityAvailability;
+use CM4AI\Hooks\ThirdPartyAbilityExposure;
+use CM4AI\Hooks\WooCommerceProductTypes;
+use CM4AI\Registry\AbilityRegistry;
+use CM4AI\Services\AbilityCatalogService;
+use CM4AI\Services\SettingsSanitizer;
+use CM4AI\Services\SettingsScreenData;
+use CM4AI\Services\SettingsService;
+use CM4AI\Services\ThirdPartyAbilityCatalog;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -129,12 +129,12 @@ final class Plugin {
         /**
          * Fires once the plugin has built its services and attached its hooks.
          *
-         * Custom abilities are better added on `wpmcpa_register_abilities`,
+         * Custom abilities are better added on `cm4ai_register_abilities`,
          * which also reaches code loaded after this plugin. Until
          * `after_setup_theme`, the registry lists the built-in abilities only.
          *
          * @param AbilityRegistry $registry The plugin's ability registry.
          */
-        do_action( 'wpmcpa_loaded', $registry );
+        do_action( 'cm4ai_loaded', $registry );
     }
 }

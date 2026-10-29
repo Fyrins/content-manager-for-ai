@@ -2,14 +2,14 @@
 /**
  * Keeps disabled and unavailable abilities out of the registry.
  *
- * @package WpMcpAbilities\Hooks
+ * @package CM4AI\Hooks
  */
 
-namespace WpMcpAbilities\Hooks;
+namespace CM4AI\Hooks;
 
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Services\SettingsService;
-use WpMcpAbilities\Support\AbstractAbility;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Services\SettingsService;
+use CM4AI\Support\AbstractAbility;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,7 +29,7 @@ class AbilityAvailability implements HookInterface {
      * @inheritDoc
      */
     public function hooks(): void {
-        add_filter( 'wpmcpa_abilities', [ $this, 'rejectUnavailable' ], 20 );
+        add_filter( 'cm4ai_abilities', [ $this, 'rejectUnavailable' ], 20 );
     }
 
     /**

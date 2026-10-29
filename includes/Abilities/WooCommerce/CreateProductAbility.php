@@ -2,13 +2,13 @@
 /**
  * Creates a product.
  *
- * @package WpMcpAbilities\Abilities\WooCommerce
+ * @package CM4AI\Abilities\WooCommerce
  */
 
-namespace WpMcpAbilities\Abilities\WooCommerce;
+namespace CM4AI\Abilities\WooCommerce;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,7 +29,7 @@ class CreateProductAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Create a product', 'wp-mcp-abilities' );
+        return __( 'Create a product', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -38,7 +38,7 @@ class CreateProductAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Creates a WooCommerce product. Accepts every field of the REST API: type, price and dated sale, stock, references, dimensions, taxonomies, images, attributes and default attributes. Prices set on a variable product are derived from its variations.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -46,7 +46,7 @@ class CreateProductAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'wp-mcp-abilities' );
+        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
     }
 
     /**

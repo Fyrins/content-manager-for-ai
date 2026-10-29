@@ -70,7 +70,10 @@ export default function App( { path } ) {
 			.catch( ( e ) =>
 				setError(
 					e?.message ||
-						__( 'Could not load the settings.', 'wp-mcp-abilities' )
+						__(
+							'Could not load the settings.',
+							'content-manager-for-ai-agents'
+						)
 				)
 			);
 	}, [ path ] );
@@ -114,7 +117,10 @@ export default function App( { path } ) {
 			<div role="status">
 				<Spinner />
 				<VisuallyHidden>
-					{ __( 'Loading the settings…', 'wp-mcp-abilities' ) }
+					{ __(
+						'Loading the settings…',
+						'content-manager-for-ai-agents'
+					) }
 				</VisuallyHidden>
 			</div>
 		);
@@ -147,7 +153,10 @@ export default function App( { path } ) {
 				setNotices( [
 					{
 						id: Date.now(),
-						content: __( 'Settings saved.', 'wp-mcp-abilities' ),
+						content: __(
+							'Settings saved.',
+							'content-manager-for-ai-agents'
+						),
 					},
 				] );
 			} )
@@ -156,7 +165,10 @@ export default function App( { path } ) {
 			.catch( ( e ) =>
 				setSaveError(
 					e?.message ||
-						__( 'Could not save the settings.', 'wp-mcp-abilities' )
+						__(
+							'Could not save the settings.',
+							'content-manager-for-ai-agents'
+						)
 				)
 			)
 			.finally( () => setIsSaving( false ) );
@@ -167,13 +179,13 @@ export default function App( { path } ) {
 	const tabs = [
 		{
 			name: 'connection',
-			title: __( 'Connection', 'wp-mcp-abilities' ),
+			title: __( 'Connection', 'content-manager-for-ai-agents' ),
 		},
 		{
 			name: 'abilities',
 			title: sprintf(
 				/* translators: 1: number of enabled abilities, 2: number of abilities. */
-				__( 'Abilities (%1$d/%2$d)', 'wp-mcp-abilities' ),
+				__( 'Abilities (%1$d/%2$d)', 'content-manager-for-ai-agents' ),
 				enabledCount,
 				data.abilities.length
 			),
@@ -183,14 +195,14 @@ export default function App( { path } ) {
 	if ( data.thirdParty.length > 0 ) {
 		tabs.push( {
 			name: 'third-party',
-			title: __( 'Other plugins', 'wp-mcp-abilities' ),
+			title: __( 'Other plugins', 'content-manager-for-ai-agents' ),
 		} );
 	}
 
 	return (
-		<div className="wpmcpa-app">
+		<div className="cm4ai-app">
 			<TabPanel
-				className="wpmcpa-tabs"
+				className="cm4ai-tabs"
 				tabs={ tabs }
 				onSelect={ setCurrentTab }
 			>
@@ -227,11 +239,11 @@ export default function App( { path } ) {
 
 			{ /* Only the abilities tabs hold switches; the save bar stays out of the way elsewhere unless something is pending. */ }
 			{ ( 'connection' !== currentTab || isDirty || saveError ) && (
-				<div className="wpmcpa-savebar">
+				<div className="cm4ai-savebar">
 					{ saveError && (
 						<Notice
 							status="error"
-							className="wpmcpa-savebar__error"
+							className="cm4ai-savebar__error"
 							onRemove={ () => setSaveError( null ) }
 						>
 							{ saveError }
@@ -243,18 +255,24 @@ export default function App( { path } ) {
 						isBusy={ isSaving }
 						disabled={ isSaving || ! isDirty }
 					>
-						{ __( 'Save settings', 'wp-mcp-abilities' ) }
+						{ __(
+							'Save settings',
+							'content-manager-for-ai-agents'
+						) }
 					</Button>
 					{ isDirty && (
-						<span className="wpmcpa-savebar__hint">
-							{ __( 'Unsaved changes', 'wp-mcp-abilities' ) }
+						<span className="cm4ai-savebar__hint">
+							{ __(
+								'Unsaved changes',
+								'content-manager-for-ai-agents'
+							) }
 						</span>
 					) }
 				</div>
 			) }
 
 			<SnackbarList
-				className="wpmcpa-snackbars"
+				className="cm4ai-snackbars"
 				notices={ notices }
 				onRemove={ ( id ) =>
 					setNotices( ( current ) =>

@@ -2,10 +2,10 @@
 /**
  * Shared shaping and validation for taxonomy abilities.
  *
- * @package WpMcpAbilities\Abilities\Taxonomy
+ * @package CM4AI\Abilities\Taxonomy
  */
 
-namespace WpMcpAbilities\Abilities\Taxonomy;
+namespace CM4AI\Abilities\Taxonomy;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -39,7 +39,7 @@ trait TaxonomyFormatting {
          *
          * @param array<string, \WP_Taxonomy> $taxonomies Taxonomies open to MCP, keyed by slug.
          */
-        return (array) apply_filters( 'wpmcpa_taxonomies', $taxonomies );
+        return (array) apply_filters( 'cm4ai_taxonomies', $taxonomies );
     }
 
     /**
@@ -52,7 +52,7 @@ trait TaxonomyFormatting {
         if ( '' === $taxonomy ) {
             return new \WP_Error(
                 'missing_taxonomy',
-                __( 'The "taxonomy" parameter is required.', 'wp-mcp-abilities' ),
+                __( 'The "taxonomy" parameter is required.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -60,7 +60,7 @@ trait TaxonomyFormatting {
         if ( ! array_key_exists( $taxonomy, $this->getTaxonomies() ) ) {
             return new \WP_Error(
                 'taxonomy_not_allowed',
-                __( 'This taxonomy is not managed by MCP abilities.', 'wp-mcp-abilities' ),
+                __( 'This taxonomy is not managed by MCP abilities.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 403 ]
             );
         }

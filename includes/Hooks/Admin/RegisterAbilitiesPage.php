@@ -2,13 +2,13 @@
 /**
  * Adds the settings page and loads the script rendering it.
  *
- * @package WpMcpAbilities\Hooks\Admin
+ * @package CM4AI\Hooks\Admin
  */
 
-namespace WpMcpAbilities\Hooks\Admin;
+namespace CM4AI\Hooks\Admin;
 
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Services\SettingsService;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Services\SettingsService;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,7 +24,7 @@ class RegisterAbilitiesPage implements HookInterface {
      *
      * @var string
      */
-    private const HANDLE = 'wp-mcp-abilities-settings';
+    private const HANDLE = 'cm4ai-settings';
 
     /**
      * Hook suffix of the page, known once it is added.
@@ -48,8 +48,8 @@ class RegisterAbilitiesPage implements HookInterface {
      */
     public function registerPage(): void {
         $this->hookSuffix = (string) add_options_page(
-            __( 'MCP Abilities', 'wp-mcp-abilities' ),
-            __( 'MCP Abilities', 'wp-mcp-abilities' ),
+            __( 'Content Manager for AI Agents', 'content-manager-for-ai-agents' ),
+            __( 'Content Manager for AI Agents', 'content-manager-for-ai-agents' ),
             SettingsService::CAPABILITY,
             SettingsService::PAGE_SLUG,
             [ $this, 'renderPage' ]
@@ -74,7 +74,7 @@ class RegisterAbilitiesPage implements HookInterface {
         }
 
         $asset = require $assetFile;
-        $url   = plugins_url( 'build/', WPMCPA_FILE );
+        $url   = plugins_url( 'build/', CM4AI_FILE );
 
         wp_enqueue_script(
             self::HANDLE,
@@ -83,7 +83,7 @@ class RegisterAbilitiesPage implements HookInterface {
             $asset['version'],
             true
         );
-        wp_set_script_translations( self::HANDLE, 'wp-mcp-abilities', WPMCPA_DIR . '/languages' );
+        wp_set_script_translations( self::HANDLE, 'content-manager-for-ai-agents', CM4AI_DIR . '/languages' );
 
         wp_enqueue_style(
             self::HANDLE,
@@ -106,7 +106,7 @@ class RegisterAbilitiesPage implements HookInterface {
         );
         wp_add_inline_script(
             self::HANDLE,
-            sprintf( 'window.wpMcpAbilities = %s;', wp_json_encode( [ 'path' => $path ], JSON_HEX_TAG | JSON_HEX_AMP ) ),
+            sprintf( 'window.cm4ai = %s;', wp_json_encode( [ 'path' => $path ], JSON_HEX_TAG | JSON_HEX_AMP ) ),
             'before'
         );
     }
@@ -122,16 +122,16 @@ class RegisterAbilitiesPage implements HookInterface {
         }
 
         ?>
-        <div class="wrap wpmcpa-settings-wrap">
-            <h1><?php echo esc_html__( 'MCP Abilities', 'wp-mcp-abilities' ); ?></h1>
-            <div id="wpmcpa-settings">
+        <div class="wrap cm4ai-settings-wrap">
+            <h1><?php echo esc_html__( 'Content Manager for AI Agents', 'content-manager-for-ai-agents' ); ?></h1>
+            <div id="cm4ai-settings">
                 <?php if ( null === $this->assetFile() ) : ?>
                     <div class="notice notice-error inline">
-                        <p><?php esc_html_e( 'The screen\'s script is missing. On a copy installed from the repository, run `npm ci && npm run build`.', 'wp-mcp-abilities' ); ?></p>
+                        <p><?php esc_html_e( 'The screen\'s script is missing. On a copy installed from the repository, run `npm ci && npm run build`.', 'content-manager-for-ai-agents' ); ?></p>
                     </div>
                 <?php endif; ?>
                 <noscript>
-                    <?php esc_html_e( 'This screen needs JavaScript.', 'wp-mcp-abilities' ); ?>
+                    <?php esc_html_e( 'This screen needs JavaScript.', 'content-manager-for-ai-agents' ); ?>
                 </noscript>
             </div>
         </div>
@@ -144,7 +144,7 @@ class RegisterAbilitiesPage implements HookInterface {
      * @return string|null Path of the file, or null when it is missing.
      */
     private function assetFile(): ?string {
-        $file = WPMCPA_DIR . '/build/index.asset.php';
+        $file = CM4AI_DIR . '/build/index.asset.php';
 
         return is_readable( $file ) ? $file : null;
     }

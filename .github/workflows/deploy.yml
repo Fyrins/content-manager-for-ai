@@ -30,16 +30,16 @@ jobs:
       # installs it under the right directory.
       - name: Assemble the zip
         run: |
-          mkdir -p dist/wp-mcp-abilities
-          rsync -a --exclude-from=.distignore --exclude=dist ./ dist/wp-mcp-abilities/
-          (cd dist && zip -qr wp-mcp-abilities.zip wp-mcp-abilities)
+          mkdir -p dist/content-manager-for-ai-agents
+          rsync -a --exclude-from=.distignore --exclude=dist ./ dist/content-manager-for-ai-agents/
+          (cd dist && zip -qr content-manager-for-ai-agents.zip content-manager-for-ai-agents)
       - name: GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
           awk -v v="$VERSION" 'index($0, "## [" v "]") == 1 {f=1; next} /^## / {f=0} f' CHANGELOG.md > notes.md
-          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" dist/wp-mcp-abilities.zip --title "$VERSION" --notes-file notes.md
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" dist/content-manager-for-ai-agents.zip --title "$VERSION" --notes-file notes.md
 
   # Off until the plugin is approved on WordPress.org: set the repository
   # variable DEPLOY_TO_WPORG to `true` to turn it on.
@@ -61,5 +61,5 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SLUG: wp-mcp-abilities
+          SLUG: content-manager-for-ai-agents
           ASSETS_DIR: .wordpress-org
