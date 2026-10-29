@@ -2,13 +2,13 @@
 /**
  * Lists the public taxonomies exposed to MCP clients.
  *
- * @package WpMcpAbilities\Abilities\Taxonomy
+ * @package CM4AI\Abilities\Taxonomy
  */
 
-namespace WpMcpAbilities\Abilities\Taxonomy;
+namespace CM4AI\Abilities\Taxonomy;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -36,7 +36,7 @@ class ListTaxonomiesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List taxonomies', 'wp-mcp-abilities' );
+        return __( 'List taxonomies', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -45,7 +45,7 @@ class ListTaxonomiesAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists all public taxonomies (category, post_tag, custom).',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -53,7 +53,7 @@ class ListTaxonomiesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'wp-mcp-abilities' );
+        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -123,6 +123,6 @@ class ListTaxonomiesAbility extends AbstractAbility {
          *
          * @param array<int, array<string, mixed>> $result Formatted taxonomies.
          */
-        return (array) apply_filters( 'wpmcpa_list_taxonomies_result', $result );
+        return (array) apply_filters( 'cm4ai_list_taxonomies_result', $result );
     }
 }

@@ -2,12 +2,12 @@
 /**
  * Inventory of the abilities other plugins have registered.
  *
- * @package WpMcpAbilities\Services
+ * @package CM4AI\Services
  */
 
-namespace WpMcpAbilities\Services;
+namespace CM4AI\Services;
 
-use WpMcpAbilities\Support\AbstractAbility;
+use CM4AI\Support\AbstractAbility;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,7 +27,7 @@ class ThirdPartyAbilityCatalog {
      * Removing an ability of the adapter would cut the branch the agent sits on,
      * and the core ones are what the adapter builds upon.
      *
-     * `wp-mcp-abilities` is not among them on purpose: it is this plugin's prefix,
+     * `cm4ai` is not among them on purpose: it is this plugin's prefix,
      * but another plugin could register abilities under it too, and excluding it
      * would hide those from this screen without listing them on the other one.
      * Ours are recognised by the mark they carry, not by their name.
@@ -168,7 +168,7 @@ class ThirdPartyAbilityCatalog {
     private function isOurs( \WP_Ability $ability ): bool {
         $meta = $ability->get_meta();
 
-        return ( $meta['wpmcpa']['plugin'] ?? null ) === AbstractAbility::PLUGIN_MARK;
+        return ( $meta['cm4ai']['plugin'] ?? null ) === AbstractAbility::PLUGIN_MARK;
     }
 
     /**

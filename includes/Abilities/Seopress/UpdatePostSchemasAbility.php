@@ -2,14 +2,14 @@
 /**
  * Replaces the SEOpress Pro Custom JSON-LD schemas of a post.
  *
- * @package WpMcpAbilities\Abilities\Seopress
+ * @package CM4AI\Abilities\Seopress
  */
 
-namespace WpMcpAbilities\Abilities\Seopress;
+namespace CM4AI\Abilities\Seopress;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -33,7 +33,7 @@ class UpdatePostSchemasAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update post SEOpress schemas', 'wp-mcp-abilities' );
+        return __( 'Update post SEOpress schemas', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -42,7 +42,7 @@ class UpdatePostSchemasAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Replaces the SEOpress Pro Custom JSON-LD schemas of a post. Sending an empty array clears all manual schemas.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -50,7 +50,7 @@ class UpdatePostSchemasAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'SEOpress', 'wp-mcp-abilities' );
+        return __( 'SEOpress', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -71,13 +71,13 @@ class UpdatePostSchemasAbility extends AbstractAbility {
             'properties' => [
                 'post_id' => [
                     'type'        => 'integer',
-                    'description' => __( 'The post ID.', 'wp-mcp-abilities' ),
+                    'description' => __( 'The post ID.', 'content-manager-for-ai-agents' ),
                 ],
                 'schemas' => [
                     'type'        => 'array',
                     'description' => __(
                         'List of JSON-LD strings. Each entry is either a raw JSON object or a full <script type="application/ld+json"> tag. The full list replaces any existing manual schemas.',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                     'items'       => [ 'type' => 'string' ],
                 ],
@@ -133,7 +133,7 @@ class UpdatePostSchemasAbility extends AbstractAbility {
         if ( ! array_key_exists( 'schemas', $input ) || ! is_array( $input['schemas'] ) ) {
             return new \WP_Error(
                 'invalid_schemas',
-                __( 'Parameter "schemas" must be an array of JSON-LD strings.', 'wp-mcp-abilities' ),
+                __( 'Parameter "schemas" must be an array of JSON-LD strings.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -148,7 +148,7 @@ class UpdatePostSchemasAbility extends AbstractAbility {
                     'invalid_schema_entry',
                     sprintf(
                         /* translators: %d: schema index */
-                        __( 'Schema #%d must be a non-empty string.', 'wp-mcp-abilities' ),
+                        __( 'Schema #%d must be a non-empty string.', 'content-manager-for-ai-agents' ),
                         $index
                     ),
                     [ 'status' => 400 ]
@@ -164,7 +164,7 @@ class UpdatePostSchemasAbility extends AbstractAbility {
                     'invalid_json_ld',
                     sprintf(
                         /* translators: %d: schema index */
-                        __( 'Schema #%d must not contain a closing script tag.', 'wp-mcp-abilities' ),
+                        __( 'Schema #%d must not contain a closing script tag.', 'content-manager-for-ai-agents' ),
                         $index
                     ),
                     [ 'status' => 400 ]
@@ -178,7 +178,7 @@ class UpdatePostSchemasAbility extends AbstractAbility {
                     'invalid_json_ld',
                     sprintf(
                         /* translators: 1: schema index, 2: json error */
-                        __( 'Schema #%1$d is not valid JSON: %2$s.', 'wp-mcp-abilities' ),
+                        __( 'Schema #%1$d is not valid JSON: %2$s.', 'content-manager-for-ai-agents' ),
                         $index,
                         json_last_error_msg()
                     ),

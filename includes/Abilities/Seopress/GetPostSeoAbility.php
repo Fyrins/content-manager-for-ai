@@ -2,14 +2,14 @@
 /**
  * Reads the SEOpress meta of a post.
  *
- * @package WpMcpAbilities\Abilities\Seopress
+ * @package CM4AI\Abilities\Seopress
  */
 
-namespace WpMcpAbilities\Abilities\Seopress;
+namespace CM4AI\Abilities\Seopress;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,21 +37,21 @@ class GetPostSeoAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get post SEOpress meta', 'wp-mcp-abilities' );
+        return __( 'Get post SEOpress meta', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Reads the SEOpress meta of a post.', 'wp-mcp-abilities' );
+        return __( 'Reads the SEOpress meta of a post.', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'SEOpress', 'wp-mcp-abilities' );
+        return __( 'SEOpress', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -70,7 +70,7 @@ class GetPostSeoAbility extends AbstractAbility {
             'properties' => [
                 'post_id' => [
                     'type'        => 'integer',
-                    'description' => __( 'The post ID.', 'wp-mcp-abilities' ),
+                    'description' => __( 'The post ID.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'post_id' ],
@@ -142,6 +142,6 @@ class GetPostSeoAbility extends AbstractAbility {
          * @param array<string, mixed> $result Formatted payload.
          * @param \WP_Post              $post   Post the meta was read from.
          */
-        return (array) apply_filters( 'wpmcpa_get_post_seo_result', $result, $post );
+        return (array) apply_filters( 'cm4ai_get_post_seo_result', $result, $post );
     }
 }

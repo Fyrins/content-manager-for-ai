@@ -2,14 +2,14 @@
 /**
  * Deletes a term meta field.
  *
- * @package WpMcpAbilities\Abilities\Meta
+ * @package CM4AI\Abilities\Meta
  */
 
-namespace WpMcpAbilities\Abilities\Meta;
+namespace CM4AI\Abilities\Meta;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -39,7 +39,7 @@ class DeleteTermMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Delete term meta', 'wp-mcp-abilities' );
+        return __( 'Delete term meta', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -48,7 +48,7 @@ class DeleteTermMetaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Deletes a term meta field. Protected meta keys are refused unless explicitly allowlisted.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -56,7 +56,7 @@ class DeleteTermMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Meta', 'wp-mcp-abilities' );
+        return __( 'Meta', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -68,15 +68,15 @@ class DeleteTermMetaAbility extends AbstractAbility {
             'properties' => [
                 'term_id'  => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the term to update.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Identifier of the term to update.', 'content-manager-for-ai-agents' ),
                 ],
                 'taxonomy' => [
                     'type'        => 'string',
-                    'description' => __( 'Taxonomy the term belongs to, used to disambiguate the lookup.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Taxonomy the term belongs to, used to disambiguate the lookup.', 'content-manager-for-ai-agents' ),
                 ],
                 'meta_key' => [
                     'type'        => 'string',
-                    'description' => __( 'Meta key to delete.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Meta key to delete.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'term_id', 'meta_key' ],
@@ -133,6 +133,10 @@ class DeleteTermMetaAbility extends AbstractAbility {
         $metaKey = $this->resolveMetaKey( 'term', $input['meta_key'] ?? null );
         if ( is_wp_error( $metaKey ) ) {
             return $metaKey;
+        }
+
+        if ( ! Capabilities::canWriteMeta( 'delete', 'term', $term->term_id, $metaKey ) ) {
+            return $this->forbidden();
         }
 
         delete_term_meta( $term->term_id, $metaKey );

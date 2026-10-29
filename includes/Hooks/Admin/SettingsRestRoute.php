@@ -2,15 +2,15 @@
 /**
  * REST route read and written by the settings screen.
  *
- * @package WpMcpAbilities\Hooks\Admin
+ * @package CM4AI\Hooks\Admin
  */
 
-namespace WpMcpAbilities\Hooks\Admin;
+namespace CM4AI\Hooks\Admin;
 
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Services\SettingsSanitizer;
-use WpMcpAbilities\Services\SettingsScreenData;
-use WpMcpAbilities\Services\SettingsService;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Services\SettingsSanitizer;
+use CM4AI\Services\SettingsScreenData;
+use CM4AI\Services\SettingsService;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,7 +27,7 @@ class SettingsRestRoute implements HookInterface {
      *
      * @var string
      */
-    public const NAMESPACE = 'wp-mcp-abilities/v1';
+    public const NAMESPACE = 'cm4ai/v1';
 
     /**
      * Path of the route inside its namespace.
@@ -76,10 +76,14 @@ class SettingsRestRoute implements HookInterface {
                         'enabled' => [
                             'type'                 => 'object',
                             'additionalProperties' => [ 'type' => 'boolean' ],
+                            'sanitize_callback'    => 'rest_sanitize_request_arg',
+                            'validate_callback'    => 'rest_validate_request_arg',
                         ],
                         'exposed' => [
                             'type'                 => 'object',
                             'additionalProperties' => [ 'type' => 'boolean' ],
+                            'sanitize_callback'    => 'rest_sanitize_request_arg',
+                            'validate_callback'    => 'rest_validate_request_arg',
                         ],
                     ],
                 ],

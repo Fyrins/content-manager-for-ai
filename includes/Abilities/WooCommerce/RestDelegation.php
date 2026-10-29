@@ -2,13 +2,13 @@
 /**
  * Hands the catalogue abilities over to the WooCommerce REST controllers.
  *
- * @package WpMcpAbilities\Abilities\WooCommerce
+ * @package CM4AI\Abilities\WooCommerce
  */
 
-namespace WpMcpAbilities\Abilities\WooCommerce;
+namespace CM4AI\Abilities\WooCommerce;
 
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\RequestCache;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\RequestCache;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -221,8 +221,8 @@ trait RestDelegation {
             $probed   = $request;
 
             return new \WP_Error(
-                'wpmcpa_permission_probe',
-                __( 'Permission probe, the request stops here.', 'wp-mcp-abilities' ),
+                'cm4ai_permission_probe',
+                __( 'Permission probe, the request stops here.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 200 ]
             );
         };
@@ -285,7 +285,7 @@ trait RestDelegation {
             'type'        => 'string',
             'description' => __(
                 'Comma separated list of the fields to return, for instance "id,name,sku,price,stock_quantity". Everything is returned when it is left out.',
-                'wp-mcp-abilities'
+                'content-manager-for-ai-agents'
             ),
         ];
 
@@ -341,7 +341,7 @@ trait RestDelegation {
             __METHOD__,
             sprintf(
                 /* translators: %s: REST controller class name. */
-                esc_html__( 'The WooCommerce REST controller %s is missing: the ability falls back on an unconstrained schema.', 'wp-mcp-abilities' ),
+                esc_html__( 'The WooCommerce REST controller %s is missing: the ability falls back on an unconstrained schema.', 'content-manager-for-ai-agents' ),
                 esc_html( $controller )
             ),
             '2.3.0'
@@ -385,7 +385,7 @@ trait RestDelegation {
             'type'        => 'object',
             'description' => __(
                 'Item as returned by the WooCommerce REST API, minus its _links.',
-                'wp-mcp-abilities'
+                'content-manager-for-ai-agents'
             ),
             'properties'  => $properties,
         ];
@@ -428,14 +428,14 @@ trait RestDelegation {
                     'type'        => 'integer',
                     'description' => __(
                         'Number of matching items, absent when WooCommerce did not report one.',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                 ],
                 'total_pages' => [
                     'type'        => 'integer',
                     'description' => __(
                         'Number of pages, absent when WooCommerce did not report one.',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                 ],
             ],
@@ -584,7 +584,7 @@ trait RestDelegation {
     protected function wooCommerceMissing(): \WP_Error {
         return new \WP_Error(
             'woocommerce_missing',
-            __( 'WooCommerce is not active on this site.', 'wp-mcp-abilities' ),
+            __( 'WooCommerce is not active on this site.', 'content-manager-for-ai-agents' ),
             [ 'status' => 400 ]
         );
     }

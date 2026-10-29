@@ -2,14 +2,14 @@
 /**
  * Creates a new term in a taxonomy.
  *
- * @package WpMcpAbilities\Abilities\Taxonomy
+ * @package CM4AI\Abilities\Taxonomy
  */
 
-namespace WpMcpAbilities\Abilities\Taxonomy;
+namespace CM4AI\Abilities\Taxonomy;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,21 +30,21 @@ class CreateTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Create a term', 'wp-mcp-abilities' );
+        return __( 'Create a term', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Creates a new term in a taxonomy.', 'wp-mcp-abilities' );
+        return __( 'Creates a new term in a taxonomy.', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'wp-mcp-abilities' );
+        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -56,26 +56,26 @@ class CreateTermAbility extends AbstractAbility {
             'properties' => [
                 'taxonomy'    => [
                     'type'        => 'string',
-                    'description' => __( 'Taxonomy the term is created in.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Taxonomy the term is created in.', 'content-manager-for-ai-agents' ),
                 ],
                 'name'        => [
                     'type'        => 'string',
-                    'description' => __( 'Term display name.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Term display name.', 'content-manager-for-ai-agents' ),
                 ],
                 'slug'        => [
                     'type'        => 'string',
                     'description' => __(
                         'Term slug. Auto-generated from the name if omitted.',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                 ],
                 'description' => [
                     'type'        => 'string',
-                    'description' => __( 'Term description.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Term description.', 'content-manager-for-ai-agents' ),
                 ],
                 'parent_id'   => [
                     'type'        => 'integer',
-                    'description' => __( 'Parent term, for hierarchical taxonomies.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Parent term, for hierarchical taxonomies.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'taxonomy', 'name' ],
@@ -134,7 +134,7 @@ class CreateTermAbility extends AbstractAbility {
         if ( '' === $name ) {
             return new \WP_Error(
                 'missing_name',
-                __( 'The "name" parameter is required.', 'wp-mcp-abilities' ),
+                __( 'The "name" parameter is required.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -160,7 +160,7 @@ class CreateTermAbility extends AbstractAbility {
          * @param string               $taxonomy Taxonomy the term is created in.
          * @param array<string, mixed> $input    Normalised MCP input.
          */
-        $args = (array) apply_filters( 'wpmcpa_create_term_args', $args, $taxonomy, $input );
+        $args = (array) apply_filters( 'cm4ai_create_term_args', $args, $taxonomy, $input );
 
         $result = wp_insert_term( $name, $taxonomy, $args );
 

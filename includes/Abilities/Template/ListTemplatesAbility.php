@@ -2,14 +2,14 @@
 /**
  * Lists block templates or template parts.
  *
- * @package WpMcpAbilities\Abilities\Template
+ * @package CM4AI\Abilities\Template
  */
 
-namespace WpMcpAbilities\Abilities\Template;
+namespace CM4AI\Abilities\Template;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -45,7 +45,7 @@ class ListTemplatesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List templates', 'wp-mcp-abilities' );
+        return __( 'List templates', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -54,7 +54,7 @@ class ListTemplatesAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists block templates or template parts of the active theme, with pagination.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -62,7 +62,7 @@ class ListTemplatesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Templates', 'wp-mcp-abilities' );
+        return __( 'Templates', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -77,19 +77,19 @@ class ListTemplatesAbility extends AbstractAbility {
                     'type'        => 'string',
                     'description' => __(
                         'Restricts results to this template part area. Only used when "type" is "wp_template_part".',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                 ],
                 'per_page' => [
                     'type'        => 'integer',
-                    'description' => __( 'Number of templates per page.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Number of templates per page.', 'content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'maximum'     => self::MAX_PER_PAGE,
                     'default'     => 50,
                 ],
                 'page'     => [
                     'type'        => 'integer',
-                    'description' => __( 'Page to return, starting at 1.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Page to return, starting at 1.', 'content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'default'     => 1,
                 ],
@@ -160,7 +160,7 @@ class ListTemplatesAbility extends AbstractAbility {
          * @param string                $type  Template post type being queried.
          * @param array<string, mixed>  $input Normalised MCP input.
          */
-        $query = (array) apply_filters( 'wpmcpa_list_templates_query_args', $query, $type, $input );
+        $query = (array) apply_filters( 'cm4ai_list_templates_query_args', $query, $type, $input );
 
         $templates = get_block_templates( $query, $type );
         $total     = count( $templates );
@@ -180,6 +180,6 @@ class ListTemplatesAbility extends AbstractAbility {
          * @param array<string, mixed>  $result    Formatted payload.
          * @param \WP_Block_Template[]  $templates Raw template objects.
          */
-        return (array) apply_filters( 'wpmcpa_list_templates_result', $result, $templates );
+        return (array) apply_filters( 'cm4ai_list_templates_result', $result, $templates );
     }
 }

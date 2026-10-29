@@ -32,7 +32,7 @@ function Logo( {
 } ) {
 	return (
 		<svg
-			className="wpmcpa-client-tab__icon"
+			className="cm4ai-client-tab__icon"
 			viewBox={ viewBox }
 			width={ width }
 			shapeRendering={ pixel ? 'crispEdges' : undefined }
@@ -82,7 +82,7 @@ const ICONS = {
 	cursor: () => <Logo path={ CURSOR_PATH } />,
 	codex: () => <Logo path={ CODEX_PATH } evenOdd />,
 	other: () => (
-		<Dashicon className="wpmcpa-client-tab__icon" icon="admin-plugins" />
+		<Dashicon className="cm4ai-client-tab__icon" icon="admin-plugins" />
 	),
 };
 
@@ -97,7 +97,7 @@ export default function ClientTabTitle( { client, label } ) {
 	const Icon = ICONS[ client ];
 
 	return (
-		<span className="wpmcpa-client-tab">
+		<span className="cm4ai-client-tab">
 			{ Icon && <Icon /> }
 			{ label }
 		</span>

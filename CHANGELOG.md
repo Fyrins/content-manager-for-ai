@@ -5,6 +5,31 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-29
+
+Renamed from WP MCP Abilities to Content Manager for AI Agents, for its release on WordPress.org. The plugin directory flags the "WP" term in plugin names, and "WP MCP Abilities" read like one of the official WordPress projects (MCP Adapter, Abilities API).
+
+### Changed
+
+- Plugin folder, main file and text domain: `content-manager-for-ai-agents`. WordPress sees it as a new plugin: deactivate and delete WP MCP Abilities, then install this one.
+- Abilities are named `cm4ai/<name>` instead of `wp-mcp-abilities/<name>`, in the `cm4ai` category. MCP clients and prompts that call the former names must be updated.
+- Hooks, options and constants use the `cm4ai_` and `CM4AI_` prefixes instead of `wpmcpa_` and `WPMCPA_`; the PHP namespace is `CM4AI`. The ability mark is `meta.cm4ai.plugin`, and the settings REST route `cm4ai/v1/settings`.
+- The readme changelog only keeps this version; the earlier ones stay here.
+
+### Added
+
+- On activation, the switches saved under the former name (`wpmcpa_enabled`, `wpmcpa_exposed`) are copied to the new options, unless those already exist. The former options are left in place for the old plugin's own uninstall.
+- `readme.txt` says where the sources of `build/` live and how they are built.
+
+### Security
+
+- `update-post-meta`, `update-term-meta` and `delete-term-meta` also check the meta capability of the key (`edit_post_meta`, `edit_term_meta`, `delete_term_meta`), so an `auth_callback` given to `register_meta()` applies. Allow-listed protected keys keep relying on the allow-list.
+
+### Fixed
+
+- `upload-media` caps the download at the allowed size plus one byte, instead of writing an oversized file to disk in full before rejecting it.
+- The settings REST route declares `sanitize_callback` and `validate_callback` on its arguments.
+
 ## [1.3.0] - 2026-10-26
 
 ### Added

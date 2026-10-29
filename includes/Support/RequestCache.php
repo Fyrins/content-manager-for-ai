@@ -2,10 +2,10 @@
 /**
  * Per-request memo shared by the abilities.
  *
- * @package WpMcpAbilities\Support
+ * @package CM4AI\Support
  */
 
-namespace WpMcpAbilities\Support;
+namespace CM4AI\Support;
 
 defined( 'ABSPATH' ) || exit;
 

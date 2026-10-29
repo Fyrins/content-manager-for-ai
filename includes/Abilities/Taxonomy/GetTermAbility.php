@@ -2,14 +2,14 @@
 /**
  * Retrieves a single term.
  *
- * @package WpMcpAbilities\Abilities\Taxonomy
+ * @package CM4AI\Abilities\Taxonomy
  */
 
-namespace WpMcpAbilities\Abilities\Taxonomy;
+namespace CM4AI\Abilities\Taxonomy;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,7 +37,7 @@ class GetTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get a term', 'wp-mcp-abilities' );
+        return __( 'Get a term', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -46,7 +46,7 @@ class GetTermAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Retrieves a taxonomy term by ID (name, slug, description, parent, count).',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -54,7 +54,7 @@ class GetTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'wp-mcp-abilities' );
+        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -66,13 +66,13 @@ class GetTermAbility extends AbstractAbility {
             'properties' => [
                 'term_id'  => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the term to retrieve.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Identifier of the term to retrieve.', 'content-manager-for-ai-agents' ),
                 ],
                 'taxonomy' => [
                     'type'        => 'string',
                     'description' => __(
                         'Taxonomy the term belongs to. Optional if the ID is unambiguous.',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                 ],
             ],
@@ -122,6 +122,6 @@ class GetTermAbility extends AbstractAbility {
          * @param array<string, mixed> $result Formatted term payload.
          * @param \WP_Term              $term   Raw term object.
          */
-        return (array) apply_filters( 'wpmcpa_get_term_result', $this->formatTerm( $term ), $term );
+        return (array) apply_filters( 'cm4ai_get_term_result', $this->formatTerm( $term ), $term );
     }
 }

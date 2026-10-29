@@ -2,14 +2,14 @@
 /**
  * Declares the settings options through the Settings API.
  *
- * @package WpMcpAbilities\Hooks\Admin
+ * @package CM4AI\Hooks\Admin
  */
 
-namespace WpMcpAbilities\Hooks\Admin;
+namespace CM4AI\Hooks\Admin;
 
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Services\SettingsSanitizer;
-use WpMcpAbilities\Services\SettingsService;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Services\SettingsSanitizer;
+use CM4AI\Services\SettingsService;
 
 defined( 'ABSPATH' ) || exit;
 

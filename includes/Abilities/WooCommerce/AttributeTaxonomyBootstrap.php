@@ -2,10 +2,10 @@
 /**
  * Repairs the WooCommerce attribute lifecycle inside a single request.
  *
- * @package WpMcpAbilities\Abilities\WooCommerce
+ * @package CM4AI\Abilities\WooCommerce
  */
 
-namespace WpMcpAbilities\Abilities\WooCommerce;
+namespace CM4AI\Abilities\WooCommerce;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -53,6 +53,7 @@ class AttributeTaxonomyBootstrap {
         foreach ( wc_get_attribute_taxonomies() as $attribute ) {
             $name = wc_attribute_taxonomy_name( $attribute->attribute_name );
 
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- WooCommerce global, filled the way WooCommerce fills it.
             $wc_product_attributes[ $name ] = $attribute;
 
             if ( taxonomy_exists( $name ) ) {

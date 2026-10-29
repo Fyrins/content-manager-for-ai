@@ -1,4 +1,4 @@
-// Settings screen of WP MCP Abilities.
+// Settings screen of Content Manager for AI Agents.
 // Greys and reds are those of the WordPress admin palette, named after it
 // (wp-admin/css/colors). The accent colour comes from the admin colour scheme
 // through --wp-admin-theme-color, so the screen follows the one each
@@ -22,17 +22,17 @@ $z-savebar: 10;
 // Above the admin bar (99999), like the notices WordPress shows itself.
 $z-snackbars: 100000;
 
-.wpmcpa-app {
+.cm4ai-app {
 	max-width: 960px;
 	margin-top: 16px;
 }
 
-.wpmcpa-tabs > .components-tab-panel__tabs {
+.cm4ai-tabs > .components-tab-panel__tabs {
 	margin-bottom: 24px;
 	border-bottom: 1px solid $gray-5;
 }
 
-.wpmcpa-intro {
+.cm4ai-intro {
 	max-width: 70ch;
 	margin-bottom: 16px;
 
@@ -41,12 +41,12 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-search {
+.cm4ai-search {
 	max-width: 360px;
 	margin-bottom: 24px;
 }
 
-.wpmcpa-card {
+.cm4ai-card {
 	margin-bottom: 24px;
 
 	&__title {
@@ -64,7 +64,7 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-section {
+.cm4ai-section {
 
 	& + & {
 		margin-top: 24px;
@@ -95,11 +95,11 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-caution {
+.cm4ai-caution {
 	margin: 0 0 16px;
 }
 
-.wpmcpa-grid {
+.cm4ai-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
 	gap: 12px 24px;
@@ -110,7 +110,7 @@ $z-snackbars: 100000;
 
 // The label shrinks and wraps; the "?" and the badges stay on its right,
 // level with its first line, instead of falling alone under it.
-.wpmcpa-ability {
+.cm4ai-ability {
 	display: flex;
 	gap: 6px;
 	align-items: flex-start;
@@ -122,12 +122,12 @@ $z-snackbars: 100000;
 	}
 
 	// Nudged down to the first line of the label.
-	> .wpmcpa-ability__help {
+	> .cm4ai-ability__help {
 		flex: none;
 		margin-top: 2px;
 	}
 
-	> .wpmcpa-badge {
+	> .cm4ai-badge {
 		flex: none;
 	}
 
@@ -159,7 +159,7 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-legend {
+.cm4ai-legend {
 	display: grid;
 	gap: 6px;
 	margin: 0 0 16px;
@@ -185,7 +185,7 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-badge {
+.cm4ai-badge {
 	white-space: nowrap;
 	padding: 1px 6px;
 	border-radius: 2px;
@@ -200,7 +200,7 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-step {
+.cm4ai-step {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -212,7 +212,7 @@ $z-snackbars: 100000;
 	font-size: 12px;
 }
 
-.wpmcpa-url {
+.cm4ai-url {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
@@ -224,7 +224,7 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-password__row {
+.cm4ai-password__row {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
@@ -235,12 +235,12 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-clients > .components-tab-panel__tabs {
+.cm4ai-clients > .components-tab-panel__tabs {
 	margin-bottom: 16px;
 	border-bottom: 1px solid $gray-2;
 }
 
-.wpmcpa-snippet {
+.cm4ai-snippet {
 	display: flex;
 	gap: 8px;
 	align-items: flex-start;
@@ -264,7 +264,7 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-paths {
+.cm4ai-paths {
 	display: grid;
 	grid-template-columns: max-content 1fr;
 	gap: 4px 12px;
@@ -275,13 +275,13 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-token-help {
+.cm4ai-token-help {
 	margin-top: 16px;
 	padding-top: 16px;
 	border-top: 1px solid $gray-2;
 }
 
-.wpmcpa-savebar {
+.cm4ai-savebar {
 	position: sticky;
 	bottom: 0;
 	z-index: $z-savebar;
@@ -303,7 +303,7 @@ $z-snackbars: 100000;
 	}
 }
 
-.wpmcpa-snackbars {
+.cm4ai-snackbars {
 	position: fixed;
 	bottom: 24px;
 	left: 50%;
@@ -312,7 +312,7 @@ $z-snackbars: 100000;
 	transform: translateX(-50%);
 }
 
-.wpmcpa-client-tab {
+.cm4ai-client-tab {
 	display: inline-flex;
 	gap: 8px;
 	align-items: center;

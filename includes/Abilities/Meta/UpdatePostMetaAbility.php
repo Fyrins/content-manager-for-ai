@@ -2,14 +2,14 @@
 /**
  * Updates a post meta field.
  *
- * @package WpMcpAbilities\Abilities\Meta
+ * @package CM4AI\Abilities\Meta
  */
 
-namespace WpMcpAbilities\Abilities\Meta;
+namespace CM4AI\Abilities\Meta;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,7 +30,7 @@ class UpdatePostMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update post meta', 'wp-mcp-abilities' );
+        return __( 'Update post meta', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -39,7 +39,7 @@ class UpdatePostMetaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Updates a post meta field. Protected meta keys are refused unless explicitly allowlisted.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -47,7 +47,7 @@ class UpdatePostMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Meta', 'wp-mcp-abilities' );
+        return __( 'Meta', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -59,11 +59,11 @@ class UpdatePostMetaAbility extends AbstractAbility {
             'properties' => [
                 'post_id'    => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the post to update.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Identifier of the post to update.', 'content-manager-for-ai-agents' ),
                 ],
                 'meta_key'   => [
                     'type'        => 'string',
-                    'description' => __( 'Meta key to write.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Meta key to write.', 'content-manager-for-ai-agents' ),
                 ],
                 'meta_value' => $this->metaValueSchema(),
             ],
@@ -122,6 +122,10 @@ class UpdatePostMetaAbility extends AbstractAbility {
         $metaKey = $this->resolveMetaKey( 'post', $input['meta_key'] ?? null );
         if ( is_wp_error( $metaKey ) ) {
             return $metaKey;
+        }
+
+        if ( ! Capabilities::canWriteMeta( 'edit', 'post', $post->ID, $metaKey ) ) {
+            return $this->forbidden();
         }
 
         $metaValue = $this->sanitizeMetaValue( $input['meta_value'] ?? null, 'post', $metaKey, $post->post_type );

@@ -2,10 +2,10 @@
 /**
  * Shared shaping and validation for media abilities.
  *
- * @package WpMcpAbilities\Abilities\Media
+ * @package CM4AI\Abilities\Media
  */
 
-namespace WpMcpAbilities\Abilities\Media;
+namespace CM4AI\Abilities\Media;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,7 +29,7 @@ trait MediaFormatting {
         if ( 'attachment' !== $attachment->post_type ) {
             return new \WP_Error(
                 'attachment_not_found',
-                __( 'Attachment not found.', 'wp-mcp-abilities' ),
+                __( 'Attachment not found.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 404 ]
             );
         }

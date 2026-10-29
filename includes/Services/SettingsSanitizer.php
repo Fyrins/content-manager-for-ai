@@ -2,10 +2,10 @@
 /**
  * Validates what is written to the two settings options.
  *
- * @package WpMcpAbilities\Services
+ * @package CM4AI\Services
  */
 
-namespace WpMcpAbilities\Services;
+namespace CM4AI\Services;
 
 defined( 'ABSPATH' ) || exit;
 

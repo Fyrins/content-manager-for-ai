@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="WP MCP Abilities">
-	<description>Rules for WP MCP Abilities. Hybrid configuration combining PSR-12 and WordPress Coding Standards.</description>
+<ruleset name="Content Manager for AI Agents">
+	<description>Rules for Content Manager for AI Agents. Hybrid configuration combining PSR-12 and WordPress Coding Standards.</description>
 
 	<!-- Only scan PHP files. -->
 	<arg name="extensions" value="php" />
@@ -22,7 +22,7 @@
 	<arg value="ps" />
 
 	<!-- Whenever possible, cache the scan results and re-use those for unchanged files on the next scan. -->
-	<arg name="cache" value="/tmp/phpcs-wp-mcp-abilities-cache" />
+	<arg name="cache" value="/tmp/phpcs-cm4ai-cache" />
 
 	<!-- Include PSR-12 standard for modern PHP practices -->
 	<rule ref="PSR12">
@@ -109,7 +109,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="wp-mcp-abilities" />
+				<element value="content-manager-for-ai-agents" />
 			</property>
 		</properties>
 	</rule>
@@ -118,8 +118,8 @@
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<property name="prefixes" type="array">
-				<element value="wpmcpa"/>
-				<element value="WpMcpAbilities"/>
+				<element value="cm4ai"/>
+				<element value="CM4AI"/>
 			</property>
 		</properties>
 	</rule>

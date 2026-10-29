@@ -2,14 +2,14 @@
 /**
  * Reads the SEOpress meta of a taxonomy term.
  *
- * @package WpMcpAbilities\Abilities\Seopress
+ * @package CM4AI\Abilities\Seopress
  */
 
-namespace WpMcpAbilities\Abilities\Seopress;
+namespace CM4AI\Abilities\Seopress;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,21 +37,21 @@ class GetTermSeoAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get term SEOpress meta', 'wp-mcp-abilities' );
+        return __( 'Get term SEOpress meta', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Reads the SEOpress meta of a taxonomy term.', 'wp-mcp-abilities' );
+        return __( 'Reads the SEOpress meta of a taxonomy term.', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'SEOpress', 'wp-mcp-abilities' );
+        return __( 'SEOpress', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -70,11 +70,11 @@ class GetTermSeoAbility extends AbstractAbility {
             'properties' => [
                 'term_id'  => [
                     'type'        => 'integer',
-                    'description' => __( 'The term ID.', 'wp-mcp-abilities' ),
+                    'description' => __( 'The term ID.', 'content-manager-for-ai-agents' ),
                 ],
                 'taxonomy' => [
                     'type'        => 'string',
-                    'description' => __( 'The taxonomy slug. Optional if term_id is unambiguous.', 'wp-mcp-abilities' ),
+                    'description' => __( 'The taxonomy slug. Optional if term_id is unambiguous.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'term_id' ],
@@ -138,6 +138,6 @@ class GetTermSeoAbility extends AbstractAbility {
          * @param array<string, mixed> $result Formatted payload.
          * @param \WP_Term              $term   Term the meta was read from.
          */
-        return (array) apply_filters( 'wpmcpa_get_term_seo_result', $result, $term );
+        return (array) apply_filters( 'cm4ai_get_term_seo_result', $result, $term );
     }
 }

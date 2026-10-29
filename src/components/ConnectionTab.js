@@ -49,7 +49,7 @@ function CopyButton( { text, label } ) {
 		setCopied( true );
 		// The button keeps its accessible name, so the change of its text is
 		// not read out: announce it.
-		speak( __( 'Copied!', 'wp-mcp-abilities' ) );
+		speak( __( 'Copied!', 'content-manager-for-ai-agents' ) );
 		window.setTimeout( () => setCopied( false ), 2000 );
 	} );
 
@@ -62,8 +62,8 @@ function CopyButton( { text, label } ) {
 			showTooltip={ false }
 		>
 			{ copied
-				? __( 'Copied!', 'wp-mcp-abilities' )
-				: __( 'Copy', 'wp-mcp-abilities' ) }
+				? __( 'Copied!', 'content-manager-for-ai-agents' )
+				: __( 'Copy', 'content-manager-for-ai-agents' ) }
 		</Button>
 	);
 }
@@ -77,7 +77,7 @@ function CopyButton( { text, label } ) {
  */
 function Snippet( { code, label } ) {
 	return (
-		<div className="wpmcpa-snippet">
+		<div className="cm4ai-snippet">
 			<pre>
 				<code>{ code }</code>
 			</pre>
@@ -158,7 +158,7 @@ function ClientSnippets( { connection, password } ) {
 	// The login goes between single quotes: one inside it closes the quote,
 	// is escaped, and reopens it.
 	const quotedLogin = userLogin.replace( /'/g, "'\\''" );
-	const tokenCommand = `read -rsp 'Application password: ' WPMCPA_PW && printf '%s' '${ quotedLogin }:'"$WPMCPA_PW" | base64 && unset WPMCPA_PW`;
+	const tokenCommand = `read -rsp 'Application password: ' CM4AI_PW && printf '%s' '${ quotedLogin }:'"$CM4AI_PW" | base64 && unset CM4AI_PW`;
 
 	const clients = [
 		{
@@ -169,14 +169,14 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'Run this in a terminal. Add --scope user to reach the site from every project. The command carries the password, only Base64-encoded: it stays in your shell history unless you remove it.',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					</p>
 					<Snippet
 						code={ `claude mcp add --transport http ${ serverName } ${ endpoint } --header "${ header }"` }
 						label={ __(
 							'Copy the Claude Code command',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -195,10 +195,10 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'Open Settings → Developer → Edit Config, then paste this into the file. Claude Desktop reaches the site through a small proxy run with npx, so Node.js has to be installed.',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					</p>
-					<dl className="wpmcpa-paths">
+					<dl className="cm4ai-paths">
 						<dt>macOS</dt>
 						<dd>
 							<code>
@@ -217,7 +217,7 @@ function ClientSnippets( { connection, password } ) {
 						code={ desktopConfig }
 						label={ __(
 							'Copy the Claude Desktop configuration',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -232,7 +232,7 @@ function ClientSnippets( { connection, password } ) {
 						{ createInterpolateElement(
 							__(
 								'Paste this into <code>~/.cursor/mcp.json</code>, or into <code>.cursor/mcp.json</code> at the root of a project.',
-								'wp-mcp-abilities'
+								'content-manager-for-ai-agents'
 							),
 							{ code: <code /> }
 						) }
@@ -241,7 +241,7 @@ function ClientSnippets( { connection, password } ) {
 						code={ cursorConfig }
 						label={ __(
 							'Copy the Cursor configuration',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -256,7 +256,7 @@ function ClientSnippets( { connection, password } ) {
 						{ createInterpolateElement(
 							__(
 								'Paste this into <code>~/.codex/config.toml</code>, or into <code>.codex/config.toml</code> at the root of a trusted project. The Codex CLI, its IDE extension and the ChatGPT desktop app share this file.',
-								'wp-mcp-abilities'
+								'content-manager-for-ai-agents'
 							),
 							{ code: <code /> }
 						) }
@@ -265,7 +265,7 @@ function ClientSnippets( { connection, password } ) {
 						code={ codexConfig }
 						label={ __(
 							'Copy the Codex configuration',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -276,7 +276,7 @@ function ClientSnippets( { connection, password } ) {
 			title: (
 				<ClientTabTitle
 					client="other"
-					label={ __( 'Other client', 'wp-mcp-abilities' ) }
+					label={ __( 'Other client', 'content-manager-for-ai-agents' ) }
 				/>
 			),
 			render: () => (
@@ -284,14 +284,14 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'The exact format depends on the client. One speaking HTTP usually takes something like this.',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					</p>
 					<Snippet
 						code={ httpConfig }
 						label={ __(
 							'Copy the configuration',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -301,22 +301,22 @@ function ClientSnippets( { connection, password } ) {
 
 	return (
 		<>
-			<TabPanel className="wpmcpa-clients" tabs={ clients }>
+			<TabPanel className="cm4ai-clients" tabs={ clients }>
 				{ ( client ) => client.render() }
 			</TabPanel>
 			{ ! hasPassword && (
-				<div className="wpmcpa-token-help">
+				<div className="cm4ai-token-help">
 					<p>
 						{ __(
 							'Already have an application password? This command turns it into the Base64 value the snippets expect, without leaving it in your shell history.',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					</p>
 					<Snippet
 						code={ tokenCommand }
 						label={ __(
 							'Copy the Base64 command',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					/>
 				</div>
@@ -335,7 +335,7 @@ function ClientSnippets( { connection, password } ) {
  */
 function PasswordCreator( { connection, password, onCreated } ) {
 	const [ name, setName ] = useState(
-		__( 'MCP client', 'wp-mcp-abilities' )
+		__( 'MCP client', 'content-manager-for-ai-agents' )
 	);
 	const [ isBusy, setIsBusy ] = useState( false );
 	const [ error, setError ] = useState( null );
@@ -345,7 +345,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 			<Notice status="warning" isDismissible={ false }>
 				{ __(
 					'Application passwords are not available for your account. WordPress only offers them on sites served over HTTPS, or on a local environment, and a plugin may also switch them off.',
-					'wp-mcp-abilities'
+					'content-manager-for-ai-agents'
 				) }
 			</Notice>
 		);
@@ -356,7 +356,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 			<Notice status="success" isDismissible={ false }>
 				{ __(
 					'Application password created and filled into the snippets below. Copy the one you need now: the password will not be shown again once you leave this page.',
-					'wp-mcp-abilities'
+					'content-manager-for-ai-agents'
 				) }
 			</Notice>
 		);
@@ -377,14 +377,14 @@ function PasswordCreator( { connection, password, onCreated } ) {
 	};
 
 	return (
-		<div className="wpmcpa-password">
-			<div className="wpmcpa-password__row">
+		<div className="cm4ai-password">
+			<div className="cm4ai-password__row">
 				<TextControl
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
 					label={ __(
 						'Application password name',
-						'wp-mcp-abilities'
+						'content-manager-for-ai-agents'
 					) }
 					value={ name }
 					onChange={ setName }
@@ -398,7 +398,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 				>
 					{ __(
 						'Create an application password',
-						'wp-mcp-abilities'
+						'content-manager-for-ai-agents'
 					) }
 				</Button>
 			</div>
@@ -408,7 +408,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 				{ createInterpolateElement(
 					__(
 						'Created for your account, <login />: the client will act with exactly your rights. You can revoke it at any time from <a>your profile</a>.',
-						'wp-mcp-abilities'
+						'content-manager-for-ai-agents'
 					),
 					{
 						login: <strong>{ connection.userLogin }</strong>,
@@ -432,15 +432,15 @@ export default function ConnectionTab( {
 	onPasswordCreated,
 } ) {
 	return (
-		<div className="wpmcpa-connection">
+		<div className="cm4ai-connection">
 			{ ! connection.mcpAdapter && (
 				<Notice status="warning" isDismissible={ false }>
 					{ __(
 						'The MCP Adapter plugin is not running. The abilities are registered, but no MCP client can reach them until it is installed and active.',
-						'wp-mcp-abilities'
+						'content-manager-for-ai-agents'
 					) }{ ' ' }
 					<ExternalLink href={ connection.adapterUrl }>
-						{ __( 'Download the MCP Adapter', 'wp-mcp-abilities' ) }
+						{ __( 'Download the MCP Adapter', 'content-manager-for-ai-agents' ) }
 					</ExternalLink>
 				</Notice>
 			) }
@@ -448,49 +448,49 @@ export default function ConnectionTab( {
 				<Notice status="warning" isDismissible={ false }>
 					{ __(
 						'This site switches off the default MCP server, so the URL below does not answer. Use the URL of the server your code declares instead.',
-						'wp-mcp-abilities'
+						'content-manager-for-ai-agents'
 					) }
 				</Notice>
 			) }
 
-			<Card className="wpmcpa-card" size="medium">
+			<Card className="cm4ai-card" size="medium">
 				<CardHeader>
-					<h2 className="wpmcpa-card__title">
-						{ __( 'MCP server URL', 'wp-mcp-abilities' ) }
+					<h2 className="cm4ai-card__title">
+						{ __( 'MCP server URL', 'content-manager-for-ai-agents' ) }
 					</h2>
 				</CardHeader>
 				<CardBody>
 					<p>
 						{ __(
 							'The address to give your AI client. It acts as a WordPress user, within that user’s capabilities, and only reaches the abilities enabled on this screen.',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					</p>
-					<div className="wpmcpa-url">
+					<div className="cm4ai-url">
 						<code>{ connection.endpoint }</code>
 						<CopyButton
 							text={ connection.endpoint }
 							label={ __(
 								'Copy the server URL',
-								'wp-mcp-abilities'
+								'content-manager-for-ai-agents'
 							) }
 						/>
 					</div>
 				</CardBody>
 			</Card>
 
-			<Card className="wpmcpa-card" size="medium">
+			<Card className="cm4ai-card" size="medium">
 				<CardHeader>
-					<h2 className="wpmcpa-card__title">
-						<span className="wpmcpa-step">1</span>
-						{ __( 'Create the credentials', 'wp-mcp-abilities' ) }
+					<h2 className="cm4ai-card__title">
+						<span className="cm4ai-step">1</span>
+						{ __( 'Create the credentials', 'content-manager-for-ai-agents' ) }
 					</h2>
 				</CardHeader>
 				<CardBody>
 					<p>
 						{ __(
 							'The client signs in with an application password. Pick the account deliberately: a dedicated user with the lowest role that covers the job is the safest choice.',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					</p>
 					<PasswordCreator
@@ -501,11 +501,11 @@ export default function ConnectionTab( {
 				</CardBody>
 			</Card>
 
-			<Card className="wpmcpa-card" size="medium">
+			<Card className="cm4ai-card" size="medium">
 				<CardHeader>
-					<h2 className="wpmcpa-card__title">
-						<span className="wpmcpa-step">2</span>
-						{ __( 'Configure your client', 'wp-mcp-abilities' ) }
+					<h2 className="cm4ai-card__title">
+						<span className="cm4ai-step">2</span>
+						{ __( 'Configure your client', 'content-manager-for-ai-agents' ) }
 					</h2>
 				</CardHeader>
 				<CardBody>
@@ -516,11 +516,11 @@ export default function ConnectionTab( {
 				</CardBody>
 			</Card>
 
-			<Card className="wpmcpa-card" size="medium">
+			<Card className="cm4ai-card" size="medium">
 				<CardHeader>
-					<h2 className="wpmcpa-card__title">
-						<span className="wpmcpa-step">3</span>
-						{ __( 'Check that it works', 'wp-mcp-abilities' ) }
+					<h2 className="cm4ai-card__title">
+						<span className="cm4ai-step">3</span>
+						{ __( 'Check that it works', 'content-manager-for-ai-agents' ) }
 					</h2>
 				</CardHeader>
 				<CardBody>
@@ -528,14 +528,14 @@ export default function ConnectionTab( {
 						<li>
 							{ __(
 								'Restart the client, then ask it which WordPress abilities it can use.',
-								'wp-mcp-abilities'
+								'content-manager-for-ai-agents'
 							) }
 						</li>
 						<li>
 							{ createInterpolateElement(
 								__(
 									'It should call <code>mcp-adapter-discover-abilities</code> and list the abilities checked in the Abilities tab.',
-									'wp-mcp-abilities'
+									'content-manager-for-ai-agents'
 								),
 								{ code: <code /> }
 							) }
@@ -543,7 +543,7 @@ export default function ConnectionTab( {
 						<li>
 							{ __(
 								'A 401 error means the credentials are wrong; a 404 means the MCP Adapter is not active.',
-								'wp-mcp-abilities'
+								'content-manager-for-ai-agents'
 							) }
 						</li>
 					</ol>

@@ -2,15 +2,15 @@
 /**
  * Holds the plugin's abilities and hands them to the Abilities API.
  *
- * @package WpMcpAbilities\Registry
+ * @package CM4AI\Registry
  */
 
-namespace WpMcpAbilities\Registry;
+namespace CM4AI\Registry;
 
-use WpMcpAbilities\Contracts\AbilityCategoryInterface;
-use WpMcpAbilities\Contracts\AbilityInterface;
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Support\AbstractAbility;
+use CM4AI\Contracts\AbilityCategoryInterface;
+use CM4AI\Contracts\AbilityInterface;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Support\AbstractAbility;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -36,14 +36,14 @@ final class AbilityRegistry implements HookInterface {
     private array $categories = [];
 
     /**
-     * Whether `wpmcpa_register_abilities` has already been fired.
+     * Whether `cm4ai_register_abilities` has already been fired.
      *
      * @var bool
      */
     private bool $extended = false;
 
     /**
-     * Whether `wpmcpa_register_abilities` is running right now.
+     * Whether `cm4ai_register_abilities` is running right now.
      *
      * @var bool
      */
@@ -52,7 +52,7 @@ final class AbilityRegistry implements HookInterface {
     /**
      * Adds an ability; a later one with the same name replaces the earlier.
      *
-     * Abilities added from `wpmcpa_register_abilities` must extend
+     * Abilities added from `cm4ai_register_abilities` must extend
      * `AbstractAbility`: the settings screen, the switches and the execution
      * hooks all rely on it, and an ability registered without them could be
      * neither listed nor switched off. Such an ability is refused.
@@ -67,7 +67,7 @@ final class AbilityRegistry implements HookInterface {
                 esc_html(
                     sprintf(
                         /* translators: 1: ability name, 2: class name. */
-                        __( 'The ability "%1$s" was not added: abilities added on wpmcpa_register_abilities must extend %2$s.', 'wp-mcp-abilities' ),
+                        __( 'The ability "%1$s" was not added: abilities added on cm4ai_register_abilities must extend %2$s.', 'content-manager-for-ai-agents' ),
                         $ability->getName(),
                         AbstractAbility::class
                     )
@@ -138,7 +138,7 @@ final class AbilityRegistry implements HookInterface {
     }
 
     /**
-     * Registers the abilities left after the `wpmcpa_abilities` filter.
+     * Registers the abilities left after the `cm4ai_abilities` filter.
      *
      * @return void
      */
@@ -154,7 +154,7 @@ final class AbilityRegistry implements HookInterface {
          *
          * @param array<string, AbilityInterface> $abilities Abilities keyed by name.
          */
-        $abilities = apply_filters( 'wpmcpa_abilities', $this->abilities );
+        $abilities = apply_filters( 'cm4ai_abilities', $this->abilities );
 
         foreach ( (array) $abilities as $ability ) {
             if ( $ability instanceof AbilityInterface ) {
@@ -170,7 +170,7 @@ final class AbilityRegistry implements HookInterface {
      * loads, before plugins loaded after it and before the theme, which would
      * miss the action. The registry is first read when the abilities are
      * registered or the settings screen is built, so at the earliest during
-     * `init`. A read made before `after_setup_theme`, by a `wpmcpa_loaded`
+     * `init`. A read made before `after_setup_theme`, by a `cm4ai_loaded`
      * callback for instance, gets the built-in abilities only and leaves the
      * action for later, so that every plugin and the theme have hooked it by
      * the time it fires. The flag is raised before the action so that a
@@ -190,13 +190,13 @@ final class AbilityRegistry implements HookInterface {
              * Fires once, on first use of the registry, to add custom abilities.
              *
              * Call `$registry->addAbility()` with an instance of a class
-             * extending `WpMcpAbilities\Support\AbstractAbility`. A later ability
+             * extending `CM4AI\Support\AbstractAbility`. A later ability
              * with the same name replaces the earlier one, including the
              * plugin's own: use a namespace of your own.
              *
              * @param AbilityRegistry $registry The plugin's ability registry.
              */
-            do_action( 'wpmcpa_register_abilities', $this );
+            do_action( 'cm4ai_register_abilities', $this );
         } finally {
             $this->extending = false;
         }

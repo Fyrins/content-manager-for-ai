@@ -2,13 +2,13 @@
 /**
  * Creates a global product attribute.
  *
- * @package WpMcpAbilities\Abilities\WooCommerce
+ * @package CM4AI\Abilities\WooCommerce
  */
 
-namespace WpMcpAbilities\Abilities\WooCommerce;
+namespace CM4AI\Abilities\WooCommerce;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,7 +29,7 @@ class CreateProductAttributeAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Create a product attribute', 'wp-mcp-abilities' );
+        return __( 'Create a product attribute', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -38,7 +38,7 @@ class CreateProductAttributeAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Creates a global WooCommerce product attribute. Its terms are created along the way when a product is given values for it.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -46,7 +46,7 @@ class CreateProductAttributeAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'wp-mcp-abilities' );
+        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
     }
 
     /**

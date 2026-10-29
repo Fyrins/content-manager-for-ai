@@ -2,14 +2,14 @@
 /**
  * Creates a new template or template part.
  *
- * @package WpMcpAbilities\Abilities\Template
+ * @package CM4AI\Abilities\Template
  */
 
-namespace WpMcpAbilities\Abilities\Template;
+namespace CM4AI\Abilities\Template;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -38,7 +38,7 @@ class CreateTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Create a template', 'wp-mcp-abilities' );
+        return __( 'Create a template', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -47,7 +47,7 @@ class CreateTemplateAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Creates a new block template or template part, tagged with the active theme.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -55,7 +55,7 @@ class CreateTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Templates', 'wp-mcp-abilities' );
+        return __( 'Templates', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -68,25 +68,25 @@ class CreateTemplateAbility extends AbstractAbility {
                 'type'        => $this->typeProperty(),
                 'slug'        => [
                     'type'        => 'string',
-                    'description' => __( 'Unique slug identifying the template.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Unique slug identifying the template.', 'content-manager-for-ai-agents' ),
                 ],
                 'title'       => [
                     'type'        => 'string',
-                    'description' => __( 'Template title.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Template title.', 'content-manager-for-ai-agents' ),
                 ],
                 'description' => [
                     'type'        => 'string',
-                    'description' => __( 'Template description.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Template description.', 'content-manager-for-ai-agents' ),
                 ],
                 'content'     => [
                     'type'        => 'string',
-                    'description' => __( 'Serialized block markup making up the template.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Serialized block markup making up the template.', 'content-manager-for-ai-agents' ),
                 ],
                 'area'        => [
                     'type'        => 'string',
                     'description' => __(
                         'Template part area (uncategorized, header, footer, navigation-overlay). Only used when "type" is "wp_template_part"; invalid values fall back to "uncategorized".',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                     'default'     => 'uncategorized',
                 ],
@@ -107,7 +107,7 @@ class CreateTemplateAbility extends AbstractAbility {
                     'type'        => 'boolean',
                     'description' => __(
                         'True when the stored content differs from the submitted content, meaning wp_filter_post_kses() stripped disallowed markup (the caller lacks the unfiltered_html capability).',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                 ],
                 'template'         => $this->templateSchema(),
@@ -157,7 +157,7 @@ class CreateTemplateAbility extends AbstractAbility {
         if ( '' === $slug ) {
             return new \WP_Error(
                 'missing_slug',
-                __( 'The "slug" parameter is required.', 'wp-mcp-abilities' ),
+                __( 'The "slug" parameter is required.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -173,7 +173,7 @@ class CreateTemplateAbility extends AbstractAbility {
         if ( $existing instanceof \WP_Block_Template && 'custom' === $existing->source ) {
             return new \WP_Error(
                 'template_exists',
-                __( 'A custom template already exists with this slug. Use the update ability instead.', 'wp-mcp-abilities' ),
+                __( 'A custom template already exists with this slug. Use the update ability instead.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 409 ]
             );
         }
@@ -203,7 +203,7 @@ class CreateTemplateAbility extends AbstractAbility {
          * @param string                $type     Template post type being created.
          * @param array<string, mixed>  $input    Normalised MCP input.
          */
-        $prepared = (array) apply_filters( 'wpmcpa_create_template_args', $prepared, $type, $input );
+        $prepared = (array) apply_filters( 'cm4ai_create_template_args', $prepared, $type, $input );
 
         $postId = wp_insert_post( wp_slash( $prepared ), true );
 
@@ -219,7 +219,7 @@ class CreateTemplateAbility extends AbstractAbility {
         if ( [] === $posts ) {
             return new \WP_Error(
                 'template_not_found',
-                __( 'The template was created but could not be resolved.', 'wp-mcp-abilities' ),
+                __( 'The template was created but could not be resolved.', 'content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }

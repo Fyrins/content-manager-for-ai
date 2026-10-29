@@ -54,42 +54,42 @@ export default function AbilitiesTab( {
 			<p>
 				{ __(
 					'No ability is available on this site.',
-					'wp-mcp-abilities'
+					'content-manager-for-ai-agents'
 				) }
 			</p>
 		);
 	}
 
 	return (
-		<div className="wpmcpa-abilities">
+		<div className="cm4ai-abilities">
 			{ isThirdParty ? (
-				<div className="wpmcpa-intro">
+				<div className="cm4ai-intro">
 					<p>
 						{ __(
 							'These abilities come from another plugin. Unchecking one hides it from MCP requests: an agent no longer lists it, and can no longer run it. The rest of the site is untouched, and the plugin providing it keeps using it as usual.',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					</p>
 					<p>
 						{ __(
 							'Some of them were never meant for an agent by the plugin that registered them. Checking such a one hands it to the MCP server as a tool. It grants no right: the ability decides for itself who may call it, exactly as it does elsewhere. What changes is that an agent can now reach it.',
-							'wp-mcp-abilities'
+							'content-manager-for-ai-agents'
 						) }
 					</p>
 					{ ! defaultServer && (
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
 								'This site switches off the default MCP server. Exposing an ability here will have no effect until a server declares it.',
-								'wp-mcp-abilities'
+								'content-manager-for-ai-agents'
 							) }
 						</Notice>
 					) }
 				</div>
 			) : (
-				<p className="wpmcpa-intro">
+				<p className="cm4ai-intro">
 					{ __(
 						'Pick the abilities exposed to MCP clients. An unchecked ability is not registered at all. Destructive abilities are off until you enable them.',
-						'wp-mcp-abilities'
+						'content-manager-for-ai-agents'
 					) }
 				</p>
 			) }
@@ -97,25 +97,25 @@ export default function AbilitiesTab( {
 			<Notice
 				status="warning"
 				isDismissible={ false }
-				className="wpmcpa-caution"
+				className="cm4ai-caution"
 			>
 				{ __(
 					'Use write abilities with caution. An agent can make mistakes, and with them it can change or delete what is on the site. Review what it does, especially on a live site.',
-					'wp-mcp-abilities'
+					'content-manager-for-ai-agents'
 				) }
 			</Notice>
 
 			<SearchControl
-				className="wpmcpa-search"
+				className="cm4ai-search"
 				value={ search }
 				onChange={ setSearch }
-				label={ __( 'Filter abilities', 'wp-mcp-abilities' ) }
-				placeholder={ __( 'Filter abilities', 'wp-mcp-abilities' ) }
+				label={ __( 'Filter abilities', 'content-manager-for-ai-agents' ) }
+				placeholder={ __( 'Filter abilities', 'content-manager-for-ai-agents' ) }
 				__nextHasNoMarginBottom
 			/>
 
 			{ filtered.length === 0 && (
-				<p>{ __( 'No ability matches.', 'wp-mcp-abilities' ) }</p>
+				<p>{ __( 'No ability matches.', 'content-manager-for-ai-agents' ) }</p>
 			) }
 
 			{ groupRows( filtered ).map( ( [ group, groupRowsList ] ) => (

@@ -2,14 +2,14 @@
 /**
  * Retrieves a single template or template part.
  *
- * @package WpMcpAbilities\Abilities\Template
+ * @package CM4AI\Abilities\Template
  */
 
-namespace WpMcpAbilities\Abilities\Template;
+namespace CM4AI\Abilities\Template;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,7 +37,7 @@ class GetTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get a template', 'wp-mcp-abilities' );
+        return __( 'Get a template', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -46,7 +46,7 @@ class GetTemplateAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Retrieves a block template or template part, whether it comes from a theme file or a customised post.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -54,7 +54,7 @@ class GetTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Templates', 'wp-mcp-abilities' );
+        return __( 'Templates', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -67,13 +67,13 @@ class GetTemplateAbility extends AbstractAbility {
                 'type' => $this->typeProperty(),
                 'id'   => [
                     'type'        => 'string',
-                    'description' => __( 'Composite identifier, formatted as "{theme}//{slug}".', 'wp-mcp-abilities' ),
+                    'description' => __( 'Composite identifier, formatted as "{theme}//{slug}".', 'content-manager-for-ai-agents' ),
                 ],
                 'slug' => [
                     'type'        => 'string',
                     'description' => __(
                         'Template slug. Used instead of "id", completed with the active theme.',
-                        'wp-mcp-abilities'
+                        'content-manager-for-ai-agents'
                     ),
                 ],
             ],
@@ -129,7 +129,7 @@ class GetTemplateAbility extends AbstractAbility {
          * @param \WP_Block_Template    $template Raw template object.
          */
         return (array) apply_filters(
-            'wpmcpa_get_template_result',
+            'cm4ai_get_template_result',
             $this->formatTemplate( $template ),
             $template
         );

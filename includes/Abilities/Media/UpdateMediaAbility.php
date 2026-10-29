@@ -2,14 +2,14 @@
 /**
  * Updates the metadata of an existing attachment.
  *
- * @package WpMcpAbilities\Abilities\Media
+ * @package CM4AI\Abilities\Media
  */
 
-namespace WpMcpAbilities\Abilities\Media;
+namespace CM4AI\Abilities\Media;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,7 +30,7 @@ class UpdateMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update a media', 'wp-mcp-abilities' );
+        return __( 'Update a media', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -39,7 +39,7 @@ class UpdateMediaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Updates the title, alt text or caption of an existing media.',
-            'wp-mcp-abilities'
+            'content-manager-for-ai-agents'
         );
     }
 
@@ -47,7 +47,7 @@ class UpdateMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Media', 'wp-mcp-abilities' );
+        return __( 'Media', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -59,19 +59,19 @@ class UpdateMediaAbility extends AbstractAbility {
             'properties' => [
                 'attachment_id' => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the attachment to update.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Identifier of the attachment to update.', 'content-manager-for-ai-agents' ),
                 ],
                 'title'          => [
                     'type'        => 'string',
-                    'description' => __( 'New title.', 'wp-mcp-abilities' ),
+                    'description' => __( 'New title.', 'content-manager-for-ai-agents' ),
                 ],
                 'alt_text'       => [
                     'type'        => 'string',
-                    'description' => __( 'New alt text.', 'wp-mcp-abilities' ),
+                    'description' => __( 'New alt text.', 'content-manager-for-ai-agents' ),
                 ],
                 'caption'        => [
                     'type'        => 'string',
-                    'description' => __( 'New caption.', 'wp-mcp-abilities' ),
+                    'description' => __( 'New caption.', 'content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'attachment_id' ],
@@ -141,7 +141,7 @@ class UpdateMediaAbility extends AbstractAbility {
          * @param \WP_Post              $attachment Attachment being updated.
          * @param array<string, mixed>  $input      Normalised MCP input.
          */
-        $updateArgs = (array) apply_filters( 'wpmcpa_update_media_args', $updateArgs, $attachment, $input );
+        $updateArgs = (array) apply_filters( 'cm4ai_update_media_args', $updateArgs, $attachment, $input );
 
         if ( count( $updateArgs ) > 1 ) {
             $result = wp_update_post( $updateArgs, true );

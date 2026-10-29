@@ -46,10 +46,10 @@ jobs:
       - run: npm ci && npm run build
       - name: Build the publishable package
         run: |
-          mkdir -p dist/wp-mcp-abilities
-          rsync -a --exclude=/dist --exclude-from=.distignore ./ dist/wp-mcp-abilities/
+          mkdir -p dist/content-manager-for-ai-agents
+          rsync -a --exclude=/dist --exclude-from=.distignore ./ dist/cm4ai/
       - uses: wordpress/plugin-check-action@10857da14b6c2246d15402b3e69f777edcf8c12e # v1.1.9
         with:
-          build-dir: dist/wp-mcp-abilities
+          build-dir: dist/content-manager-for-ai-agents
           categories: general,plugin_repo,security,performance,accessibility
           include-experimental: true

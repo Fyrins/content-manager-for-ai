@@ -1,5 +1,5 @@
 {
-    "name": "fyrins/wp-mcp-abilities",
+    "name": "fyrins/content-manager-for-ai-agents",
     "description": "Content management abilities for AI agents, exposed through the WordPress Abilities API and the MCP Adapter.",
     "type": "wordpress-plugin",
     "minimum-stability": "dev",

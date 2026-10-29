@@ -2,10 +2,10 @@
 /**
  * Shared access to WP Grid Builder facets for the grid builder abilities.
  *
- * @package WpMcpAbilities\Abilities\GridBuilder
+ * @package CM4AI\Abilities\GridBuilder
  */
 
-namespace WpMcpAbilities\Abilities\GridBuilder;
+namespace CM4AI\Abilities\GridBuilder;
 
 use WP_Grid_Builder\Includes\Database;
 
@@ -102,11 +102,11 @@ trait GridBuilderAccess {
                 'type'          => [ 'type' => 'string' ],
                 'source'        => [
                     'type'        => 'string',
-                    'description' => __( 'What the facet indexes, e.g. "taxonomy/category" or "post_meta/start_date". Empty for facets that index nothing (search, sort, pagination…).', 'wp-mcp-abilities' ),
+                    'description' => __( 'What the facet indexes, e.g. "taxonomy/category" or "post_meta/start_date". Empty for facets that index nothing (search, sort, pagination…).', 'content-manager-for-ai-agents' ),
                 ],
                 'index_rows'    => [
                     'type'        => 'integer',
-                    'description' => __( 'Rows stored in the index for this facet.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Rows stored in the index for this facet.', 'content-manager-for-ai-agents' ),
                 ],
                 'modified_date' => [ 'type' => 'string' ],
                 'settings'      => [ 'type' => 'object' ],

@@ -2,14 +2,14 @@
 /**
  * Lists the WP Grid Builder facets with the size of their index.
  *
- * @package WpMcpAbilities\Abilities\GridBuilder
+ * @package CM4AI\Abilities\GridBuilder
  */
 
-namespace WpMcpAbilities\Abilities\GridBuilder;
+namespace CM4AI\Abilities\GridBuilder;
 
-use WpMcpAbilities\Support\AbstractAbility;
-use WpMcpAbilities\Support\Capabilities;
-use WpMcpAbilities\Support\Input;
+use CM4AI\Support\AbstractAbility;
+use CM4AI\Support\Capabilities;
+use CM4AI\Support\Input;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -41,21 +41,21 @@ class ListFacetsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List WP Grid Builder facets', 'wp-mcp-abilities' );
+        return __( 'List WP Grid Builder facets', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Lists the WP Grid Builder facets with their ID, slug, type, source, settings and number of index rows.', 'wp-mcp-abilities' );
+        return __( 'Lists the WP Grid Builder facets with their ID, slug, type, source, settings and number of index rows.', 'content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WP Grid Builder', 'wp-mcp-abilities' );
+        return __( 'WP Grid Builder', 'content-manager-for-ai-agents' );
     }
 
     /**
@@ -75,7 +75,7 @@ class ListFacetsAbility extends AbstractAbility {
                 'ids' => [
                     'type'        => 'array',
                     'items'       => [ 'type' => 'integer' ],
-                    'description' => __( 'Facet IDs to return. Omit to list every facet.', 'wp-mcp-abilities' ),
+                    'description' => __( 'Facet IDs to return. Omit to list every facet.', 'content-manager-for-ai-agents' ),
                 ],
             ],
         ];

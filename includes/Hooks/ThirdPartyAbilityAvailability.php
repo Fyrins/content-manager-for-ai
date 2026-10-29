@@ -2,14 +2,14 @@
 /**
  * Removes the third-party abilities an administrator switched off.
  *
- * @package WpMcpAbilities\Hooks
+ * @package CM4AI\Hooks
  */
 
-namespace WpMcpAbilities\Hooks;
+namespace CM4AI\Hooks;
 
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Services\SettingsService;
-use WpMcpAbilities\Services\ThirdPartyAbilityCatalog;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Services\SettingsService;
+use CM4AI\Services\ThirdPartyAbilityCatalog;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -144,7 +144,7 @@ class ThirdPartyAbilityAvailability implements HookInterface {
          *
          * @param array<int, string> $prefixes Route prefixes, leading and trailing slash included.
          */
-        $prefixes = (array) apply_filters( 'wpmcpa_mcp_route_prefixes', self::MCP_ROUTE_PREFIXES );
+        $prefixes = (array) apply_filters( 'cm4ai_mcp_route_prefixes', self::MCP_ROUTE_PREFIXES );
 
         $normalised = [];
 

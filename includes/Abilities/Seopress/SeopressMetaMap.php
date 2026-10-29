@@ -2,10 +2,10 @@
 /**
  * Shared SEOpress meta map, casting and schemas for post and term abilities.
  *
- * @package WpMcpAbilities\Abilities\Seopress
+ * @package CM4AI\Abilities\Seopress
  */
 
-namespace WpMcpAbilities\Abilities\Seopress;
+namespace CM4AI\Abilities\Seopress;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -79,7 +79,7 @@ trait SeopressMetaMap {
      * Only keys actually present in the input are returned, so a partial
      * update never overwrites fields the caller did not mention. The
      * returned array is flat (input key => cast value) so it can be handed
-     * to the `wpmcpa_*_seo_data` filters as-is, matching the
+     * to the `cm4ai_*_seo_data` filters as-is, matching the
      * legacy shape integrators already rely on.
      *
      * @param array<string, mixed>                             $input  Normalised MCP input.
@@ -181,17 +181,17 @@ trait SeopressMetaMap {
      */
     protected function seoWriteSchemaProperties(): array {
         return [
-            'meta_title'           => [ 'type' => 'string', 'description' => __( 'SEOpress meta title.', 'wp-mcp-abilities' ) ],
-            'meta_description'     => [ 'type' => 'string', 'description' => __( 'SEOpress meta description.', 'wp-mcp-abilities' ) ],
-            'canonical_url'        => [ 'type' => 'string', 'description' => __( 'The canonical URL.', 'wp-mcp-abilities' ) ],
-            'noindex'              => [ 'type' => 'boolean', 'description' => __( 'Set noindex.', 'wp-mcp-abilities' ) ],
-            'nofollow'             => [ 'type' => 'boolean', 'description' => __( 'Set nofollow.', 'wp-mcp-abilities' ) ],
-            'og_title'             => [ 'type' => 'string', 'description' => __( 'Open Graph title (Facebook/social).', 'wp-mcp-abilities' ) ],
-            'og_description'       => [ 'type' => 'string', 'description' => __( 'Open Graph description (Facebook/social).', 'wp-mcp-abilities' ) ],
-            'og_image'             => [ 'type' => 'string', 'description' => __( 'Open Graph image URL (Facebook/social).', 'wp-mcp-abilities' ) ],
-            'twitter_title'        => [ 'type' => 'string', 'description' => __( 'Twitter/X card title.', 'wp-mcp-abilities' ) ],
-            'twitter_description'  => [ 'type' => 'string', 'description' => __( 'Twitter/X card description.', 'wp-mcp-abilities' ) ],
-            'twitter_image'        => [ 'type' => 'string', 'description' => __( 'Twitter/X card image URL.', 'wp-mcp-abilities' ) ],
+            'meta_title'           => [ 'type' => 'string', 'description' => __( 'SEOpress meta title.', 'content-manager-for-ai-agents' ) ],
+            'meta_description'     => [ 'type' => 'string', 'description' => __( 'SEOpress meta description.', 'content-manager-for-ai-agents' ) ],
+            'canonical_url'        => [ 'type' => 'string', 'description' => __( 'The canonical URL.', 'content-manager-for-ai-agents' ) ],
+            'noindex'              => [ 'type' => 'boolean', 'description' => __( 'Set noindex.', 'content-manager-for-ai-agents' ) ],
+            'nofollow'             => [ 'type' => 'boolean', 'description' => __( 'Set nofollow.', 'content-manager-for-ai-agents' ) ],
+            'og_title'             => [ 'type' => 'string', 'description' => __( 'Open Graph title (Facebook/social).', 'content-manager-for-ai-agents' ) ],
+            'og_description'       => [ 'type' => 'string', 'description' => __( 'Open Graph description (Facebook/social).', 'content-manager-for-ai-agents' ) ],
+            'og_image'             => [ 'type' => 'string', 'description' => __( 'Open Graph image URL (Facebook/social).', 'content-manager-for-ai-agents' ) ],
+            'twitter_title'        => [ 'type' => 'string', 'description' => __( 'Twitter/X card title.', 'content-manager-for-ai-agents' ) ],
+            'twitter_description'  => [ 'type' => 'string', 'description' => __( 'Twitter/X card description.', 'content-manager-for-ai-agents' ) ],
+            'twitter_image'        => [ 'type' => 'string', 'description' => __( 'Twitter/X card image URL.', 'content-manager-for-ai-agents' ) ],
         ];
     }
 

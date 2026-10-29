@@ -2,14 +2,14 @@
 /**
  * Registers the dynamic CRUD abilities of every exposed post type.
  *
- * @package WpMcpAbilities\Hooks
+ * @package CM4AI\Hooks
  */
 
-namespace WpMcpAbilities\Hooks;
+namespace CM4AI\Hooks;
 
-use WpMcpAbilities\Contracts\HookInterface;
-use WpMcpAbilities\Services\AbilityCatalogService;
-use WpMcpAbilities\Services\SettingsService;
+use CM4AI\Contracts\HookInterface;
+use CM4AI\Services\AbilityCatalogService;
+use CM4AI\Services\SettingsService;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * They are registered here directly rather than through the registry: they
  * are built on the fly from the post types, whereas the registry and its
- * `wpmcpa_abilities` filter only carry the static abilities.
+ * `cm4ai_abilities` filter only carry the static abilities.
  */
 class PostTypeAbilityProvider implements HookInterface {
     /**
