@@ -31,7 +31,7 @@ jobs:
       - name: Assemble the zip
         run: |
           mkdir -p dist/content-manager-for-ai-agents
-          rsync -a --exclude-from=.distignore --exclude=dist ./ dist/cm4ai/
+          rsync -a --exclude-from=.distignore --exclude=dist ./ dist/content-manager-for-ai-agents/
           (cd dist && zip -qr content-manager-for-ai-agents.zip content-manager-for-ai-agents)
       - name: GitHub release
         env:

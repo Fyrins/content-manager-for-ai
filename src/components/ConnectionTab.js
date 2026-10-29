@@ -276,7 +276,10 @@ function ClientSnippets( { connection, password } ) {
 			title: (
 				<ClientTabTitle
 					client="other"
-					label={ __( 'Other client', 'content-manager-for-ai-agents' ) }
+					label={ __(
+						'Other client',
+						'content-manager-for-ai-agents'
+					) }
 				/>
 			),
 			render: () => (
@@ -440,7 +443,10 @@ export default function ConnectionTab( {
 						'content-manager-for-ai-agents'
 					) }{ ' ' }
 					<ExternalLink href={ connection.adapterUrl }>
-						{ __( 'Download the MCP Adapter', 'content-manager-for-ai-agents' ) }
+						{ __(
+							'Download the MCP Adapter',
+							'content-manager-for-ai-agents'
+						) }
 					</ExternalLink>
 				</Notice>
 			) }
@@ -456,7 +462,10 @@ export default function ConnectionTab( {
 			<Card className="cm4ai-card" size="medium">
 				<CardHeader>
 					<h2 className="cm4ai-card__title">
-						{ __( 'MCP server URL', 'content-manager-for-ai-agents' ) }
+						{ __(
+							'MCP server URL',
+							'content-manager-for-ai-agents'
+						) }
 					</h2>
 				</CardHeader>
 				<CardBody>
@@ -483,7 +492,10 @@ export default function ConnectionTab( {
 				<CardHeader>
 					<h2 className="cm4ai-card__title">
 						<span className="cm4ai-step">1</span>
-						{ __( 'Create the credentials', 'content-manager-for-ai-agents' ) }
+						{ __(
+							'Create the credentials',
+							'content-manager-for-ai-agents'
+						) }
 					</h2>
 				</CardHeader>
 				<CardBody>
@@ -505,7 +517,10 @@ export default function ConnectionTab( {
 				<CardHeader>
 					<h2 className="cm4ai-card__title">
 						<span className="cm4ai-step">2</span>
-						{ __( 'Configure your client', 'content-manager-for-ai-agents' ) }
+						{ __(
+							'Configure your client',
+							'content-manager-for-ai-agents'
+						) }
 					</h2>
 				</CardHeader>
 				<CardBody>
@@ -520,7 +535,10 @@ export default function ConnectionTab( {
 				<CardHeader>
 					<h2 className="cm4ai-card__title">
 						<span className="cm4ai-step">3</span>
-						{ __( 'Check that it works', 'content-manager-for-ai-agents' ) }
+						{ __(
+							'Check that it works',
+							'content-manager-for-ai-agents'
+						) }
 					</h2>
 				</CardHeader>
 				<CardBody>

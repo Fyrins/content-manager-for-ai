@@ -109,13 +109,24 @@ export default function AbilitiesTab( {
 				className="cm4ai-search"
 				value={ search }
 				onChange={ setSearch }
-				label={ __( 'Filter abilities', 'content-manager-for-ai-agents' ) }
-				placeholder={ __( 'Filter abilities', 'content-manager-for-ai-agents' ) }
+				label={ __(
+					'Filter abilities',
+					'content-manager-for-ai-agents'
+				) }
+				placeholder={ __(
+					'Filter abilities',
+					'content-manager-for-ai-agents'
+				) }
 				__nextHasNoMarginBottom
 			/>
 
 			{ filtered.length === 0 && (
-				<p>{ __( 'No ability matches.', 'content-manager-for-ai-agents' ) }</p>
+				<p>
+					{ __(
+						'No ability matches.',
+						'content-manager-for-ai-agents'
+					) }
+				</p>
 			) }
 
 			{ groupRows( filtered ).map( ( [ group, groupRowsList ] ) => (

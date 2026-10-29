@@ -85,10 +85,7 @@ function AbilityCheckbox( { row, badges, onChange } ) {
 	const label = row.label || row.name;
 	const description = usefulDescription( row, label );
 	const details = [ row.name, description ].filter( Boolean ).join( ' — ' );
-	const detailsId = useInstanceId(
-		AbilityCheckbox,
-		'cm4ai-ability-details'
-	);
+	const detailsId = useInstanceId( AbilityCheckbox, 'cm4ai-ability-details' );
 
 	return (
 		<li className="cm4ai-ability">
@@ -109,7 +106,10 @@ function AbilityCheckbox( { row, badges, onChange } ) {
 						size="small"
 						aria-label={ sprintf(
 							/* translators: %s: label of the ability. */
-							__( 'Details about %s', 'content-manager-for-ai-agents' ),
+							__(
+								'Details about %s',
+								'content-manager-for-ai-agents'
+							),
 							label
 						) }
 						aria-describedby={ detailsId }
@@ -231,8 +231,14 @@ function AbilitySection( {
 					className="cm4ai-section__toggle"
 					label={
 						allChecked
-							? __( 'Deselect all', 'content-manager-for-ai-agents' )
-							: __( 'Select all', 'content-manager-for-ai-agents' )
+							? __(
+									'Deselect all',
+									'content-manager-for-ai-agents'
+								)
+							: __(
+									'Select all',
+									'content-manager-for-ai-agents'
+								)
 					}
 					checked={ allChecked }
 					indeterminate={ checkedCount > 0 && ! allChecked }
@@ -260,7 +266,10 @@ export default function AbilityGroupCard( {
 				<span className="cm4ai-card__count">
 					{ sprintf(
 						/* translators: 1: number of enabled abilities, 2: number of abilities. */
-						__( '%1$d of %2$d enabled', 'content-manager-for-ai-agents' ),
+						__(
+							'%1$d of %2$d enabled',
+							'content-manager-for-ai-agents'
+						),
 						enabledCount,
 						rows.length
 					) }
@@ -268,7 +277,10 @@ export default function AbilityGroupCard( {
 			</CardHeader>
 			<CardBody>
 				<AbilitySection
-					title={ __( 'Read-only abilities', 'content-manager-for-ai-agents' ) }
+					title={ __(
+						'Read-only abilities',
+						'content-manager-for-ai-agents'
+					) }
 					description={ __(
 						'These abilities let an agent read content. They change nothing on the site.',
 						'content-manager-for-ai-agents'
@@ -278,7 +290,10 @@ export default function AbilityGroupCard( {
 					isThirdParty={ isThirdParty }
 				/>
 				<AbilitySection
-					title={ __( 'Write abilities', 'content-manager-for-ai-agents' ) }
+					title={ __(
+						'Write abilities',
+						'content-manager-for-ai-agents'
+					) }
 					description={
 						isThirdParty
 							? __(

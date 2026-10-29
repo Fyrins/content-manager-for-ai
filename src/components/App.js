@@ -70,7 +70,10 @@ export default function App( { path } ) {
 			.catch( ( e ) =>
 				setError(
 					e?.message ||
-						__( 'Could not load the settings.', 'content-manager-for-ai-agents' )
+						__(
+							'Could not load the settings.',
+							'content-manager-for-ai-agents'
+						)
 				)
 			);
 	}, [ path ] );
@@ -114,7 +117,10 @@ export default function App( { path } ) {
 			<div role="status">
 				<Spinner />
 				<VisuallyHidden>
-					{ __( 'Loading the settings…', 'content-manager-for-ai-agents' ) }
+					{ __(
+						'Loading the settings…',
+						'content-manager-for-ai-agents'
+					) }
 				</VisuallyHidden>
 			</div>
 		);
@@ -147,7 +153,10 @@ export default function App( { path } ) {
 				setNotices( [
 					{
 						id: Date.now(),
-						content: __( 'Settings saved.', 'content-manager-for-ai-agents' ),
+						content: __(
+							'Settings saved.',
+							'content-manager-for-ai-agents'
+						),
 					},
 				] );
 			} )
@@ -156,7 +165,10 @@ export default function App( { path } ) {
 			.catch( ( e ) =>
 				setSaveError(
 					e?.message ||
-						__( 'Could not save the settings.', 'content-manager-for-ai-agents' )
+						__(
+							'Could not save the settings.',
+							'content-manager-for-ai-agents'
+						)
 				)
 			)
 			.finally( () => setIsSaving( false ) );
@@ -243,11 +255,17 @@ export default function App( { path } ) {
 						isBusy={ isSaving }
 						disabled={ isSaving || ! isDirty }
 					>
-						{ __( 'Save settings', 'content-manager-for-ai-agents' ) }
+						{ __(
+							'Save settings',
+							'content-manager-for-ai-agents'
+						) }
 					</Button>
 					{ isDirty && (
 						<span className="cm4ai-savebar__hint">
-							{ __( 'Unsaved changes', 'content-manager-for-ai-agents' ) }
+							{ __(
+								'Unsaved changes',
+								'content-manager-for-ai-agents'
+							) }
 						</span>
 					) }
 				</div>

@@ -47,7 +47,7 @@ jobs:
       - name: Build the publishable package
         run: |
           mkdir -p dist/content-manager-for-ai-agents
-          rsync -a --exclude=/dist --exclude-from=.distignore ./ dist/cm4ai/
+          rsync -a --exclude=/dist --exclude-from=.distignore ./ dist/content-manager-for-ai-agents/
       - uses: wordpress/plugin-check-action@10857da14b6c2246d15402b3e69f777edcf8c12e # v1.1.9
         with:
           build-dir: dist/content-manager-for-ai-agents
