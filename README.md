@@ -1,10 +1,20 @@
 # Content Manager for AI Agents
 
+![A prompt bubble from an AI agent, an arrow, and a list of checked abilities run on the WordPress site.](.wordpress-org/banner-1544x500.png)
+
 Content management abilities for AI agents, registered with the WordPress Abilities API and reachable over MCP through the MCP Adapter.
 
-`version 1.1.1` · `license GPL-2.0-or-later` · `WordPress 6.9+` · `PHP 8.1+`
+[![CI](https://github.com/Fyrins/content-manager-for-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Fyrins/content-manager-for-ai/actions/workflows/ci.yml)
+[![License: GPL v2](https://img.shields.io/badge/license-GPL--2.0--or--later-blue.svg)](LICENSE)
+[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa.svg)](https://github.com/sponsors/Fyrins)
 
 An agent connected over MCP can list, read, create, update and delete posts of every public post type, media, taxonomy terms, post and term meta, block templates and template parts, WooCommerce products, variations and attributes, and SEOPress fields. It does so as a WordPress user, within that user's capabilities, and each ability can be switched off from the settings screen.
+
+- Version 2.0.0
+- Requires WordPress 6.9, PHP 8.1
+- Licensed GPL-2.0-or-later
+
+![Abilities tab of the settings screen: abilities grouped in cards, split into read-only and write, each with its own checkbox.](.wordpress-org/screenshot-2.png)
 
 ## Table of contents
 
