@@ -47,6 +47,11 @@ jobs:
     needs: release
     if: vars.DEPLOY_TO_WPORG == 'true'
     runs-on: ubuntu-latest
+    # Publishing needs an approval in the Actions tab, and only v* tags may
+    # deploy: both rules live in the wordpress-org environment settings.
+    environment:
+      name: wordpress-org
+      url: https://wordpress.org/plugins/content-manager-for-ai-agents/
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
