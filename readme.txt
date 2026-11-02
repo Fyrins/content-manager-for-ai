@@ -12,6 +12,8 @@ Let AI agents manage your content through the Abilities API: posts, media, terms
 
 == Description ==
 
+https://www.youtube.com/watch?v=W1Ww7G7HJqg
+
 Content Manager for AI Agents registers content management abilities with the WordPress Abilities API. With the MCP Adapter active, an MCP client (Claude, ChatGPT, Cursor…) can discover and run them: an AI agent can draft and publish posts, fix a typo across a page, upload images, classify content, fill in SEO fields or build a variable product, always within the permissions of the WordPress user it authenticates as.
 
 Ability families, with a few names:
