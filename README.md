@@ -15,7 +15,9 @@
 
 An agent connected over MCP can list, read, create, update and delete posts of every public post type, media, taxonomy terms, post and term meta, block templates and template parts, WooCommerce products, variations and attributes, and SEOPress fields. It does so as a WordPress user, within that user's capabilities, and each ability can be switched off from the settings screen.
 
-The plugin is awaiting review on WordPress.org. Until it is approved, install it from a GitHub release or with Composer (see [Installation](#installation)).
+- Version 2.0.0
+- Requires WordPress 6.9, PHP 8.1
+- Licensed GPL-2.0-or-later
 
 ![Abilities tab of the settings screen: abilities grouped in cards, split into read-only and write, each with its own checkbox.](.wordpress-org/screenshot-2.png)
 
