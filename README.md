@@ -1,18 +1,21 @@
-# Content Manager for AI Agents
+<p align="center">
+  <img src=".wordpress-org/banner-1544x500.png" alt="A prompt bubble from an AI agent, an arrow, and a list of checked abilities run on the WordPress site.">
+</p>
 
-![A prompt bubble from an AI agent, an arrow, and a list of checked abilities run on the WordPress site.](.wordpress-org/banner-1544x500.png)
+<h1 align="center">Content Manager for AI Agents</h1>
 
-Content management abilities for AI agents, registered with the WordPress Abilities API and reachable over MCP through the MCP Adapter.
+<p align="center">Let AI agents manage your content through the Abilities API: posts, media, terms, meta, templates, WooCommerce and SEOPress.</p>
 
-[![CI](https://github.com/Fyrins/content-manager-for-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Fyrins/content-manager-for-ai/actions/workflows/ci.yml)
-[![License: GPL v2](https://img.shields.io/badge/license-GPL--2.0--or--later-blue.svg)](LICENSE)
-[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa.svg)](https://github.com/sponsors/Fyrins)
+<p align="center">
+  <a href="https://github.com/Fyrins/content-manager-for-ai/actions/workflows/ci.yml"><img src="https://github.com/Fyrins/content-manager-for-ai/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--2.0--or--later-green" alt="License: GPL-2.0-or-later"></a>
+  <a href="https://github.com/Fyrins/content-manager-for-ai/issues"><img src="https://img.shields.io/github/issues/Fyrins/content-manager-for-ai" alt="Open issues"></a>
+  <a href="https://github.com/sponsors/Fyrins"><img src="https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa" alt="Sponsor"></a>
+</p>
 
 An agent connected over MCP can list, read, create, update and delete posts of every public post type, media, taxonomy terms, post and term meta, block templates and template parts, WooCommerce products, variations and attributes, and SEOPress fields. It does so as a WordPress user, within that user's capabilities, and each ability can be switched off from the settings screen.
 
-- Version 2.0.0
-- Requires WordPress 6.9, PHP 8.1
-- Licensed GPL-2.0-or-later
+The plugin is awaiting review on WordPress.org. Until it is approved, install it from a GitHub release or with Composer (see [Installation](#installation)).
 
 ![Abilities tab of the settings screen: abilities grouped in cards, split into read-only and write, each with its own checkbox.](.wordpress-org/screenshot-2.png)
 
