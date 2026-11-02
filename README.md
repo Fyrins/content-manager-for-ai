@@ -23,6 +23,7 @@ An agent connected over MCP can list, read, create, update and delete posts of e
 
 ## Table of contents
 
+- [What it looks like](#what-it-looks-like)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Connecting an MCP client](#connecting-an-mcp-client)
@@ -46,6 +47,12 @@ An agent connected over MCP can list, read, create, update and delete posts of e
 - [Migrating from bsaweb-mcp-abilities](#migrating-from-bsaweb-mcp-abilities)
 - [Contributing](#contributing)
 - [License](#license)
+
+## What it looks like
+
+![Left, a request typed into a minimal MCP client, the cm4ai/replace-in-post-content call it sends and the response of the server. Right, the published page reloads with the opening time changed to 10:00.](.github/media/demo.gif)
+
+<em>The call and the response are real. The mapping from the typed sentence to the call is scripted for the demo: no model is involved.</em>
 
 ## Requirements
 
