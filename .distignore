@@ -12,3 +12,8 @@ CHANGELOG.md
 src
 package.json
 package-lock.json
+# Translations come from translate.wordpress.org: only the .pot ships.
+languages/*.po
+languages/*.mo
+languages/*.json
+languages/*.l10n.php
