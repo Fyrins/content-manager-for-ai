@@ -72,7 +72,7 @@ export default function App( { path } ) {
 					e?.message ||
 						__(
 							'Could not load the settings.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						)
 				)
 			);
@@ -119,7 +119,7 @@ export default function App( { path } ) {
 				<VisuallyHidden>
 					{ __(
 						'Loading the settings…',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 				</VisuallyHidden>
 			</div>
@@ -155,7 +155,7 @@ export default function App( { path } ) {
 						id: Date.now(),
 						content: __(
 							'Settings saved.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						),
 					},
 				] );
@@ -167,7 +167,7 @@ export default function App( { path } ) {
 					e?.message ||
 						__(
 							'Could not save the settings.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						)
 				)
 			)
@@ -179,13 +179,16 @@ export default function App( { path } ) {
 	const tabs = [
 		{
 			name: 'connection',
-			title: __( 'Connection', 'content-manager-for-ai-agents' ),
+			title: __( 'Connection', 'fyrins-content-manager-for-ai-agents' ),
 		},
 		{
 			name: 'abilities',
 			title: sprintf(
 				/* translators: 1: number of enabled abilities, 2: number of abilities. */
-				__( 'Abilities (%1$d/%2$d)', 'content-manager-for-ai-agents' ),
+				__(
+					'Abilities (%1$d/%2$d)',
+					'fyrins-content-manager-for-ai-agents'
+				),
 				enabledCount,
 				data.abilities.length
 			),
@@ -195,7 +198,10 @@ export default function App( { path } ) {
 	if ( data.thirdParty.length > 0 ) {
 		tabs.push( {
 			name: 'third-party',
-			title: __( 'Other plugins', 'content-manager-for-ai-agents' ),
+			title: __(
+				'Other plugins',
+				'fyrins-content-manager-for-ai-agents'
+			),
 		} );
 	}
 
@@ -257,14 +263,14 @@ export default function App( { path } ) {
 					>
 						{ __(
 							'Save settings',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</Button>
 					{ isDirty && (
 						<span className="cm4ai-savebar__hint">
 							{ __(
 								'Unsaved changes',
-								'content-manager-for-ai-agents'
+								'fyrins-content-manager-for-ai-agents'
 							) }
 						</span>
 					) }

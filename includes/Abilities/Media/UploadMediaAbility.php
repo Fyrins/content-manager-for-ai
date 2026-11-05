@@ -34,7 +34,7 @@ class UploadMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Upload a media', 'content-manager-for-ai-agents' );
+        return __( 'Upload a media', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -43,7 +43,7 @@ class UploadMediaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Downloads a media file from a URL and adds it to the library.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -51,7 +51,7 @@ class UploadMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Media', 'content-manager-for-ai-agents' );
+        return __( 'Media', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -63,15 +63,15 @@ class UploadMediaAbility extends AbstractAbility {
             'properties' => [
                 'url'      => [
                     'type'        => 'string',
-                    'description' => __( 'The URL of the file to download.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'The URL of the file to download.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'filename' => [
                     'type'        => 'string',
-                    'description' => __( 'The desired filename (optional, inferred from the URL by default).', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'The desired filename (optional, inferred from the URL by default).', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'alt_text' => [
                     'type'        => 'string',
-                    'description' => __( 'The image alt text.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'The image alt text.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'url' ],
@@ -115,7 +115,7 @@ class UploadMediaAbility extends AbstractAbility {
         if ( ! in_array( $scheme, [ 'http', 'https' ], true ) ) {
             return new \WP_Error(
                 'invalid_url_scheme',
-                __( 'The URL must use http or https.', 'content-manager-for-ai-agents' ),
+                __( 'The URL must use http or https.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -155,7 +155,7 @@ class UploadMediaAbility extends AbstractAbility {
 
             return new \WP_Error(
                 'file_too_large',
-                __( 'The downloaded file exceeds the allowed size.', 'content-manager-for-ai-agents' ),
+                __( 'The downloaded file exceeds the allowed size.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }

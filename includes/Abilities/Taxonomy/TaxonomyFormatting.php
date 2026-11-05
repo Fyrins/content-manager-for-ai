@@ -52,7 +52,7 @@ trait TaxonomyFormatting {
         if ( '' === $taxonomy ) {
             return new \WP_Error(
                 'missing_taxonomy',
-                __( 'The "taxonomy" parameter is required.', 'content-manager-for-ai-agents' ),
+                __( 'The "taxonomy" parameter is required.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -60,7 +60,7 @@ trait TaxonomyFormatting {
         if ( ! array_key_exists( $taxonomy, $this->getTaxonomies() ) ) {
             return new \WP_Error(
                 'taxonomy_not_allowed',
-                __( 'This taxonomy is not managed by MCP abilities.', 'content-manager-for-ai-agents' ),
+                __( 'This taxonomy is not managed by MCP abilities.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 403 ]
             );
         }

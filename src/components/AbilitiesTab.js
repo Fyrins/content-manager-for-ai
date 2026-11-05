@@ -54,7 +54,7 @@ export default function AbilitiesTab( {
 			<p>
 				{ __(
 					'No ability is available on this site.',
-					'content-manager-for-ai-agents'
+					'fyrins-content-manager-for-ai-agents'
 				) }
 			</p>
 		);
@@ -67,20 +67,20 @@ export default function AbilitiesTab( {
 					<p>
 						{ __(
 							'These abilities come from another plugin. Unchecking one hides it from MCP requests: an agent no longer lists it, and can no longer run it. The rest of the site is untouched, and the plugin providing it keeps using it as usual.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</p>
 					<p>
 						{ __(
 							'Some of them were never meant for an agent by the plugin that registered them. Checking such a one hands it to the MCP server as a tool. It grants no right: the ability decides for itself who may call it, exactly as it does elsewhere. What changes is that an agent can now reach it.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</p>
 					{ ! defaultServer && (
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
 								'This site switches off the default MCP server. Exposing an ability here will have no effect until a server declares it.',
-								'content-manager-for-ai-agents'
+								'fyrins-content-manager-for-ai-agents'
 							) }
 						</Notice>
 					) }
@@ -89,7 +89,7 @@ export default function AbilitiesTab( {
 				<p className="cm4ai-intro">
 					{ __(
 						'Pick the abilities exposed to MCP clients. An unchecked ability is not registered at all. Destructive abilities are off until you enable them.',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 				</p>
 			) }
@@ -101,7 +101,7 @@ export default function AbilitiesTab( {
 			>
 				{ __(
 					'Use write abilities with caution. An agent can make mistakes, and with them it can change or delete what is on the site. Review what it does, especially on a live site.',
-					'content-manager-for-ai-agents'
+					'fyrins-content-manager-for-ai-agents'
 				) }
 			</Notice>
 
@@ -111,11 +111,11 @@ export default function AbilitiesTab( {
 				onChange={ setSearch }
 				label={ __(
 					'Filter abilities',
-					'content-manager-for-ai-agents'
+					'fyrins-content-manager-for-ai-agents'
 				) }
 				placeholder={ __(
 					'Filter abilities',
-					'content-manager-for-ai-agents'
+					'fyrins-content-manager-for-ai-agents'
 				) }
 				__nextHasNoMarginBottom
 			/>
@@ -124,7 +124,7 @@ export default function AbilitiesTab( {
 				<p>
 					{ __(
 						'No ability matches.',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 				</p>
 			) }

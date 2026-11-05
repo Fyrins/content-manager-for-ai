@@ -30,21 +30,21 @@ class CreateTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Create a term', 'content-manager-for-ai-agents' );
+        return __( 'Create a term', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Creates a new term in a taxonomy.', 'content-manager-for-ai-agents' );
+        return __( 'Creates a new term in a taxonomy.', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
+        return __( 'Taxonomies', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -56,26 +56,26 @@ class CreateTermAbility extends AbstractAbility {
             'properties' => [
                 'taxonomy'    => [
                     'type'        => 'string',
-                    'description' => __( 'Taxonomy the term is created in.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Taxonomy the term is created in.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'name'        => [
                     'type'        => 'string',
-                    'description' => __( 'Term display name.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Term display name.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'slug'        => [
                     'type'        => 'string',
                     'description' => __(
                         'Term slug. Auto-generated from the name if omitted.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
                 'description' => [
                     'type'        => 'string',
-                    'description' => __( 'Term description.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Term description.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'parent_id'   => [
                     'type'        => 'integer',
-                    'description' => __( 'Parent term, for hierarchical taxonomies.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Parent term, for hierarchical taxonomies.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'taxonomy', 'name' ],
@@ -134,7 +134,7 @@ class CreateTermAbility extends AbstractAbility {
         if ( '' === $name ) {
             return new \WP_Error(
                 'missing_name',
-                __( 'The "name" parameter is required.', 'content-manager-for-ai-agents' ),
+                __( 'The "name" parameter is required.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }

@@ -33,7 +33,7 @@ class SetFeaturedImageAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Set the featured image', 'content-manager-for-ai-agents' );
+        return __( 'Set the featured image', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -42,7 +42,7 @@ class SetFeaturedImageAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Assigns an existing media as the featured image of a post.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -50,7 +50,7 @@ class SetFeaturedImageAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Media', 'content-manager-for-ai-agents' );
+        return __( 'Media', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -62,11 +62,11 @@ class SetFeaturedImageAbility extends AbstractAbility {
             'properties' => [
                 'post_id'       => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the post to update.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the post to update.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'attachment_id' => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the attachment to use.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the attachment to use.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'post_id', 'attachment_id' ],
@@ -131,7 +131,7 @@ class SetFeaturedImageAbility extends AbstractAbility {
         if ( ! $result ) {
             return new \WP_Error(
                 'set_featured_image_failed',
-                __( 'Unable to set the featured image.', 'content-manager-for-ai-agents' ),
+                __( 'Unable to set the featured image.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }

@@ -39,21 +39,21 @@ class IndexFacetsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Index WP Grid Builder facets', 'content-manager-for-ai-agents' );
+        return __( 'Index WP Grid Builder facets', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Queues the given WP Grid Builder facets for indexing, as the "Index" button of the plugin does. Indexing runs in the background: call list-wpgb-facets to follow the index row counts, then clear-wpgb-cache once they are back so that facets stop serving cached choices.', 'content-manager-for-ai-agents' );
+        return __( 'Queues the given WP Grid Builder facets for indexing, as the "Index" button of the plugin does. Indexing runs in the background: call list-wpgb-facets to follow the index row counts, then clear-wpgb-cache once they are back so that facets stop serving cached choices.', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WP Grid Builder', 'content-manager-for-ai-agents' );
+        return __( 'WP Grid Builder', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -82,7 +82,7 @@ class IndexFacetsAbility extends AbstractAbility {
                     'type'        => 'array',
                     'items'       => [ 'type' => 'integer' ],
                     'minItems'    => 1,
-                    'description' => __( 'IDs of the facets to index.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'IDs of the facets to index.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'ids' ],
@@ -99,12 +99,12 @@ class IndexFacetsAbility extends AbstractAbility {
                 'queued'  => [
                     'type'        => 'array',
                     'items'       => [ 'type' => 'integer' ],
-                    'description' => __( 'IDs of the facets handed to the indexing queue.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'IDs of the facets handed to the indexing queue.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'skipped' => [
                     'type'        => 'array',
                     'items'       => [ 'type' => 'integer' ],
-                    'description' => __( 'Requested IDs that match no facet, or a facet that indexes nothing (search, selection, sort…).', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Requested IDs that match no facet, or a facet that indexes nothing (search, selection, sort…).', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
         ];
@@ -129,7 +129,7 @@ class IndexFacetsAbility extends AbstractAbility {
         if ( [] === $ids ) {
             return new \WP_Error(
                 'missing_facet_ids',
-                __( 'Pass the IDs of the facets to index.', 'content-manager-for-ai-agents' ),
+                __( 'Pass the IDs of the facets to index.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }

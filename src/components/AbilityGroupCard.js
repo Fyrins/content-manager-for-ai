@@ -23,22 +23,24 @@ const BADGES = [
 	{
 		key: 'destructive',
 		className: 'cm4ai-badge cm4ai-badge--danger',
-		label: () => __( 'Irreversible', 'content-manager-for-ai-agents' ),
+		label: () =>
+			__( 'Irreversible', 'fyrins-content-manager-for-ai-agents' ),
 		meaning: () =>
 			__(
 				'Can overwrite or erase data on the site, with no way to undo it.',
-				'content-manager-for-ai-agents'
+				'fyrins-content-manager-for-ai-agents'
 			),
 		applies: ( row ) => row.destructive,
 	},
 	{
 		key: 'hidden',
 		className: 'cm4ai-badge',
-		label: () => __( 'Hidden by default', 'content-manager-for-ai-agents' ),
+		label: () =>
+			__( 'Hidden by default', 'fyrins-content-manager-for-ai-agents' ),
 		meaning: () =>
 			__(
 				'Its plugin registers it but does not offer it to agents. Check it to add it to the MCP server, no code needed.',
-				'content-manager-for-ai-agents'
+				'fyrins-content-manager-for-ai-agents'
 			),
 		applies: ( row, isThirdParty ) =>
 			isThirdParty && 'exposed' === row.option,
@@ -108,7 +110,7 @@ function AbilityCheckbox( { row, badges, onChange } ) {
 							/* translators: %s: label of the ability. */
 							__(
 								'Details about %s',
-								'content-manager-for-ai-agents'
+								'fyrins-content-manager-for-ai-agents'
 							),
 							label
 						) }
@@ -157,7 +159,7 @@ function BadgeLegend( { badges, shared } ) {
 							' ' +
 								__(
 									'Applies to every ability below.',
-									'content-manager-for-ai-agents'
+									'fyrins-content-manager-for-ai-agents'
 								) }
 					</dd>
 				</div>
@@ -233,11 +235,11 @@ function AbilitySection( {
 						allChecked
 							? __(
 									'Deselect all',
-									'content-manager-for-ai-agents'
+									'fyrins-content-manager-for-ai-agents'
 								)
 							: __(
 									'Select all',
-									'content-manager-for-ai-agents'
+									'fyrins-content-manager-for-ai-agents'
 								)
 					}
 					checked={ allChecked }
@@ -268,7 +270,7 @@ export default function AbilityGroupCard( {
 						/* translators: 1: number of enabled abilities, 2: number of abilities. */
 						__(
 							'%1$d of %2$d enabled',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						),
 						enabledCount,
 						rows.length
@@ -279,11 +281,11 @@ export default function AbilityGroupCard( {
 				<AbilitySection
 					title={ __(
 						'Read-only abilities',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 					description={ __(
 						'These abilities let an agent read content. They change nothing on the site.',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 					rows={ readRows }
 					onChange={ onChange }
@@ -292,17 +294,17 @@ export default function AbilityGroupCard( {
 				<AbilitySection
 					title={ __(
 						'Write abilities',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 					description={
 						isThirdParty
 							? __(
 									'These abilities do not declare themselves read-only: assume they can change the site.',
-									'content-manager-for-ai-agents'
+									'fyrins-content-manager-for-ai-agents'
 								)
 							: __(
 									'These abilities let an agent create, update and delete content.',
-									'content-manager-for-ai-agents'
+									'fyrins-content-manager-for-ai-agents'
 								)
 					}
 					rows={ writeRows }

@@ -37,7 +37,7 @@ class GetTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get a term', 'content-manager-for-ai-agents' );
+        return __( 'Get a term', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -46,7 +46,7 @@ class GetTermAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Retrieves a taxonomy term by ID (name, slug, description, parent, count).',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -54,7 +54,7 @@ class GetTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
+        return __( 'Taxonomies', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -66,13 +66,13 @@ class GetTermAbility extends AbstractAbility {
             'properties' => [
                 'term_id'  => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the term to retrieve.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the term to retrieve.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'taxonomy' => [
                     'type'        => 'string',
                     'description' => __(
                         'Taxonomy the term belongs to. Optional if the ID is unambiguous.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
             ],

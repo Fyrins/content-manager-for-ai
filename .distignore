@@ -2,6 +2,7 @@
 bin
 docs
 tests
+tasks
 vendor
 node_modules
 composer.json

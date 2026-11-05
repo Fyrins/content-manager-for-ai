@@ -36,7 +36,7 @@ class ListProductVariationsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List product variations', 'content-manager-for-ai-agents' );
+        return __( 'List product variations', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -45,7 +45,7 @@ class ListProductVariationsAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists the variations of a WooCommerce variable product, with their attributes, prices and stock.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -53,7 +53,7 @@ class ListProductVariationsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
+        return __( 'WooCommerce', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -72,7 +72,7 @@ class ListProductVariationsAbility extends AbstractAbility {
         $schema['properties'] = [
             'product_id' => [
                 'type'        => 'integer',
-                'description' => __( 'Id of the parent product.', 'content-manager-for-ai-agents' ),
+                'description' => __( 'Id of the parent product.', 'fyrins-content-manager-for-ai-agents' ),
             ],
         ] + ( $schema['properties'] ?? [] );
 

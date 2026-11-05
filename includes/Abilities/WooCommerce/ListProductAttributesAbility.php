@@ -36,7 +36,7 @@ class ListProductAttributesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List product attributes', 'content-manager-for-ai-agents' );
+        return __( 'List product attributes', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -45,7 +45,7 @@ class ListProductAttributesAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists the global WooCommerce product attributes with their taxonomy names, types and ordering.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -53,7 +53,7 @@ class ListProductAttributesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
+        return __( 'WooCommerce', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**

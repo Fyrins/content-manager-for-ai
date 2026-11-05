@@ -43,7 +43,7 @@ class DeleteTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Delete a template', 'content-manager-for-ai-agents' );
+        return __( 'Delete a template', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -52,7 +52,7 @@ class DeleteTemplateAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Trashes or permanently deletes a customised block template or template part.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -60,7 +60,7 @@ class DeleteTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Templates', 'content-manager-for-ai-agents' );
+        return __( 'Templates', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -73,18 +73,18 @@ class DeleteTemplateAbility extends AbstractAbility {
                 'type'  => $this->typeProperty(),
                 'id'    => [
                     'type'        => 'string',
-                    'description' => __( 'Composite identifier, formatted as "{theme}//{slug}".', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Composite identifier, formatted as "{theme}//{slug}".', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'slug'  => [
                     'type'        => 'string',
                     'description' => __(
                         'Template slug. Used instead of "id", completed with the active theme.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
                 'force' => [
                     'type'        => 'boolean',
-                    'description' => __( 'Whether to bypass Trash and delete permanently.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Whether to bypass Trash and delete permanently.', 'fyrins-content-manager-for-ai-agents' ),
                     'default'     => false,
                 ],
             ],
@@ -141,7 +141,7 @@ class DeleteTemplateAbility extends AbstractAbility {
         if ( 'custom' !== $template->source ) {
             return new \WP_Error(
                 'invalid_template',
-                __( 'Templates that come from the theme files cannot be deleted.', 'content-manager-for-ai-agents' ),
+                __( 'Templates that come from the theme files cannot be deleted.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -154,7 +154,7 @@ class DeleteTemplateAbility extends AbstractAbility {
             if ( 'trash' === $template->status ) {
                 return new \WP_Error(
                     'template_already_trashed',
-                    __( 'The template has already been deleted.', 'content-manager-for-ai-agents' ),
+                    __( 'The template has already been deleted.', 'fyrins-content-manager-for-ai-agents' ),
                     [ 'status' => 410 ]
                 );
             }
@@ -165,7 +165,7 @@ class DeleteTemplateAbility extends AbstractAbility {
         if ( ! $result ) {
             return new \WP_Error(
                 'delete_failed',
-                __( 'Unable to delete the template.', 'content-manager-for-ai-agents' ),
+                __( 'Unable to delete the template.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }

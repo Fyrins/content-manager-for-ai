@@ -1,7 +1,7 @@
 {
-  "name": "content-manager-for-ai-agents",
+  "name": "fyrins-content-manager-for-ai-agents",
   "version": "2.0.0",
-  "description": "Settings screen of Content Manager for AI Agents",
+  "description": "Settings screen of Fyrins Content Manager for AI Agents",
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",

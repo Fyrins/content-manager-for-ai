@@ -37,21 +37,21 @@ class GetTermSeoAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get term SEOpress meta', 'content-manager-for-ai-agents' );
+        return __( 'Get term SEOpress meta', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Reads the SEOpress meta of a taxonomy term.', 'content-manager-for-ai-agents' );
+        return __( 'Reads the SEOpress meta of a taxonomy term.', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'SEOpress', 'content-manager-for-ai-agents' );
+        return __( 'SEOpress', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -70,11 +70,11 @@ class GetTermSeoAbility extends AbstractAbility {
             'properties' => [
                 'term_id'  => [
                     'type'        => 'integer',
-                    'description' => __( 'The term ID.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'The term ID.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'taxonomy' => [
                     'type'        => 'string',
-                    'description' => __( 'The taxonomy slug. Optional if term_id is unambiguous.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'The taxonomy slug. Optional if term_id is unambiguous.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'term_id' ],

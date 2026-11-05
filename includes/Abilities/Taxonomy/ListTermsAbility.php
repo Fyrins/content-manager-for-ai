@@ -42,7 +42,7 @@ class ListTermsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List terms', 'content-manager-for-ai-agents' );
+        return __( 'List terms', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -51,7 +51,7 @@ class ListTermsAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists the terms of a taxonomy, with search, parent filtering and pagination.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -59,7 +59,7 @@ class ListTermsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
+        return __( 'Taxonomies', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -71,31 +71,31 @@ class ListTermsAbility extends AbstractAbility {
             'properties' => [
                 'taxonomy'   => [
                     'type'        => 'string',
-                    'description' => __( 'Taxonomy slug.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Taxonomy slug.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'search'     => [
                     'type'        => 'string',
-                    'description' => __( 'Restricts results to terms matching this string.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Restricts results to terms matching this string.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'parent'     => [
                     'type'        => 'integer',
-                    'description' => __( 'Restricts results to the children of this term.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Restricts results to the children of this term.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'hide_empty' => [
                     'type'        => 'boolean',
-                    'description' => __( 'Excludes terms not assigned to any content.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Excludes terms not assigned to any content.', 'fyrins-content-manager-for-ai-agents' ),
                     'default'     => false,
                 ],
                 'per_page'   => [
                     'type'        => 'integer',
-                    'description' => __( 'Number of terms per page.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Number of terms per page.', 'fyrins-content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'maximum'     => self::MAX_PER_PAGE,
                     'default'     => 50,
                 ],
                 'page'       => [
                     'type'        => 'integer',
-                    'description' => __( 'Page to return, starting at 1.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Page to return, starting at 1.', 'fyrins-content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'default'     => 1,
                 ],

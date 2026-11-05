@@ -32,10 +32,10 @@ class ContentAbilityCategory implements AbilityCategoryInterface {
      */
     public function getProperties(): array {
         return [
-            'label'       => __( 'Content Manager for AI Agents', 'content-manager-for-ai-agents' ),
+            'label'       => __( 'Fyrins Content Manager for AI Agents', 'fyrins-content-manager-for-ai-agents' ),
             'description' => __(
                 'Abilities for WordPress content management.',
-                'content-manager-for-ai-agents'
+                'fyrins-content-manager-for-ai-agents'
             ),
         ];
     }

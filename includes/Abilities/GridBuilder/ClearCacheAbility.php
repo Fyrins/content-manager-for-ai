@@ -35,21 +35,21 @@ class ClearCacheAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Clear WP Grid Builder cache', 'content-manager-for-ai-agents' );
+        return __( 'Clear WP Grid Builder cache', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Clears the WP Grid Builder cache, as the button of its settings screen does. Use it when a facet shows stale or empty choices after an import or an indexing.', 'content-manager-for-ai-agents' );
+        return __( 'Clears the WP Grid Builder cache, as the button of its settings screen does. Use it when a facet shows stale or empty choices after an import or an indexing.', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WP Grid Builder', 'content-manager-for-ai-agents' );
+        return __( 'WP Grid Builder', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**

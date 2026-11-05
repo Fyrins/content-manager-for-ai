@@ -29,7 +29,7 @@ class UpdateProductVariationAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update a product variation', 'content-manager-for-ai-agents' );
+        return __( 'Update a product variation', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -38,7 +38,7 @@ class UpdateProductVariationAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Updates a WooCommerce product variation: attribute values, price, stock, reference or dimensions. Sending "attributes" replaces the current pairs, as the WooCommerce admin does.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -46,7 +46,7 @@ class UpdateProductVariationAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
+        return __( 'WooCommerce', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -65,11 +65,11 @@ class UpdateProductVariationAbility extends AbstractAbility {
         $schema['properties'] = [
             'product_id' => [
                 'type'        => 'integer',
-                'description' => __( 'Id of the parent product.', 'content-manager-for-ai-agents' ),
+                'description' => __( 'Id of the parent product.', 'fyrins-content-manager-for-ai-agents' ),
             ],
             'variation_id' => [
                 'type'        => 'integer',
-                'description' => __( 'Id of the variation to update.', 'content-manager-for-ai-agents' ),
+                'description' => __( 'Id of the variation to update.', 'fyrins-content-manager-for-ai-agents' ),
             ],
         ] + ( $schema['properties'] ?? [] );
 

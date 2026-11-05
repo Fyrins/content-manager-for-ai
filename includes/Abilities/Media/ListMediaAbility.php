@@ -42,7 +42,7 @@ class ListMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List media', 'content-manager-for-ai-agents' );
+        return __( 'List media', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -51,7 +51,7 @@ class ListMediaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists the attachments of the media library, with MIME type filtering and pagination.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -59,7 +59,7 @@ class ListMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Media', 'content-manager-for-ai-agents' );
+        return __( 'Media', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -71,22 +71,22 @@ class ListMediaAbility extends AbstractAbility {
             'properties' => [
                 'mime_type' => [
                     'type'        => 'string',
-                    'description' => __( 'Restricts results to this MIME type, e.g. "image" or "image/png".', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Restricts results to this MIME type, e.g. "image" or "image/png".', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'search'    => [
                     'type'        => 'string',
-                    'description' => __( 'Restricts results to attachments matching this string.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Restricts results to attachments matching this string.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'per_page'  => [
                     'type'        => 'integer',
-                    'description' => __( 'Number of attachments per page.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Number of attachments per page.', 'fyrins-content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'maximum'     => self::MAX_PER_PAGE,
                     'default'     => 50,
                 ],
                 'page'      => [
                     'type'        => 'integer',
-                    'description' => __( 'Page to return, starting at 1.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Page to return, starting at 1.', 'fyrins-content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'default'     => 1,
                 ],

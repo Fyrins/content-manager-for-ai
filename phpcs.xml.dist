@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Content Manager for AI Agents">
-	<description>Rules for Content Manager for AI Agents. Hybrid configuration combining PSR-12 and WordPress Coding Standards.</description>
+<ruleset name="Fyrins Content Manager for AI Agents">
+	<description>Rules for Fyrins Content Manager for AI Agents. Hybrid configuration combining PSR-12 and WordPress Coding Standards.</description>
 
 	<!-- Only scan PHP files. -->
 	<arg name="extensions" value="php" />
@@ -109,7 +109,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="content-manager-for-ai-agents" />
+				<element value="fyrins-content-manager-for-ai-agents" />
 			</property>
 		</properties>
 	</rule>

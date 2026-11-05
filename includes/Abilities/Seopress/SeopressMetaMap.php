@@ -181,17 +181,17 @@ trait SeopressMetaMap {
      */
     protected function seoWriteSchemaProperties(): array {
         return [
-            'meta_title'           => [ 'type' => 'string', 'description' => __( 'SEOpress meta title.', 'content-manager-for-ai-agents' ) ],
-            'meta_description'     => [ 'type' => 'string', 'description' => __( 'SEOpress meta description.', 'content-manager-for-ai-agents' ) ],
-            'canonical_url'        => [ 'type' => 'string', 'description' => __( 'The canonical URL.', 'content-manager-for-ai-agents' ) ],
-            'noindex'              => [ 'type' => 'boolean', 'description' => __( 'Set noindex.', 'content-manager-for-ai-agents' ) ],
-            'nofollow'             => [ 'type' => 'boolean', 'description' => __( 'Set nofollow.', 'content-manager-for-ai-agents' ) ],
-            'og_title'             => [ 'type' => 'string', 'description' => __( 'Open Graph title (Facebook/social).', 'content-manager-for-ai-agents' ) ],
-            'og_description'       => [ 'type' => 'string', 'description' => __( 'Open Graph description (Facebook/social).', 'content-manager-for-ai-agents' ) ],
-            'og_image'             => [ 'type' => 'string', 'description' => __( 'Open Graph image URL (Facebook/social).', 'content-manager-for-ai-agents' ) ],
-            'twitter_title'        => [ 'type' => 'string', 'description' => __( 'Twitter/X card title.', 'content-manager-for-ai-agents' ) ],
-            'twitter_description'  => [ 'type' => 'string', 'description' => __( 'Twitter/X card description.', 'content-manager-for-ai-agents' ) ],
-            'twitter_image'        => [ 'type' => 'string', 'description' => __( 'Twitter/X card image URL.', 'content-manager-for-ai-agents' ) ],
+            'meta_title'           => [ 'type' => 'string', 'description' => __( 'SEOpress meta title.', 'fyrins-content-manager-for-ai-agents' ) ],
+            'meta_description'     => [ 'type' => 'string', 'description' => __( 'SEOpress meta description.', 'fyrins-content-manager-for-ai-agents' ) ],
+            'canonical_url'        => [ 'type' => 'string', 'description' => __( 'The canonical URL.', 'fyrins-content-manager-for-ai-agents' ) ],
+            'noindex'              => [ 'type' => 'boolean', 'description' => __( 'Set noindex.', 'fyrins-content-manager-for-ai-agents' ) ],
+            'nofollow'             => [ 'type' => 'boolean', 'description' => __( 'Set nofollow.', 'fyrins-content-manager-for-ai-agents' ) ],
+            'og_title'             => [ 'type' => 'string', 'description' => __( 'Open Graph title (Facebook/social).', 'fyrins-content-manager-for-ai-agents' ) ],
+            'og_description'       => [ 'type' => 'string', 'description' => __( 'Open Graph description (Facebook/social).', 'fyrins-content-manager-for-ai-agents' ) ],
+            'og_image'             => [ 'type' => 'string', 'description' => __( 'Open Graph image URL (Facebook/social).', 'fyrins-content-manager-for-ai-agents' ) ],
+            'twitter_title'        => [ 'type' => 'string', 'description' => __( 'Twitter/X card title.', 'fyrins-content-manager-for-ai-agents' ) ],
+            'twitter_description'  => [ 'type' => 'string', 'description' => __( 'Twitter/X card description.', 'fyrins-content-manager-for-ai-agents' ) ],
+            'twitter_image'        => [ 'type' => 'string', 'description' => __( 'Twitter/X card image URL.', 'fyrins-content-manager-for-ai-agents' ) ],
         ];
     }
 

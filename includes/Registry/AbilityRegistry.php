@@ -67,7 +67,7 @@ final class AbilityRegistry implements HookInterface {
                 esc_html(
                     sprintf(
                         /* translators: 1: ability name, 2: class name. */
-                        __( 'The ability "%1$s" was not added: abilities added on cm4ai_register_abilities must extend %2$s.', 'content-manager-for-ai-agents' ),
+                        __( 'The ability "%1$s" was not added: abilities added on cm4ai_register_abilities must extend %2$s.', 'fyrins-content-manager-for-ai-agents' ),
                         $ability->getName(),
                         AbstractAbility::class
                     )

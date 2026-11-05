@@ -48,8 +48,8 @@ class RegisterAbilitiesPage implements HookInterface {
      */
     public function registerPage(): void {
         $this->hookSuffix = (string) add_options_page(
-            __( 'Content Manager for AI Agents', 'content-manager-for-ai-agents' ),
-            __( 'Content Manager for AI Agents', 'content-manager-for-ai-agents' ),
+            __( 'Fyrins Content Manager for AI Agents', 'fyrins-content-manager-for-ai-agents' ),
+            __( 'Fyrins Content Manager for AI Agents', 'fyrins-content-manager-for-ai-agents' ),
             SettingsService::CAPABILITY,
             SettingsService::PAGE_SLUG,
             [ $this, 'renderPage' ]
@@ -83,7 +83,7 @@ class RegisterAbilitiesPage implements HookInterface {
             $asset['version'],
             true
         );
-        wp_set_script_translations( self::HANDLE, 'content-manager-for-ai-agents', CM4AI_DIR . '/languages' );
+        wp_set_script_translations( self::HANDLE, 'fyrins-content-manager-for-ai-agents', CM4AI_DIR . '/languages' );
 
         wp_enqueue_style(
             self::HANDLE,
@@ -123,15 +123,15 @@ class RegisterAbilitiesPage implements HookInterface {
 
         ?>
         <div class="wrap cm4ai-settings-wrap">
-            <h1><?php echo esc_html__( 'Content Manager for AI Agents', 'content-manager-for-ai-agents' ); ?></h1>
+            <h1><?php echo esc_html__( 'Fyrins Content Manager for AI Agents', 'fyrins-content-manager-for-ai-agents' ); ?></h1>
             <div id="cm4ai-settings">
                 <?php if ( null === $this->assetFile() ) : ?>
                     <div class="notice notice-error inline">
-                        <p><?php esc_html_e( 'The screen\'s script is missing. On a copy installed from the repository, run `npm ci && npm run build`.', 'content-manager-for-ai-agents' ); ?></p>
+                        <p><?php esc_html_e( 'The screen\'s script is missing. On a copy installed from the repository, run `npm ci && npm run build`.', 'fyrins-content-manager-for-ai-agents' ); ?></p>
                     </div>
                 <?php endif; ?>
                 <noscript>
-                    <?php esc_html_e( 'This screen needs JavaScript.', 'content-manager-for-ai-agents' ); ?>
+                    <?php esc_html_e( 'This screen needs JavaScript.', 'fyrins-content-manager-for-ai-agents' ); ?>
                 </noscript>
             </div>
         </div>

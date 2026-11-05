@@ -29,7 +29,7 @@ class CreateProductVariationAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Create a product variation', 'content-manager-for-ai-agents' );
+        return __( 'Create a product variation', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -38,7 +38,7 @@ class CreateProductVariationAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Creates a variation on a WooCommerce variable product. Each entry of "attributes" pairs an attribute of the parent with one of its values; an empty value means any. The parent must be of type variable and carry attributes marked for variation.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -46,7 +46,7 @@ class CreateProductVariationAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
+        return __( 'WooCommerce', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -65,7 +65,7 @@ class CreateProductVariationAbility extends AbstractAbility {
         $schema['properties'] = [
             'product_id' => [
                 'type'        => 'integer',
-                'description' => __( 'Id of the parent product.', 'content-manager-for-ai-agents' ),
+                'description' => __( 'Id of the parent product.', 'fyrins-content-manager-for-ai-agents' ),
             ],
         ] + ( $schema['properties'] ?? [] );
 

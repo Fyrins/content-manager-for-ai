@@ -77,15 +77,15 @@ class PostTypeAbility extends AbstractAbility {
 
         return match ( $this->operation ) {
             // translators: %s: plural label of the post type (e.g. "Posts").
-            'list'   => sprintf( __( 'List %s', 'content-manager-for-ai-agents' ), $plural ),
+            'list'   => sprintf( __( 'List %s', 'fyrins-content-manager-for-ai-agents' ), $plural ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'get'    => sprintf( __( 'Get a %s', 'content-manager-for-ai-agents' ), $singular ),
+            'get'    => sprintf( __( 'Get a %s', 'fyrins-content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'create' => sprintf( __( 'Create a %s', 'content-manager-for-ai-agents' ), $singular ),
+            'create' => sprintf( __( 'Create a %s', 'fyrins-content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'update' => sprintf( __( 'Update a %s', 'content-manager-for-ai-agents' ), $singular ),
+            'update' => sprintf( __( 'Update a %s', 'fyrins-content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'delete' => sprintf( __( 'Delete a %s', 'content-manager-for-ai-agents' ), $singular ),
+            'delete' => sprintf( __( 'Delete a %s', 'fyrins-content-manager-for-ai-agents' ), $singular ),
         };
     }
 
@@ -98,16 +98,16 @@ class PostTypeAbility extends AbstractAbility {
 
         return match ( $this->operation ) {
             // translators: %s: plural label of the post type (e.g. "Posts").
-            'list'   => sprintf( __( 'Lists all published and draft %s.', 'content-manager-for-ai-agents' ), $plural ),
+            'list'   => sprintf( __( 'Lists all published and draft %s.', 'fyrins-content-manager-for-ai-agents' ), $plural ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'get'    => sprintf( __( 'Retrieves the full content of a %s.', 'content-manager-for-ai-agents' ), $singular ),
+            'get'    => sprintf( __( 'Retrieves the full content of a %s.', 'fyrins-content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'create' => sprintf( __( 'Creates a new %s.', 'content-manager-for-ai-agents' ), $singular ),
+            'create' => sprintf( __( 'Creates a new %s.', 'fyrins-content-manager-for-ai-agents' ), $singular ),
             // translators: %s: singular label of the post type (e.g. "Post").
-            'update' => sprintf( __( 'Updates an existing %s.', 'content-manager-for-ai-agents' ), $singular ),
+            'update' => sprintf( __( 'Updates an existing %s.', 'fyrins-content-manager-for-ai-agents' ), $singular ),
             'delete' => sprintf(
                 // translators: %s: singular label of the post type (e.g. "Post").
-                __( 'Deletes a %s (trash by default, permanent if force=true).', 'content-manager-for-ai-agents' ),
+                __( 'Deletes a %s (trash by default, permanent if force=true).', 'fyrins-content-manager-for-ai-agents' ),
                 $singular
             ),
         };
@@ -162,11 +162,11 @@ class PostTypeAbility extends AbstractAbility {
                     'link'    => [ 'type' => 'string' ],
                     'status'  => [
                         'type'        => 'string',
-                        'description' => __( 'Status actually stored, which is not always the one asked for: a "publish" carrying a future date is scheduled by WordPress as "future".', 'content-manager-for-ai-agents' ),
+                        'description' => __( 'Status actually stored, which is not always the one asked for: a "publish" carrying a future date is scheduled by WordPress as "future".', 'fyrins-content-manager-for-ai-agents' ),
                     ],
                     'date'    => [
                         'type'        => 'string',
-                        'description' => __( 'Publication date actually stored.', 'content-manager-for-ai-agents' ),
+                        'description' => __( 'Publication date actually stored.', 'fyrins-content-manager-for-ai-agents' ),
                     ],
                 ],
             ],
@@ -177,11 +177,11 @@ class PostTypeAbility extends AbstractAbility {
                     'link'    => [ 'type' => 'string' ],
                     'status'  => [
                         'type'        => 'string',
-                        'description' => __( 'Status actually stored, which is not always the one asked for: a "publish" carrying a future date is scheduled by WordPress as "future".', 'content-manager-for-ai-agents' ),
+                        'description' => __( 'Status actually stored, which is not always the one asked for: a "publish" carrying a future date is scheduled by WordPress as "future".', 'fyrins-content-manager-for-ai-agents' ),
                     ],
                     'date'    => [
                         'type'        => 'string',
-                        'description' => __( 'Publication date actually stored.', 'content-manager-for-ai-agents' ),
+                        'description' => __( 'Publication date actually stored.', 'fyrins-content-manager-for-ai-agents' ),
                     ],
                 ],
             ],
@@ -485,7 +485,7 @@ class PostTypeAbility extends AbstractAbility {
 
         return new \WP_Error(
             'cannot_assign_sticky',
-            __( 'You are not allowed to pin a post.', 'content-manager-for-ai-agents' ),
+            __( 'You are not allowed to pin a post.', 'fyrins-content-manager-for-ai-agents' ),
             [ 'status' => 403 ]
         );
     }
@@ -622,7 +622,7 @@ class PostTypeAbility extends AbstractAbility {
         if ( ! $result ) {
             return new \WP_Error(
                 'delete_failed',
-                __( 'Unable to delete the content.', 'content-manager-for-ai-agents' ),
+                __( 'Unable to delete the content.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }
@@ -646,7 +646,7 @@ class PostTypeAbility extends AbstractAbility {
         if ( $post->post_type !== $this->postType->name ) {
             return new \WP_Error(
                 'post_not_found',
-                __( 'Post not found.', 'content-manager-for-ai-agents' ),
+                __( 'Post not found.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 404 ]
             );
         }
@@ -694,7 +694,7 @@ class PostTypeAbility extends AbstractAbility {
         if ( ! $parsed instanceof \DateTimeImmutable || $parsed->format( 'Y-m-d H:i:s' ) !== $date ) {
             return new \WP_Error(
                 'invalid_date',
-                __( 'The "date" parameter could not be read. Expected format: YYYY-MM-DD HH:MM:SS.', 'content-manager-for-ai-agents' ),
+                __( 'The "date" parameter could not be read. Expected format: YYYY-MM-DD HH:MM:SS.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -803,14 +803,14 @@ class PostTypeAbility extends AbstractAbility {
             'properties' => [
                 'per_page' => [
                     'type'        => 'integer',
-                    'description' => __( 'Number of items per page.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Number of items per page.', 'fyrins-content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'maximum'     => self::MAX_PER_PAGE,
                     'default'     => self::DEFAULT_PER_PAGE,
                 ],
                 'page'     => [
                     'type'        => 'integer',
-                    'description' => __( 'Page to return, starting at 1.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Page to return, starting at 1.', 'fyrins-content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'default'     => 1,
                 ],
@@ -830,7 +830,7 @@ class PostTypeAbility extends AbstractAbility {
                 'type'        => 'integer',
                 'description' => sprintf(
                     // translators: %s: singular label of the post type (e.g. "Post").
-                    __( 'The %s ID.', 'content-manager-for-ai-agents' ),
+                    __( 'The %s ID.', 'fyrins-content-manager-for-ai-agents' ),
                     $this->postType->labels->singular_name
                 ),
             ],
@@ -839,7 +839,7 @@ class PostTypeAbility extends AbstractAbility {
         if ( $withForce ) {
             $properties['force'] = [
                 'type'        => 'boolean',
-                'description' => __( 'Permanently delete (skip trash).', 'content-manager-for-ai-agents' ),
+                'description' => __( 'Permanently delete (skip trash).', 'fyrins-content-manager-for-ai-agents' ),
                 'default'     => false,
             ];
         }
@@ -865,39 +865,39 @@ class PostTypeAbility extends AbstractAbility {
             $properties['post_id'] = [
                 'type'        => 'integer',
                 // translators: %s: singular label of the post type (e.g. "Post").
-                'description' => sprintf( __( 'The %s ID.', 'content-manager-for-ai-agents' ), $label ),
+                'description' => sprintf( __( 'The %s ID.', 'fyrins-content-manager-for-ai-agents' ), $label ),
             ];
         }
 
         $properties['title'] = [
             'type'        => 'string',
             // translators: %s: singular label of the post type (e.g. "Post").
-            'description' => sprintf( __( 'The %s title.', 'content-manager-for-ai-agents' ), $label ),
+            'description' => sprintf( __( 'The %s title.', 'fyrins-content-manager-for-ai-agents' ), $label ),
         ];
 
         $properties['content'] = [
             'type'        => 'string',
             // translators: %s: singular label of the post type (e.g. "Post").
-            'description' => sprintf( __( 'The HTML content of the %s.', 'content-manager-for-ai-agents' ), $label ),
+            'description' => sprintf( __( 'The HTML content of the %s.', 'fyrins-content-manager-for-ai-agents' ), $label ),
         ];
 
         $properties['excerpt'] = [
             'type'        => 'string',
             // translators: %s: singular label of the post type (e.g. "Post").
-            'description' => sprintf( __( 'The %s excerpt.', 'content-manager-for-ai-agents' ), $label ),
+            'description' => sprintf( __( 'The %s excerpt.', 'fyrins-content-manager-for-ai-agents' ), $label ),
         ];
 
         $properties['slug'] = [
             'type'        => 'string',
             'description' => __(
                 'The URL slug (post_name). Auto-generated from the title if omitted.',
-                'content-manager-for-ai-agents'
+                'fyrins-content-manager-for-ai-agents'
             ),
         ];
 
         $properties['status'] = [
             'type'        => 'string',
-            'description' => __( 'The status (draft, publish).', 'content-manager-for-ai-agents' ),
+            'description' => __( 'The status (draft, publish).', 'fyrins-content-manager-for-ai-agents' ),
             'enum'        => [ 'draft', 'publish' ],
         ];
 
@@ -909,7 +909,7 @@ class PostTypeAbility extends AbstractAbility {
             $properties['parent_id'] = [
                 'type'        => 'integer',
                 // translators: %s: singular label of the post type (e.g. "Post").
-                'description' => sprintf( __( 'The parent %s ID.', 'content-manager-for-ai-agents' ), $label ),
+                'description' => sprintf( __( 'The parent %s ID.', 'fyrins-content-manager-for-ai-agents' ), $label ),
             ];
         }
 
@@ -917,7 +917,7 @@ class PostTypeAbility extends AbstractAbility {
             $properties['category_ids'] = [
                 'type'        => 'array',
                 'items'       => [ 'type' => 'integer' ],
-                'description' => __( 'The IDs of categories to assign. Equivalent to the "category" entry of "terms".', 'content-manager-for-ai-agents' ),
+                'description' => __( 'The IDs of categories to assign. Equivalent to the "category" entry of "terms".', 'fyrins-content-manager-for-ai-agents' ),
             ];
         }
 
@@ -930,7 +930,7 @@ class PostTypeAbility extends AbstractAbility {
                 'additionalProperties' => false,
                 'description'          => __(
                     'Term IDs to assign, keyed by taxonomy. Each taxonomy sent replaces the terms already assigned in it; a taxonomy left out is untouched, and an empty array clears it.',
-                    'content-manager-for-ai-agents'
+                    'fyrins-content-manager-for-ai-agents'
                 ),
             ];
         }
@@ -939,7 +939,7 @@ class PostTypeAbility extends AbstractAbility {
             'type'        => 'integer',
             'description' => sprintf(
                 // translators: %s: singular label of the post type (e.g. "Post").
-                __( 'The user ID to assign as author of the %s.', 'content-manager-for-ai-agents' ),
+                __( 'The user ID to assign as author of the %s.', 'fyrins-content-manager-for-ai-agents' ),
                 $label
             ),
         ];
@@ -952,13 +952,13 @@ class PostTypeAbility extends AbstractAbility {
         // said nothing.
         $properties['date'] = [
             'type'        => 'string',
-            'description' => __( 'The publication date (YYYY-MM-DD HH:MM:SS), in site time.', 'content-manager-for-ai-agents' ),
+            'description' => __( 'The publication date (YYYY-MM-DD HH:MM:SS), in site time.', 'fyrins-content-manager-for-ai-agents' ),
         ];
 
         if ( 'post' === $this->postType->name ) {
             $properties['sticky'] = [
                 'type'        => 'boolean',
-                'description' => __( 'Pin as sticky (true) or unpin (false).', 'content-manager-for-ai-agents' ),
+                'description' => __( 'Pin as sticky (true) or unpin (false).', 'fyrins-content-manager-for-ai-agents' ),
             ];
         }
 
@@ -1019,7 +1019,7 @@ class PostTypeAbility extends AbstractAbility {
                 $properties['terms'] = [
                     'type'        => 'object',
                     'properties'  => $termProperties,
-                    'description' => __( 'Term IDs assigned to the post, keyed by taxonomy.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Term IDs assigned to the post, keyed by taxonomy.', 'fyrins-content-manager-for-ai-agents' ),
                 ];
             }
         } else {

@@ -51,7 +51,7 @@ class UpdateTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update a template', 'content-manager-for-ai-agents' );
+        return __( 'Update a template', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -60,7 +60,7 @@ class UpdateTemplateAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Updates the title, description, content or area of a template, or reverts it to its theme file.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -68,7 +68,7 @@ class UpdateTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Templates', 'content-manager-for-ai-agents' );
+        return __( 'Templates', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -81,39 +81,39 @@ class UpdateTemplateAbility extends AbstractAbility {
                 'type'        => $this->typeProperty(),
                 'id'          => [
                     'type'        => 'string',
-                    'description' => __( 'Composite identifier, formatted as "{theme}//{slug}".', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Composite identifier, formatted as "{theme}//{slug}".', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'slug'        => [
                     'type'        => 'string',
                     'description' => __(
                         'Template slug. Used instead of "id", completed with the active theme.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
                 'title'       => [
                     'type'        => 'string',
-                    'description' => __( 'New title.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New title.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'description' => [
                     'type'        => 'string',
-                    'description' => __( 'New description.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New description.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'content'     => [
                     'type'        => 'string',
-                    'description' => __( 'New serialized block markup.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New serialized block markup.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'area'        => [
                     'type'        => 'string',
                     'description' => __(
                         'New template part area. Only used when "type" is "wp_template_part"; invalid values fall back to "uncategorized".',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
                 'revert'      => [
                     'type'        => 'boolean',
                     'description' => __(
                         'When true, discards the customisation and lets the theme file resurface instead of updating any field.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                     'default'     => false,
                 ],
@@ -135,7 +135,7 @@ class UpdateTemplateAbility extends AbstractAbility {
                     'type'        => 'boolean',
                     'description' => __(
                         'True when the stored content differs from the submitted content, meaning wp_filter_post_kses() stripped disallowed markup (the caller lacks the unfiltered_html capability).',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
                 'template'         => $this->templateSchema(),
@@ -206,7 +206,7 @@ class UpdateTemplateAbility extends AbstractAbility {
         if ( 'custom' !== $template->source ) {
             return new \WP_Error(
                 'template_not_customized',
-                __( 'This template has no customisation to revert; it already resolves to its theme file.', 'content-manager-for-ai-agents' ),
+                __( 'This template has no customisation to revert; it already resolves to its theme file.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -214,7 +214,7 @@ class UpdateTemplateAbility extends AbstractAbility {
         if ( ! $template->has_theme_file ) {
             return new \WP_Error(
                 'template_no_theme_file',
-                __( 'This template only exists as a custom post; reverting would delete it entirely. Use the delete ability instead.', 'content-manager-for-ai-agents' ),
+                __( 'This template only exists as a custom post; reverting would delete it entirely. Use the delete ability instead.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -224,7 +224,7 @@ class UpdateTemplateAbility extends AbstractAbility {
         if ( ! $deleted ) {
             return new \WP_Error(
                 'revert_failed',
-                __( 'Unable to revert the template.', 'content-manager-for-ai-agents' ),
+                __( 'Unable to revert the template.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }
@@ -261,7 +261,7 @@ class UpdateTemplateAbility extends AbstractAbility {
         if ( ! $hasContent && ! $hasTitle && ! $hasDescription && ! $hasArea ) {
             return new \WP_Error(
                 'nothing_to_update',
-                __( 'Provide at least one field to update, or set "revert" to true.', 'content-manager-for-ai-agents' ),
+                __( 'Provide at least one field to update, or set "revert" to true.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }

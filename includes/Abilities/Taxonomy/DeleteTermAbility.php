@@ -37,21 +37,21 @@ class DeleteTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Delete a term', 'content-manager-for-ai-agents' );
+        return __( 'Delete a term', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Permanently deletes a taxonomy term.', 'content-manager-for-ai-agents' );
+        return __( 'Permanently deletes a taxonomy term.', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
+        return __( 'Taxonomies', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -63,13 +63,13 @@ class DeleteTermAbility extends AbstractAbility {
             'properties' => [
                 'term_id'  => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the term to delete.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the term to delete.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'taxonomy' => [
                     'type'        => 'string',
                     'description' => __(
                         'Taxonomy the term belongs to. Optional if the ID is unambiguous.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
             ],
@@ -131,7 +131,7 @@ class DeleteTermAbility extends AbstractAbility {
         if ( false === $result ) {
             return new \WP_Error(
                 'delete_failed',
-                __( 'Unable to delete the term.', 'content-manager-for-ai-agents' ),
+                __( 'Unable to delete the term.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }

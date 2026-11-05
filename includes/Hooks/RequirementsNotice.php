@@ -68,8 +68,8 @@ class RequirementsNotice implements HookInterface {
                     <?php
                     echo esc_html(
                         $is_error
-                            ? __( 'Content Manager for AI Agents cannot register its abilities.', 'content-manager-for-ai-agents' )
-                            : __( 'Content Manager for AI Agents is not reachable by MCP clients yet.', 'content-manager-for-ai-agents' )
+                            ? __( 'Fyrins Content Manager for AI Agents cannot register its abilities.', 'fyrins-content-manager-for-ai-agents' )
+                            : __( 'Fyrins Content Manager for AI Agents is not reachable by MCP clients yet.', 'fyrins-content-manager-for-ai-agents' )
                     );
                     ?>
                 </strong>
@@ -82,7 +82,7 @@ class RequirementsNotice implements HookInterface {
                         <br /><code><?php echo esc_html( $requirement['command'] ); ?></code>
                     <?php endif; ?>
                     <?php if ( ! empty( $requirement['url'] ) ) : ?>
-                        <br /><a href="<?php echo esc_url( $requirement['url'] ); ?>"><?php echo esc_html__( 'Download the MCP Adapter', 'content-manager-for-ai-agents' ); ?></a>
+                        <br /><a href="<?php echo esc_url( $requirement['url'] ); ?>"><?php echo esc_html__( 'Download the MCP Adapter', 'fyrins-content-manager-for-ai-agents' ); ?></a>
                     <?php endif; ?>
                 </p>
             <?php endforeach; ?>

@@ -37,7 +37,7 @@ class GetPostMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get post meta', 'content-manager-for-ai-agents' );
+        return __( 'Get post meta', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -46,7 +46,7 @@ class GetPostMetaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Reads a post meta field. Protected meta keys are refused unless explicitly allowlisted.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -54,7 +54,7 @@ class GetPostMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Meta', 'content-manager-for-ai-agents' );
+        return __( 'Meta', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -66,13 +66,13 @@ class GetPostMetaAbility extends AbstractAbility {
             'properties' => [
                 'post_id'  => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the post to read.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the post to read.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'meta_key' => [
                     'type'        => 'string',
                     'description' => __(
                         'Meta key to read. Omit it to list every readable meta of the post.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
             ],
@@ -95,7 +95,7 @@ class GetPostMetaAbility extends AbstractAbility {
                     'type'        => 'object',
                     'description' => __(
                         'Every readable meta of the post, returned when no meta key was given.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
             ],

@@ -39,7 +39,7 @@ class DeleteMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Delete a media', 'content-manager-for-ai-agents' );
+        return __( 'Delete a media', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -48,7 +48,7 @@ class DeleteMediaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Permanently deletes a media from the library.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -56,7 +56,7 @@ class DeleteMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Media', 'content-manager-for-ai-agents' );
+        return __( 'Media', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -68,7 +68,7 @@ class DeleteMediaAbility extends AbstractAbility {
             'properties' => [
                 'attachment_id' => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the attachment to delete.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the attachment to delete.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'attachment_id' ],
@@ -125,7 +125,7 @@ class DeleteMediaAbility extends AbstractAbility {
         if ( ! $result ) {
             return new \WP_Error(
                 'delete_failed',
-                __( 'Unable to delete the attachment.', 'content-manager-for-ai-agents' ),
+                __( 'Unable to delete the attachment.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }

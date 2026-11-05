@@ -38,7 +38,7 @@ class CreateTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Create a template', 'content-manager-for-ai-agents' );
+        return __( 'Create a template', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -47,7 +47,7 @@ class CreateTemplateAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Creates a new block template or template part, tagged with the active theme.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -55,7 +55,7 @@ class CreateTemplateAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Templates', 'content-manager-for-ai-agents' );
+        return __( 'Templates', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -68,25 +68,25 @@ class CreateTemplateAbility extends AbstractAbility {
                 'type'        => $this->typeProperty(),
                 'slug'        => [
                     'type'        => 'string',
-                    'description' => __( 'Unique slug identifying the template.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Unique slug identifying the template.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'title'       => [
                     'type'        => 'string',
-                    'description' => __( 'Template title.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Template title.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'description' => [
                     'type'        => 'string',
-                    'description' => __( 'Template description.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Template description.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'content'     => [
                     'type'        => 'string',
-                    'description' => __( 'Serialized block markup making up the template.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Serialized block markup making up the template.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'area'        => [
                     'type'        => 'string',
                     'description' => __(
                         'Template part area (uncategorized, header, footer, navigation-overlay). Only used when "type" is "wp_template_part"; invalid values fall back to "uncategorized".',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                     'default'     => 'uncategorized',
                 ],
@@ -107,7 +107,7 @@ class CreateTemplateAbility extends AbstractAbility {
                     'type'        => 'boolean',
                     'description' => __(
                         'True when the stored content differs from the submitted content, meaning wp_filter_post_kses() stripped disallowed markup (the caller lacks the unfiltered_html capability).',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
                 'template'         => $this->templateSchema(),
@@ -157,7 +157,7 @@ class CreateTemplateAbility extends AbstractAbility {
         if ( '' === $slug ) {
             return new \WP_Error(
                 'missing_slug',
-                __( 'The "slug" parameter is required.', 'content-manager-for-ai-agents' ),
+                __( 'The "slug" parameter is required.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -173,7 +173,7 @@ class CreateTemplateAbility extends AbstractAbility {
         if ( $existing instanceof \WP_Block_Template && 'custom' === $existing->source ) {
             return new \WP_Error(
                 'template_exists',
-                __( 'A custom template already exists with this slug. Use the update ability instead.', 'content-manager-for-ai-agents' ),
+                __( 'A custom template already exists with this slug. Use the update ability instead.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 409 ]
             );
         }
@@ -219,7 +219,7 @@ class CreateTemplateAbility extends AbstractAbility {
         if ( [] === $posts ) {
             return new \WP_Error(
                 'template_not_found',
-                __( 'The template was created but could not be resolved.', 'content-manager-for-ai-agents' ),
+                __( 'The template was created but could not be resolved.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 500 ]
             );
         }

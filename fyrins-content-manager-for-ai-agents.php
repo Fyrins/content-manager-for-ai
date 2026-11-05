@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Content Manager for AI Agents
+ * Plugin Name:       Fyrins Content Manager for AI Agents
  * Description:       Content management abilities for AI agents, exposed through the WordPress Abilities API and the MCP Adapter.
  * Version:           2.0.0
  * Requires at least: 6.9
@@ -9,7 +9,7 @@
  * Author URI:        https://alexandre-revire.fr
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       content-manager-for-ai-agents
+ * Text Domain:       fyrins-content-manager-for-ai-agents
  * Domain Path:       /languages
  *
  * @package CM4AI

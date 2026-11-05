@@ -29,7 +29,7 @@ class CreateProductAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Create a product', 'content-manager-for-ai-agents' );
+        return __( 'Create a product', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -38,7 +38,7 @@ class CreateProductAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Creates a WooCommerce product. Accepts every field of the REST API: type, price and dated sale, stock, references, dimensions, taxonomies, images, attributes and default attributes. Prices set on a variable product are derived from its variations.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -46,7 +46,7 @@ class CreateProductAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
+        return __( 'WooCommerce', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**

@@ -30,7 +30,7 @@ class UpdateMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update a media', 'content-manager-for-ai-agents' );
+        return __( 'Update a media', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -39,7 +39,7 @@ class UpdateMediaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Updates the title, alt text or caption of an existing media.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -47,7 +47,7 @@ class UpdateMediaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Media', 'content-manager-for-ai-agents' );
+        return __( 'Media', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -59,19 +59,19 @@ class UpdateMediaAbility extends AbstractAbility {
             'properties' => [
                 'attachment_id' => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the attachment to update.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the attachment to update.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'title'          => [
                     'type'        => 'string',
-                    'description' => __( 'New title.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New title.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'alt_text'       => [
                     'type'        => 'string',
-                    'description' => __( 'New alt text.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New alt text.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'caption'        => [
                     'type'        => 'string',
-                    'description' => __( 'New caption.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New caption.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'attachment_id' ],
