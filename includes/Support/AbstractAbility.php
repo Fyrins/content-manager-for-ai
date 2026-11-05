@@ -223,7 +223,7 @@ abstract class AbstractAbility implements AbilityInterface {
                 esc_html(
                     sprintf(
                         /* translators: %s: ability name. */
-                        __( 'The cm4ai_execute_result filter must return an array or a WP_Error; the original result of "%s" was kept.', 'content-manager-for-ai-agents' ),
+                        __( 'The cm4ai_execute_result filter must return an array or a WP_Error; the original result of "%s" was kept.', 'fyrins-content-manager-for-ai-agents' ),
                         $name
                     )
                 ),
@@ -256,7 +256,7 @@ abstract class AbstractAbility implements AbilityInterface {
         if ( ! $post instanceof \WP_Post ) {
             return new \WP_Error(
                 'post_not_found',
-                __( 'Post not found.', 'content-manager-for-ai-agents' ),
+                __( 'Post not found.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 404 ]
             );
         }
@@ -277,7 +277,7 @@ abstract class AbstractAbility implements AbilityInterface {
         if ( ! $term instanceof \WP_Term ) {
             return new \WP_Error(
                 'term_not_found',
-                __( 'Term not found.', 'content-manager-for-ai-agents' ),
+                __( 'Term not found.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 404 ]
             );
         }
@@ -291,7 +291,7 @@ abstract class AbstractAbility implements AbilityInterface {
     protected function forbidden(): \WP_Error {
         return new \WP_Error(
             'insufficient_permissions',
-            __( 'You are not allowed to perform this action.', 'content-manager-for-ai-agents' ),
+            __( 'You are not allowed to perform this action.', 'fyrins-content-manager-for-ai-agents' ),
             [ 'status' => 403 ]
         );
     }

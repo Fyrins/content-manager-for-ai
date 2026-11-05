@@ -1,5 +1,5 @@
 /**
- * Settings screen of Content Manager for AI Agents.
+ * Settings screen of Fyrins Content Manager for AI Agents.
  */
 import { createRoot } from '@wordpress/element';
 

@@ -49,7 +49,7 @@ function CopyButton( { text, label } ) {
 		setCopied( true );
 		// The button keeps its accessible name, so the change of its text is
 		// not read out: announce it.
-		speak( __( 'Copied!', 'content-manager-for-ai-agents' ) );
+		speak( __( 'Copied!', 'fyrins-content-manager-for-ai-agents' ) );
 		window.setTimeout( () => setCopied( false ), 2000 );
 	} );
 
@@ -62,8 +62,8 @@ function CopyButton( { text, label } ) {
 			showTooltip={ false }
 		>
 			{ copied
-				? __( 'Copied!', 'content-manager-for-ai-agents' )
-				: __( 'Copy', 'content-manager-for-ai-agents' ) }
+				? __( 'Copied!', 'fyrins-content-manager-for-ai-agents' )
+				: __( 'Copy', 'fyrins-content-manager-for-ai-agents' ) }
 		</Button>
 	);
 }
@@ -169,14 +169,14 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'Run this in a terminal. Add --scope user to reach the site from every project. The command carries the password, only Base64-encoded: it stays in your shell history unless you remove it.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</p>
 					<Snippet
 						code={ `claude mcp add --transport http ${ serverName } ${ endpoint } --header "${ header }"` }
 						label={ __(
 							'Copy the Claude Code command',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -195,7 +195,7 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'Open Settings → Developer → Edit Config, then paste this into the file. Claude Desktop reaches the site through a small proxy run with npx, so Node.js has to be installed.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</p>
 					<dl className="cm4ai-paths">
@@ -217,7 +217,7 @@ function ClientSnippets( { connection, password } ) {
 						code={ desktopConfig }
 						label={ __(
 							'Copy the Claude Desktop configuration',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -232,7 +232,7 @@ function ClientSnippets( { connection, password } ) {
 						{ createInterpolateElement(
 							__(
 								'Paste this into <code>~/.cursor/mcp.json</code>, or into <code>.cursor/mcp.json</code> at the root of a project.',
-								'content-manager-for-ai-agents'
+								'fyrins-content-manager-for-ai-agents'
 							),
 							{ code: <code /> }
 						) }
@@ -241,7 +241,7 @@ function ClientSnippets( { connection, password } ) {
 						code={ cursorConfig }
 						label={ __(
 							'Copy the Cursor configuration',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -256,7 +256,7 @@ function ClientSnippets( { connection, password } ) {
 						{ createInterpolateElement(
 							__(
 								'Paste this into <code>~/.codex/config.toml</code>, or into <code>.codex/config.toml</code> at the root of a trusted project. The Codex CLI, its IDE extension and the ChatGPT desktop app share this file.',
-								'content-manager-for-ai-agents'
+								'fyrins-content-manager-for-ai-agents'
 							),
 							{ code: <code /> }
 						) }
@@ -265,7 +265,7 @@ function ClientSnippets( { connection, password } ) {
 						code={ codexConfig }
 						label={ __(
 							'Copy the Codex configuration',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -278,7 +278,7 @@ function ClientSnippets( { connection, password } ) {
 					client="other"
 					label={ __(
 						'Other client',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 				/>
 			),
@@ -287,14 +287,14 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'The exact format depends on the client. One speaking HTTP usually takes something like this.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</p>
 					<Snippet
 						code={ httpConfig }
 						label={ __(
 							'Copy the configuration',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					/>
 				</>
@@ -312,14 +312,14 @@ function ClientSnippets( { connection, password } ) {
 					<p>
 						{ __(
 							'Already have an application password? This command turns it into the Base64 value the snippets expect, without leaving it in your shell history.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</p>
 					<Snippet
 						code={ tokenCommand }
 						label={ __(
 							'Copy the Base64 command',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					/>
 				</div>
@@ -338,7 +338,7 @@ function ClientSnippets( { connection, password } ) {
  */
 function PasswordCreator( { connection, password, onCreated } ) {
 	const [ name, setName ] = useState(
-		__( 'MCP client', 'content-manager-for-ai-agents' )
+		__( 'MCP client', 'fyrins-content-manager-for-ai-agents' )
 	);
 	const [ isBusy, setIsBusy ] = useState( false );
 	const [ error, setError ] = useState( null );
@@ -348,7 +348,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 			<Notice status="warning" isDismissible={ false }>
 				{ __(
 					'Application passwords are not available for your account. WordPress only offers them on sites served over HTTPS, or on a local environment, and a plugin may also switch them off.',
-					'content-manager-for-ai-agents'
+					'fyrins-content-manager-for-ai-agents'
 				) }
 			</Notice>
 		);
@@ -359,7 +359,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 			<Notice status="success" isDismissible={ false }>
 				{ __(
 					'Application password created and filled into the snippets below. Copy the one you need now: the password will not be shown again once you leave this page.',
-					'content-manager-for-ai-agents'
+					'fyrins-content-manager-for-ai-agents'
 				) }
 			</Notice>
 		);
@@ -387,7 +387,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 					__next40pxDefaultSize
 					label={ __(
 						'Application password name',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 					value={ name }
 					onChange={ setName }
@@ -401,7 +401,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 				>
 					{ __(
 						'Create an application password',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 				</Button>
 			</div>
@@ -411,7 +411,7 @@ function PasswordCreator( { connection, password, onCreated } ) {
 				{ createInterpolateElement(
 					__(
 						'Created for your account, <login />: the client will act with exactly your rights. You can revoke it at any time from <a>your profile</a>.',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					),
 					{
 						login: <strong>{ connection.userLogin }</strong>,
@@ -440,12 +440,12 @@ export default function ConnectionTab( {
 				<Notice status="warning" isDismissible={ false }>
 					{ __(
 						'The MCP Adapter plugin is not running. The abilities are registered, but no MCP client can reach them until it is installed and active.',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }{ ' ' }
 					<ExternalLink href={ connection.adapterUrl }>
 						{ __(
 							'Download the MCP Adapter',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</ExternalLink>
 				</Notice>
@@ -454,7 +454,7 @@ export default function ConnectionTab( {
 				<Notice status="warning" isDismissible={ false }>
 					{ __(
 						'This site switches off the default MCP server, so the URL below does not answer. Use the URL of the server your code declares instead.',
-						'content-manager-for-ai-agents'
+						'fyrins-content-manager-for-ai-agents'
 					) }
 				</Notice>
 			) }
@@ -464,7 +464,7 @@ export default function ConnectionTab( {
 					<h2 className="cm4ai-card__title">
 						{ __(
 							'MCP server URL',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</h2>
 				</CardHeader>
@@ -472,7 +472,7 @@ export default function ConnectionTab( {
 					<p>
 						{ __(
 							'The address to give your AI client. It acts as a WordPress user, within that user’s capabilities, and only reaches the abilities enabled on this screen.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</p>
 					<div className="cm4ai-url">
@@ -481,7 +481,7 @@ export default function ConnectionTab( {
 							text={ connection.endpoint }
 							label={ __(
 								'Copy the server URL',
-								'content-manager-for-ai-agents'
+								'fyrins-content-manager-for-ai-agents'
 							) }
 						/>
 					</div>
@@ -494,7 +494,7 @@ export default function ConnectionTab( {
 						<span className="cm4ai-step">1</span>
 						{ __(
 							'Create the credentials',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</h2>
 				</CardHeader>
@@ -502,7 +502,7 @@ export default function ConnectionTab( {
 					<p>
 						{ __(
 							'The client signs in with an application password. Pick the account deliberately: a dedicated user with the lowest role that covers the job is the safest choice.',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</p>
 					<PasswordCreator
@@ -519,7 +519,7 @@ export default function ConnectionTab( {
 						<span className="cm4ai-step">2</span>
 						{ __(
 							'Configure your client',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</h2>
 				</CardHeader>
@@ -537,7 +537,7 @@ export default function ConnectionTab( {
 						<span className="cm4ai-step">3</span>
 						{ __(
 							'Check that it works',
-							'content-manager-for-ai-agents'
+							'fyrins-content-manager-for-ai-agents'
 						) }
 					</h2>
 				</CardHeader>
@@ -546,14 +546,14 @@ export default function ConnectionTab( {
 						<li>
 							{ __(
 								'Restart the client, then ask it which WordPress abilities it can use.',
-								'content-manager-for-ai-agents'
+								'fyrins-content-manager-for-ai-agents'
 							) }
 						</li>
 						<li>
 							{ createInterpolateElement(
 								__(
 									'It should call <code>mcp-adapter-discover-abilities</code> and list the abilities checked in the Abilities tab.',
-									'content-manager-for-ai-agents'
+									'fyrins-content-manager-for-ai-agents'
 								),
 								{ code: <code /> }
 							) }
@@ -561,7 +561,7 @@ export default function ConnectionTab( {
 						<li>
 							{ __(
 								'A 401 error means the credentials are wrong; a 404 means the MCP Adapter is not active.',
-								'content-manager-for-ai-agents'
+								'fyrins-content-manager-for-ai-agents'
 							) }
 						</li>
 					</ol>

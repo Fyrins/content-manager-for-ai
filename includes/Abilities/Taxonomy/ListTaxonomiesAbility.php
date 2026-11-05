@@ -36,7 +36,7 @@ class ListTaxonomiesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List taxonomies', 'content-manager-for-ai-agents' );
+        return __( 'List taxonomies', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -45,7 +45,7 @@ class ListTaxonomiesAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists all public taxonomies (category, post_tag, custom).',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -53,7 +53,7 @@ class ListTaxonomiesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
+        return __( 'Taxonomies', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**

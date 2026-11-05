@@ -30,7 +30,7 @@ class UpdateTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update a term', 'content-manager-for-ai-agents' );
+        return __( 'Update a term', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -39,7 +39,7 @@ class UpdateTermAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Updates the name, slug, description or parent of an existing term.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -47,7 +47,7 @@ class UpdateTermAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Taxonomies', 'content-manager-for-ai-agents' );
+        return __( 'Taxonomies', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -59,27 +59,27 @@ class UpdateTermAbility extends AbstractAbility {
             'properties' => [
                 'term_id'     => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the term to update.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the term to update.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'taxonomy'    => [
                     'type'        => 'string',
-                    'description' => __( 'Taxonomy the term belongs to.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Taxonomy the term belongs to.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'name'        => [
                     'type'        => 'string',
-                    'description' => __( 'New display name.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New display name.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'slug'        => [
                     'type'        => 'string',
-                    'description' => __( 'New slug.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New slug.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'description' => [
                     'type'        => 'string',
-                    'description' => __( 'New description.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New description.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'parent_id'   => [
                     'type'        => 'integer',
-                    'description' => __( 'New parent term, 0 to move the term to the root.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'New parent term, 0 to move the term to the root.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'term_id' ],
@@ -158,7 +158,7 @@ class UpdateTermAbility extends AbstractAbility {
         if ( [] === $args ) {
             return new \WP_Error(
                 'nothing_to_update',
-                __( 'Provide at least one field to update.', 'content-manager-for-ai-agents' ),
+                __( 'Provide at least one field to update.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }

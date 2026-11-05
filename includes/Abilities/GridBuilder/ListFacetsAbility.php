@@ -41,21 +41,21 @@ class ListFacetsAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List WP Grid Builder facets', 'content-manager-for-ai-agents' );
+        return __( 'List WP Grid Builder facets', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Lists the WP Grid Builder facets with their ID, slug, type, source, settings and number of index rows.', 'content-manager-for-ai-agents' );
+        return __( 'Lists the WP Grid Builder facets with their ID, slug, type, source, settings and number of index rows.', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WP Grid Builder', 'content-manager-for-ai-agents' );
+        return __( 'WP Grid Builder', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -75,7 +75,7 @@ class ListFacetsAbility extends AbstractAbility {
                 'ids' => [
                     'type'        => 'array',
                     'items'       => [ 'type' => 'integer' ],
-                    'description' => __( 'Facet IDs to return. Omit to list every facet.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Facet IDs to return. Omit to list every facet.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
         ];

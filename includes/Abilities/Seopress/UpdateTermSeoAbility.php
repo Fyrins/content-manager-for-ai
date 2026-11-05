@@ -30,21 +30,21 @@ class UpdateTermSeoAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update term SEOpress meta', 'content-manager-for-ai-agents' );
+        return __( 'Update term SEOpress meta', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Updates the SEOpress meta of a taxonomy term.', 'content-manager-for-ai-agents' );
+        return __( 'Updates the SEOpress meta of a taxonomy term.', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'SEOpress', 'content-manager-for-ai-agents' );
+        return __( 'SEOpress', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -62,8 +62,8 @@ class UpdateTermSeoAbility extends AbstractAbility {
             'type'       => 'object',
             'properties' => array_merge(
                 [
-                    'term_id'  => [ 'type' => 'integer', 'description' => __( 'The term ID.', 'content-manager-for-ai-agents' ) ],
-                    'taxonomy' => [ 'type' => 'string', 'description' => __( 'The taxonomy slug. Optional if term_id is unambiguous.', 'content-manager-for-ai-agents' ) ],
+                    'term_id'  => [ 'type' => 'integer', 'description' => __( 'The term ID.', 'fyrins-content-manager-for-ai-agents' ) ],
+                    'taxonomy' => [ 'type' => 'string', 'description' => __( 'The taxonomy slug. Optional if term_id is unambiguous.', 'fyrins-content-manager-for-ai-agents' ) ],
                 ],
                 $this->seoWriteSchemaProperties()
             ),

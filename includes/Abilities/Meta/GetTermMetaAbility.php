@@ -37,7 +37,7 @@ class GetTermMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get term meta', 'content-manager-for-ai-agents' );
+        return __( 'Get term meta', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -46,7 +46,7 @@ class GetTermMetaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Reads a term meta field. Protected meta keys are refused unless explicitly allowlisted.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -54,7 +54,7 @@ class GetTermMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Meta', 'content-manager-for-ai-agents' );
+        return __( 'Meta', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -66,17 +66,17 @@ class GetTermMetaAbility extends AbstractAbility {
             'properties' => [
                 'term_id'  => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the term to read.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the term to read.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'taxonomy' => [
                     'type'        => 'string',
-                    'description' => __( 'Taxonomy the term belongs to, used to disambiguate the lookup.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Taxonomy the term belongs to, used to disambiguate the lookup.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'meta_key' => [
                     'type'        => 'string',
                     'description' => __(
                         'Meta key to read. Omit it to list every readable meta of the term.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
             ],
@@ -99,7 +99,7 @@ class GetTermMetaAbility extends AbstractAbility {
                     'type'        => 'object',
                     'description' => __(
                         'Every readable meta of the term, returned when no meta key was given.',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
             ],

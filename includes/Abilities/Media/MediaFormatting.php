@@ -29,7 +29,7 @@ trait MediaFormatting {
         if ( 'attachment' !== $attachment->post_type ) {
             return new \WP_Error(
                 'attachment_not_found',
-                __( 'Attachment not found.', 'content-manager-for-ai-agents' ),
+                __( 'Attachment not found.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 404 ]
             );
         }

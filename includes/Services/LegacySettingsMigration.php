@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Copies the settings saved under WP MCP Abilities, the plugin's name up to 1.3.
  *
- * The rename changed the plugin folder, so WordPress sees Content Manager for AI Agents as a new
+ * The rename changed the plugin folder, so WordPress sees Fyrins Content Manager for AI Agents as a new
  * plugin: nothing is migrated in place, the copy runs on activation. The old
  * options are left alone, since the old plugin may still be installed and its
  * own uninstall removes them. Ability names are rewritten with the new prefix;

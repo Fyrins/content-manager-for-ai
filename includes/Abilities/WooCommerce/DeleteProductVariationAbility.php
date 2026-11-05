@@ -36,7 +36,7 @@ class DeleteProductVariationAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Delete a product variation', 'content-manager-for-ai-agents' );
+        return __( 'Delete a product variation', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -45,7 +45,7 @@ class DeleteProductVariationAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Permanently deletes a WooCommerce product variation.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -53,7 +53,7 @@ class DeleteProductVariationAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
+        return __( 'WooCommerce', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -72,11 +72,11 @@ class DeleteProductVariationAbility extends AbstractAbility {
         $schema['properties'] = [
             'product_id' => [
                 'type'        => 'integer',
-                'description' => __( 'Id of the parent product.', 'content-manager-for-ai-agents' ),
+                'description' => __( 'Id of the parent product.', 'fyrins-content-manager-for-ai-agents' ),
             ],
             'variation_id' => [
                 'type'        => 'integer',
-                'description' => __( 'Id of the variation to delete.', 'content-manager-for-ai-agents' ),
+                'description' => __( 'Id of the variation to delete.', 'fyrins-content-manager-for-ai-agents' ),
             ],
         ];
 

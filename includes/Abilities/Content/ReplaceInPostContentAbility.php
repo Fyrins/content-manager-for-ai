@@ -56,7 +56,7 @@ class ReplaceInPostContentAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Replace in post content', 'content-manager-for-ai-agents' );
+        return __( 'Replace in post content', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -65,7 +65,7 @@ class ReplaceInPostContentAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Replaces a literal string inside the content of a post, without resending the whole content. Supports a dry run and an expected number of occurrences.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -73,7 +73,7 @@ class ReplaceInPostContentAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Content', 'content-manager-for-ai-agents' );
+        return __( 'Content', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -85,26 +85,26 @@ class ReplaceInPostContentAbility extends AbstractAbility {
             'properties' => [
                 'post_id'              => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the post to edit.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the post to edit.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'search'               => [
                     'type'        => 'string',
                     'minLength'   => 1,
-                    'description' => __( 'Literal string to look for, matched byte for byte. Not a regular expression. Tags, attributes, HTML comments and newlines are kept as sent, so a block boundary or an opening tag with its attributes can be used as an anchor.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Literal string to look for, matched byte for byte. Not a regular expression. Tags, attributes, HTML comments and newlines are kept as sent, so a block boundary or an opening tag with its attributes can be used as an anchor.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'replace'              => [
                     'type'        => 'string',
-                    'description' => __( 'String to put in its place, written as sent. An empty string deletes the match.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'String to put in its place, written as sent. An empty string deletes the match.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'expected_occurrences' => [
                     'type'        => 'integer',
                     'minimum'     => 0,
-                    'description' => __( 'Number of matches the caller expects. Nothing is written when the actual count differs.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Number of matches the caller expects. Nothing is written when the actual count differs.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'dry_run'              => [
                     'type'        => 'boolean',
                     'default'     => false,
-                    'description' => __( 'Counts and measures without writing anything.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Counts and measures without writing anything.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'post_id', 'search', 'replace' ],
@@ -122,21 +122,21 @@ class ReplaceInPostContentAbility extends AbstractAbility {
                 'post_id'        => [ 'type' => 'integer' ],
                 'occurrences'    => [
                     'type'        => 'integer',
-                    'description' => __( 'Matches found in the content.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Matches found in the content.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'replaced'       => [
                     'type'        => 'boolean',
-                    'description' => __( 'True when the content was actually written.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'True when the content was actually written.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'dry_run'        => [ 'type' => 'boolean' ],
                 'length_before'  => [ 'type' => 'integer' ],
                 'length_after'   => [
                     'type'        => 'integer',
-                    'description' => __( 'Length read back from the database after writing, or the projected length on a dry run.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Length read back from the database after writing, or the projected length on a dry run.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'content_intact' => [
                     'type'        => 'boolean',
-                    'description' => __( 'False when what was stored differs from what was submitted, which points to kses having stripped markup the caller is not allowed to write.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'False when what was stored differs from what was submitted, which points to kses having stripped markup the caller is not allowed to write.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
         ];
@@ -181,7 +181,7 @@ class ReplaceInPostContentAbility extends AbstractAbility {
         if ( ! Input::hasScalar( $input, 'search' ) ) {
             return new \WP_Error(
                 'missing_search',
-                __( 'The "search" parameter is required.', 'content-manager-for-ai-agents' ),
+                __( 'The "search" parameter is required.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -190,7 +190,7 @@ class ReplaceInPostContentAbility extends AbstractAbility {
         if ( '' === $search ) {
             return new \WP_Error(
                 'empty_search',
-                __( 'The "search" parameter was sent as an empty string. Nothing was looked for.', 'content-manager-for-ai-agents' ),
+                __( 'The "search" parameter was sent as an empty string. Nothing was looked for.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 400 ]
             );
         }
@@ -211,7 +211,7 @@ class ReplaceInPostContentAbility extends AbstractAbility {
                     'unexpected_occurrences',
                     sprintf(
                         /* translators: 1: expected number of matches, 2: number actually found. */
-                        __( '%1$d matches expected, %2$d found. Nothing was written.', 'content-manager-for-ai-agents' ),
+                        __( '%1$d matches expected, %2$d found. Nothing was written.', 'fyrins-content-manager-for-ai-agents' ),
                         $expected,
                         $occurrences
                     ),

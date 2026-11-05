@@ -30,7 +30,7 @@ class UpdatePostMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update post meta', 'content-manager-for-ai-agents' );
+        return __( 'Update post meta', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -39,7 +39,7 @@ class UpdatePostMetaAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Updates a post meta field. Protected meta keys are refused unless explicitly allowlisted.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -47,7 +47,7 @@ class UpdatePostMetaAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Meta', 'content-manager-for-ai-agents' );
+        return __( 'Meta', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -59,11 +59,11 @@ class UpdatePostMetaAbility extends AbstractAbility {
             'properties' => [
                 'post_id'    => [
                     'type'        => 'integer',
-                    'description' => __( 'Identifier of the post to update.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Identifier of the post to update.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'meta_key'   => [
                     'type'        => 'string',
-                    'description' => __( 'Meta key to write.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Meta key to write.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'meta_value' => $this->metaValueSchema(),
             ],

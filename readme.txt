@@ -1,4 +1,4 @@
-=== Content Manager for AI Agents ===
+=== Fyrins Content Manager for AI Agents ===
 Contributors: fyrins
 Tags: mcp, ai, abilities, agents, api
 Requires at least: 6.9
@@ -14,7 +14,7 @@ Let AI agents manage your content through the Abilities API: posts, media, terms
 
 https://www.youtube.com/watch?v=W1Ww7G7HJqg
 
-Content Manager for AI Agents registers content management abilities with the WordPress Abilities API. With the MCP Adapter active, an MCP client (Claude, ChatGPT, Cursor…) can discover and run them: an AI agent can draft and publish posts, fix a typo across a page, upload images, classify content, fill in SEO fields or build a variable product, always within the permissions of the WordPress user it authenticates as.
+Fyrins Content Manager for AI Agents registers content management abilities with the WordPress Abilities API. With the MCP Adapter active, an MCP client (Claude, ChatGPT, Cursor…) can discover and run them: an AI agent can draft and publish posts, fix a typo across a page, upload images, classify content, fill in SEO fields or build a variable product, always within the permissions of the WordPress user it authenticates as.
 
 Ability families, with a few names:
 
@@ -29,7 +29,7 @@ Ability families, with a few names:
 
 Every name carries the `cm4ai/` prefix.
 
-Each ability can be switched on or off from Settings → Content Manager for AI Agents. Abilities that delete something are off until you enable them.
+Each ability can be switched on or off from Settings → Fyrins Content Manager for AI Agents. Abilities that delete something are off until you enable them.
 
 = Requirements =
 
@@ -71,9 +71,9 @@ The settings screen ships compiled in `build/`. Its sources live in `src/` in th
 
 == Installation ==
 
-1. Install and activate Content Manager for AI Agents.
+1. Install and activate Fyrins Content Manager for AI Agents.
 2. Install and activate the MCP Adapter from its GitHub releases.
-3. Go to Settings → Content Manager for AI Agents and choose which abilities are enabled.
+3. Go to Settings → Fyrins Content Manager for AI Agents and choose which abilities are enabled.
 4. In the Connection tab, create an application password for the WordPress user the agent will act as.
 5. Copy the configuration of your client (Claude Code, Claude Desktop, Cursor, Codex or another HTTP client) into it. It points at `https://your-site.example/wp-json/mcp/mcp-adapter-default-server`, authenticated with that user and application password.
 
@@ -89,7 +89,7 @@ Exactly what the WordPress user it authenticates as can do, limited to the abili
 
 = How do I disable an ability? =
 
-Uncheck it under Settings → Content Manager for AI Agents. A disabled ability is not registered at all, so MCP clients do not see it. Developers can also force the state with the `cm4ai_is_enabled` filter.
+Uncheck it under Settings → Fyrins Content Manager for AI Agents. A disabled ability is not registered at all, so MCP clients do not see it. Developers can also force the state with the `cm4ai_is_enabled` filter.
 
 = WooCommerce or SEOPress is not installed. Does it matter? =
 
@@ -120,7 +120,7 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 == Changelog ==
 
 = 2.0.0 =
-* Renamed from WP MCP Abilities to Content Manager for AI Agents, for its release on WordPress.org. The plugin folder, text domain and every identifier change: abilities are now named `cm4ai/<name>`, hooks and options use the `cm4ai_` prefix. Update the MCP clients and code that call the former names.
+* Renamed from WP MCP Abilities to Fyrins Content Manager for AI Agents, for its release on WordPress.org. The plugin folder, text domain and every identifier change: abilities are now named `cm4ai/<name>`, hooks and options use the `cm4ai_` prefix. Update the MCP clients and code that call the former names.
 * The switches saved under the former name are copied on activation.
 * Security: writing or deleting a meta key also checks the meta capability of that key, so an `auth_callback` given to `register_meta()` applies.
 * Fix: `upload-media` stops the download as soon as the file exceeds the allowed size, instead of writing it to disk in full first.

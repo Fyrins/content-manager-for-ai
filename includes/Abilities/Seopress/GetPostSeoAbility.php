@@ -37,21 +37,21 @@ class GetPostSeoAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Get post SEOpress meta', 'content-manager-for-ai-agents' );
+        return __( 'Get post SEOpress meta', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getDescription(): string {
-        return __( 'Reads the SEOpress meta of a post.', 'content-manager-for-ai-agents' );
+        return __( 'Reads the SEOpress meta of a post.', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'SEOpress', 'content-manager-for-ai-agents' );
+        return __( 'SEOpress', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -70,7 +70,7 @@ class GetPostSeoAbility extends AbstractAbility {
             'properties' => [
                 'post_id' => [
                     'type'        => 'integer',
-                    'description' => __( 'The post ID.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'The post ID.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
             ],
             'required'   => [ 'post_id' ],

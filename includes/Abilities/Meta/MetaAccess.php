@@ -67,7 +67,7 @@ trait MetaAccess {
         if ( ! is_scalar( $rawMetaKey ) ) {
             return new \WP_Error(
                 'meta_key_not_allowed',
-                __( 'The "meta_key" parameter is required.', 'content-manager-for-ai-agents' ),
+                __( 'The "meta_key" parameter is required.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 403 ]
             );
         }
@@ -77,7 +77,7 @@ trait MetaAccess {
         if ( '' === $metaKey ) {
             return new \WP_Error(
                 'meta_key_not_allowed',
-                __( 'The "meta_key" parameter is required.', 'content-manager-for-ai-agents' ),
+                __( 'The "meta_key" parameter is required.', 'fyrins-content-manager-for-ai-agents' ),
                 [ 'status' => 403 ]
             );
         }
@@ -87,7 +87,7 @@ trait MetaAccess {
                 'meta_key_not_allowed',
                 sprintf(
                     /* translators: %s: meta key name. */
-                    __( 'The "%s" meta key is protected and has not been allowlisted for MCP abilities.', 'content-manager-for-ai-agents' ),
+                    __( 'The "%s" meta key is protected and has not been allowlisted for MCP abilities.', 'fyrins-content-manager-for-ai-agents' ),
                     $metaKey
                 ),
                 [ 'status' => 403 ]
@@ -137,7 +137,7 @@ trait MetaAccess {
                 if ( null !== $item && ! is_scalar( $item ) ) {
                     return new \WP_Error(
                         'invalid_meta_value',
-                        __( 'The "meta_value" parameter only accepts scalars or arrays of scalars.', 'content-manager-for-ai-agents' ),
+                        __( 'The "meta_value" parameter only accepts scalars or arrays of scalars.', 'fyrins-content-manager-for-ai-agents' ),
                         [ 'status' => 400 ]
                     );
                 }
@@ -150,7 +150,7 @@ trait MetaAccess {
 
         return new \WP_Error(
             'invalid_meta_value',
-            __( 'The "meta_value" parameter only accepts scalars or arrays of scalars.', 'content-manager-for-ai-agents' ),
+            __( 'The "meta_value" parameter only accepts scalars or arrays of scalars.', 'fyrins-content-manager-for-ai-agents' ),
             [ 'status' => 400 ]
         );
     }
@@ -236,7 +236,7 @@ trait MetaAccess {
         return [
             'description' => __(
                 'The meta value. Accepts a string, number or boolean, or an array of such scalars; objects are rejected.',
-                'content-manager-for-ai-agents'
+                'fyrins-content-manager-for-ai-agents'
             ),
             'anyOf'       => [
                 [ 'type' => 'string' ],

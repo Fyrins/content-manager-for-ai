@@ -7,11 +7,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [2.0.0] - 2026-10-29
 
-Renamed from WP MCP Abilities to Content Manager for AI Agents, for its release on WordPress.org. The plugin directory flags the "WP" term in plugin names, and "WP MCP Abilities" read like one of the official WordPress projects (MCP Adapter, Abilities API).
+Renamed from WP MCP Abilities to Fyrins Content Manager for AI Agents, for its release on WordPress.org. The plugin directory flags the "WP" term in plugin names, and "WP MCP Abilities" read like one of the official WordPress projects (MCP Adapter, Abilities API). The "Fyrins" prefix was added during the plugin review, which found "Content Manager for AI Agents" too generic on its own.
 
 ### Changed
 
-- Plugin folder, main file and text domain: `content-manager-for-ai-agents`. WordPress sees it as a new plugin: deactivate and delete WP MCP Abilities, then install this one.
+- Plugin folder, main file and text domain: `fyrins-content-manager-for-ai-agents`. WordPress sees it as a new plugin: deactivate and delete WP MCP Abilities, then install this one.
 - Abilities are named `cm4ai/<name>` instead of `wp-mcp-abilities/<name>`, in the `cm4ai` category. MCP clients and prompts that call the former names must be updated.
 - Hooks, options and constants use the `cm4ai_` and `CM4AI_` prefixes instead of `wpmcpa_` and `WPMCPA_`; the PHP namespace is `CM4AI`. The ability mark is `meta.cm4ai.plugin`, and the settings REST route `cm4ai/v1/settings`.
 - The readme changelog only keeps this version; the earlier ones stay here.

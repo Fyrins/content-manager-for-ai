@@ -29,7 +29,7 @@ class UpdateProductAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'Update a product', 'content-manager-for-ai-agents' );
+        return __( 'Update a product', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -38,7 +38,7 @@ class UpdateProductAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Updates a WooCommerce product. Only the fields sent are written, and "type" may turn a simple product into a variable one.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -46,7 +46,7 @@ class UpdateProductAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'WooCommerce', 'content-manager-for-ai-agents' );
+        return __( 'WooCommerce', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -65,7 +65,7 @@ class UpdateProductAbility extends AbstractAbility {
         $schema['properties'] = [
             'product_id' => [
                 'type'        => 'integer',
-                'description' => __( 'Id of the product to update.', 'content-manager-for-ai-agents' ),
+                'description' => __( 'Id of the product to update.', 'fyrins-content-manager-for-ai-agents' ),
             ],
         ] + ( $schema['properties'] ?? [] );
 

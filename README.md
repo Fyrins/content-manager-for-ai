@@ -2,7 +2,7 @@
   <img src=".wordpress-org/banner-1544x500.png" alt="A prompt bubble from an AI agent, an arrow, and a list of checked abilities run on the WordPress site.">
 </p>
 
-<h1 align="center">Content Manager for AI Agents</h1>
+<h1 align="center">Fyrins Content Manager for AI Agents</h1>
 
 <p align="center">Let AI agents manage your content through the Abilities API: posts, media, terms, meta, templates, WooCommerce and SEOPress.</p>
 
@@ -70,15 +70,15 @@ Without the adapter, the abilities are still registered and usable by any other 
 
 ## Installation
 
-**From WordPress.org.** Search for "Content Manager for AI Agents" under Plugins → Add New, or download the zip from the plugin page and upload it.
+**From WordPress.org.** Search for "Fyrins Content Manager for AI Agents" under Plugins → Add New, or download the zip from the plugin page and upload it.
 
 **From a GitHub release.** Download the zip attached to a release on the [GitHub repository](https://github.com/Fyrins/content-manager-for-ai) and upload it under Plugins → Add New → Upload Plugin.
 
 **With Composer (Bedrock and similar setups).**
 
 ```bash
-composer require fyrins/content-manager-for-ai-agents
-wp plugin activate content-manager-for-ai-agents
+composer require fyrins/fyrins-content-manager-for-ai-agents
+wp plugin activate fyrins-content-manager-for-ai-agents
 ```
 
 The package has the `wordpress-plugin` type, so `composer/installers` places it in your plugins directory. It has no runtime Composer dependency.
@@ -128,7 +128,7 @@ Its REST namespace is `mcp` and its route `mcp-adapter-default-server`.
 
 ## Settings screen
 
-**Settings → Content Manager for AI Agents** (`wp-admin/options-general.php?page=content-manager-for-ai-agents`), visible to users with `manage_options`.
+**Settings → Fyrins Content Manager for AI Agents** (`wp-admin/options-general.php?page=fyrins-content-manager-for-ai-agents`), visible to users with `manage_options`.
 
 The screen is a React app built with `@wordpress/components`. It reads and saves through the `cm4ai/v1/settings` REST route (`GET` and `POST`, `manage_options` required), preloaded so the page renders without a first round trip. It has three tabs.
 
@@ -912,7 +912,7 @@ Keep `meta.mcp.public` and `meta.cm4ai.plugin` in place: without the first the a
 
 ```bash
 git clone https://github.com/Fyrins/content-manager-for-ai.git
-cd content-manager-for-ai-agents
+cd fyrins-content-manager-for-ai-agents
 composer install
 composer lint      # PHP_CodeSniffer with phpcs.xml.dist
 composer format    # PHP Code Beautifier and Fixer
@@ -924,7 +924,7 @@ npm run lint:js
 
 `build/` is not versioned. A copy cloned from the repository shows an error on the settings screen until `npm run build` has run; the release and CI workflows build it before packaging.
 
-`phpcs.xml.dist` applies the WordPress Coding Standards, PHPCompatibilityWP for PHP 8.1 and later, the minimum WordPress version (6.9), and the text domain and prefix checks (`content-manager-for-ai-agents`, `CM4AI`).
+`phpcs.xml.dist` applies the WordPress Coding Standards, PHPCompatibilityWP for PHP 8.1 and later, the minimum WordPress version (6.9), and the text domain and prefix checks (`fyrins-content-manager-for-ai-agents`, `CM4AI`).
 
 ### Testing locally
 
@@ -932,11 +932,11 @@ The repository ships no automated test suite. Test changes on a local WordPress 
 
 ### Translations
 
-The plugin relies on WordPress's just-in-time translation loading (text domain `content-manager-for-ai-agents`, `languages/`). To refresh the catalogue after changing strings:
+The plugin relies on WordPress's just-in-time translation loading (text domain `fyrins-content-manager-for-ai-agents`, `languages/`). To refresh the catalogue after changing strings:
 
 ```bash
-wp i18n make-pot . languages/content-manager-for-ai-agents.pot --slug=content-manager-for-ai-agents --exclude=vendor,tests,docs,node_modules,build,dist
-wp i18n update-po languages/content-manager-for-ai-agents.pot languages/
+wp i18n make-pot . languages/fyrins-content-manager-for-ai-agents.pot --slug=fyrins-content-manager-for-ai-agents --exclude=vendor,tests,docs,node_modules,build,dist
+wp i18n update-po languages/fyrins-content-manager-for-ai-agents.pot languages/
 wp i18n make-mo languages/
 wp i18n make-json languages/ --no-purge --use-map=<map.json>
 ```
@@ -947,7 +947,7 @@ The strings of the settings screen live in `src/`, but WordPress looks their tra
 
 | Path | Role |
 | --- | --- |
-| `content-manager-for-ai-agents.php` | Plugin header, constants (`CM4AI_VERSION`, `CM4AI_FILE`, `CM4AI_DIR`), autoloader, `Plugin::boot()`. |
+| `fyrins-content-manager-for-ai-agents.php` | Plugin header, constants (`CM4AI_VERSION`, `CM4AI_FILE`, `CM4AI_DIR`), autoloader, `Plugin::boot()`. |
 | `includes/Autoloader.php` | Maps `CM4AI\Foo\Bar` to `includes/Foo/Bar.php`. |
 | `includes/Plugin.php` | Explicit wiring: builds every service and hook once. `Plugin::ABILITIES` lists the static ability classes. |
 | `includes/Registry/` | `AbilityRegistry` holds the category and the static abilities, and registers them on `wp_abilities_api_categories_init` and `wp_abilities_api_init`. |
@@ -980,15 +980,15 @@ class CountWordsAbility extends AbstractAbility {
     }
 
     public function getLabel(): string {
-        return __( 'Count words', 'content-manager-for-ai-agents' );
+        return __( 'Count words', 'fyrins-content-manager-for-ai-agents' );
     }
 
     public function getDescription(): string {
-        return __( 'Counts the words of a post.', 'content-manager-for-ai-agents' );
+        return __( 'Counts the words of a post.', 'fyrins-content-manager-for-ai-agents' );
     }
 
     public function getGroup(): string {
-        return __( 'Content', 'content-manager-for-ai-agents' );
+        return __( 'Content', 'fyrins-content-manager-for-ai-agents' );
     }
 
     public function getInputSchema(): array {
@@ -1054,13 +1054,13 @@ To build the zip by hand: `npm ci && npm run build`, then `wp dist-archive .` (W
 
 ## Migrating from bsaweb-mcp-abilities
 
-Content Manager for AI Agents is a standalone fork of bsaweb-mcp-abilities 2.5.1, with the same abilities and behaviour. It no longer needs the former dependency-injection framework, and the MCP Adapter is optional. Everything carrying the old name was renamed:
+Fyrins Content Manager for AI Agents is a standalone fork of bsaweb-mcp-abilities 2.5.1, with the same abilities and behaviour. It no longer needs the former dependency-injection framework, and the MCP Adapter is optional. Everything carrying the old name was renamed:
 
-| Item | bsaweb-mcp-abilities 2.5.1 | Content Manager for AI Agents |
+| Item | bsaweb-mcp-abilities 2.5.1 | Fyrins Content Manager for AI Agents |
 | --- | --- | --- |
-| Plugin folder and slug | `bsaweb-mcp-abilities` | `content-manager-for-ai-agents` |
-| Main file | `bsaweb-mcp-abilities.php` | `content-manager-for-ai-agents.php` |
-| Composer package | `bsaweb/bsaweb-mcp-abilities` | `fyrins/content-manager-for-ai-agents` |
+| Plugin folder and slug | `bsaweb-mcp-abilities` | `fyrins-content-manager-for-ai-agents` |
+| Main file | `bsaweb-mcp-abilities.php` | `fyrins-content-manager-for-ai-agents.php` |
+| Composer package | `bsaweb/bsaweb-mcp-abilities` | `fyrins/fyrins-content-manager-for-ai-agents` |
 | PHP namespace | `Bsaweb\McpAbilities` | `CM4AI` |
 | Constants | `BSAWEB_MCP_ABILITIES_*` | `CM4AI_VERSION`, `CM4AI_FILE`, `CM4AI_DIR` (the kernel name constant is gone) |
 | Ability category and prefix | `bsaweb`, `bsaweb/<name>` | `cm4ai`, `cm4ai/<name>` |
@@ -1068,15 +1068,15 @@ Content Manager for AI Agents is a standalone fork of bsaweb-mcp-abilities 2.5.1
 | Filters | `bsaweb_mcp_abilities_*` | `cm4ai_*` (same suffixes) |
 | Options | `bsaweb_mcp_abilities_enabled`, `bsaweb_mcp_abilities_exposed` | `cm4ai_enabled`, `cm4ai_exposed` |
 | Permission probe error code | `bsaweb_permission_probe` | `cm4ai_permission_probe` |
-| Text domain | `bsaweb-mcp-abilities` | `content-manager-for-ai-agents` |
-| Settings page slug | `bsaweb-mcp-abilities` | `content-manager-for-ai-agents` |
+| Text domain | `bsaweb-mcp-abilities` | `fyrins-content-manager-for-ai-agents` |
+| Settings page slug | `bsaweb-mcp-abilities` | `fyrins-content-manager-for-ai-agents` |
 | Minimum WordPress | 6.8 | 6.9 |
 | `Requires Plugins` | `mcp-adapter` | none |
 
 Steps:
 
-1. Deactivate and remove bsaweb-mcp-abilities, then install and activate Content Manager for AI Agents. With Composer: `composer remove bsaweb/bsaweb-mcp-abilities && composer require fyrins/content-manager-for-ai-agents`. The old package pulled `wordpress/mcp-adapter` as a dependency; if the adapter came from there, require it directly (`composer require wordpress/mcp-adapter`).
-2. Settings are not migrated. Open Settings → Content Manager for AI Agents and set the switches again, including the destructive abilities and third-party exposure. The old options can be deleted: `wp option delete bsaweb_mcp_abilities_enabled bsaweb_mcp_abilities_exposed`.
+1. Deactivate and remove bsaweb-mcp-abilities, then install and activate Fyrins Content Manager for AI Agents. With Composer: `composer remove bsaweb/bsaweb-mcp-abilities && composer require fyrins/fyrins-content-manager-for-ai-agents`. The old package pulled `wordpress/mcp-adapter` as a dependency; if the adapter came from there, require it directly (`composer require wordpress/mcp-adapter`).
+2. Settings are not migrated. Open Settings → Fyrins Content Manager for AI Agents and set the switches again, including the destructive abilities and third-party exposure. The old options can be deleted: `wp option delete bsaweb_mcp_abilities_enabled bsaweb_mcp_abilities_exposed`.
 3. Rename filters in your code, for instance: `grep -rl 'bsaweb_mcp_abilities_' wp-content/ | xargs sed -i '' 's/bsaweb_mcp_abilities_/cm4ai_/g'` (GNU sed: `sed -i` without `''`).
 4. Update MCP clients, prompts and scripts that name abilities: `bsaweb/list-posts` becomes `cm4ai/list-posts`, and so on.
 5. Code reading `meta.bsaweb.plugin`, or calling classes under `Bsaweb\McpAbilities`, must use the new names.

@@ -41,7 +41,7 @@ class SettingsService {
      *
      * @var string
      */
-    public const PAGE_SLUG = 'content-manager-for-ai-agents';
+    public const PAGE_SLUG = 'fyrins-content-manager-for-ai-agents';
 
     /**
      * Capability required to read and write these settings.

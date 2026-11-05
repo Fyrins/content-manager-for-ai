@@ -45,7 +45,7 @@ class ListTemplatesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getLabel(): string {
-        return __( 'List templates', 'content-manager-for-ai-agents' );
+        return __( 'List templates', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -54,7 +54,7 @@ class ListTemplatesAbility extends AbstractAbility {
     public function getDescription(): string {
         return __(
             'Lists block templates or template parts of the active theme, with pagination.',
-            'content-manager-for-ai-agents'
+            'fyrins-content-manager-for-ai-agents'
         );
     }
 
@@ -62,7 +62,7 @@ class ListTemplatesAbility extends AbstractAbility {
      * @inheritDoc
      */
     public function getGroup(): string {
-        return __( 'Templates', 'content-manager-for-ai-agents' );
+        return __( 'Templates', 'fyrins-content-manager-for-ai-agents' );
     }
 
     /**
@@ -77,19 +77,19 @@ class ListTemplatesAbility extends AbstractAbility {
                     'type'        => 'string',
                     'description' => __(
                         'Restricts results to this template part area. Only used when "type" is "wp_template_part".',
-                        'content-manager-for-ai-agents'
+                        'fyrins-content-manager-for-ai-agents'
                     ),
                 ],
                 'per_page' => [
                     'type'        => 'integer',
-                    'description' => __( 'Number of templates per page.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Number of templates per page.', 'fyrins-content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'maximum'     => self::MAX_PER_PAGE,
                     'default'     => 50,
                 ],
                 'page'     => [
                     'type'        => 'integer',
-                    'description' => __( 'Page to return, starting at 1.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Page to return, starting at 1.', 'fyrins-content-manager-for-ai-agents' ),
                     'minimum'     => 1,
                     'default'     => 1,
                 ],

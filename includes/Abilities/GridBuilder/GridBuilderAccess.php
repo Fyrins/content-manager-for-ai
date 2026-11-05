@@ -102,11 +102,11 @@ trait GridBuilderAccess {
                 'type'          => [ 'type' => 'string' ],
                 'source'        => [
                     'type'        => 'string',
-                    'description' => __( 'What the facet indexes, e.g. "taxonomy/category" or "post_meta/start_date". Empty for facets that index nothing (search, sort, pagination…).', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'What the facet indexes, e.g. "taxonomy/category" or "post_meta/start_date". Empty for facets that index nothing (search, sort, pagination…).', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'index_rows'    => [
                     'type'        => 'integer',
-                    'description' => __( 'Rows stored in the index for this facet.', 'content-manager-for-ai-agents' ),
+                    'description' => __( 'Rows stored in the index for this facet.', 'fyrins-content-manager-for-ai-agents' ),
                 ],
                 'modified_date' => [ 'type' => 'string' ],
                 'settings'      => [ 'type' => 'object' ],
