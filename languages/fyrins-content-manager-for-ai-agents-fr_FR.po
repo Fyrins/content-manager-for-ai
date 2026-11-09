@@ -1142,7 +1142,7 @@ msgid ""
 "attributes marked for variation."
 msgstr ""
 "Crée une variation sur un produit variable WooCommerce. Chaque entrée "
-"d'« attributes » associe un attribut du parent à l’une de ses valeurs ; une "
+"d’« attributes » associe un attribut du parent à l’une de ses valeurs ; une "
 "valeur vide signifie « n’importe laquelle ». Le parent doit être de type "
 "variable et porter des attributs marqués pour la variation."
 
