@@ -5,6 +5,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-11-26
+
+### Fixed
+
+- `list-templates` failed its output validation ("items is not of type array") when `get_block_templates()` returned the templates with non-consecutive keys: the page is now reindexed before it is formatted.
+
+### Changed
+
+- `Tested up to: 7.2`. The abilities were run against WordPress 7.2 RC3 and 7.1.5 with WooCommerce 11.3.1, with the same results on both.
+
 ## [2.0.0] - 2026-10-29
 
 Renamed from WP MCP Abilities to Fyrins Content Manager for AI Agents, for its release on WordPress.org. The plugin directory flags the "WP" term in plugin names, and "WP MCP Abilities" read like one of the official WordPress projects (MCP Adapter, Abilities API). The "Fyrins" prefix was added during the plugin review, which found "Content Manager for AI Agents" too generic on its own.
