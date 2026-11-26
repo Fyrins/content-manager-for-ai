@@ -165,7 +165,8 @@ class ListTemplatesAbility extends AbstractAbility {
         $templates = get_block_templates( $query, $type );
         $total     = count( $templates );
         $offset    = ( $page - 1 ) * $perPage;
-        $items     = array_slice( $templates, $offset, $perPage );
+        // get_block_templates() may return gapped keys, which would encode `items` as a JSON object.
+        $items     = array_values( array_slice( $templates, $offset, $perPage ) );
 
         $result = [
             'items'    => array_map( [ $this, 'formatTemplate' ], $items ),

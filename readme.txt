@@ -2,9 +2,9 @@
 Contributors: fyrins
 Tags: mcp, ai, abilities, agents, api
 Requires at least: 6.9
-Tested up to: 7.1
+Tested up to: 7.2
 Requires PHP: 8.1
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,10 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 
 == Changelog ==
 
+= 2.0.1 =
+* Tested up to WordPress 7.2.
+* Fix: `list-templates` returned an invalid result when WordPress listed the templates with non-consecutive keys.
+
 = 2.0.0 =
 * Renamed from WP MCP Abilities to Fyrins Content Manager for AI Agents, for its release on WordPress.org. The plugin folder, text domain and every identifier change: abilities are now named `cm4ai/<name>`, hooks and options use the `cm4ai_` prefix. Update the MCP clients and code that call the former names.
 * The switches saved under the former name are copied on activation.
@@ -128,6 +132,9 @@ No. Abilities only run when a client calls them, and every ability that deletes 
 Earlier versions, released as WP MCP Abilities: https://github.com/Fyrins/content-manager-for-ai/blob/main/CHANGELOG.md
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+Fixes the `list-templates` ability and confirms compatibility with WordPress 7.2.
 
 = 2.0.0 =
 New name and identifiers. Abilities are now `cm4ai/<name>`: update your MCP client configurations and any code using the former `wpmcpa_` hooks.
